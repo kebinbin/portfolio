@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { data, slug } = Astro.props.project;
+---
+
+<a class="card" href={`/projects/${slug}`}>
+  <span class="content">
+    <aside>{data.subtitle}</aside>
+    <h3>{data.title}</h3>
+    <p>{data.description}</p>
+  </span>
+  <div class="overlay"></div>
+  <img
+    src={data.img}
+    alt={data.img_alt || ""}
+    loading="lazy"
+    decoding="async"
+  />
+</a>
+
+<style>
+  .card {
+    display: grid;
+    /* grid-template: auto 1fr / auto 1fr; */
+    grid-template-columns: 0 1fr 0;
+    grid-template-rows: 1fr;
+    height: 35rem;
+    /* background: var(--gradient-subtle); */
+    /* border: 1px solid var(--gray-800); */
+    /* border-radius: 0.75rem; */
+    overflow: hidden;
+    /* box-shadow: var(--shadow-sm); */
+    text-decoration: none;
+    font-family: var(--font-brand);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    align-items: center;
+    /* transition: box-shadow var(--theme-transition); */
+  }
+
+  /* .card:hover {
+    box-shadow: var(--shadow-md);
+  } */
+
+  .content {
+    grid-area: 1 / 2 / 1 / 3;
+    z-index: 1;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    /* background: var(--gray-999); */
+    color: var(--gray-200);
+    max-width: 400px;
+    /* border-radius: 0.375rem; */
+  }
+
+  .content aside {
+    font-size: var(--text-lg);
+    text-transform: uppercase;
+  }
+
+  .content h3 {
+    font-size: var(--text-2xl);
+    text-transform: uppercase;
+  }
+
+  .content p {
+    font-size: var(--text-sm);
+  }
+
+  img {
+    grid-area: 1 / 1 / 4 / 4;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .overlay {
+    grid-area: 1 / 1 / 4 / 4;
+    /* z-index: 1; */
+    width: 100%;
+    height: 100%;
+    background: rgb(24, 24, 24);
+    background: linear-gradient(
+      90deg,
+      rgba(24, 24, 24, 1) 0%,
+      rgba(24, 24, 24, 0.8) 50%,
+      rgba(24, 24, 24, 0.35) 100%
+    );
+  }
+  /* 
+  @media (min-width: 50em) {
+    .card {
+      height: 39rem;
+    }
+  } */
+
+  @media (min-width: 83rem) {
+    .card {
+      grid-template-columns: 1fr 83rem 1fr;
+      /* border-radius: 1.5rem; */
+    }
+
+    .content h3 {
+    }
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import { getCollection } from "astro:content";
+
+import Layout from "../layouts/Layout.astro";
+
+import Icon from "../components/Icon.astro";
+import Service from "../components/Service.astro";
+import ProjectPreview from "../components/ProjectPreview.astro";
+
+// Content Fetching: List four most recent work projects
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4);
+
+const portrait = {
+  img: "/assets/portrait.jpg",
+  img_alt: "Portrait picture of me in office with indoor plants in background.",
+};
+---
+
+<Layout>
+  <div class="flex flex-col gap-4 lg:gap-4">
+    <header class="hero wrapper">
+      <h1 class="flex title">Full-Stack Software Engineer & UI/UX Designer</h1>
+      <aside class="aside">
+        <p>Avaliable for offers and collaborations on:</p>
+        <div class="services">
+          <Service><Icon icon="palette" size="1.33em" /> Web Design</Service>
+          <Service><Icon icon="code-tag" size="1.33em" /> Front-end</Service>
+          <Service
+            ><Icon icon="terminal-window-2" size="1.33em" /> Back-end</Service
+          >
+          <Service><Icon icon="database" size="1.33em" /> Databases</Service>
+          <Service><Icon icon="app-window" size="1.33em" /> E-Commerce</Service>
+        </div>
+      </aside>
+      <a class="projects-link" href="#projects"
+        >Take a look at my most <strong>recent projects</strong></a
+      >
+    </header>
+
+    <main class="flex flex-col gap-20 lg:gap-48">
+      <section class="flex flex-col projects">
+        <header>
+          <a id="projects"><h2 class="sr-only">Selected Projects</h2></a>
+        </header>
+        <ul>
+          {
+            //Should we put an article here
+            projects.map((project) => (
+              <li>
+                <ProjectPreview project={project} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section>
+        <header>
+          <a id="about"><h2>Get to know me</h2></a>
+        </header>
+        <div class="about">
+          <img
+            class="portrait"
+            src={portrait.img}
+            alt={portrait.img_alt || ""}
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="bio">
+            <h3>About me</h3>
+            <p></p><p></p>
+          </div>
+          <div class="experience">
+            <h3>Experience</h3>
+          </div>
+          <div class="skills">
+            <h3>Things I can help you with</h3>
+          </div>
+          <div class="education">
+            <h3>Education</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- <ContactCTA /> -->
+    </main>
+  </div>
+
+  <style>
+    .hero {
+      font-size: var(--text-lg);
+      text-align: center;
+      background-color: cyan;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto; /* check this */
+      grid-template-areas:
+        "title"
+        "aside"
+        "link";
+      /* gap: 3.5rem; */
+    }
+
+    .title {
+      grid-area: title;
+      font-size: var(--text-5xl);
+      text-transform: uppercase;
+      line-height: 3.5rem;
+      letter-spacing: -2px;
+      color: var(--gray-0);
+      max-width: 20ch;
+      margin-inline: auto; /* check this */
+      text-align: center;
+      background-color: gray;
+      align-items: center;
+      padding: 3.5rem 0;
+    }
+
+    .aside {
+      grid-area: aside;
+      font-size: var(--text-sm);
+      background-color: blue;
+      text-align: start;
+      align-content: end;
+      padding: 0.5rem 0;
+    }
+
+    .projects-link {
+      grid-area: link;
+      font-size: var(--text-sm);
+      background-color: yellow;
+      text-align: end;
+      align-content: end;
+      padding: 0.5rem 0;
+    }
+
+    .projects {
+      width: 100%;
+      /* max-width: 83rem; */
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    .projects li {
+      margin: 1.5rem 0;
+    }
+
+    .services {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "portrait-img about experience"
+        "skills education experience";
+    }
+
+    .portrait {
+      grid-area: portrait-img;
+      background-color: aqua;
+    }
+
+    .about {
+      grid-area: about;
+      background-color: red;
+    }
+
+    .experience {
+      grid-area: experience;
+      background-color: green;
+    }
+
+    .skills {
+      grid-area: skills;
+      background-color: yellow;
+    }
+
+    .education {
+      grid-area: education;
+      background-color: grey;
+    }
+
+    @media (min-width: 40em) {
+      .services {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (min-width: 56em) {
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+          "title title title"
+          "aside aside link";
+        /* min-height: 400px; */
+      }
+    }
+  </style>
+</Layout>

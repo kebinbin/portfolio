@@ -1,0 +1,45 @@
+---
+import MainHead from "../components/MainHead.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!-- Change the lang to use i18n -->
+<html lang="en">
+  <head>
+    <MainHead title={title} description={description} />
+  </head>
+  <body>
+    <div class="flex flex-col">
+      <Nav />
+      <slot />
+      <Footer />
+    </div>
+
+    <style>
+      :root {
+        --bg-color: beige;
+        background-color: var(--bg-color);
+      }
+
+      :root.theme-dark {
+        --bg-color: #181818;
+        background-color: var(--bg-color);
+      }
+
+      @media (min-width: 50em) {
+        :root {
+        }
+        :root.theme-dark {
+        }
+      }
+    </style>
+  </body>
+</html>
