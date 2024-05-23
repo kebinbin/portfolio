@@ -1,0 +1,41 @@
+{
+    "hero": {
+        "h1": {
+            "start": "Ingeniero de Software",
+            "middle": "apps & Diseñador",
+            "end": "de UX/UI"
+        },
+        "h1": {
+            "start": "Ingeniero de Software",
+            "middle": "FullStack & Diseño",
+            "end": "de interfaces"
+        },
+        "aside":{
+            "availableFor": "Disponible para ofertas y colaboraciones en:",
+            "services": [
+                {
+                    "icon": "palette",
+                    "label": "Diseño Web"
+                },
+                {
+                    "icon": "code-tag",
+                    "label": "Front-end"
+                },
+                {
+                    "icon": "terminal-window-2",
+                    "label": "Back-end"
+                },
+                {
+                    "icon": "database",
+                    "label": "Bases de datos"
+                },
+                {
+                    "icon": "app-window",
+                    "label": "E-Commerce"
+                }
+            ]
+        },
+        "recentProjects": "Echa un vistazo a mis",
+        "recentProjectsLink": "projectos recientes"
+    }
+}

@@ -1,0 +1,149 @@
+---
+import Icon from "../components/Icon.astro";
+import Service from "../components/Service.astro";
+import { getI18N } from "../i18n";
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<header class="hero wrapper">
+  <h1 class="title">
+    {i18n.hero.h1.start}
+    <span class="break"></span>
+    {i18n.hero.h1.middle}
+    <span class="break"></span>
+    {i18n.hero.h1.end}
+  </h1>
+  <aside class="aside">
+    <p>{i18n.hero.aside.availableFor}</p>
+    <div class="services">
+      {
+        i18n.hero.aside.services.map((service) => (
+          <Service>
+            <Icon icon={service.icon} size="1.33em" />{" "}
+            <span>{service.label}</span>
+          </Service>
+        ))
+      }
+    </div>
+  </aside>
+  <p class="projects-link">
+    {i18n.hero.recentProjects}
+    <a href="#projects">
+      <strong>{i18n.hero.recentProjectsLink}</strong>
+    </a>
+  </p>
+</header>
+
+<style>
+  .hero {
+    font-size: var(--text-lg);
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto; /* check this */
+    grid-template-areas:
+      "title"
+      "aside"
+      "link";
+    /* gap: 3.5rem; */
+  }
+
+  .title {
+    grid-area: title;
+    /* font-size: var(--text-5xl); */
+    font-size: 110px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 5.5rem;
+    /* letter-spacing: -3px; */
+    color: var(--gray-0);
+    /* max-width: 19ch; */
+    /* margin-inline: auto; check this */
+    text-align: center;
+    align-items: center;
+    padding: 6.5rem 0;
+  }
+
+  .break {
+    display: block;
+  }
+
+  .aside {
+    grid-area: aside;
+    /* font-size: var(--text-sm); */
+    text-align: start;
+    /* align-content: end; */
+    padding: 0.5rem 0;
+    /* place-items: center; */
+    /* align-content: center; */
+    display: flex;
+    flex-direction: column;
+
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+  }
+
+  .aside > p::before {
+    /* display: inline-flex; */
+    /* display: inline-flex; */
+    border: 0;
+    border-radius: 999rem;
+    padding: 0;
+    margin-right: 0.25rem;
+
+    content: "";
+    height: 12px;
+    width: 12px;
+    background-color: greenyellow;
+  }
+
+  .aside > p {
+    /* flex-grow: 1; */
+    display: flex;
+    align-items: center;
+  }
+
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+  }
+
+  .projects-link {
+    grid-area: link;
+    font-size: var(--text-sm);
+    text-align: end;
+    align-content: end;
+    padding: 0.5rem 0;
+  }
+
+  .projects-link > a {
+    text-decoration: none;
+  }
+
+  @media (min-width: 40em) {
+    .services {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (min-width: 56em) {
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr auto;
+      grid-template-areas:
+        "title title title"
+        "aside aside link";
+      /* min-height: 400px; */
+    }
+  }
+</style>

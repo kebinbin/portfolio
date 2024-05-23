@@ -1,0 +1,36 @@
+{
+    "hero": {
+        "h1": {
+            "start": "Full-Stack Software",
+            "middle": "Engineer & Web",
+            "end": "Designer"
+        },
+        "aside":{
+            "availableFor": "Avaliable for offers and collaborations on:",
+            "services": [
+                {
+                    "icon": "palette",
+                    "label": "Web Design"
+                },
+                {
+                    "icon": "code-tag",
+                    "label": "Front-end"
+                },
+                {
+                    "icon": "terminal-window-2",
+                    "label": "Back-end"
+                },
+                {
+                    "icon": "database",
+                    "label": "Databases"
+                },
+                {
+                    "icon": "app-window",
+                    "label": "E-Commerce"
+                }
+            ]
+        },
+        "recentProjects": "Take a look at my most",
+        "recentProjectsLink": "recent projects"
+    }
+}

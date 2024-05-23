@@ -3,17 +3,22 @@ import Icon from "./Icon.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 import type { iconPaths } from "./IconPaths";
 
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
-  { label: "Projects", href: "#projects" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: t("nav.projects"), href: `/${lang}/#projects` },
+  { label: t("nav.about"), href: `/${lang}/#about` },
+  { label: t("nav.contact"), href: `/${lang}/#contact` },
 ];
 ---
 
 <nav class="wrapper">
   <div class="menu-header">
-    <a href="/" class="site-title"> Kevin Castillo </a>
+    <a href="/" class="site-title">{t("nav.brand")}</a>
     <menu-button>
       <template>
         <button class="menu-button" aria-expanded="false">
@@ -130,14 +135,13 @@ const textLinks: { label: string; href: string }[] = [
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
-    /* padding: 1.5rem; */
   }
 
   .site-title {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    line-height: 1.1;
+    line-height: 1.2;
     color: var(--gray-0);
     text-decoration: none;
   }
@@ -146,31 +150,19 @@ const textLinks: { label: string; href: string }[] = [
     position: relative;
     display: flex;
     border: 0;
-    border-radius: 999rem;
     /* padding: 0.5rem; */
     font-size: 1.5rem;
-    color: var(--gray-300);
-    background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
-    box-shadow: var(--shadow-md);
+    color: var(--gray-0);
+    background-color: transparent;
+    /* box-shadow: var(--shadow-md); */
   }
 
   .menu-button[aria-expanded="true"] {
-    color: var(--gray-0);
-    background: linear-gradient(180deg, var(--gray-600), transparent),
-      radial-gradient(var(--gray-900), var(--gray-800) 150%);
+    color: var(--gray-300);
   }
 
   .menu-button[hidden] {
     display: none;
-  }
-
-  .menu-button::before {
-    position: absolute;
-    inset: -1px;
-    content: "";
-    /* background: var(--gradient-stroke); */
-    /* border-radius: 999rem; */
-    z-index: -1;
   }
 
   .menu-content {
@@ -211,7 +203,7 @@ const textLinks: { label: string; href: string }[] = [
     gap: 0.75rem;
     padding: 1.5rem 2rem 1.5rem 1.5rem;
     background-color: var(--bg-color);
-    border-radius: 0 0 0.75rem 0.75rem;
+    /* border-radius: 0 0 0.75rem 0.75rem; */
     /* box-shadow: var(--shadow-lg); */
   }
 
@@ -248,7 +240,7 @@ const textLinks: { label: string; href: string }[] = [
       position: relative;
       flex-direction: row;
       font-size: var(--text-sm);
-      border-radius: 999rem;
+      /* border-radius: 999rem; */
       border: 0;
       padding: 0.5rem 0.5625rem;
       /* background: radial-gradient(var(--gray-900), var(--gray-800) 150%); */
@@ -260,7 +252,7 @@ const textLinks: { label: string; href: string }[] = [
       inset: -1px;
       content: "";
       background: var(--gradient-stroke);
-      border-radius: 999rem;
+      /* border-radius: 999rem; */
       z-index: -1;
     }
 

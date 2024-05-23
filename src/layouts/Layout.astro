@@ -2,6 +2,7 @@
 import MainHead from "../components/MainHead.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import { getLangFromUrl } from "../i18n/utils";
 
 interface Props {
   title?: string | undefined;
@@ -9,36 +10,26 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 
-<!-- Change the lang to use i18n -->
-<html lang="en">
+<html lang={lang}>
   <head>
     <MainHead title={title} description={description} />
   </head>
   <body>
-    <div class="flex flex-col">
-      <Nav />
-      <slot />
-      <Footer />
-    </div>
+    <Nav />
+    <slot />
+    <Footer />
 
     <style>
       :root {
         --bg-color: beige;
         background-color: var(--bg-color);
       }
-
       :root.theme-dark {
         --bg-color: #181818;
         background-color: var(--bg-color);
-      }
-
-      @media (min-width: 50em) {
-        :root {
-        }
-        :root.theme-dark {
-        }
       }
     </style>
   </body>

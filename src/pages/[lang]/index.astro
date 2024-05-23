@@ -1,0 +1,10 @@
+---
+import App from "../../components/Pages/App.astro";
+
+//use I18n file!!!
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+---
+
+<App />

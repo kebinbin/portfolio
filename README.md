@@ -42,3 +42,7 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to see it in action?
 
 Go ahead and visit the [deployed version](https://my.porfolio.url).
+
+## TODO:
+
+- Not found page.
