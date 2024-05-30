@@ -1,9 +1,9 @@
 ---
 import Icon from "./Icon.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import type { iconPaths } from "./IconPaths";
 
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import LanguagePicker from "./LanguagePicker.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -76,6 +76,7 @@ const textLinks: { label: string; href: string }[] = [
       }
     </ul>
     <div class="menu-footer">
+      <LanguagePicker />
       <div class="theme-toggle">
         <ThemeToggle />
       </div>
@@ -125,7 +126,7 @@ const textLinks: { label: string; href: string }[] = [
     /* Check why nav changes height when in mobile */
     z-index: 9999;
     position: relative;
-    font-family: var(--font-brand);
+    /* font-family: var(--font-brand); */
     font-weight: 500;
     margin-bottom: 1rem;
     margin-top: 1rem;
@@ -142,8 +143,7 @@ const textLinks: { label: string; href: string }[] = [
     gap: 0.5rem;
     align-items: center;
     line-height: 1.2;
-    color: var(--gray-0);
-    text-decoration: none;
+    color: var(--color-text-3);
   }
 
   .menu-button {
@@ -152,13 +152,13 @@ const textLinks: { label: string; href: string }[] = [
     border: 0;
     /* padding: 0.5rem; */
     font-size: 1.5rem;
-    color: var(--gray-0);
+    color: var(--color-link);
     background-color: transparent;
     /* box-shadow: var(--shadow-md); */
   }
 
   .menu-button[aria-expanded="true"] {
-    color: var(--gray-300);
+    color: var(--color-link-active);
   }
 
   .menu-button[hidden] {
@@ -180,18 +180,17 @@ const textLinks: { label: string; href: string }[] = [
     line-height: 1.2;
     list-style: none;
     padding: 2rem;
-    background-color: var(--bg-color);
-    border-bottom: 1px solid var(--gray-800);
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .link {
     display: inline-block;
-    color: var(--gray-300);
-    text-decoration: none;
+    color: var(--color-link);
   }
 
   .link.active {
-    color: var(--gray-0);
+    color: var(--color-link-active);
   }
 
   .menu-footer {
@@ -202,7 +201,7 @@ const textLinks: { label: string; href: string }[] = [
     justify-content: space-between;
     gap: 0.75rem;
     padding: 1.5rem 2rem 1.5rem 1.5rem;
-    background-color: var(--bg-color);
+    background-color: var(--color-bg);
     /* border-radius: 0 0 0.75rem 0.75rem; */
     /* box-shadow: var(--shadow-lg); */
   }
@@ -210,7 +209,7 @@ const textLinks: { label: string; href: string }[] = [
   .theme-toggle {
     display: flex;
     align-items: center;
-    height: calc(var(--icon-size) + 2 * var(--icon-padding));
+    /* height: calc(var(--icon-size) + 2 * var(--icon-padding)); */
   }
 
   @media (min-width: 50em) {
@@ -251,7 +250,7 @@ const textLinks: { label: string; href: string }[] = [
       position: absolute;
       inset: -1px;
       content: "";
-      background: var(--gradient-stroke);
+      /* background: var(--gradient-stroke); */
       /* border-radius: 999rem; */
       z-index: -1;
     }
@@ -259,20 +258,19 @@ const textLinks: { label: string; href: string }[] = [
     .link {
       padding: 0.5rem 1rem;
       border-radius: 999rem;
-      transition:
-        color var(--theme-transition),
-        background-color var(--theme-transition);
+      transition: color var(--theme-transition);
+      /* background-color var(--theme-transition); */
     }
 
     .link:hover,
     .link:focus {
-      color: var(--gray-100);
-      background-color: var(--accent-subtle-overlay);
+      color: var(--color-link-hover);
+      /* background-color: var(--accent-subtle-overlay); */
     }
 
     .link.active {
-      color: var(--accent-text-over);
-      background-color: var(--accent-regular);
+      color: var(--color-link-active);
+      /* background-color: var(--accent-regular); */
     }
 
     .menu-footer {

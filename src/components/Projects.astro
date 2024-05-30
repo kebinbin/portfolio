@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import ProjectPreview from "./ProjectPreview-absolute.astro";
+import ProjectPreview from "./ProjectPreview.astro";
 // import ProjectPreview from "./ProjectPreview-grid.astro";
 
 const { currentLocale } = Astro;
@@ -32,7 +32,7 @@ const projects = (await getCollection("projects"))
 
 <style>
   .projects {
-    /* margin-top: 3rem; */
+    margin-bottom: 10rem;
   }
 
   .projects li {

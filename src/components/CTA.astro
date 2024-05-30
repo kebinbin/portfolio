@@ -1,0 +1,37 @@
+---
+import { getI18N } from "../i18n";
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<aside class="wrapper">
+  <h2>Interested in working together?</h2>
+  <p>
+    Shoot me a note with your project details at <a
+      href="mailto:kevin@castillo.works">kevin@castillo.works</a
+    >
+  </p>
+</aside>
+
+<style>
+  h2 {
+    font-size: var(--text-3xl);
+    line-height: 4.5rem;
+    color: var(--color-text-3);
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 700px;
+    align-items: center;
+    text-align: center;
+    margin: 4rem auto;
+    color: var(--color-text-1);
+  }
+
+  aside a {
+    font-family: var(--font-body);
+  }
+</style>

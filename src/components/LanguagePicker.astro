@@ -1,13 +1,14 @@
 ---
 import { languages } from "../i18n/ui";
+const { currentLocale } = Astro;
+const [lang] = Object.keys(languages).filter((lang) => lang != currentLocale);
 ---
 
-<ul>
-  {
-    Object.entries(languages).map(([lang, label]) => (
-      <li>
-        <a href={`/${lang}/`}>{label}</a>
-      </li>
-    ))
+<a href={`/${lang}/`}>{lang}</a>
+
+<style>
+  a {
+    text-transform: uppercase;
+    /* font-family: var(--font-brand); */
   }
-</ul>
+</style>

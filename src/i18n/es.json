@@ -1,41 +1,141 @@
 {
-    "hero": {
-        "h1": {
-            "start": "Ingeniero de Software",
-            "middle": "apps & Diseñador",
-            "end": "de UX/UI"
+  "hero": {
+    "h1": {
+      "start": "Ingeniero de Software",
+      "middle": "FullStack & Diseño",
+      "end": "de interfaces"
+    },
+    "aside": {
+      "availableFor": "Disponible para ofertas y colaboraciones en:",
+      "services": [
+        {
+          "icon": "palette",
+          "label": "Diseño Web"
         },
-        "h1": {
-            "start": "Ingeniero de Software",
-            "middle": "FullStack & Diseño",
-            "end": "de interfaces"
+        {
+          "icon": "code-tag",
+          "label": "Front-end"
         },
-        "aside":{
-            "availableFor": "Disponible para ofertas y colaboraciones en:",
-            "services": [
-                {
-                    "icon": "palette",
-                    "label": "Diseño Web"
-                },
-                {
-                    "icon": "code-tag",
-                    "label": "Front-end"
-                },
-                {
-                    "icon": "terminal-window-2",
-                    "label": "Back-end"
-                },
-                {
-                    "icon": "database",
-                    "label": "Bases de datos"
-                },
-                {
-                    "icon": "app-window",
-                    "label": "E-Commerce"
-                }
-            ]
+        {
+          "icon": "terminal-window-2",
+          "label": "Back-end"
         },
-        "recentProjects": "Echa un vistazo a mis",
-        "recentProjectsLink": "projectos recientes"
+        {
+          "icon": "database",
+          "label": "Bases de datos"
+        },
+        {
+          "icon": "app-window",
+          "label": "E-Commerce"
+        }
+      ]
+    },
+    "recentProjects": "Echa un vistazo a mis",
+    "recentProjectsLink": "projectos recientes"
+  },
+  "about": {
+    "h2": "Conoce sobre mí",
+    "bio": {
+      "h3": "Acerca de mí",
+      "paragraph1": "I am a Software Engineer with a solid background in Full-Stack development in corporate environments and an avid traveler who has witnessed first-hand the intrinsic value that PMS tools such as Cloudbeds can provide to hostel management.  This experiences, plus my immediate resonance with Cloudbeds values and culture, motivated me to apply to this job.",
+      "paragraph2": "Throughout my career I have worked in multiple front-end applications (mostly React based) and back-end projects built using tools such as OOP Java (with frameworks like Spring), PHP, and relational databases.  As part of my previous corporate experience, I was able to bring an inherited critical enterprise app from unstable state to a stable release in an Agile environment."
+    },
+    "experience": {
+      "h3": "Experience",
+      "experiences": [
+        {
+          "company": "Collabor",
+          "role": "Founder, developer & designer",
+          "dates": "Oct 2023 - Present",
+          "paragraph": "Created a freelancer to client platform to facilitate the communication, strategy, progress track and payments of freelancers.  This is the tool I use for our work :)",
+          "tags": [
+            "ReactJS",
+            "Svelte",
+            "Astro",
+            "NextJS",
+            "TypeScript",
+            "Tailwind"
+          ]
+        },
+        {
+          "company": "Hewlett Packard Enterprise",
+          "role": "Software Engineer",
+          "dates": "May 2015 - Aug 2016",
+          "paragraph": "Developed new features, identified and fixed synchronization, cyber-security and performance issues.  Developed many UI views.  Deployed to production.",
+          "tags": [
+            "ReactJS",
+            "Java",
+            "Spring",
+            "Docker",
+            "Micro-services",
+            "SQLServer"
+          ]
+        },
+        {
+          "company": "Naluum",
+          "role": "Web developer",
+          "dates": "Nov 2018 - Oct 2020",
+          "paragraph": "Designed and developed the website for an international event being hosted by the institute.  Developed WordPress plugin to integrate form inputs with GoogleSheets.",
+          "tags": ["HTML", "JavaScript", "CSS", "WordPress", "PHP", "Figma"]
+        },
+        {
+          "company": "Hewlett Packard",
+          "role": "Software Engineer",
+          "dates": "Jun 2015 - Aug 2016",
+          "paragraph": "Developed new UI features of a real-time application.  Researched and fixed performance bottlenecks.",
+          "tags": [
+            "React",
+            "FLUX",
+            "SASS",
+            "BootStrap",
+            "JS",
+            "ActiveMQ",
+            "Linux"
+          ]
+        },
+        {
+          "company": "SYSDAT CREST UPRM ",
+          "role": "Engineering Student",
+          "dates": "Jan 2015 - May 2015",
+          "paragraph": "Designed and deployed a normalizad relational database, developed front-end  components and back-end functionality such as role-based access control.",
+          "tags": [
+            "AngularJS",
+            "PHP",
+            "MySQL",
+            "ERD",
+            "BootStrap",
+            "HTML",
+            "CSS"
+          ]
+        }
+      ]
+    },
+    "skills": {
+      "h3": "Things I can help you with",
+      "currentlyOffering": [
+        "REST API",
+        "Real-time apps",
+        "Front-end development",
+        "Back-end development",
+        "OOP",
+        "Relational databases",
+        "Web design"
+      ]
+    },
+    "education": {
+      "h3": "Education",
+      "degrees": [
+        {
+          "title": "BSCpE - Computer Engineering",
+          "institution": "University of Puerto Rico",
+          "dates": "Aug 2009 - May 2015"
+        }
+      ]
+    },
+    "cta": {
+      "text": "Want to know more?",
+      "link": "Download resume"
     }
+  },
+  "footer": {}
 }

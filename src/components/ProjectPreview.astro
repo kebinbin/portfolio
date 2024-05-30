@@ -22,7 +22,7 @@ const [, projectSlug] = slug.split("/");
       <aside>{data.subtitle}</aside>
       <h3>{data.title}</h3>
       <p>{data.description}</p>
-      <a href={`projects/${projectSlug}`}>View Project</a>
+      <a href={`projects/${projectSlug}`}>View Case Study</a>
     </div>
   </div>
 </article>
@@ -84,24 +84,40 @@ const [, projectSlug] = slug.split("/");
   .content aside {
     /* font-size: var(--text-lg); */
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--color-text-overlay-1);
     font-size: 14px;
     line-height: 0.92;
     letter-spacing: 0.2rem;
     font-weight: 700;
+    font-family: var(--font-brand);
   }
 
   .content h3 {
-    /* font-size: var(--text-2xl); */
+    font-size: var(--text-2xl);
     text-transform: uppercase;
-    color: #fff;
-    font-size: 50px;
+    color: var(--color-text-overlay-3);
+    /* font-family: var(--font-brand); */
     line-height: 0.92;
     font-weight: 600;
   }
 
   .content p {
+    color: var(--color-text-overlay-2);
+  }
+
+  .content a {
+    display: flex;
+    color: var(--color-text-overlay-3);
+    /* font-family: var(--font-brand); */
+    text-align: center;
+    border: 0.1rem solid var(--color-link);
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 12rem;
+    padding: 0.75rem 1rem;
+    letter-spacing: 2px;
     font-size: var(--text-sm);
-    color: #fff;
   }
 </style>

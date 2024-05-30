@@ -23,7 +23,7 @@ import Icon from "./Icon.astro";
     cursor: pointer;
     height: 15px;
     width: 15px;
-    border: 0.075rem solid var(--gray-0);
+    border: 0.075rem solid var(--color-link);
     background: none;
   }
 
@@ -55,30 +55,30 @@ import Icon from "./Icon.astro";
     border-radius: 999rem;
   } */
 
-  :global(.theme-dark) .icon.light::before {
+  /* :global(.theme-dark) .icon.light::before {
     transform: translateX(100%);
-  }
+  } */
 
   :global(.theme-dark) .icon.dark,
   :global(html:not(.theme-dark)) .icon.light,
   button[aria-pressed="false"] .icon.light {
-    color: var(--accent-text-over);
+    color: var(--color-link-active);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
+  /* @media (prefers-reduced-motion: no-preference) {
     .icon,
     .icon.light::before {
       transition:
         transform var(--theme-transition),
         color var(--theme-transition);
     }
-  }
+  } */
 
-  @media (forced-colors: active) {
+  /* @media (forced-colors: active) {
     .icon.light::before {
-      background-color: SelectedItem; /* Check this */
+      background-color: SelectedItem; 
     }
-  }
+  } */
 </style>
 
 <script>

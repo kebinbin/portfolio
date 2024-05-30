@@ -14,136 +14,179 @@ const i18n = getI18N({ currentLocale });
     <span class="break"></span>
     {i18n.hero.h1.end}
   </h1>
-  <aside class="aside">
+  <aside>
     <p>{i18n.hero.aside.availableFor}</p>
-    <div class="services">
-      {
-        i18n.hero.aside.services.map((service) => (
-          <Service>
-            <Icon icon={service.icon} size="1.33em" />{" "}
-            <span>{service.label}</span>
-          </Service>
-        ))
-      }
+    <div class="bottom">
+      <div class="services">
+        {
+          i18n.hero.aside.services.map((service) => (
+            <Service>
+              <Icon icon={service.icon} size="1em" />
+              <span>{service.label}</span>
+            </Service>
+          ))
+        }
+      </div>
+
+      <div class="projects-link">
+        <span>{i18n.hero.recentProjects}</span>
+        <a href="#projects">
+          <strong>{i18n.hero.recentProjectsLink}</strong>
+        </a>
+        <div class="line"></div>
+      </div>
     </div>
   </aside>
-  <p class="projects-link">
-    {i18n.hero.recentProjects}
-    <a href="#projects">
-      <strong>{i18n.hero.recentProjectsLink}</strong>
-    </a>
-  </p>
 </header>
 
 <style>
   .hero {
-    font-size: var(--text-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     text-align: center;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto; /* check this */
-    grid-template-areas:
-      "title"
-      "aside"
-      "link";
-    /* gap: 3.5rem; */
+    font-size: var(--text-base);
   }
 
   .title {
-    grid-area: title;
-    /* font-size: var(--text-5xl); */
-    font-size: 110px;
+    align-items: center;
+    padding: 3.5rem 0;
+    text-align: center;
+    /* font-size: var(--text-2xl); */
     font-weight: 600;
     text-transform: uppercase;
-    line-height: 5.5rem;
-    /* letter-spacing: -3px; */
-    color: var(--gray-0);
+    /* line-height: 5.5rem; */
+    color: var(--color-text-3);
+    /* font-family: var(--font-brand); */
     /* max-width: 19ch; */
     /* margin-inline: auto; check this */
-    text-align: center;
-    align-items: center;
-    padding: 6.5rem 0;
   }
 
   .break {
     display: block;
   }
 
-  .aside {
-    grid-area: aside;
-    /* font-size: var(--text-sm); */
-    text-align: start;
-    /* align-content: end; */
-    padding: 0.5rem 0;
-    /* place-items: center; */
-    /* align-content: center; */
+  aside {
     display: flex;
     flex-direction: column;
-
-    font-size: 14px;
-    color: #fff;
+    padding: 0.5rem 0;
+    gap: 1rem;
+    text-align: start;
+    color: var(--color-text-3);
     font-weight: 400;
   }
 
-  .aside > p::before {
+  aside > p::before {
     /* display: inline-flex; */
     /* display: inline-flex; */
-    border: 0;
-    border-radius: 999rem;
-    padding: 0;
-    margin-right: 0.25rem;
 
     content: "";
     height: 12px;
     width: 12px;
-    background-color: greenyellow;
+    padding: 0;
+    margin-right: 0.25rem;
+    border: 0;
+    border-radius: 999rem;
+    background-color: var(--color-semantic-success);
   }
 
-  .aside > p {
+  aside > p {
     /* flex-grow: 1; */
     display: flex;
     align-items: center;
   }
 
-  .services {
+  .bottom {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
+  }
+
+  .services {
+    display: flex;
+    flex-direction: row;
     gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-wrap: wrap;
 
-    font-size: 16px;
+    /* font-size: 16px;
     color: #fff;
-    font-weight: 400;
+    font-weight: 400; */
+  }
+  .services span {
+    display: block;
+    height: 1.5rem;
+    /* line-height: 30px; */
+    /* font-family: var(--font-body); */
+
+    /* Crazy hack to fix font vertical issue */
+    vertical-align: text-bottom;
+    line-height: 1.7rem;
   }
 
   .projects-link {
-    grid-area: link;
-    font-size: var(--text-sm);
-    text-align: end;
-    align-content: end;
-    padding: 0.5rem 0;
+    /* align-content: flex-end; */
+    /* text-align: end; */
+    color: var(--color-text-2);
+    font-size: var(--text-base);
+    letter-spacing: 0.035rem; /*use rem? */
   }
 
-  .projects-link > a {
-    text-decoration: none;
+  .projects-link > span {
+    /* height: 1.5rem; */
+    /* width: 100%; */
   }
 
-  @media (min-width: 40em) {
+  .line::before {
+    content: "";
+    border-right: 0.025rem solid var(--color-link);
+    display: inline-block;
+    margin-top: 1rem;
+    width: 50%;
+    height: 25px;
+  }
+
+  /* .line::after {
+    content: "";
+    border-left: 0.025rem solid var(--color-text-1);
+    display: inline-block;
+    margin-top: 1rem;
+    width: 50%;
+    height: 50px;
+  } */
+
+  .projects-link a {
+    color: var(--color-text-3);
+    font-family: var(--font-body);
+  }
+  /* 
+  @media (min-width: 30em) {
     .services {
       flex-direction: row;
-      flex-wrap: wrap;
     }
-  }
+  } */
 
   @media (min-width: 56em) {
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr auto;
-      grid-template-areas:
-        "title title title"
-        "aside aside link";
-      /* min-height: 400px; */
+    aside {
+      gap: 0.25rem;
+    }
+    .bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      /* align-items: center; */
+    }
+    .title {
+      align-items: center;
+      padding: 6.5rem 0;
+      text-align: center;
+      font-size: var(--text-4xl);
+      font-weight: 600;
+      text-transform: uppercase;
+      line-height: 5.5rem;
+      color: var(--color-text-3);
+      /* max-width: 19ch; */
+      /* margin-inline: auto; check this */
     }
   }
 </style>
