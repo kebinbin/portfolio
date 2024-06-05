@@ -45,7 +45,7 @@ const i18n = getI18N({ currentLocale });
     flex-direction: column;
     gap: 1rem;
     text-align: center;
-    font-size: var(--text-base);
+    font-size: var(--font-size-9);
   }
 
   .title {
@@ -53,10 +53,11 @@ const i18n = getI18N({ currentLocale });
     padding: 3.5rem 0;
     text-align: center;
     /* font-size: var(--text-2xl); */
+    font-size: var(--font-size-8);
     font-weight: 600;
     text-transform: uppercase;
     /* line-height: 5.5rem; */
-    color: var(--color-text-3);
+    color: var(--font-color-5);
     /* font-family: var(--font-brand); */
     /* max-width: 19ch; */
     /* margin-inline: auto; check this */
@@ -72,7 +73,7 @@ const i18n = getI18N({ currentLocale });
     padding: 0.5rem 0;
     gap: 1rem;
     text-align: start;
-    color: var(--color-text-3);
+    color: var(--font-color-5);
     font-weight: 400;
   }
 
@@ -87,7 +88,7 @@ const i18n = getI18N({ currentLocale });
     margin-right: 0.25rem;
     border: 0;
     border-radius: 999rem;
-    background-color: var(--color-semantic-success);
+    background-color: var(--color-semantic-success-2);
   }
 
   aside > p {
@@ -128,8 +129,8 @@ const i18n = getI18N({ currentLocale });
   .projects-link {
     /* align-content: flex-end; */
     /* text-align: end; */
-    color: var(--color-text-2);
-    font-size: var(--text-base);
+    color: var(--font-color-3);
+    font-size: var(--font-size-3);
     letter-spacing: 0.035rem; /*use rem? */
   }
 
@@ -140,7 +141,7 @@ const i18n = getI18N({ currentLocale });
 
   .line::before {
     content: "";
-    border-right: 0.025rem solid var(--color-link);
+    border-right: 0.025rem solid var(--link-color);
     display: inline-block;
     margin-top: 1rem;
     width: 50%;
@@ -157,8 +158,8 @@ const i18n = getI18N({ currentLocale });
   } */
 
   .projects-link a {
-    color: var(--color-text-3);
-    font-family: var(--font-body);
+    color: var(--link-color);
+    font-family: var(--font-family-body);
   }
   /* 
   @media (min-width: 30em) {
@@ -180,11 +181,11 @@ const i18n = getI18N({ currentLocale });
       align-items: center;
       padding: 6.5rem 0;
       text-align: center;
-      font-size: var(--text-4xl);
+      font-size: var(--font-size-9);
       font-weight: 600;
       text-transform: uppercase;
       line-height: 5.5rem;
-      color: var(--color-text-3);
+      /* color: var(--font-color-5); */
       /* max-width: 19ch; */
       /* margin-inline: auto; check this */
     }

@@ -143,7 +143,7 @@ const textLinks: { label: string; href: string }[] = [
     gap: 0.5rem;
     align-items: center;
     line-height: 1.2;
-    color: var(--color-text-3);
+    color: var(--font-color-5);
   }
 
   .menu-button {
@@ -152,13 +152,13 @@ const textLinks: { label: string; href: string }[] = [
     border: 0;
     /* padding: 0.5rem; */
     font-size: 1.5rem;
-    color: var(--color-link);
+    color: var(--link-color);
     background-color: transparent;
     /* box-shadow: var(--shadow-md); */
   }
 
   .menu-button[aria-expanded="true"] {
-    color: var(--color-link-active);
+    color: var(--link-active-color);
   }
 
   .menu-button[hidden] {
@@ -176,32 +176,32 @@ const textLinks: { label: string; href: string }[] = [
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    font-size: var(--text-md);
+    font-size: var(--font-size-3);
     line-height: 1.2;
     list-style: none;
     padding: 2rem;
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .link {
     display: inline-block;
-    color: var(--color-link);
+    color: var(--link-color);
   }
 
   .link.active {
-    color: var(--color-link-active);
+    color: var(--link-active-color);
   }
 
   .menu-footer {
-    --icon-size: var(--text-xl);
-    --icon-padding: 0.5rem;
+    /* --icon-size: var(--font-size-1); */
+    /* --icon-padding: 0.5rem; */
 
     display: flex;
     justify-content: space-between;
     gap: 0.75rem;
     padding: 1.5rem 2rem 1.5rem 1.5rem;
-    background-color: var(--color-bg);
+    background-color: var(--bg-color);
     /* border-radius: 0 0 0.75rem 0.75rem; */
     /* box-shadow: var(--shadow-lg); */
   }
@@ -226,7 +226,7 @@ const textLinks: { label: string; href: string }[] = [
     }
 
     .site-title {
-      font-size: var(--text-lg);
+      font-size: var(--font-size-3);
       text-transform: uppercase;
     }
 
@@ -238,7 +238,7 @@ const textLinks: { label: string; href: string }[] = [
     .nav-items {
       position: relative;
       flex-direction: row;
-      font-size: var(--text-sm);
+      font-size: var(--font-size-2);
       /* border-radius: 999rem; */
       border: 0;
       padding: 0.5rem 0.5625rem;
@@ -264,17 +264,17 @@ const textLinks: { label: string; href: string }[] = [
 
     .link:hover,
     .link:focus {
-      color: var(--color-link-hover);
+      color: var(--link-hover-color);
       /* background-color: var(--accent-subtle-overlay); */
     }
 
     .link.active {
-      color: var(--color-link-active);
+      color: var(--link-active-color);
       /* background-color: var(--accent-regular); */
     }
 
     .menu-footer {
-      --icon-padding: 0.375rem;
+      /* --icon-padding: 0.375rem; */
 
       justify-self: flex-end;
       align-items: center;

@@ -23,7 +23,7 @@ import Icon from "./Icon.astro";
     cursor: pointer;
     height: 15px;
     width: 15px;
-    border: 0.075rem solid var(--color-link);
+    border: 0.075rem solid var(--link-color);
     background: none;
   }
 
@@ -62,7 +62,7 @@ import Icon from "./Icon.astro";
   :global(.theme-dark) .icon.dark,
   :global(html:not(.theme-dark)) .icon.light,
   button[aria-pressed="false"] .icon.light {
-    color: var(--color-link-active);
+    color: var(--link-active-color);
   }
 
   /* @media (prefers-reduced-motion: no-preference) {
