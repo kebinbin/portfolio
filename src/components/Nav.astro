@@ -143,7 +143,9 @@ const textLinks: { label: string; href: string }[] = [
     gap: var(--space-2);
     align-items: center;
     /* line-height: 1.2; */
-    color: var(--font-color-5);
+    color: var(--link-color-2);
+    font-size: var(--font-size-3);
+    text-transform: uppercase;
   }
 
   .menu-button {
@@ -152,13 +154,13 @@ const textLinks: { label: string; href: string }[] = [
     border: 0;
     padding: 0;
     font-size: var(--font-size-6);
-    color: var(--link-color);
+    color: var(--link-color-1);
     background-color: transparent;
     /* box-shadow: var(--shadow-md); */
   }
 
   .menu-button[aria-expanded="true"] {
-    color: var(--link-active-color);
+    color: var(--link-active-color-1);
   }
 
   .menu-button[hidden] {
@@ -169,6 +171,7 @@ const textLinks: { label: string; href: string }[] = [
     position: absolute;
     left: 0;
     right: 0;
+    text-transform: uppercase;
   }
 
   .nav-items {
@@ -176,8 +179,6 @@ const textLinks: { label: string; href: string }[] = [
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
-    font-size: var(--font-size-3);
-    /* line-height: 1.2; */
     list-style: none;
     padding: var(--space-5);
     background-color: var(--bg-color);
@@ -186,11 +187,15 @@ const textLinks: { label: string; href: string }[] = [
 
   .link {
     display: inline-block;
-    color: var(--link-color);
+    color: var(--link-color-1);
+    font-weight: var(--font-weight-2);
+    letter-spacing: var(--font-letter-spacing-3);
+    font-size: var(--font-size-3);
+    /* line-height: 1.2; */
   }
 
   .link.active {
-    color: var(--link-active-color);
+    color: var(--link-active-color-2);
   }
 
   .menu-footer {
@@ -221,18 +226,16 @@ const textLinks: { label: string; href: string }[] = [
     }
 
     .site-title {
-      font-size: var(--font-size-3);
-      text-transform: uppercase;
+      font-size: var(--font-size-4);
     }
 
     .menu-content {
       display: contents;
-      text-transform: uppercase;
     }
 
     .nav-items {
       flex-direction: row;
-      font-size: var(--font-size-2);
+      font-size: var(--font-size-3);
       border: 0;
       padding: var(--space-2);
     }
@@ -240,17 +243,16 @@ const textLinks: { label: string; href: string }[] = [
     .link {
       padding: var(--space-2) var(--space-4);
       transition: color var(--theme-transition);
-      letter-spacing: var(--font-letter-spacing-3);
     }
 
     .link:hover,
     .link:focus {
-      color: var(--link-hover-color);
+      color: var(--link-hover-color-1);
       /* background-color: var(--accent-subtle-overlay); */
     }
 
     .link.active {
-      color: var(--link-active-color);
+      color: var(--link-active-color-1);
       /* background-color: var(--accent-regular); */
     }
 
