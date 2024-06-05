@@ -30,9 +30,8 @@ const [, projectSlug] = slug.split("/");
 <style>
   .card {
     position: relative;
-    height: 37rem;
+    height: var(--space-15);
     display: flex;
-    /* align-items: center; */
   }
 
   .card img {
@@ -55,14 +54,7 @@ const [, projectSlug] = slug.split("/");
     width: 100%;
     height: 100%;
 
-    /* background: rgb(24, 24, 24);
-    background: linear-gradient(
-      90deg,
-      rgba(24, 24, 24, 0.7) 0%,
-      rgba(24, 24, 24, 0.5) 50%,
-      rgba(24, 24, 24, 0.1) 100%
-    ); */
-
+    /* TODO: Improve this gradient */
     background: rgb(0, 0, 0);
     background: linear-gradient(
       90deg,
@@ -73,22 +65,21 @@ const [, projectSlug] = slug.split("/");
   }
 
   .content {
-    width: 400px;
+    width: var(--space-13);
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.75rem;
+    gap: var(--space-5);
   }
 
   .content aside {
-    /* font-size: var(--text-lg); */
     text-transform: uppercase;
     color: var(--font-color-2);
-    font-size: 14px;
-    line-height: 0.92;
-    letter-spacing: 0.2rem;
-    font-weight: 700;
+    font-size: var(--font-size-2);
+    /* line-height: 0.92; */
+    letter-spacing: var(--font-letter-spacing-4);
+    font-weight: var(--font-weight-5);
     font-family: var(--font-family-brand);
   }
 
@@ -96,9 +87,8 @@ const [, projectSlug] = slug.split("/");
     font-size: var(--font-size-8);
     text-transform: uppercase;
     color: var(--font-color-5);
-    /* font-family: var(--font-brand); */
-    line-height: 0.92;
-    font-weight: 600;
+    line-height: var(--font-line-height-1);
+    font-weight: var(--font-weight-4);
   }
 
   .content p {
@@ -110,14 +100,14 @@ const [, projectSlug] = slug.split("/");
     color: var(--link-color);
     /* font-family: var(--font-brand); */
     text-align: center;
-    border: 0.1rem solid var(--link-color);
+    border: var(--border-width-1) solid var(--link-color);
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
 
-    max-width: 12rem;
-    padding: 0.75rem 1rem;
-    letter-spacing: 2px;
+    max-width: var(--space-11);
+    padding: var(--space-3) var(--space-4);
+    letter-spacing: var(--font-letter-spacing-4);
     font-size: var(--font-size-2);
   }
 </style>
