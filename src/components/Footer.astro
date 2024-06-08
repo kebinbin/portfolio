@@ -14,29 +14,30 @@ const currentYear = new Date().getFullYear();
   footer {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: var(--space-7);
     margin-top: auto;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-5);
   }
 
   footer a {
-    /* color: var(--color-text-3); */
-    text-decoration: 1px solid underline transparent;
+    /* text-decoration: 1px solid underline transparent;
     text-underline-offset: 0.25em;
-    transition: text-decoration-color var(--theme-transition);
-    letter-spacing: 1px;
+    transition: text-decoration-color var(--theme-transition); */
+
+    /* font-size: var(--font-size-2); */
+    letter-spacing: var(--font-letter-spacing-3);
     text-transform: uppercase;
   }
 
   footer a:hover,
   footer a:focus {
-    text-decoration-color: currentColor;
+    /* text-decoration-color: currentColor; */
   }
 
   .socials {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--space-5);
     flex-wrap: wrap;
   }
 

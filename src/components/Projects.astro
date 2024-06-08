@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import ProjectPreview from "./ProjectPreview.astro";
-// import ProjectPreview from "./ProjectPreview-grid.astro";
 
 const { currentLocale } = Astro;
 
@@ -20,7 +19,6 @@ const projects = (await getCollection("projects"))
   </header>
   <ul>
     {
-      //Should we put an article here
       projects.map((project) => (
         <li>
           <ProjectPreview project={project} />
@@ -32,10 +30,11 @@ const projects = (await getCollection("projects"))
 
 <style>
   .projects {
-    margin-bottom: 10rem;
+    margin-top: -25px; /* This is temporary (remove) */
+    margin-bottom: var(--space-10);
   }
 
   .projects li {
-    margin: 1.5rem 0;
+    margin: var(--space-5) 0;
   }
 </style>

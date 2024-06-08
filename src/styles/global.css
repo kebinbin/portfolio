@@ -1,60 +1,170 @@
 /* Global variables */
+
 :root {
-  /* Colors */
-  --color-primary: #181818; /* bg & overall website color */
-  --color-primary-tint-1: #383838;
-  --color-primary-tint-2: #686868;
-  --color-primary-tint-3: #a3a3a3; /* #989898 */
-  --color-primary-tint-4: #c8c8c8;
-  --color-primary-tint-5: #f8f8f8;
-  --color-semantic-success: #aac800;
-  --color-semantic-fail: #e61500;
-
-  /* dark overlay */
-  --color-text-overlay-1: var(--color-primary-tint-3);
-  --color-text-overlay-2: var(--color-primary-tint-4);
-  --color-text-overlay-3: var(--color-primary-tint-5);
-
-  /* Colors that depend on theme */
-  --color-bg: var(--color-primary-tint-5);
-  --color-text-1: var(--color-primary-tint-3); /* less contrast: lighter */
-  --color-text-2: var(--color-primary-tint-2); /* middle: body */
-  --color-text-3: var(--color-primary-tint-1); /* higher contrast: darker */
-
-  --color-border: var(--color-primary-tint-4);
-  --color-link: var(--color-primary-tint-1);
-  --color-link-hover: var(--color-primary-tint-2);
-  --color-link-active: var(--color-primary-tint-3);
-
-  /* Text Sizes */
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-md: 1.125rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.625rem;
-  --text-2xl: 3.125rem;
-  --text-3xl: 4.875rem;
-  --text-4xl: 6.875rem;
-
   /* Fonts */
-  --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-family-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Public Sans", sans-serif;
-  --font-body: Arial, "Helvetica Neue", var(--font-system);
-  --font-brand: "Teko", sans-serif, var(--font-system);
+  --font-family-body: "Helvetica Neue", var(--font-family-system);
+  --font-family-brand: "Teko", sans-serif, var(--font-family-system);
+
+  --font-size-1: 0.75rem;
+  --font-size-2: 0.875rem;
+  --font-size-3: 1rem;
+  --font-size-4: 1.125rem;
+  --font-size-5: 1.25rem;
+  --font-size-6: 1.5rem;
+  --font-size-7: 2rem;
+  --font-size-8: 3rem;
+  --font-size-9: 4rem;
+  --font-size-10: 5rem;
+  --font-size-11: 7rem;
+
+  --font-line-height-1: 1;
+  --font-line-height-2: 1.125;
+  --font-line-height-3: 1.25;
+  --font-line-height-4: 1.5;
+  --font-line-height-5: 1.75;
+
+  --font-letter-spacing-1: -0.05em;
+  --font-letter-spacing-2: 0;
+  --font-letter-spacing-3: 0.05em;
+  --font-letter-spacing-4: 0.1em;
+
+  --font-weight-1: 300;
+  --font-weight-2: 400;
+  --font-weight-3: 500;
+  --font-weight-4: 600;
+  --font-weight-5: 700;
 
   /* Transitions */
   --theme-transition: 0.2s ease-in-out;
+
+  /* Borders */
+  --border-width-1: 0.0625rem;
+  --border-width-2: 0.125rem;
+
+  --border-radius-1: 0.1875rem; /* Not used */
+
+  /* Spacing scale */
+  --space-0: 0.0625rem; /* make this space-1 */
+  --space-00: 0.125rem; /* make this space-2 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 12rem;
+  --space-12: 16rem;
+  --space-13: 24rem;
+  --space-14: 32rem;
+  --space-15: 40rem;
+  --space-16: 48rem;
+  --space-17: 64rem;
+  --space-18: 80rem; /* 1280 */
+
+  /* Colors */
+  /* No neutral nor accent colors since the project's primary colors are already neutral */
+  --color-primary-1: hsl(0, 0%, 91%);
+  --color-primary-2: hsl(0, 0%, 79%);
+  --color-primary-3: hsl(0, 0%, 69%);
+  --color-primary-4: hsl(0, 0%, 59%);
+  --color-primary-5: hsl(0, 0%, 49%); /* base */
+  --color-primary-6: hsl(0, 0%, 39%);
+  --color-primary-7: hsl(0, 0%, 29%);
+  --color-primary-8: hsl(0, 0%, 19%);
+  --color-primary-9: hsl(0, 0%, 9%);
+  /* --color-primary-9: hsl(240, 5%, 10%); */
+  --color-semantic-success-1: hsl(69, 100%, 54%);
+  --color-semantic-success-2: hsl(69, 100%, 39%);
+  --color-semantic-success-3: hsl(69, 100%, 24%);
+  --color-semantic-fail-1: hsl(5, 100%, 65%);
+  --color-semantic-fail-2: hsl(5, 100%, 45%);
+  --color-semantic-fail-3: hsl(5, 100%, 30%);
+
+  /* Theme dependent values */
+  --overlay-gradient: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+
+  --bg-color: var(--color-primary-1);
+  --bg-gradient-top: radial-gradient(
+    ellipse 45% 30% at 50% -5%,
+    hsla(0, 0%, 9%, 0.12),
+    hsla(0, 0%, 0%, 0)
+  );
+  --bg-gradient-bottom: radial-gradient(
+    ellipse 45% 30% at 50% 110%,
+    hsla(0, 0%, 9%, 0.12),
+    hsla(0, 0%, 0%, 0)
+  );
+  --font-color-1: var(--color-primary-5);
+  --font-color-2: var(--color-primary-6);
+  --font-color-3: var(--color-primary-7);
+  --font-color-4: var(--color-primary-8);
+  --font-color-5: var(--color-primary-9);
+  --border-color-1: var(--color-primary-2);
+  --border-color-2: var(--color-primary-4);
+
+  /* Remove this variables */
+  --link-color-1: var(--color-primary-7);
+  --link-color-2: var(--color-primary-9);
+  --link-hover-color-1: var(--color-primary-5);
+  --link-hover-color-2: var(--color-primary-7);
+  --link-active-color-1: var(--color-primary-3);
+  --link-active-color-2: var(--color-primary-5);
 }
 
 :root.theme-dark {
-  --color-bg: var(--color-primary);
-  --color-text-1: var(--color-primary-tint-3); /* less contrast: darker */
-  --color-text-2: var(--color-primary-tint-4); /* middle: body */
-  --color-text-3: var(--color-primary-tint-5); /* higher contrast: lighter */
-  --color-border: var(--color-primary-tint-1);
-  --color-link: var(--color-primary-tint-5);
-  --color-link-hover: var(--color-primary-tint-4);
-  --color-link-active: var(--color-primary-tint-3);
+  --overlay-gradient: linear-gradient(
+    90deg,
+    hsla(0, 0%, 9%, 1) 0%,
+    hsla(0, 0%, 9%, 0.9) 25%,
+    hsla(0, 0%, 9%, 0.7) 50%,
+    hsla(0, 0%, 9%, 0.33) 75%,
+    hsla(0, 0%, 9%, 1) 100%
+  );
+  --overlay-gradient: linear-gradient(
+    90deg,
+    hsla(0, 0%, 9%, 0.95) 0%,
+    hsla(0, 0%, 9%, 0.8) 25%,
+    hsla(0, 0%, 9%, 0.6) 50%,
+    hsla(0, 0%, 9%, 0.33) 75%,
+    hsla(0, 0%, 9%, 0.94) 100%
+  );
+  --bg-color: var(--color-primary-9);
+  --bg-gradient-top: radial-gradient(
+    ellipse 45% 30% at 50% -10%,
+    hsla(0, 0%, 51%, 0.12),
+    hsla(0, 0%, 0%, 0)
+  );
+  --bg-gradient-bottom: radial-gradient(
+    ellipse 45% 30% at 50% 120%,
+    hsla(0, 0%, 51%, 0.15),
+    hsla(0, 0%, 0%, 0)
+  );
+  --font-color-1: var(--color-primary-5);
+  --font-color-2: var(--color-primary-4);
+  --font-color-3: var(--color-primary-3);
+  --font-color-4: var(--color-primary-2);
+  --font-color-5: var(--color-primary-1);
+  --border-color-1: var(--color-primary-8);
+  --border-color-2: var(--color-primary-6);
+
+  /* Remove this variables */
+  --link-color-1: var(--color-primary-3);
+  --link-color-2: var(--color-primary-1);
+  --link-hover-color-1: var(--color-primary-5);
+  --link-hover-color-2: var(--color-primary-3);
+  --link-active-color-1: var(--color-primary-7);
+  --link-active-color-2: var(--color-primary-5);
 }
 
 html,
@@ -68,10 +178,12 @@ html {
 }
 
 body {
-  color: var(--color-text-2);
-  font-family: var(--font-body);
+  color: var(--font-color-3);
+  font-family: var(--font-family-body);
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
+  line-height: var(--font-line-height-4);
+  background-color: var(--bg-color);
+  background: var(--bg-gradient-top), var(--bg-gradient-bottom), var(--bg-color);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -93,9 +205,9 @@ img {
 }
 
 a {
-  color: var(--color-link);
+  color: var(--link-color-1);
   text-decoration: none;
-  font-family: var(--font-brand);
+  font-family: var(--font-family-brand);
 }
 
 h1,
@@ -104,15 +216,15 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.1;
-  font-family: var(--font-brand);
-  font-weight: 600;
+  line-height: var(--font-line-height-2);
+  font-family: var(--font-family-brand);
+  font-weight: var(--font-weight-4);
   text-transform: uppercase;
 }
 
 p {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-2);
   /* text-wrap: pretty; */
 }
 
@@ -138,9 +250,9 @@ ul {
 
 .wrapper {
   width: 100%;
-  max-width: 80rem;
+  max-width: var(--space-18);
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: var(--space-5);
 }
 
 /* .margins {
@@ -148,6 +260,6 @@ ul {
 } */
 
 .paddings {
-  padding-inline: 1.5rem;
+  padding-inline: var(--space-5);
   /* padding-block: 1.5rem; */
 }
