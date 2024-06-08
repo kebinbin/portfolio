@@ -21,7 +21,7 @@ const i18n = getI18N({ currentLocale });
         {
           i18n.hero.aside.services.map((service) => (
             <Service>
-              <Icon icon={service.icon} size="1em" />
+              <Icon icon={service.icon} size=".95em" />
               <span>{service.label}</span>
             </Service>
           ))
@@ -56,10 +56,26 @@ const i18n = getI18N({ currentLocale });
     font-weight: var(--font-weight-4);
     text-transform: uppercase;
     /* line-height: 5.5rem; */
-    color: var(--font-color-5);
     /* font-family: var(--font-brand); */
     /* max-width: 19ch; */
     /* margin-inline: auto; check this */
+    color: var(--font-color-5);
+    /* background-image: linear-gradient(
+      20deg,
+      var(--font-color-3),
+      var(--font-color-5)
+    ); */
+    background-image: radial-gradient(
+      ellipse 50% 90% at 50% 20%,
+      var(--font-color-5),
+      var(--font-color-1)
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
   }
 
   .break {
@@ -70,9 +86,9 @@ const i18n = getI18N({ currentLocale });
     display: flex;
     flex-direction: column;
     padding: var(--space-2) 0;
-    gap: var(--space-4);
+    gap: var(--space-2);
     text-align: start;
-    color: var(--font-color-5);
+    color: var(--font-color-1);
     font-weight: var(--font-weight-2);
   }
 
@@ -81,10 +97,11 @@ const i18n = getI18N({ currentLocale });
     /* display: inline-flex; */
 
     content: "";
-    height: var(--space-4);
-    width: var(--space-4);
+    height: var(--space-3);
+    width: var(--space-3);
     padding: 0;
-    margin-right: var(--space-1);
+    margin-left: var(--space-0);
+    margin-right: var(--space-2);
     border: 0;
     border-radius: 999rem;
     background-color: var(--color-semantic-success-2);
@@ -114,7 +131,7 @@ const i18n = getI18N({ currentLocale });
     display: block;
     height: var(--space-5);
 
-    /* Crazy hack to fix font vertical issue */
+    /* TODO: Improve this fix for the font vertical issue */
     vertical-align: text-bottom;
     line-height: 1.7;
   }
@@ -122,22 +139,22 @@ const i18n = getI18N({ currentLocale });
   .projects-link {
     /* align-content: flex-end; */
     /* text-align: end; */
-    color: var(--font-color-3);
+    color: var(--font-color-1);
     font-size: var(--font-size-3);
-    letter-spacing: var(--font-letter-spacing-1);
+    letter-spacing: var(--font-letter-spacing-2);
   }
 
   .line::before {
     content: "";
     border-right: var(--border-width-1) solid var(--border-color-2);
     display: inline-block;
-    margin-top: var(--space-4);
+    margin-top: var(--space-2);
     width: 50%;
-    height: var(--space-5);
+    height: var(--space-3);
   }
 
   .projects-link a {
-    color: var(--link-color-1);
+    color: var(--link-color-2);
     font-family: var(--font-family-body);
   }
 
@@ -149,22 +166,19 @@ const i18n = getI18N({ currentLocale });
   } */
 
   @media (min-width: 56em) {
-    aside {
-      gap: var(--space-1);
-    }
     .bottom {
       flex-direction: row;
       justify-content: space-between;
     }
     .title {
       align-items: center;
-      padding: var(--space-9) 0;
+      padding: var(--space-9) 0 var(--space-8) 0; /* fix this when Font vertical issue is fixed */
       text-align: center;
-      font-size: var(--font-size-10);
+      font-size: var(--font-size-11);
       font-weight: var(--font-weight-3);
-      letter-spacing: 0.0125em;
-      text-transform: uppercase;
-      line-height: 0.8;
+      /* letter-spacing: 0.0125em; */
+      letter-spacing: var(--font-letter-spacing-2);
+      line-height: 0.82;
 
       /* max-width: 19ch; */
       /* margin-inline: auto; check this */

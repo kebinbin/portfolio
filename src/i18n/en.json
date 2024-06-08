@@ -1,12 +1,12 @@
 {
   "hero": {
     "h1": {
-      "start": "Full-Stack Software",
+      "start": "FullStack Software",
       "middle": "Engineer & Web",
       "end": "Designer"
     },
     "aside": {
-      "availableFor": "Avaliable for offers and collaborations on:",
+      "availableFor": "Avaliable for offers and collaborations in",
       "services": [
         {
           "icon": "palette",

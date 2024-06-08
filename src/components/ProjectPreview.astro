@@ -56,12 +56,7 @@ const [, projectSlug] = slug.split("/");
 
     /* TODO: Improve this gradient */
     background: rgb(0, 0, 0);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0, 0.1) 100%
-    );
+    background: var(--overlay-gradient);
   }
 
   .content {

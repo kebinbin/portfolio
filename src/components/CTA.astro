@@ -18,6 +18,13 @@ const i18n = getI18N({ currentLocale });
     font-size: var(--font-size-9);
     line-height: var(--font-line-height-1);
     color: var(--font-color-5);
+    background-image: linear-gradient(
+      160deg,
+      var(--font-color-3) -10%,
+      var(--font-color-5) 80%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   aside {
