@@ -81,7 +81,7 @@ const portrait = {
   .about {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto, 5);
+    grid-template-rows: repeat(5, auto);
     grid-template-areas:
       "portrait-img"
       "bio"
@@ -219,7 +219,7 @@ const portrait = {
   @media (min-width: 35em) {
     .about {
       grid-template-columns: 1fr 2fr;
-      grid-template-rows: repeat(auto, 4);
+      grid-template-rows: repeat(4, auto);
       grid-template-areas:
         "portrait-img bio"
         "experience experience"
@@ -231,9 +231,10 @@ const portrait = {
   @media (min-width: 50em) {
     .about {
       grid-template-columns: 1fr 2fr;
-      grid-template-rows: repeat(auto, 3);
+      grid-template-rows: repeat(4, auto);
       grid-template-areas:
         "portrait-img bio"
+        "portrait-img experience"
         "education experience"
         "skills experience";
     }
@@ -242,10 +243,12 @@ const portrait = {
   @media (min-width: 70em) {
     .about {
       grid-template-columns: 3fr 4fr 5fr;
-      grid-template-rows: repeat(auto, 2);
+      grid-template-rows: repeat(2, 1fr);
       grid-template-areas:
         "portrait-img bio experience"
         "skills education experience";
+
+      grid-gap: 7rem 3rem;
     }
   }
 </style>
