@@ -2,8 +2,8 @@
 title: Donde el viajar se une a la fotografia
 subtitle: Web Designer & Lead Engineer
 publishDate: 2024-03-02 00:00:00
-img: /assets/stock-1.jpg
-img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+hero_bg_img: /assets/case-study-3.jpg
+hero_bg_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
 tags:

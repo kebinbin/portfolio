@@ -42,8 +42,11 @@
   /* Borders */
   --border-width-1: 0.0625rem;
   --border-width-2: 0.125rem;
+  --border-width-3: 0.25rem;
+  --border-width-4: 0.5rem;
 
-  --border-radius-1: 0.1875rem; /* Not used */
+  --border-radius-1: 0.1875rem;
+  --border-radius-2: 0.5rem;
 
   /* Spacing scale */
   --space-0: 0.0625rem; /* make this space-1 */
@@ -77,7 +80,8 @@
   --color-primary-6: hsl(0, 0%, 39%);
   --color-primary-7: hsl(0, 0%, 29%);
   --color-primary-8: hsl(0, 0%, 19%);
-  --color-primary-9: hsl(0, 0%, 9%);
+  --color-primary-8b: hsl(0, 0%, 12%);
+  --color-primary-9: hsl(0, 0%, 7%);
   /* --color-primary-9: hsl(240, 5%, 10%); */
   --color-semantic-success-1: hsl(69, 100%, 54%);
   --color-semantic-success-2: hsl(69, 100%, 39%);
@@ -89,6 +93,12 @@
   /* Theme dependent values */
   --overlay-gradient: linear-gradient(
     90deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  --overlay-gradient-2: linear-gradient(
+    /*fix*/ 90deg,
     rgba(255, 255, 255, 0.9) 0%,
     rgba(255, 255, 255, 0.6) 50%,
     rgba(255, 255, 255, 0.1) 100%
@@ -123,22 +133,45 @@
 }
 
 :root.theme-dark {
-  --overlay-gradient: linear-gradient(
+  /* --overlay-gradient: linear-gradient(
     90deg,
-    hsla(0, 0%, 9%, 1) 0%,
-    hsla(0, 0%, 9%, 0.9) 25%,
-    hsla(0, 0%, 9%, 0.7) 50%,
-    hsla(0, 0%, 9%, 0.33) 75%,
-    hsla(0, 0%, 9%, 1) 100%
-  );
-  --overlay-gradient: linear-gradient(
-    90deg,
-    hsla(0, 0%, 9%, 0.95) 0%,
+    hsla(0, 0%, 9%, 0.85) 0%,
     hsla(0, 0%, 9%, 0.8) 25%,
     hsla(0, 0%, 9%, 0.6) 50%,
-    hsla(0, 0%, 9%, 0.33) 75%,
-    hsla(0, 0%, 9%, 0.94) 100%
+    hsla(0, 0%, 9%, 0.43) 75%,
+    hsla(0, 0%, 9%, 1) 100%
   );
+  --overlay-gradient-2: linear-gradient(
+    0deg,
+    hsla(0, 0%, 0%, 0.5) 0%,
+    hsla(0, 0%, 0%, 0.25) 20%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
+  --overlay-gradient-3: linear-gradient(
+    270deg,
+    hsla(0, 0%, 0%, 0.5) 0%,
+    hsla(0, 0%, 0%, 0.25) 20%,
+    hsla(0, 0%, 0%, 0) 100%
+  ); */
+
+  --overlay-gradient-left: linear-gradient(
+    90deg,
+    hsla(0, 0%, 4%, 0.5) 0%,
+    hsla(0, 0%, 4%, 0.33) 50%,
+    hsla(0, 0%, 4%, 0) 100%
+  );
+  --overlay-gradient-right: linear-gradient(
+    270deg,
+    hsla(0, 0%, 0%, 0.5) 0%,
+    hsla(0, 0%, 0%, 0.25) 20%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
+  --overlay-gradient-bottom: linear-gradient(
+    0deg,
+    rgba(29, 29, 31, 0.95) 0%,
+    /* from apple */ transparent 50%
+  );
+
   --bg-color: var(--color-primary-9);
   --bg-gradient-top: radial-gradient(
     ellipse 45% 30% at 50% -10%,
@@ -248,11 +281,18 @@ ul {
   border-width: 0;
 }
 
-.wrapper {
+.wrapper,
+.wrapper-md {
   width: 100%;
-  max-width: var(--space-18);
   margin-inline: auto;
   padding-inline: var(--space-5);
+}
+.wrapper {
+  max-width: var(--space-18);
+}
+
+.wrapper-md {
+  max-width: var(--space-17);
 }
 
 /* .margins {
@@ -262,4 +302,34 @@ ul {
 .paddings {
   padding-inline: var(--space-5);
   /* padding-block: 1.5rem; */
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  /* & > * {
+    margin-bottom: var(--space-10);
+  }
+  & > *:not(:last-child) {
+    margin-bottom: 0;
+  }
+  & > *:not(:first-child) {
+    margin-bottom: 0;
+  } */
+}
+
+/* Pushes first child to the top edge
+.stack > *:first-child {
+  margin-bottom: auto;
+} */
+
+/* Apply these styles only if API is supported */
+@supports (view-transition-name: none) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.5s;
+    /* animation-timing-function: ease-in-out; */
+  }
 }
