@@ -1,9 +1,11 @@
 ---
 title: Where travel meets photography
 subtitle: Founder and developer
-publishDate: 2022-03-02 00:00:00
-img: /assets/stock-3.jpg
-img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+publishDate: 2024-06-21 00:00:00
+hero_bg_img: /assets/case-study-1.jpg
+hero_bg_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+hero_img: null
+hero_img_alt: null
 description: |
   Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
 tags:
@@ -12,12 +14,130 @@ tags:
   - Branding
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere commodo venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam non ligula vel metus efficitur hendrerit. In hac habitasse platea dictumst. Praesent et mauris ut mi dapibus semper. Curabitur tortor justo, efficitur sit amet pretium cursus, porta eget odio. Cras ac venenatis dolor. Donec laoreet posuere malesuada. Curabitur nec mi tempor, placerat leo sit amet, tincidunt est. Quisque pellentesque venenatis magna, eget tristique nibh pulvinar in. Vestibulum vitae volutpat arcu. Aenean ut malesuada odio, sit amet pellentesque odio. Suspendisse nunc elit, blandit nec hendrerit non, aliquet at magna. Donec id leo ut nulla sagittis sodales.
+[![header][header-url]][header-link]
 
-Integer vitae nibh elit. Suspendisse eget urna eu neque bibendum pharetra. Sed interdum lectus sem, in pulvinar magna dignissim vel. Quisque maximus at urna nec laoreet. Suspendisse potenti. Vestibulum rhoncus sem ut mi pellentesque, in vestibulum erat blandit. Aliquam sodales dui ac maximus consectetur. Duis quis est vehicula, imperdiet nisl nec, fermentum erat. Duis tortor diam, pharetra eu euismod in, vehicula non eros. Curabitur facilisis dui at erat ultrices gravida. In at nunc ultricies, pulvinar mi vel, sagittis mauris. Praesent pharetra posuere purus ac imperdiet. Nulla facilisi.
+# Project Name
 
-Sed pulvinar porttitor mi in ultricies. Etiam non dolor gravida eros pulvinar pellentesque et dictum ex. Proin eu ornare ligula, sed condimentum dui. Vivamus tincidunt tellus mi, sed semper ipsum pharetra a. Suspendisse sollicitudin at sapien nec volutpat. Etiam justo urna, laoreet ac lacus sed, ultricies facilisis dolor. Integer posuere, metus vel viverra gravida, risus elit ornare magna, id feugiat erat risus ullamcorper libero. Proin vitae diam auctor, laoreet lorem vitae, varius tellus.
+[![Project Version][version-image]][version-url]
+[![Frontend][Frontend-image]][Frontend-url]
+[![Backend][Backend-image]][Backend-url]
 
-Mauris sed eros in ex maximus volutpat. Suspendisse potenti. Donec lacinia justo consectetur sagittis tempor. Proin ullamcorper nisi vitae auctor rhoncus. Sed tristique aliquam augue. Pellentesque vitae fringilla ligula. Nulla arcu elit, efficitur eu nunc malesuada, eleifend tincidunt orci. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer mattis orci in bibendum ultricies. Quisque a dui erat. Phasellus et vulputate ipsum. Proin metus ex, lobortis nec ornare eget, bibendum ut sapien. Aliquam in dolor lobortis, aliquam tellus a, congue augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+> Short blurb about your project idea.
 
-Aenean pretium purus augue, ut bibendum erat convallis quis. Cras condimentum quis velit ac mollis. Suspendisse non purus fringilla, venenatis nisl porta, finibus odio. Curabitur aliquet metus faucibus libero interdum euismod. Morbi sed magna nisl. Morbi odio nibh, facilisis vel sapien eu, tempus tincidunt erat. Nullam erat velit, sagittis at purus quis, tristique scelerisque tortor. Pellentesque lacinia tortor id est aliquam viverra. Vestibulum et diam ac ipsum mollis fringilla.
+One or two paragraphs about your project and what it does.
+
+---
+
+## Author
+
+**Your name**
+
+- _Initial work_ - [repository-name][repository-url] (Repository space)
+- _Released on_ [cloud-provider][cloud-provider-url] (Cloud provider)
+- _My professional profile on_ [LinkedIn][linkedin-url]
+
+## Showcase
+
+This project was designed to demonstrate:
+
+- Technology 1
+  - Tech 1 subitem
+- Technology 2
+- .
+- .
+- .
+- Technology N
+
+## Usage example
+
+Bring the best usages of your project.
+
+_For more examples and usage, please refer to the [Wiki][wiki]._
+
+---
+
+## Installation
+
+Describe how to get your project running.
+
+MacOS & Linux:
+
+```sh
+npm install my-module --save
+```
+
+Windows:
+
+```sh
+edit autoexec.bat
+```
+
+---
+
+## Development setup
+
+Describe how to install all development dependencies and consider do this for multiple platforms.
+
+```sh
+make install
+npm test
+```
+
+## Running the tests
+
+Remember this is a showcase, thus your potential employer might want to see an automated test-suite of some kind up running.
+
+---
+
+## Built With
+
+- [Maven](https://maven.apache.org/) - Dependency Management
+- [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) - To deploy on Heroku
+
+## Release History
+
+- 0.2.1
+  - CHANGE: Update docs (module code remains unchanged)
+- 0.2.0
+  - CHANGE: Refactoring - Remove `setAnyMethod()`
+  - ADD: Add `newSomething()`
+- 0.1.1
+  - FIX: Crash when calling `defaultXYZ()` (Thanks @ContributorName)
+- 0.1.0
+  - The first proper release
+- 0.0.1
+  - Initial work
+
+---
+
+## Contributing
+
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+Normal _markdown_ paragraph.
+
+<p class="myclass">This paragraph has a class "myclass"</p>
+
+{{< table class="my-table-class" >}}
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1 | Cell 2 |
+{{< /table >}}
+
+<!-- Markdown link & img dfn's -->
+
+[header-link]: https://github.com/alexandrerosseto
+[repository-url]: https://github.com/alexandrerosseto/wbshopping
+[cloud-provider-url]: https://wbshopping.herokuapp.com
+[linkedin-url]: https://www.linkedin.com/in/alexandrerosseto
+[wiki]: https://github.com/yourname/yourproject/wiki
+[version-image]: https://img.shields.io/badge/Version-1.0.0-brightgreen?style=for-the-badge&logo=appveyor
+[version-url]: https://img.shields.io/badge/version-1.0.0-green
+[Frontend-image]: https://img.shields.io/badge/Frontend-Ionic-blue?style=for-the-badge
+[Frontend-url]: https://img.shields.io/badge/Frontend-Ionic-blue?style=for-the-badge
+[Backend-image]: https://img.shields.io/badge/Backend-Java%208-important?style=for-the-badge
+[Backend-url]: https://img.shields.io/badge/Backend-Java%208-important?style=for-the-badge

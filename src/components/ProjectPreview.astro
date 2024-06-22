@@ -1,5 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import Icon from "./Icon.astro";
+import { fade } from "astro:transitions";
 
 interface Props {
   project: CollectionEntry<"project">;
@@ -10,63 +12,151 @@ const { data, slug } = Astro.props.project;
 const [, projectSlug] = slug.split("/");
 ---
 
-<article class="card">
-  <img
-    src={data.img}
-    alt={data.img_alt || ""}
-    loading="lazy"
-    decoding="async"
-  />
-  <div class="wrapper">
-    <div class="content">
-      <aside>{data.subtitle}</aside>
-      <h3>{data.title}</h3>
-      <p>{data.description}</p>
-      <a href={`projects/${projectSlug}`}>View Case Study</a>
+<article class="card" transition:name={`${projectSlug}-card`}>
+  <div class="card-bg">
+    {
+      data.hero_bg_img && (
+        <img
+          src={data.hero_bg_img}
+          alt={data.hero_bg_img_alt || ""}
+          loading="lazy"
+          decoding="async"
+          transition:name={`${projectSlug}-card-bg-img`}
+        />
+      )
+    }
+    <div class="overlay" transition:name={`${projectSlug}-card-bg-overlay`}>
     </div>
+  </div>
+  <div class="wrapper container">
+    <div class="content">
+      <!-- <div class="brand-icon">
+        <Icon
+          icon="case-study-1-brand"
+          size="5em"
+          viewBox="0 0 40 40"
+          color="hsl(0, 0%, 39%)"
+        />
+      </div> -->
+      <aside transition:name={`${projectSlug}-card-subtitle`}>
+        {data.subtitle}
+      </aside>
+      <h3 transition:name={`${projectSlug}-card-title`}>
+        {data.title}
+      </h3>
+      <p transition:name={`${projectSlug}-card-description`}>
+        {data.description}
+      </p>
+      <a
+        href={`projects/${projectSlug}`}
+        transition:name={`${projectSlug}-card-link`}>View Case Study</a
+      >
+    </div>
+    {
+      data.hero_img && (
+        <div class="card-img">
+          <img
+            src={data.hero_img}
+            alt={data.hero_img_alt || ""}
+            loading="lazy"
+            decoding="async"
+            transition:name={`${projectSlug}-card-img`}
+          />
+          <div
+            class="overlay"
+            transition:name={`${projectSlug}-card-img-overlay`}
+          />
+        </div>
+      )
+    }
   </div>
 </article>
 
 <style>
   .card {
-    position: relative;
-    height: var(--space-15);
     display: flex;
+    position: relative;
+
+    min-height: var(--space-15);
+    background-color: var(--color-primary-8b);
+
+    padding-top: var(--space-7);
+    padding-bottom: var(--space-5);
+    overflow: hidden;
   }
 
-  .card img {
+  .card-bg img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
   }
 
-  .card::after {
+  .card-img {
+    position: relative;
+    /* width: 850px; */
+    margin-bottom: -150px;
+    margin-right: -250px;
+    width: 910px;
+    flex-shrink: 1;
+  }
+
+  .card-img img {
+    width: 100%;
+    border: 7px solid hsla(0, 0%, 9%, 80%);
+    border-radius: 15px;
+    outline: 2px solid hsla(0, 0%, 91%, 20%);
+  }
+
+  /* Using elements instead of pseudo-elements (.card-bg::after and .card-img::after) to
+   be able to use astro's default view-transition names */
+  .overlay {
     content: "";
     position: absolute;
     display: block;
-    z-index: -1;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+  }
 
-    /* TODO: Improve this gradient */
+  .card-bg .overlay {
     background: rgb(0, 0, 0);
-    background: var(--overlay-gradient);
+    background: var(--overlay-gradient-left);
+    /* background: var(--overlay-gradient-left), var(--overlay-gradient-right); */
+    /* background: cyan; */
+  }
+
+  .card-img .overlay {
+    background: rgb(0, 0, 0);
+    background: var(--overlay-gradient-bottom), var(--overlay-gradient-right);
+    border-radius: 15px; /* still not considering outline */
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center; /*check*/
+    gap: var(--space-8);
   }
 
   .content {
-    width: var(--space-13);
-    height: 100%;
+    width: var(--space-15);
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: var(--space-5);
+    z-index: 1;
+    flex-shrink: 1;
   }
+
+  /* .brand-icon {
+    margin-bottom: var(--space-3);
+  } */
 
   .content aside {
     text-transform: uppercase;
@@ -87,7 +177,7 @@ const [, projectSlug] = slug.split("/");
   }
 
   .content p {
-    color: var(--font-color-3);
+    color: var(--font-color-4);
   }
 
   .content a {
@@ -104,5 +194,43 @@ const [, projectSlug] = slug.split("/");
     padding: var(--space-3) var(--space-4);
     letter-spacing: var(--font-letter-spacing-4);
     font-size: var(--font-size-2);
+  }
+
+  /* 
+  .collabor-io-card .card-bg::after {
+    view-transition-name: collabor-io-card-bg;
+  }
+  .collabor-io-card .card-img::after {
+    view-transition-name: collabor-io-card-img-bg;
+  }
+  .skeleton-card .card-bg::after {
+    view-transition-name: skeleton-card-bg;
+  }
+  .skeleton-card .card-img::after {
+    view-transition-name: skeleton-card-img-bg;
+  }
+  .travelography-card .card-bg::after {
+    view-transition-name: travelography-card-bg;
+  }
+  .travelography-card .card-img::after {
+    view-transition-name: travelography-card-img-bg;
+  } */
+
+  @media (min-width: 50em) {
+    .card {
+      padding-top: 0;
+    }
+    .container {
+      flex-wrap: nowrap;
+      gap: var(--space-9);
+    }
+    .content {
+      width: var(--space-13);
+      flex-shrink: 0;
+      /* overflow: visible; */
+    }
+    .card-img {
+      flex-shrink: 0;
+    }
   }
 </style>

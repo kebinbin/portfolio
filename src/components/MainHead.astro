@@ -36,8 +36,14 @@ const {
       ? "dark"
       : "light";
   };
-  const isDark = getThemePreference() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("theme-dark");
+
+  const setTheme = (document) => {
+    document.documentElement.classList[
+      getThemePreference() === "dark" ? "add" : "remove"
+    ]("theme-dark");
+  };
+
+  setTheme(document);
 
   if (typeof localStorage !== "undefined") {
     // Watch the document element and persist user preference when it changes.
@@ -50,4 +56,8 @@ const {
       attributeFilter: ["class"],
     });
   }
+
+  document.addEventListener("astro:before-swap", (ev) => {
+    setTheme(ev.newDocument);
+  });
 </script>

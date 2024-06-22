@@ -1,9 +1,11 @@
 ---
-title: Donde el viajar se une a la fotografia
+title: Donde viajar se una a la fotografia
 subtitle: Founder and developer
-publishDate: 2022-03-02 00:00:00
-img: /assets/stock-3.jpg
-img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+publishDate: 2024-06-21 00:00:00
+hero_bg_img: /assets/case-study-2.jpg
+hero_bg_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+hero_img: null
+hero_img_alt: null
 description: |
   Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
 tags:

@@ -1,15 +1,17 @@
 ---
-title: Where travel meets photography
-subtitle: Web Designer & Lead Engineer
-publishDate: 2024-03-02 00:00:00
-hero_bg_img: /assets/case-study-3.jpg
-hero_bg_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+title: Skeleton Layout Chrome Extension
+subtitle: Software Developer
+publishDate: 2024-05-20 00:00:00
+hero_bg_img: null
+hero_bg_img_alt: null
+hero_img: /assets/case-study-2.png
+hero_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
-  Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
+  Developed a Google Chrome extension to visualize websites' layout structure with the aim of simplifying the web design process and catch layout issues easily.
 tags:
   - Design
-  - Dev
-  - User Testing
+  - Development
+  - Extension
 ---
 
 ## Level-two heading (DEFAULT)

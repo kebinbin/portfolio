@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
+import ProjectPreview from "../../../components/ProjectPreview.astro";
+import CTA from "../../../components/CTA.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("projects");
@@ -21,15 +23,20 @@ const { Content } = await page.render();
 ---
 
 <Layout>
-  <h1>{page.data.title}</h1>
-  <div class="container">
-    <main>
-      <Content />
-    </main>
-  </div>
+  <div class="test"><ProjectPreview project={page} /></div>
 
+  <main class="wrapper">
+    <Content />
+  </main>
+  <CTA />
   <style>
-    .container {
+    .test {
+      /* margin-bottom: auto; */
+    }
+  </style>
+  <style is:global>
+    .myclass {
+      color: red;
     }
   </style>
 </Layout>
