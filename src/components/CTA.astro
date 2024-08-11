@@ -1,44 +1,40 @@
 ---
-import { getI18N } from "../i18n";
-const { currentLocale } = Astro;
-const i18n = getI18N({ currentLocale });
+import { getI18N } from '../i18n'
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
 ---
 
-<aside class="wrapper">
-  <h2>Interested in working together?</h2>
-  <p>
-    Shoot me a note with your project details at <a
-      href="mailto:kevin@castillo.works">kevin@castillo.works</a
-    >
-  </p>
+<aside class="container">
+	<a id="contact"><h2>Interested in working together?</h2></a>
+	<p>
+		Shoot me a note with your project details at <a href="mailto:kevin@castillo.works"
+			>kevin@castillo.works</a
+		>
+	</p>
 </aside>
 
 <style>
-  h2 {
-    font-size: var(--font-size-9);
-    line-height: var(--font-line-height-1);
-    color: var(--font-color-5);
-    background-image: linear-gradient(
-      160deg,
-      var(--font-color-3) -10%,
-      var(--font-color-5) 80%
-    );
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+	h2 {
+		font-size: var(--font-size-9);
+		line-height: var(--font-line-height-1);
+		color: var(--font-color-5);
+		background-image: linear-gradient(160deg, var(--font-color-3) -10%, var(--font-color-5) 80%);
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 
-  aside {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-7);
-    max-width: var(--space-15);
-    align-items: center;
-    text-align: center;
-    /* margin: var(--space-8) auto; */
-    color: var(--font-color-2);
-  }
+	aside {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-7);
+		max-width: var(--space-15);
+		align-items: center;
+		text-align: center;
+		/* margin: var(--space-8) auto; */
+		color: var(--font-color-2);
+	}
 
-  aside a {
-    font-family: var(--font-family-body);
-  }
+	aside a {
+		font-family: var(--font-family-body);
+	}
 </style>

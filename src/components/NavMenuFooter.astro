@@ -1,0 +1,23 @@
+---
+import ThemeToggle from './ThemeToggle.astro'
+import LanguagePicker from './LanguagePicker.astro'
+
+interface Props {
+	noScript?: boolean
+}
+
+const { noScript = false } = Astro.props
+---
+
+<div
+	class="flex justify-between gap-3 bg-stone-200 p-6 md:items-center md:justify-end md:bg-transparent md:p-0 dark:bg-stone-900 md:dark:bg-transparent"
+>
+	<LanguagePicker />
+	{
+		!noScript && (
+			<div class="mb-[3px] flex items-center">
+				<ThemeToggle />
+			</div>
+		)
+	}
+</div>

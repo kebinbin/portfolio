@@ -1,42 +1,31 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "../../../layouts/Layout.astro";
-import ProjectPreview from "../../../components/ProjectPreview.astro";
-import CTA from "../../../components/CTA.astro";
+import { getCollection } from 'astro:content'
+import Layout from '../../../layouts/Layout.astro'
+import ProjectPreview from '../../../components/ProjectPreview.astro'
+import CTA from '../../../components/CTA.astro'
 
 export async function getStaticPaths() {
-  const pages = await getCollection("projects");
+	const pages = await getCollection('projects')
 
-  const paths = pages.map((page) => {
-    const [lang, ...slug] = page.slug.split("/");
-    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
-  });
+	const paths = pages.map((page) => {
+		const [lang, ...slug] = page.slug.split('/')
+		return { params: { lang, slug: slug.join('/') || undefined }, props: page }
+	})
 
-  return paths;
+	return paths
 }
 
 // const { lang, slug } = Astro.params;
-const page = Astro.props;
+const page = Astro.props
 // const formattedDate = page.data.date.toLocaleString(lang);
 
-const { Content } = await page.render();
+const { Content } = await page.render()
 ---
 
 <Layout>
-  <div class="test"><ProjectPreview project={page} /></div>
-
-  <main class="wrapper">
-    <Content />
-  </main>
-  <CTA />
-  <style>
-    .test {
-      /* margin-bottom: auto; */
-    }
-  </style>
-  <style is:global>
-    .myclass {
-      color: red;
-    }
-  </style>
+	<ProjectPreview project={page} />
+	<main class="container prose prose-lg prose-stone dark:prose-invert">
+		<Content />
+	</main>
+	<CTA />
 </Layout>

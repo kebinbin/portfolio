@@ -120,13 +120,7 @@ Remember this is a showcase, thus your potential employer might want to see an a
 
 Normal _markdown_ paragraph.
 
-<p class="myclass">This paragraph has a class "myclass"</p>
-
-{{< table class="my-table-class" >}}
-| Header 1 | Header 2 |
-| -------- | -------- |
-| Cell 1 | Cell 2 |
-{{< /table >}}
+<p class="text-red-400">This paragraph has a class "text-red-400"</p>
 
 <!-- Markdown link & img dfn's -->
 

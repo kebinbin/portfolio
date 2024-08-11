@@ -1,17 +1,10 @@
 ---
-import { languages } from "../i18n/ui";
-const { currentLocale } = Astro;
-const [lang] = Object.keys(languages).filter((lang) => lang != currentLocale);
+import { languages } from '../i18n/ui'
+const { currentLocale } = Astro
+const [lang] = Object.keys(languages).filter((lang) => lang != currentLocale)
 ---
 
-<a href={`/${lang}/`}>{lang}</a>
-
-<style>
-  a {
-    text-transform: uppercase;
-    color: var(--link-color-1);
-    font-weight: var(--font-weight-2);
-    letter-spacing: var(--font-letter-spacing-3);
-    font-size: var(--font-size-4);
-  }
-</style>
+<a
+	class="text-xl font-medium tracking-wide hover:text-stone-800 focus:text-stone-900 md:px-1 hover:dark:text-stone-200 focus:dark:text-stone-100"
+	href={`/${lang}/`}>{lang}</a
+>
