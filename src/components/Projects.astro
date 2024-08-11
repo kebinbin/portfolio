@@ -1,39 +1,29 @@
 ---
-import { getCollection } from "astro:content";
-import ProjectPreview from "./ProjectPreview.astro";
+import { getCollection } from 'astro:content'
+import ProjectPreview from './ProjectPreview.astro'
 
-const { currentLocale } = Astro;
+const { currentLocale } = Astro
 
 // Content Fetching: List four most recent work projects
-const projects = (await getCollection("projects"))
-  .filter((project) => {
-    return project.slug.split("/")[0] === currentLocale;
-  })
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 4);
+const projects = (await getCollection('projects'))
+	.filter((project) => {
+		return project.slug.split('/')[0] === currentLocale
+	})
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	.slice(0, 4)
 ---
 
-<section class="projects paddings">
-  <header>
-    <a id="projects"><h2 class="sr-only">Selected Projects</h2></a>
-  </header>
-  <ul>
-    {
-      projects.map((project) => (
-        <li>
-          <ProjectPreview project={project} />
-        </li>
-      ))
-    }
-  </ul>
+<section class="px-6">
+	<header>
+		<a id="projects"><h2 class="sr-only">Selected Projects</h2></a>
+	</header>
+	<ul>
+		{
+			projects.map((project) => (
+				<li class="my-6">
+					<ProjectPreview project={project} />
+				</li>
+			))
+		}
+	</ul>
 </section>
-
-<style>
-  .projects {
-    /* margin-bottom: var(--space-10); */
-  }
-
-  .projects li {
-    margin: var(--space-5) 0;
-  }
-</style>

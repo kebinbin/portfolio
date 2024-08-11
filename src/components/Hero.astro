@@ -1,187 +1,62 @@
 ---
-import Icon from "../components/Icon.astro";
-import Service from "../components/Service.astro";
-import { getI18N } from "../i18n";
-const { currentLocale } = Astro;
-const i18n = getI18N({ currentLocale });
+import Icon from '../components/Icon.astro'
+import { getI18N } from '../i18n'
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
 ---
 
-<header class="hero wrapper">
-  <h1 class="title">
-    {i18n.hero.h1.start}
-    <span class="break"></span>
-    {i18n.hero.h1.middle}
-    <span class="break"></span>
-    {i18n.hero.h1.end}
-  </h1>
-  <aside>
-    <p>{i18n.hero.aside.availableFor}</p>
-    <div class="bottom">
-      <div class="services">
-        {
-          i18n.hero.aside.services.map((service) => (
-            <Service>
-              <Icon icon={service.icon} size=".95em" />
-              <span>{service.label}</span>
-            </Service>
-          ))
-        }
-      </div>
+<header class="container flex flex-col gap-12">
+	<h1
+		class="title items-center pb-6 pt-16 text-center text-5xl font-bold uppercase tracking-normal text-stone-800 md:pb-44 md:pt-56 md:text-9xl dark:text-orange-50"
+	>
+		{i18n.hero.h1.start}
+		<span class="block"></span>
+		<span class="text-11xl leading-[0.7]">{i18n.hero.h1.middle}</span>
+		<span class="block"></span>
+		<span class="text-9xl leading-3">{i18n.hero.h1.end}</span>
+	</h1>
+	<aside class="flex flex-col gap-2 py-2 text-start font-normal">
+		<p
+			class="ml-1 flex items-center gap-2 text-base font-medium text-stone-500 before:size-4 before:rounded-full before:bg-lime-500 dark:text-stone-500"
+		>
+			{i18n.hero.aside.availableFor}
+		</p>
+		<div class="flex flex-col gap-8 md:flex-row md:justify-between">
+			<div class="flex flex-wrap items-start justify-start gap-4">
+				{
+					i18n.hero.aside.services.map((service) => (
+						<div class="flex items-center gap-1 whitespace-nowrap font-brand text-2xl font-medium uppercase tracking-wide text-stone-500 dark:text-stone-600">
+							<Icon icon={service.icon} size="1em" />
+							<span class="block h-6 align-text-top leading-[1.2]">{service.label}</span>
+						</div>
+					))
+				}
+			</div>
 
-      <div class="projects-link">
-        <span>{i18n.hero.recentProjects}</span>
-        <a href="#projects">
-          <strong>{i18n.hero.recentProjectsLink}</strong>
-        </a>
-        <div class="line"></div>
-      </div>
-    </div>
-  </aside>
+			<div
+				class="text-base tracking-normal after:mt-2 after:inline-block after:h-8 after:w-1/2 after:border-r after:border-solid after:border-stone-500"
+			>
+				<span class="text-stone-400">{i18n.hero.recentProjects}</span>
+				<a class="text-stone-100" href="#projects">
+					<strong>{i18n.hero.recentProjectsLink}</strong>
+				</a>
+			</div>
+		</div>
+	</aside>
 </header>
 
 <style>
-  .hero {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-7);
-    text-align: center;
-    font-size: var(--font-size-9);
-  }
-
-  .title {
-    align-items: center;
-    padding: var(--space-7) 0;
-    text-align: center;
-    font-size: var(--font-size-8);
-    font-weight: var(--font-weight-4);
-    text-transform: uppercase;
-    /* line-height: 5.5rem; */
-    /* font-family: var(--font-brand); */
-    /* max-width: 19ch; */
-    /* margin-inline: auto; check this */
-    color: var(--font-color-5);
-    /* background-image: linear-gradient(
-      20deg,
-      var(--font-color-3),
-      var(--font-color-5)
-    ); */
-    background-image: radial-gradient(
-      ellipse 50% 90% at 50% 20%,
-      var(--font-color-5),
-      var(--font-color-1)
-    );
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-  }
-
-  .break {
-    display: block;
-  }
-
-  aside {
-    display: flex;
-    flex-direction: column;
-    padding: var(--space-2) 0;
-    gap: var(--space-2);
-    text-align: start;
-    color: var(--font-color-1);
-    font-weight: var(--font-weight-2);
-  }
-
-  aside > p::before {
-    /* display: inline-flex; */
-    /* display: inline-flex; */
-
-    content: "";
-    height: var(--space-3);
-    width: var(--space-3);
-    padding: 0;
-    margin-left: var(--space-0);
-    margin-right: var(--space-2);
-    border: 0;
-    border-radius: 999rem;
-    background-color: var(--color-semantic-success-2);
-  }
-
-  aside > p {
-    /* flex-grow: 1; */
-    display: flex;
-    align-items: center;
-  }
-
-  .bottom {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  }
-
-  .services {
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-2);
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-  .services span {
-    display: block;
-    height: var(--space-5);
-
-    /* TODO: Improve this fix for the font vertical issue */
-    vertical-align: text-bottom;
-    line-height: 1.7;
-  }
-
-  .projects-link {
-    /* align-content: flex-end; */
-    /* text-align: end; */
-    color: var(--font-color-1);
-    font-size: var(--font-size-3);
-    letter-spacing: var(--font-letter-spacing-2);
-  }
-
-  .line::before {
-    content: "";
-    border-right: var(--border-width-1) solid var(--border-color-2);
-    display: inline-block;
-    margin-top: var(--space-2);
-    width: 50%;
-    height: var(--space-6);
-  }
-
-  .projects-link a {
-    color: var(--link-color-2);
-    font-family: var(--font-family-body);
-  }
-
-  /* 
-  @media (min-width: 30em) {
-    .services {
-      flex-direction: row;
-    }
-  } */
-
-  @media (min-width: 56em) {
-    .bottom {
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    .title {
-      align-items: center;
-      padding: var(--space-9) 0 var(--space-8) 0; /* fix this when Font vertical issue is fixed */
-      text-align: center;
-      font-size: var(--font-size-11);
-      font-weight: var(--font-weight-3);
-      /* letter-spacing: 0.0125em; */
-      letter-spacing: var(--font-letter-spacing-2);
-      line-height: 0.82;
-
-      /* max-width: 19ch; */
-      /* margin-inline: auto; check this */
-    }
-  }
+	/* GRADIENT ON TEXT */
+	.title {
+		background-image: radial-gradient(
+			ellipse 50% 90% at 50% 20%,
+			var(--font-color-5),
+			var(--font-color-1)
+		);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-moz-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-moz-text-fill-color: transparent;
+	}
 </style>

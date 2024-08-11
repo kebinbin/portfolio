@@ -1,139 +1,139 @@
 /* Global variables */
 
 :root {
-  /* Fonts */
-  --font-family-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Public Sans", sans-serif;
-  --font-family-body: "Helvetica Neue", var(--font-family-system);
-  --font-family-brand: "Teko", sans-serif, var(--font-family-system);
+	/* Fonts */
+	--font-family-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Open Sans', 'Public Sans', sans-serif;
+	--font-family-body: 'Helvetica Neue', var(--font-family-system);
+	--font-family-brand: 'Teko', sans-serif, var(--font-family-system);
 
-  --font-size-1: 0.75rem;
-  --font-size-2: 0.875rem;
-  --font-size-3: 1rem;
-  --font-size-4: 1.125rem;
-  --font-size-5: 1.25rem;
-  --font-size-6: 1.5rem;
-  --font-size-7: 2rem;
-  --font-size-8: 3rem;
-  --font-size-9: 4rem;
-  --font-size-10: 5rem;
-  --font-size-11: 7rem;
+	--font-size-1: 0.75rem;
+	--font-size-2: 0.875rem;
+	--font-size-3: 1rem;
+	--font-size-4: 1.125rem;
+	--font-size-5: 1.25rem;
+	--font-size-6: 1.5rem;
+	--font-size-7: 2rem;
+	--font-size-8: 3rem;
+	--font-size-9: 4rem;
+	--font-size-10: 5rem;
+	--font-size-11: 7rem;
 
-  --font-line-height-1: 1;
-  --font-line-height-2: 1.125;
-  --font-line-height-3: 1.25;
-  --font-line-height-4: 1.5;
-  --font-line-height-5: 1.75;
+	--font-line-height-1: 1;
+	--font-line-height-2: 1.125;
+	--font-line-height-3: 1.25;
+	--font-line-height-4: 1.5;
+	--font-line-height-5: 1.75;
 
-  --font-letter-spacing-1: -0.05em;
-  --font-letter-spacing-2: 0;
-  --font-letter-spacing-3: 0.05em;
-  --font-letter-spacing-4: 0.1em;
+	--font-letter-spacing-1: -0.05em;
+	--font-letter-spacing-2: 0;
+	--font-letter-spacing-3: 0.05em;
+	--font-letter-spacing-4: 0.1em;
 
-  --font-weight-1: 300;
-  --font-weight-2: 400;
-  --font-weight-3: 500;
-  --font-weight-4: 600;
-  --font-weight-5: 700;
+	--font-weight-1: 300;
+	--font-weight-2: 400;
+	--font-weight-3: 500;
+	--font-weight-4: 600;
+	--font-weight-5: 700;
 
-  /* Transitions */
-  --theme-transition: 0.2s ease-in-out;
+	/* Transitions */
+	--theme-transition: 0.2s ease-in-out;
 
-  /* Borders */
-  --border-width-1: 0.0625rem;
-  --border-width-2: 0.125rem;
-  --border-width-3: 0.25rem;
-  --border-width-4: 0.5rem;
+	/* Borders */
+	--border-width-1: 0.0625rem;
+	--border-width-2: 0.125rem;
+	--border-width-3: 0.25rem;
+	--border-width-4: 0.5rem;
 
-  --border-radius-1: 0.1875rem;
-  --border-radius-2: 0.5rem;
+	--border-radius-1: 0.1875rem;
+	--border-radius-2: 0.5rem;
 
-  /* Spacing scale */
-  --space-0: 0.0625rem; /* make this space-1 */
-  --space-00: 0.125rem; /* make this space-2 */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
-  --space-9: 6rem;
-  --space-10: 8rem;
-  --space-11: 12rem;
-  --space-12: 16rem;
-  --space-13: 24rem;
-  --space-14: 32rem;
-  --space-15: 40rem;
-  --space-16: 48rem;
-  --space-17: 64rem;
-  --space-18: 80rem; /* 1280 */
+	/* Spacing scale */
+	--space-0: 0.0625rem; /* make this space-1 */
+	--space-00: 0.125rem; /* make this space-2 */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 3rem;
+	--space-8: 4rem;
+	--space-9: 6rem;
+	--space-10: 8rem;
+	--space-11: 12rem;
+	--space-12: 16rem;
+	--space-13: 24rem;
+	--space-14: 32rem;
+	--space-15: 40rem;
+	--space-16: 48rem;
+	--space-17: 64rem;
+	--space-18: 80rem; /* 1280 */
 
-  /* Colors */
-  /* No neutral nor accent colors since the project's primary colors are already neutral */
-  --color-primary-1: hsl(0, 0%, 91%);
-  --color-primary-2: hsl(0, 0%, 79%);
-  --color-primary-3: hsl(0, 0%, 69%);
-  --color-primary-4: hsl(0, 0%, 59%);
-  --color-primary-5: hsl(0, 0%, 49%); /* base */
-  --color-primary-6: hsl(0, 0%, 39%);
-  --color-primary-7: hsl(0, 0%, 29%);
-  --color-primary-8: hsl(0, 0%, 19%);
-  --color-primary-8b: hsl(0, 0%, 12%);
-  --color-primary-9: hsl(0, 0%, 7%);
-  /* --color-primary-9: hsl(240, 5%, 10%); */
-  --color-semantic-success-1: hsl(69, 100%, 54%);
-  --color-semantic-success-2: hsl(69, 100%, 39%);
-  --color-semantic-success-3: hsl(69, 100%, 24%);
-  --color-semantic-fail-1: hsl(5, 100%, 65%);
-  --color-semantic-fail-2: hsl(5, 100%, 45%);
-  --color-semantic-fail-3: hsl(5, 100%, 30%);
+	/* Colors */
+	/* No neutral nor accent colors since the project's primary colors are already neutral */
+	--color-primary-1: hsl(0, 0%, 91%);
+	--color-primary-2: hsl(0, 0%, 79%);
+	--color-primary-3: hsl(0, 0%, 69%);
+	--color-primary-4: hsl(0, 0%, 59%);
+	--color-primary-5: hsl(0, 0%, 49%); /* base */
+	--color-primary-6: hsl(0, 0%, 39%);
+	--color-primary-7: hsl(0, 0%, 29%);
+	--color-primary-8: hsl(0, 0%, 19%);
+	--color-primary-8b: hsl(0, 0%, 12%);
+	--color-primary-9: hsl(0, 0%, 7%);
+	/* --color-primary-9: hsl(240, 5%, 10%); */
+	--color-semantic-success-1: hsl(69, 100%, 54%);
+	--color-semantic-success-2: hsl(69, 100%, 39%);
+	--color-semantic-success-3: hsl(69, 100%, 24%);
+	--color-semantic-fail-1: hsl(5, 100%, 65%);
+	--color-semantic-fail-2: hsl(5, 100%, 45%);
+	--color-semantic-fail-3: hsl(5, 100%, 30%);
 
-  /* Theme dependent values */
-  --overlay-gradient: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  --overlay-gradient-2: linear-gradient(
-    /*fix*/ 90deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
+	/* Theme dependent values */
+	--overlay-gradient: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.9) 0%,
+		rgba(255, 255, 255, 0.6) 50%,
+		rgba(255, 255, 255, 0.1) 100%
+	);
+	--overlay-gradient-2: linear-gradient(
+		/*fix*/ 90deg,
+		rgba(255, 255, 255, 0.9) 0%,
+		rgba(255, 255, 255, 0.6) 50%,
+		rgba(255, 255, 255, 0.1) 100%
+	);
 
-  --bg-color: var(--color-primary-1);
-  --bg-gradient-top: radial-gradient(
-    ellipse 45% 30% at 50% -5%,
-    hsla(0, 0%, 9%, 0.12),
-    hsla(0, 0%, 0%, 0)
-  );
-  --bg-gradient-bottom: radial-gradient(
-    ellipse 45% 30% at 50% 110%,
-    hsla(0, 0%, 9%, 0.12),
-    hsla(0, 0%, 0%, 0)
-  );
-  --font-color-1: var(--color-primary-5);
-  --font-color-2: var(--color-primary-6);
-  --font-color-3: var(--color-primary-7);
-  --font-color-4: var(--color-primary-8);
-  --font-color-5: var(--color-primary-9);
-  --border-color-1: var(--color-primary-2);
-  --border-color-2: var(--color-primary-4);
+	--bg-color: var(--color-primary-1);
+	--bg-gradient-top: radial-gradient(
+		ellipse 45% 30% at 50% -5%,
+		hsla(0, 0%, 9%, 0.12),
+		hsla(0, 0%, 0%, 0)
+	);
+	--bg-gradient-bottom: radial-gradient(
+		ellipse 45% 30% at 50% 110%,
+		hsla(0, 0%, 9%, 0.12),
+		hsla(0, 0%, 0%, 0)
+	);
+	--font-color-1: var(--color-primary-5);
+	--font-color-2: var(--color-primary-6);
+	--font-color-3: var(--color-primary-7);
+	--font-color-4: var(--color-primary-8);
+	--font-color-5: var(--color-primary-9);
+	--border-color-1: var(--color-primary-2);
+	--border-color-2: var(--color-primary-4);
 
-  /* Remove this variables */
-  --link-color-1: var(--color-primary-7);
-  --link-color-2: var(--color-primary-9);
-  --link-hover-color-1: var(--color-primary-5);
-  --link-hover-color-2: var(--color-primary-7);
-  --link-active-color-1: var(--color-primary-3);
-  --link-active-color-2: var(--color-primary-5);
+	/* Remove this variables */
+	--link-color-1: var(--color-primary-7);
+	--link-color-2: var(--color-primary-9);
+	--link-hover-color-1: var(--color-primary-5);
+	--link-hover-color-2: var(--color-primary-7);
+	--link-active-color-1: var(--color-primary-3);
+	--link-active-color-2: var(--color-primary-5);
 }
 
-:root.theme-dark {
-  /* --overlay-gradient: linear-gradient(
+:root.dark {
+	/* --overlay-gradient: linear-gradient(
     90deg,
     hsla(0, 0%, 9%, 0.85) 0%,
     hsla(0, 0%, 9%, 0.8) 25%,
@@ -154,93 +154,94 @@
     hsla(0, 0%, 0%, 0) 100%
   ); */
 
-  --overlay-gradient-left: linear-gradient(
-    90deg,
-    hsla(0, 0%, 4%, 0.5) 0%,
-    hsla(0, 0%, 4%, 0.33) 50%,
-    hsla(0, 0%, 4%, 0) 100%
-  );
-  --overlay-gradient-right: linear-gradient(
-    270deg,
-    hsla(0, 0%, 0%, 0.5) 0%,
-    hsla(0, 0%, 0%, 0.25) 20%,
-    hsla(0, 0%, 0%, 0) 100%
-  );
-  --overlay-gradient-bottom: linear-gradient(
-    0deg,
-    rgba(29, 29, 31, 0.95) 0%,
-    /* from apple */ transparent 50%
-  );
+	--overlay-gradient-left: linear-gradient(
+		90deg,
+		hsla(0, 0%, 4%, 0.5) 0%,
+		hsla(0, 0%, 4%, 0.33) 50%,
+		hsla(0, 0%, 4%, 0) 100%
+	);
+	--overlay-gradient-right: linear-gradient(
+		270deg,
+		hsla(0, 0%, 0%, 0.5) 0%,
+		hsla(0, 0%, 0%, 0.25) 20%,
+		hsla(0, 0%, 0%, 0) 100%
+	);
+	--overlay-gradient-bottom: linear-gradient(
+		0deg,
+		rgba(29, 29, 31, 0.95) 0%,
+		/* from apple */ transparent 50%
+	);
 
-  --bg-color: var(--color-primary-9);
-  --bg-gradient-top: radial-gradient(
-    ellipse 45% 30% at 50% -10%,
-    hsla(0, 0%, 51%, 0.12),
-    hsla(0, 0%, 0%, 0)
-  );
-  --bg-gradient-bottom: radial-gradient(
-    ellipse 45% 30% at 50% 120%,
-    hsla(0, 0%, 51%, 0.15),
-    hsla(0, 0%, 0%, 0)
-  );
-  --font-color-1: var(--color-primary-5);
-  --font-color-2: var(--color-primary-4);
-  --font-color-3: var(--color-primary-3);
-  --font-color-4: var(--color-primary-2);
-  --font-color-5: var(--color-primary-1);
-  --border-color-1: var(--color-primary-8);
-  --border-color-2: var(--color-primary-6);
+	--bg-color: var(--color-primary-9);
+	--bg-gradient-top: radial-gradient(
+		ellipse 45% 30% at 50% -10%,
+		hsla(0, 0%, 51%, 0.12),
+		hsla(0, 0%, 0%, 0)
+	);
+	--bg-gradient-bottom: radial-gradient(
+		ellipse 45% 30% at 50% 120%,
+		hsla(0, 0%, 51%, 0.15),
+		hsla(0, 0%, 0%, 0)
+	);
+	--font-color-1: var(--color-primary-5);
+	--font-color-2: var(--color-primary-4);
+	--font-color-3: var(--color-primary-3);
+	--font-color-4: var(--color-primary-2);
+	--font-color-5: var(--color-primary-1);
+	--border-color-1: var(--color-primary-8);
+	--border-color-2: var(--color-primary-6);
 
-  /* Remove this variables */
-  --link-color-1: var(--color-primary-3);
-  --link-color-2: var(--color-primary-1);
-  --link-hover-color-1: var(--color-primary-5);
-  --link-hover-color-2: var(--color-primary-3);
-  --link-active-color-1: var(--color-primary-7);
-  --link-active-color-2: var(--color-primary-5);
+	/* Remove this variables */
+	--link-color-1: var(--color-primary-3);
+	--link-color-2: var(--color-primary-1);
+	--link-hover-color-1: var(--color-primary-5);
+	--link-hover-color-2: var(--color-primary-3);
+	--link-active-color-1: var(--color-primary-7);
+	--link-active-color-2: var(--color-primary-5);
 }
 
 html,
 body {
-  min-height: 100%;
-  overflow-x: hidden;
+	min-height: 100%;
+	overflow-x: hidden;
 }
 
 html {
-  scroll-behavior: smooth; /* Check if this is widely supported and works correctly  */
+	scroll-behavior: smooth; /* Check if this is widely supported and works correctly  */
 }
 
 body {
-  color: var(--font-color-3);
-  font-family: var(--font-family-body);
-  -webkit-font-smoothing: antialiased;
-  line-height: var(--font-line-height-4);
-  background-color: var(--bg-color);
-  background: var(--bg-gradient-top), var(--bg-gradient-bottom), var(--bg-color);
+	color: var(--font-color-3);
+	font-family: var(--font-family-body);
+	-webkit-font-smoothing: antialiased;
+	line-height: var(--font-line-height-4);
+	background-color: var(--bg-color);
+	background: var(--bg-gradient-top), var(--bg-gradient-bottom), var(--bg-color);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+	html {
+		scroll-behavior: auto;
+	}
 }
 
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  margin: 0;
+	box-sizing: border-box;
+	margin: 0;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 a {
-  color: var(--link-color-1);
-  text-decoration: none;
-  font-family: var(--font-family-brand);
+	/* check how can we define global style with tailwind using Tailwind colors  */
+	/* color: var(--link-color-1); */
+	text-decoration: none;
+	/* font-family: var(--font-family-brand); */
 }
 
 h1,
@@ -249,27 +250,27 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: var(--font-line-height-2);
-  font-family: var(--font-family-brand);
-  font-weight: var(--font-weight-4);
-  text-transform: uppercase;
+	/* line-height: var(--font-line-height-2); */
+	font-family: var(--font-family-brand);
+	font-weight: var(--font-weight-4);
+	text-transform: uppercase;
 }
 
 p {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-2);
-  /* text-wrap: pretty; */
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-2);
+	/* text-wrap: pretty; */
 }
 
 ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
 }
 
 /* Utilities */
 
-.sr-only {
+/* .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -279,9 +280,9 @@ ul {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
+} */
 
-.wrapper,
+/* .wrapper,
 .wrapper-md {
   width: 100%;
   margin-inline: auto;
@@ -293,22 +294,22 @@ ul {
 
 .wrapper-md {
   max-width: var(--space-17);
-}
+} */
 
 /* .margins {
   margin-inline: auto;
 } */
 
-.paddings {
-  padding-inline: var(--space-5);
-  /* padding-block: 1.5rem; */
-}
+/* .paddings { */
+/* padding-inline: var(--space-5); */
+/* padding-block: 1.5rem; */
+/* } */
 
 .stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-10);
-  /* & > * {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-10);
+	/* & > * {
     margin-bottom: var(--space-10);
   }
   & > *:not(:last-child) {
@@ -326,10 +327,10 @@ ul {
 
 /* Apply these styles only if API is supported */
 @supports (view-transition-name: none) {
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation-duration: 0.5s;
-    /* animation-timing-function: ease-in-out; */
-  }
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation-duration: 0.5s;
+		/* animation-timing-function: ease-in-out; */
+	}
 }

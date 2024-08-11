@@ -1,275 +1,89 @@
 ---
-import Icon from "./Icon.astro";
-import ThemeToggle from "./ThemeToggle.astro";
+import Icon from './Icon.astro'
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+import NavMenuItems from './NavMenuItems.astro'
+import NavMenuFooter from './NavMenuFooter.astro'
 
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import LanguagePicker from "./LanguagePicker.astro";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
-  { label: t("nav.projects"), href: `/${lang}/#projects` },
-  { label: t("nav.about"), href: `/${lang}/#about` },
-  { label: t("nav.contact"), href: `/${lang}/#contact` },
-];
+	{ label: t('nav.projects'), href: `/${lang}/#projects` },
+	{ label: t('nav.about'), href: `/${lang}/#about` },
+	{ label: t('nav.contact'), href: `/${lang}/#contact` }
+]
 ---
 
-<nav class="wrapper">
-  <div class="menu-header">
-    <a href="/" class="site-title">{t("nav.brand")}</a>
-    <menu-button>
-      <template>
-        <button class="menu-button" aria-expanded="false">
-          <span class="sr-only">Menu</span>
-          <Icon icon="list" />
-        </button>
-      </template>
-    </menu-button>
-  </div>
-  <noscript>
-    <ul class="nav-items">
-      {
-        textLinks.map(({ label, href }) => (
-          <li>
-            <a
-              aria-current={Astro.url.pathname === href}
-              class:list={[
-                "link",
-                {
-                  active:
-                    Astro.url.pathname === href ||
-                    (href !== "/" && Astro.url.pathname.startsWith(href)),
-                },
-              ]}
-              href={href}
-            >
-              {label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </noscript>
-  <div id="menu-content" hidden>
-    <ul class="nav-items">
-      {
-        textLinks.map(({ label, href }) => (
-          <li>
-            <a
-              aria-current={Astro.url.pathname === href}
-              class:list={[
-                "link",
-                {
-                  active:
-                    Astro.url.pathname === href ||
-                    (href !== "/" && Astro.url.pathname.startsWith(href)),
-                },
-              ]}
-              href={href}
-            >
-              {label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <div class="menu-footer">
-      <LanguagePicker />
-      <div class="theme-toggle">
-        <ThemeToggle />
-      </div>
-    </div>
-  </div>
+<nav
+	class="relative z-50 my-12 px-6 font-brand font-medium uppercase md:container md:grid md:grid-cols-nav md:items-center md:gap-4"
+>
+	<div class="flex justify-between gap-2 md:p-0">
+		<a
+			href="/"
+			class="flex items-center gap-2 text-base font-medium tracking-wide text-stone-950 md:text-2xl dark:text-stone-50"
+		>
+			{t('nav.brand')}
+		</a>
+		<menu-button>
+			<template>
+				<button
+					class="relative flex border-0 p-0 text-2xl aria-expanded:text-stone-600 [&[hidden]]:hidden"
+					aria-expanded="false"
+				>
+					<span class="sr-only">Menu</span>
+					<Icon icon="list" />
+				</button>
+			</template>
+		</menu-button>
+	</div>
+	<div class="absolute inset-x-0 md:contents">
+		<noscript>
+			<NavMenuItems links={textLinks} />
+		</noscript>
+		<noscript>
+			<NavMenuFooter noScript />
+		</noscript>
+	</div>
+	<div id="menu-content-js" class="absolute inset-x-0 [&.js-enabled]:md:contents" hidden>
+		<NavMenuItems links={textLinks} />
+		<NavMenuFooter />
+	</div>
 </nav>
 
 <script>
-  class MenuButton extends HTMLElement {
-    constructor() {
-      super();
+	class MenuButton extends HTMLElement {
+		constructor() {
+			super()
 
-      // Inject menu toggle button when JS runs.
-      this.appendChild(this.querySelector("template")!.content.cloneNode(true));
-      const btn = this.querySelector("button")!;
+			// Inject menu toggle button when JS runs.
+			this.appendChild(this.querySelector('template')!.content.cloneNode(true))
+			const btn = this.querySelector('button')!
 
-      // Hide menu (shown by default to support no-JS browsers).
-      const menu = document.getElementById("menu-content")!;
-      menu.hidden = true;
-      // Add "menu-content" class in JS to avoid covering content in non-JS browsers.
-      menu.classList.add("menu-content");
+			// Hide menu (shown by default to support no-JS browsers).
+			const menuContent = document.getElementById('menu-content-js')!
+			menuContent.hidden = true
+			// Add "js-enabled" class in JS to avoid covering content in non-JS browsers.
+			menuContent.classList.add('js-enabled')
 
-      /** Set whether the menu is currently expanded or collapsed. */
-      const setExpanded = (expand: boolean) => {
-        btn.setAttribute("aria-expanded", expand ? "true" : "false");
-        menu.hidden = !expand;
-      };
+			/** Set whether the menu is currently expanded or collapsed. */
+			const setExpanded = (expand: boolean) => {
+				btn.setAttribute('aria-expanded', expand ? 'true' : 'false')
+				menuContent.hidden = !expand
+			}
 
-      // Toggle menu visibility when the menu button is clicked.
-      btn.addEventListener("click", () => setExpanded(menu.hidden));
+			// Toggle menu visibility when the menu button is clicked.
+			btn.addEventListener('click', () => setExpanded(menuContent.hidden))
 
-      // Hide menu button for large screens.
-      const handleViewports = (e: MediaQueryList | MediaQueryListEvent) => {
-        setExpanded(e.matches);
-        btn.hidden = e.matches;
-      };
-      const mediaQueries = window.matchMedia("(min-width: 50em)");
-      handleViewports(mediaQueries);
-      mediaQueries.addEventListener("change", handleViewports);
-    }
-  }
-  customElements.define("menu-button", MenuButton);
+			// Hide menu button for large screens.
+			const handleViewports = (e: MediaQueryList | MediaQueryListEvent) => {
+				setExpanded(e.matches)
+				btn.hidden = e.matches
+			}
+			const mediaQueries = window.matchMedia('(min-width: 768px)')
+			handleViewports(mediaQueries)
+			mediaQueries.addEventListener('change', handleViewports)
+		}
+	}
+	customElements.define('menu-button', MenuButton)
 </script>
-
-<style>
-  nav {
-    /* Check why nav changes height when in mobile */
-    z-index: 9999;
-    position: relative;
-    /* font-family: var(--font-brand); */
-    font-weight: var(--font-weight-3);
-    margin-bottom: var(--space-4);
-    margin-top: var(--space-4);
-    background: transparent;
-  }
-
-  .menu-header {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-2);
-  }
-
-  .site-title {
-    display: flex;
-    gap: var(--space-2);
-    align-items: center;
-    /* line-height: 1.2; */
-    color: var(--link-color-2);
-    font-size: var(--font-size-3);
-    text-transform: uppercase;
-  }
-
-  .menu-button {
-    position: relative;
-    display: flex;
-    border: 0;
-    padding: 0;
-    font-size: var(--font-size-6);
-    color: var(--link-color-1);
-    background-color: transparent;
-    /* box-shadow: var(--shadow-md); */
-  }
-
-  .menu-button[aria-expanded="true"] {
-    color: var(--link-active-color-1);
-  }
-
-  .menu-button[hidden] {
-    display: none;
-  }
-
-  .menu-content {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-transform: uppercase;
-  }
-
-  .nav-items {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    list-style: none;
-    padding: var(--space-5);
-    background-color: var(--bg-color);
-    border-bottom: var(--border-width-1) solid var(--border-color-1);
-  }
-
-  .link {
-    display: inline-block;
-    color: var(--link-color-1);
-    font-weight: var(--font-weight-2);
-    letter-spacing: var(--font-letter-spacing-3);
-    font-size: var(--font-size-3);
-    /* line-height: 1.2; */
-  }
-
-  .link.active {
-    color: var(--link-active-color-2);
-  }
-
-  .menu-footer {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-3);
-    padding: var(--space-5);
-    background-color: var(--bg-color);
-    /* border-radius: 0 0 0.75rem 0.75rem; */
-    /* box-shadow: var(--shadow-lg); */
-  }
-
-  .theme-toggle {
-    display: flex;
-    align-items: center;
-  }
-
-  @media (min-width: 50em) {
-    nav {
-      display: grid;
-      grid-template-columns: 4fr auto 1fr;
-      align-items: center;
-      gap: var(--space-4);
-    }
-
-    .menu-header {
-      padding: 0;
-    }
-
-    .site-title {
-      font-size: var(--font-size-4);
-    }
-
-    .menu-content {
-      display: contents;
-    }
-
-    .nav-items {
-      flex-direction: row;
-      font-size: var(--font-size-3);
-      border: 0;
-      padding: var(--space-2);
-      background-color: transparent;
-    }
-
-    .link {
-      padding: var(--space-2) var(--space-4);
-      transition: color var(--theme-transition);
-    }
-
-    .link:hover,
-    .link:focus {
-      color: var(--link-hover-color-1);
-      /* background-color: var(--accent-subtle-overlay); */
-    }
-
-    .link.active {
-      color: var(--link-active-color-1);
-      /* background-color: var(--accent-regular); */
-    }
-
-    .menu-footer {
-      justify-self: flex-end;
-      align-items: center;
-      padding: 0;
-      background-color: transparent;
-      box-shadow: none;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .link.active {
-      color: SelectedItem;
-    }
-  }
-</style>
