@@ -1,16 +1,20 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import CTA from "../CTA.astro";
-import Hero from "../Hero.astro";
-import Projects from "../Projects.astro";
-import About from "../About.astro";
+import Layout from '../../layouts/Layout.astro'
+import CTA from '../CTA.astro'
+import Hero from '../Hero.astro'
+import Projects from '../Projects.astro'
+import About from '../About.astro'
+import Experiences from '../Experiences.astro'
+import Workflow from '../Workflow.astro'
 ---
 
 <Layout>
-  <Hero />
-  <main>
-    <Projects />
-    <About />
-  </main>
-  <CTA />
+	<Hero />
+	<main>
+		<Projects />
+		<Experiences />
+		<Workflow />
+		<About />
+	</main>
+	<CTA />
 </Layout>

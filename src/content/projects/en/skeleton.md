@@ -1,11 +1,10 @@
 ---
 title: Skeleton Layout Chrome Extension
-subtitle: Software Developer
+role: Software Development
+period: 2024
 publishDate: 2024-05-20 00:00:00
-hero_bg_img: null
-hero_bg_img_alt: null
-hero_img: /assets/case-study-2.png
-hero_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+img: /assets/case-study-3.png
+img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Developed a Google Chrome extension to visualize websites' layout structure with the aim of simplifying the web design process and catch layout issues easily.
 tags:

@@ -1,11 +1,10 @@
 ---
-title: Donde viajar se una a la fotografia
-subtitle: Founder and developer
+title: Travellography
+role: Web Design & Development
+period: Soon
 publishDate: 2024-06-21 00:00:00
-hero_bg_img: /assets/case-study-2.jpg
-hero_bg_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
-hero_img: null
-hero_img_alt: null
+img: /assets/case-study-1.png
+img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
 tags:
