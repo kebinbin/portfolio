@@ -1,254 +1,52 @@
 ---
-import { getI18N } from "../i18n";
-const { currentLocale } = Astro;
-const i18n = getI18N({ currentLocale });
+import { getI18N } from '../i18n'
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
 const portrait = {
-  img: "/assets/portrait.jpg",
-  img_alt: "Portrait picture of me in office with indoor plants in background.",
-};
+	img: '/assets/portrait.jpg',
+	img_alt: 'Portrait picture of me in black and white.'
+}
 ---
 
 <section class="container">
-  <header>
-    <a id="about"><h2>{i18n.about.h2}</h2></a>
-  </header>
-  <div class="about">
-    <img
-      class="portrait"
-      src={portrait.img}
-      alt={portrait.img_alt || ""}
-      loading="lazy"
-      decoding="async"
-    />
-    <div class="bio">
-      <h3>{i18n.about.bio.h3}</h3>
-      <div class="content">
-        <p>{i18n.about.bio.paragraph1}</p>
-        <p>{i18n.about.bio.paragraph2}</p>
-      </div>
-    </div>
-    <div class="experience">
-      <h3>{i18n.about.experience.h3}</h3>
-      <ul class="experiences">
-        {
-          i18n.about.experience.experiences.map((exp) => (
-            <li class="experience-item">
-              <h4>{exp.company}</h4>
-              <aside>
-                <div class="role">{exp.role}</div>
-                <div class="dates">{exp.dates}</div>
-              </aside>
-              <p>{exp.paragraph}</p>
-              <ul class="tags">
-                {exp.tags.map((tag) => (
-                  <li class="tag">{tag}</li>
-                ))}
-              </ul>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-    <div class="skills">
-      <h3>{i18n.about.skills.h3}</h3>
-      <ul>
-        {i18n.about.skills.currentlyOffering.map((skill) => <li>{skill}</li>)}
-      </ul>
-    </div>
-    <div class="education">
-      <h3>{i18n.about.education.h3}</h3>
-      <ul>
-        {
-          i18n.about.education.degrees.map((deg) => (
-            <li>
-              <h4>{deg.title}</h4>
-              <aside>
-                <span class="institution">{deg.institution}</span>
-                <span class="dates">{deg.dates}</span>
-              </aside>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </div>
-  <div class="cta">
-    {i18n.about.cta.text}<a href="#download"> {i18n.about.cta.link}</a>
-  </div>
+	<header>
+		<a id="about"
+			><h2
+				class="text-start text-7xl font-medium leading-20 tracking-tighter text-stone-800 md:text-9xl md:leading-27 dark:text-stone-400"
+			>
+				<span class="inline-block">{i18n.about.h2.start}</span>
+				<span class="block"></span>
+				<span class="inline-block">{i18n.about.h2.end}</span>
+			</h2></a
+		>
+	</header>
+	<div class="mt-44 grid grid-cols-3 grid-rows-2 lg:gap-x-28 lg:gap-y-12">
+		<img
+			class="row-span-2"
+			src={portrait.img}
+			alt={portrait.img_alt || ''}
+			loading="lazy"
+			decoding="async"
+		/>
+		<div>
+			<h3 class="text-xl font-bold">{i18n.about.bio.h3}</h3><p>{i18n.about.bio.paragraph}</p>
+		</div>
+		<div>
+			<h3 class="text-xl font-bold">{i18n.about.technologies.h3}</h3><p>
+				{i18n.about.technologies.list.join(', ')}
+			</p>
+		</div>
+		<div class="flex flex-col gap-1">
+			<h3 class="text-xl font-bold">{i18n.about.education.h3}</h3>
+			<span class="font-light"
+				>{`${i18n.about.education.degree} · ${i18n.about.education.dates}`}</span
+			>
+			<p>{i18n.about.education.paragraph}</p>
+		</div>
+		<div>
+			<h3 class="text-xl font-bold">{i18n.about.technologies.h3}</h3><ul>
+				{i18n.about.services.list.map((service) => <li>{service}</li>)}
+			</ul>
+		</div>
+	</div>
 </section>
-
-<style>
-  .about {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, auto);
-    grid-template-areas:
-      "portrait-img"
-      "bio"
-      "experience"
-      "skills"
-      "education";
-    gap: var(--space-7);
-    font-size: var(--font-size-1);
-  }
-
-  h2 {
-    margin-bottom: var(--space-8);
-    font-size: var(--font-size-9);
-    color: var(--font-color-5);
-  }
-
-  h3 {
-    margin-bottom: var(--space-6);
-    color: var(--font-color-1);
-    letter-spacing: var(--font-letter-spacing-4);
-    font-size: var(--font-size-3);
-  }
-
-  h4 {
-    color: var(--font-color-5);
-    letter-spacing: var(--font-letter-spacing-3);
-    font-weight: var(--font-weight-5);
-    font-size: var(--font-size-3);
-    text-transform: capitalize;
-  }
-
-  aside {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  p {
-    color: var(--font-color-4);
-    line-height: var(--font-line-height-5);
-  }
-  .experiences {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  }
-
-  .experience-item {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .experience p {
-    margin-top: var(--space-1);
-  }
-
-  .role,
-  .institution {
-    color: var(--font-color-1);
-    text-transform: capitalize;
-    font-weight: var(--font-weight-4);
-    font-size: var(--font-size-2);
-    font-family: var(--font-family-brand);
-    letter-spacing: var(--font-letter-spacing-3);
-  }
-
-  .dates {
-    color: var(--font-color-1);
-    text-transform: capitalize;
-    margin: auto 0;
-    /* Check typography here */
-  }
-
-  .tags {
-    margin-top: var(--space-1);
-    display: inline-flex;
-    gap: var(--space-1);
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    text-transform: capitalize;
-    /* font-weight: 600; */
-    color: var(--font-color-5);
-  }
-
-  .tag:first-child::before {
-    content: "⎯⎯";
-    margin-right: var(--space-1);
-  }
-
-  .tag:before {
-    content: "⦁";
-    margin-right: var(--space-1);
-  }
-
-  .portrait {
-    grid-area: portrait-img;
-  }
-
-  .bio {
-    grid-area: bio;
-  }
-
-  .bio .content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .experience {
-    grid-area: experience;
-  }
-
-  .skills {
-    grid-area: skills;
-  }
-
-  .education {
-    grid-area: education;
-  }
-
-  .cta {
-    margin-top: var(--space-8);
-    /* margin-bottom: var(--space-10); */
-    text-align: end;
-    font-size: var(--font-size-2);
-    color: var(--font-color-1);
-  }
-
-  .cta a {
-    font-family: var(--font-family-body);
-    /* font-weight: 500; */
-  }
-
-  @media (min-width: 35em) {
-    .about {
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows: repeat(4, auto);
-      grid-template-areas:
-        "portrait-img bio"
-        "experience experience"
-        "education education"
-        "skills skills";
-    }
-  }
-
-  @media (min-width: 50em) {
-    .about {
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows: repeat(4, auto);
-      grid-template-areas:
-        "portrait-img bio"
-        "portrait-img experience"
-        "education experience"
-        "skills experience";
-    }
-  }
-
-  @media (min-width: 70em) {
-    .about {
-      grid-template-columns: 3fr 4fr 5fr;
-      grid-template-rows: repeat(2, 1fr);
-      grid-template-areas:
-        "portrait-img bio experience"
-        "skills education experience";
-
-      grid-gap: 7rem 3rem;
-    }
-  }
-</style>

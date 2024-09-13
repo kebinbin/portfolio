@@ -17,8 +17,7 @@
 		},
 		"aside": {
 			"availableFor": "Avaliable for offers and collaborations"
-		},
-		"email": "kevin.castillo@works.com"
+		}
 	},
 	"experience": {
 		"h2": {
@@ -60,7 +59,7 @@
 		],
 		"cta": {
 			"question": "Want to know more?",
-			"link": "Download Resume"
+			"link": "Download resume"
 		}
 	},
 	"workflow": {
@@ -113,72 +112,63 @@
 		"footnote": "*The design and agreement (stages 4-5) can be omitted if you already have a design for your project."
 	},
 	"about": {
-		"h2": "Get to know me",
-		"bio": {
-			"h3": "About me",
-			"paragraph1": "I am a Software Engineer with a solid background in Full-Stack development in corporate environments and an avid traveler who has witnessed first-hand the intrinsic value that PMS tools such as Cloudbeds can provide to hostel management.  This experiences, plus my immediate resonance with Cloudbeds values and culture, motivated me to apply to this job.",
-			"paragraph2": "Throughout my career I have worked in multiple front-end applications (mostly React based) and back-end projects built using tools such as OOP Java (with frameworks like Spring), PHP, and relational databases.  As part of my previous corporate experience, I was able to bring an inherited critical enterprise app from unstable state to a stable release in an Agile environment."
+		"h2": {
+			"start": "I craft digital magic",
+			"end": "using code"
 		},
-		"experience": {
-			"h3": "Experience",
-			"experiences": [
-				{
-					"company": "Collabor",
-					"role": "Founder, developer & designer",
-					"dates": "Oct 2023 - Present",
-					"paragraph": "Created a freelancer to client platform to facilitate the communication, strategy, progress track and payments of freelancers.  I'm just adding an extra sentence here.  This is the tool I use for our work :)",
-					"tags": ["ReactJS", "Svelte", "Astro", "NextJS", "TypeScript", "Tailwind"]
-				},
-				{
-					"company": "Hewlett Packard Enterprise",
-					"role": "Software Engineer",
-					"dates": "May 2015 - Aug 2016",
-					"paragraph": "Developed new features, identified and fixed synchronization, cyber-security and performance issues.  Developed many UI views.  Responsible for production troubleshooting, maintenance, and deployments.",
-					"tags": ["ReactJS", "Java", "Spring", "Docker", "Micro-services", "SQLServer"]
-				},
-				{
-					"company": "Naluum",
-					"role": "Web developer",
-					"dates": "Nov 2018 - Oct 2020",
-					"paragraph": "Designed and developed the website for an international event being hosted by the institute for informational purpose and capture volunteer data.  Developed WordPress plugin to integrate form inputs with GoogleSheets.",
-					"tags": ["HTML", "JavaScript", "CSS", "WordPress", "PHP", "Figma"]
-				},
-				{
-					"company": "Hewlett Packard",
-					"role": "Software Engineer",
-					"dates": "Jun 2015 - Aug 2016",
-					"paragraph": "Developed new UI features of a real-time application and re-designed many existing ones.  Migrated GWT views to ReactJS components. Researched and fixed performance bottlenecks.",
-					"tags": ["React", "FLUX", "SASS", "BootStrap", "JS", "ActiveMQ", "Linux"]
-				},
-				{
-					"company": "SYSDAT CREST UPRM ",
-					"role": "Engineering Student",
-					"dates": "Jan 2015 - May 2015",
-					"paragraph": "Designed and deployed a normalized relational database, developed front-end components and back-end functionality such as role-based access control and session management.",
-					"tags": ["AngularJS", "PHP", "MySQL", "ERD", "BootStrap", "HTML", "CSS"]
-				}
+		"bio": {
+			"h3": "I am a Software Engineer with a solid background in full-stack development in corporate environments.",
+			"paragraph": "After deeply immersing myself in programming throughout my adolescence, I eventually pursued a formal education and transformed one of my passions into a professional career in software engineering.  As time has passed, I have slightly oriented my career towards front-end development due to my intrinsic interest in UI design, art, problem-solving, and the creation of efficient solutions."
+		},
+		"education": {
+			"h3": "UPR Mayagüez RUM",
+			"degree": "Computer Engineering",
+			"dates": "Aug 2009 - May 2015",
+			"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
+		},
+		"technologies": {
+			"h3": "Technologies I enjoy using",
+			"list": [
+				"React",
+				"JavaScript/TypeScript",
+				"HTML",
+				"CSS/SASS",
+				"Astro",
+				"NextJS",
+				"Jest",
+				"REST",
+				"SQLServer",
+				"MySQL",
+				"PostgreSQL",
+				"Object Oriented Programming",
+				"Java",
+				"Spring",
+				"PHP",
+				"ActiveMQ",
+				"WebSocket",
+				"Docker",
+				"Micro-services",
+				"Flux",
+				"Git",
+				"Jenkins",
+				"Linux",
+				"Figma",
+				"Lightroom",
+				"WordPress",
+				"C",
+				"ASM"
 			]
 		},
-		"skills": {
+		"services": {
 			"h3": "Things I can help you with",
-			"currentlyOffering": [
+			"list": [
+				"Front-end development",
 				"REST API",
 				"Real-time apps",
-				"Front-end development",
 				"Back-end development",
 				"OOP",
 				"Relational databases",
 				"Web design"
-			]
-		},
-		"education": {
-			"h3": "Education",
-			"degrees": [
-				{
-					"title": "BSCpE - Computer Engineering",
-					"institution": "University of Puerto Rico",
-					"dates": "Aug 2009 - May 2015"
-				}
 			]
 		},
 		"cta": {
@@ -186,5 +176,15 @@
 			"link": "Download resume"
 		}
 	},
-	"footer": {}
+	"contact": {
+		"h2": {
+			"start": "Interested in",
+			"end": "working together"
+		},
+		"paragraph": "Shoot me a note with your project details at "
+	},
+	"footer": {},
+	"metadata": {
+		"email": "kevin.castillo@works.com"
+	}
 }
