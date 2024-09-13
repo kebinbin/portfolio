@@ -12,7 +12,9 @@ export const ui = {
 		'nav.projects': 'Projects',
 		'nav.about': 'About',
 		'nav.contact': 'Contact',
-		'nav.lang': 'ES'
+		'nav.lang': 'ES',
+		'footer.github': 'GitHub',
+		'footer.linkedin': 'LinkedIn'
 	},
 	es: {
 		'nav.projects': 'Proyectos',

@@ -12,20 +12,22 @@ const { data, slug } = Astro.props.project
 const [, projectSlug] = slug.split('/')
 ---
 
-<article class="flex flex-col gap-4" transition:name={`${projectSlug}-card`}>
-	<img
-		src={data.img}
-		alt={data.img_alt || ''}
-		loading="lazy"
-		decoding="async"
-		class="aspect-video size-full object-cover"
-		transition:name={`${projectSlug}-card-bg-img`}
-	/>
-	<div class="flex flex-row justify-between text-xl font-bold">
-		<div class="capitalize">
-			<span>{data.title}</span>
-			<span class="font-light">{data.role}</span>
+<article class="flex flex-col gap-4">
+	<a href={`projects/${projectSlug}`}>
+		<img
+			src={data.img}
+			alt={data.img_alt || ''}
+			loading="lazy"
+			decoding="async"
+			class="aspect-video size-full object-cover"
+			transition:name={`${projectSlug}-hero-img`}
+		/>
+		<div class="flex flex-row justify-between text-xl font-bold">
+			<div class="capitalize">
+				<span>{data.title}</span>
+				<span class="font-light">{data.role}</span>
+			</div>
+			<div class="uppercase">{data.period}</div>
 		</div>
-		<div class="uppercase">{data.period}</div>
-	</div>
+	</a>
 </article>
