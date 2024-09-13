@@ -1,53 +1,66 @@
 ---
 import Icon from '../components/Icon.astro'
+import { getLangFromUrl } from '../i18n/utils'
 import { getI18N } from '../i18n'
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
 ---
 
-<header class="container flex flex-col gap-12">
-	<h1
-		class="title items-center pb-6 pt-16 text-center text-5xl font-bold uppercase tracking-normal text-stone-800 md:pb-44 md:pt-56 md:text-9xl dark:text-orange-50"
-	>
-		{i18n.hero.h1.start}
-		<span class="block"></span>
-		<span class="text-11xl leading-[0.7]">{i18n.hero.h1.middle}</span>
-		<span class="block"></span>
-		<span class="text-9xl leading-3">{i18n.hero.h1.end}</span>
-	</h1>
-	<aside class="flex flex-col gap-2 py-2 text-start font-normal">
+<header class="container flex h-screen flex-col gap-36 py-28">
+	<div class="flex flex-col gap-14">
+		<div class="text-xl font-light uppercase tracking-widest">
+			<span>{i18n.hero.name.first}</span>
+			<span>{i18n.hero.name.middle}</span>
+			<span class="font-bold">{i18n.hero.name.last}</span>
+		</div>
+		<h1
+			class="items-center text-start text-8xl font-medium leading-20 text-stone-800 [word-spacing:-1rem] md:text-10xl md:leading-32 dark:text-stone-400"
+		>
+			<span class="inline-block tracking-tightest">{i18n.hero.h1.start}</span>
+			<span class="block"></span>
+			<span class="inline-block tracking-tight">{i18n.hero.h1.middle}</span>
+			<span class="inline-block tracking-tightest">{i18n.hero.h1.end}</span>
+		</h1>
+		<p class="max-w-prose text-lg leading-7 text-stone-600 dark:text-stone-400">
+			{i18n.hero.p}
+		</p>
+		<div class="flex flex-row flex-wrap gap-3 font-medium">
+			<a
+				href=`/${lang}/#contact`
+				class="flex min-w-56 flex-grow items-center justify-center border border-solid border-stone-800 bg-stone-800 px-4 py-3 text-center text-base uppercase tracking-widest text-stone-400 md:flex-grow-0 dark:border-stone-800 dark:bg-stone-400 dark:text-stone-800"
+				>{i18n.hero.cta.contact}</a
+			>
+			<a
+				href=`/${lang}/#projects`
+				class="flex min-w-56 flex-grow items-center justify-center border border-solid border-stone-800 px-4 py-3 text-center text-base uppercase tracking-widest text-stone-800 md:flex-grow-0 dark:border-stone-400 dark:text-stone-400"
+				>{i18n.hero.cta.work}</a
+			>
+		</div>
+	</div>
+	<aside class="flex flex-row justify-between gap-2 py-2 text-start font-normal">
 		<p
 			class="ml-1 flex items-center gap-2 text-base font-medium text-stone-500 before:size-4 before:rounded-full before:bg-lime-500 dark:text-stone-500"
 		>
 			{i18n.hero.aside.availableFor}
 		</p>
-		<div class="flex flex-col gap-8 md:flex-row md:justify-between">
-			<div class="flex flex-wrap items-start justify-start gap-4">
-				{
-					i18n.hero.aside.services.map((service) => (
-						<div class="flex items-center gap-1 whitespace-nowrap font-brand text-2xl font-medium uppercase tracking-wide text-stone-500 dark:text-stone-600">
-							<Icon icon={service.icon} size="1em" />
-							<span class="block h-6 align-text-top leading-[1.2]">{service.label}</span>
-						</div>
-					))
-				}
-			</div>
-
-			<div
-				class="text-base tracking-normal after:mt-2 after:inline-block after:h-8 after:w-1/2 after:border-r after:border-solid after:border-stone-500"
-			>
-				<span class="text-stone-400">{i18n.hero.recentProjects}</span>
-				<a class="text-stone-100" href="#projects">
-					<strong>{i18n.hero.recentProjectsLink}</strong>
-				</a>
-			</div>
-		</div>
+		<a
+			href={`mailto:${i18n.metadata.email}`}
+			class="-mt-64 leading-none text-stone-500 [writing-mode:vertical-lr]">{i18n.metadata.email}</a
+		>
 	</aside>
 </header>
 
 <style>
+	/* .kern {
+		font-size: 8rem;
+		letter-spacing: -0.05em;
+		text-rendering: optimizeLegibility;
+		font-feature-settings: 'kern' 1;
+		font-kerning: normal;
+	} */
 	/* GRADIENT ON TEXT */
-	.title {
+	/* .title {
 		background-image: radial-gradient(
 			ellipse 50% 90% at 50% 20%,
 			var(--font-color-5),
@@ -58,5 +71,5 @@ const i18n = getI18N({ currentLocale })
 		-moz-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		-moz-text-fill-color: transparent;
-	}
+	} */
 </style>

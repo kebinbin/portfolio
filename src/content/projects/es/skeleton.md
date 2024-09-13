@@ -1,8 +1,9 @@
 ---
-title: Donde el viajar se une a la fotografia
-subtitle: Web Designer & Lead Engineer
+title: Skeleton Layout Chrome Extension
+role: Software Development
+period: 2024
 publishDate: 2024-03-02 00:00:00
-img: /assets/stock-1.jpg
+img: /assets/case-study-3.png
 img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.

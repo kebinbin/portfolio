@@ -1,9 +1,10 @@
 ---
-title: Where travel meets photography
-subtitle: Web Designer & Lead Engineer
+title: Travellography
+role: Web Design & Development
+period: 2024
 publishDate: 2024-03-02 00:00:00
-hero_bg_img: /assets/case-study-3.jpg
-hero_bg_img_alt: A big glacier in a sunny day with some clouds with photographers walking.
+img: /assets/case-study-4.png
+img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
 tags:

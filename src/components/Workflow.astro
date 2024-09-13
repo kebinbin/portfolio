@@ -1,0 +1,38 @@
+---
+import { getI18N } from '../i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+
+<section class="container mb-64">
+	<header>
+		<a id="workflow"
+			><h2 class="text-start text-stone-800 dark:text-stone-400">
+				<span
+					class="inline-block text-7xl font-medium leading-20 tracking-tighter md:text-9xl md:leading-27"
+					>{i18n.workflow.h2.start}</span
+				>
+				<span class="block"></span>
+				<span
+					class="inline-block text-5xl font-thin leading-10 tracking-tightest md:text-7xl md:leading-18"
+					>{i18n.workflow.h2.end}</span
+				>
+			</h2></a
+		>
+	</header>
+	<div class="mt-32 grid grid-cols-4 gap-x-10 gap-y-20">
+		{
+			i18n.workflow.stages.map((stage, index) => (
+				<div class="flex flex-col gap-1">
+					<span class="text-5xl font-bold">{`0${index + 1}${stage.footnote ? '*' : ''}`}</span>
+					<h3 class="text-xl font-bold">{stage.title}</h3>
+					<p>{stage.description}</p>
+				</div>
+			))
+		}
+	</div>
+	<p id="workflow-footnote" class="mt-36 text-end text-sm leading-7 text-stone-500">
+		{i18n.workflow.footnote}
+	</p>
+</section>

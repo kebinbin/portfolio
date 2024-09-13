@@ -16,16 +16,16 @@ const textLinks: { label: string; href: string }[] = [
 ---
 
 <nav
-	class="relative z-50 my-12 px-6 font-brand font-medium uppercase md:container md:grid md:grid-cols-nav md:items-center md:gap-4"
+	class="relative z-50 my-12 px-6 font-brand font-medium md:container md:grid md:grid-cols-nav md:items-center md:gap-4"
 >
 	<div class="flex justify-between gap-2 md:p-0">
 		<a
-			href="/"
-			class="flex items-center gap-2 text-base font-medium tracking-wide text-stone-950 md:text-2xl dark:text-stone-50"
+			href=`/${lang}/`
+			class="flex items-center gap-2 text-5xl font-bold lowercase text-stone-950 dark:text-stone-50"
 		>
 			{t('nav.brand')}
 		</a>
-		<menu-button>
+		<menu-button class="flex items-center">
 			<template>
 				<button
 					class="relative flex border-0 p-0 text-2xl aria-expanded:text-stone-600 [&[hidden]]:hidden"

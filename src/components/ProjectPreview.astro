@@ -12,69 +12,22 @@ const { data, slug } = Astro.props.project
 const [, projectSlug] = slug.split('/')
 ---
 
-<article
-	class="relative flex min-h-160 overflow-hidden bg-stone-800 pb-6 pt-12"
-	transition:name={`${projectSlug}-card`}
->
-	{
-		data.hero_bg_img && (
-			<img
-				src={data.hero_bg_img}
-				alt={data.hero_bg_img_alt || ''}
-				loading="lazy"
-				decoding="async"
-				class="absolute inset-0 size-full object-cover"
-				transition:name={`${projectSlug}-card-bg-img`}
-			/>
-		)
-	}
-	<div
-		class="absolute inset-0 size-full bg-gradient-to-r from-stone-900 opacity-80"
-		transition:name={`${projectSlug}-card-bg-overlay`}
-	>
-	</div>
-	<div
-		class="container flex flex-wrap items-center justify-between gap-16 md:flex-nowrap md:gap-24"
-	>
-		<div class="z-10 flex w-160 flex-shrink flex-col justify-center gap-6 md:w-96 md:flex-shrink-0">
-			<aside
-				class="font-brand text-sm font-bold uppercase tracking-widest text-stone-400"
-				transition:name={`${projectSlug}-card-subtitle`}
-			>
-				{data.subtitle}
-			</aside>
-			<h3
-				class="font-brand text-5xl font-semibold uppercase tracking-normal text-stone-200"
-				transition:name={`${projectSlug}-card-title`}
-			>
-				{data.title}
-			</h3>
-			<p class="text-stone-300" transition:name={`${projectSlug}-card-description`}>
-				{data.description}
-			</p>
-			<a
-				href={`projects/${projectSlug}`}
-				class="flex max-w-48 items-center justify-center border border-solid border-stone-200 px-4 py-3 text-center text-sm uppercase tracking-widest text-stone-200"
-				transition:name={`${projectSlug}-card-link`}>View Case Study</a
-			>
+<article class="flex flex-col gap-4">
+	<a href={`projects/${projectSlug}`}>
+		<img
+			src={data.img}
+			alt={data.img_alt || ''}
+			loading="lazy"
+			decoding="async"
+			class="aspect-video size-full object-cover"
+			transition:name={`${projectSlug}-hero-img`}
+		/>
+		<div class="flex flex-row justify-between text-xl font-bold">
+			<div class="capitalize">
+				<span>{data.title}</span>
+				<span class="font-light">{data.role}</span>
+			</div>
+			<div class="uppercase">{data.period}</div>
 		</div>
-		{
-			data.hero_img && (
-				<div class="relative -mb-40 -mr-64 w-240 flex-shrink md:flex-shrink-0">
-					<img
-						src={data.hero_img}
-						alt={data.hero_img_alt || ''}
-						loading="lazy"
-						decoding="async"
-						class="w-full rounded-2xl border-8 border-solid border-stone-900 outline outline-2 outline-stone-600"
-						transition:name={`${projectSlug}-card-img`}
-					/>
-					<div
-						class="absolute inset-0 size-full rounded-2xl bg-gradient-to-tl from-stone-900 opacity-40"
-						transition:name={`${projectSlug}-card-img-overlay`}
-					/>
-				</div>
-			)
-		}
-	</div>
+	</a>
 </article>

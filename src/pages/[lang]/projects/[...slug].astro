@@ -15,15 +15,27 @@ export async function getStaticPaths() {
 	return paths
 }
 
-// const { lang, slug } = Astro.params;
+// const { lang, slug } = Astro.params
 const page = Astro.props
+const { data, slug } = page
 // const formattedDate = page.data.date.toLocaleString(lang);
+
+// const { data, slug } = Astro.props.project
+
+const [, projectSlug] = slug.split('/')
 
 const { Content } = await page.render()
 ---
 
 <Layout>
-	<ProjectPreview project={page} />
+	<img
+		src={page.data.img}
+		alt={page.data.img_alt || ''}
+		loading="lazy"
+		decoding="async"
+		class="aspect-video size-full object-cover"
+		transition:name={`${projectSlug}-hero-img`}
+	/>
 	<main class="container prose prose-lg prose-stone dark:prose-invert">
 		<Content />
 	</main>

@@ -4,8 +4,8 @@
 	/* Fonts */
 	--font-family-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 		Ubuntu, Cantarell, 'Open Sans', 'Public Sans', sans-serif;
-	--font-family-body: 'Helvetica Neue', var(--font-family-system);
-	--font-family-brand: 'Teko', sans-serif, var(--font-family-system);
+	--font-family-body: neue-haas-unica, var(--font-family-system);
+	--font-family-brand: neue-haas-unica, sans-serif, var(--font-family-system);
 
 	--font-size-1: 0.75rem;
 	--font-size-2: 0.875rem;
@@ -203,7 +203,8 @@
 html,
 body {
 	min-height: 100%;
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
+	overflow-x: clip;
 }
 
 html {
@@ -253,12 +254,12 @@ h6 {
 	/* line-height: var(--font-line-height-2); */
 	font-family: var(--font-family-brand);
 	font-weight: var(--font-weight-4);
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 }
 
 p {
-	font-family: var(--font-family-body);
-	font-size: var(--font-size-2);
+	/* font-family: var(--font-family-body); */
+	/* font-size: var(--font-size-2); */
 	/* text-wrap: pretty; */
 }
 
