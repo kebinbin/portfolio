@@ -1,9 +1,9 @@
 ---
-import App from "../../components/Pages/App.astro";
+import App from '../../components/pages/home/App.astro'
 
 //use I18n file!!!
 export function getStaticPaths() {
-  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+	return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }]
 }
 ---
 
