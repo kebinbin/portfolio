@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { iconPaths } from './IconPaths'
+
+interface Props {
+	icon: keyof typeof iconPaths
+	color?: string
+	size?: string
+	viewBox?: string
+}
+
+const { color = 'currentcolor', icon, size } = Astro.props
+const iconPath = iconPaths[icon]
+
+const attrs: HTMLAttributes<'svg'> = {}
+if (size) attrs.style = { '--size': size }
+
+const { viewBox } = Astro.props
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	width="40"
+	height="40"
+	viewBox={viewBox || '0 0 256 256'}
+	{/* this needs to be removed, fix the icons viewBox */}
+	aria-hidden="true"
+	stroke={color}
+	stroke-width="6"
+	fill={color}
+	{...attrs}
+>
+	<g set:html={iconPath} />
+</svg>
+
+<style>
+	svg {
+		vertical-align: middle;
+		width: var(--size, 1em);
+		height: var(--size, 1em);
+	}
+</style>
