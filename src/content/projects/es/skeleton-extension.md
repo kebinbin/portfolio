@@ -3,7 +3,7 @@ title: Skeleton Extension
 role: Software Development
 period: 2024
 publishDate: 2024-03-02 00:00:00
-img: /assets/case-study-2.png
+img: /assets/case-study-2-16-9.webp
 img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
