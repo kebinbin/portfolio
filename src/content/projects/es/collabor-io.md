@@ -3,7 +3,7 @@ title: Travellography
 role: Web Design & Development
 period: Soon
 publishDate: 2024-06-21 00:00:00
-img: /assets/case-study-1.png
+img: /assets/case-study-1-16-9.webp
 img_alt: A big glacier in a sunny day with some clouds with photographers walking.
 description: |
   Designed and developed a web application for CompanyX to allow users be able to register for Photography travel tours to increase customer number.
