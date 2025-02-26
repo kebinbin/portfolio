@@ -45,7 +45,7 @@ const textLinks: { label: string; href: string }[] = [
 			<NavMenuFooter noScript />
 		</noscript>
 	</div>
-	<div id="menu-content-js" class="absolute inset-x-0 [&.js-enabled]:md:contents" hidden>
+	<div id="menu-content-js" class="absolute inset-x-0 md:[&.js-enabled]:contents" hidden>
 		<NavMenuItems links={textLinks} />
 		<NavMenuFooter />
 	</div>
