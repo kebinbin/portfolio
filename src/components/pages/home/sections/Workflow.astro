@@ -5,34 +5,46 @@ const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 ---
 
-<section class="container mb-64">
+<section class="container py-24 lg:py-32">
 	<header>
 		<a id="workflow"
-			><h2 class="text-start text-stone-800 dark:text-stone-400">
-				<span
-					class="inline-block text-7xl font-medium leading-20 tracking-tighter md:text-9xl md:leading-27"
-					>{i18n.workflow.h2.start}</span
+			><h2 class="text-start">
+				<div
+					class="mb-2 text-[clamp(3rem,7.5vw,8rem)] leading-[.8em] font-semibold tracking-tighter xl:mb-4"
 				>
-				<span class="block"></span>
+					<span>{i18n.workflow.h2['1']}</span>
+					<span class="sr-only sm:not-sr-only">{i18n.workflow.h2['2']}</span>
+				</div>
 				<span
-					class="inline-block text-5xl font-thin leading-10 tracking-tightest md:text-7xl md:leading-18"
-					>{i18n.workflow.h2.end}</span
+					class="text-[clamp(1.75rem,4.5vw,5rem)] leading-[.8em] font-extralight tracking-tight text-stone-600 dark:text-stone-500"
+					>{i18n.workflow.h2['3']}</span
 				>
 			</h2></a
 		>
 	</header>
-	<div class="mt-32 grid grid-cols-4 gap-x-10 gap-y-20">
+	<div
+		class="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-32 xl:grid-cols-3 2xl:gap-x-8"
+	>
 		{
 			i18n.workflow.stages.map((stage, index) => (
 				<div class="flex flex-col gap-1">
-					<span class="text-5xl font-bold">{`0${index + 1}${stage.footnote ? '*' : ''}`}</span>
-					<h3 class="text-xl font-bold">{stage.title}</h3>
-					<p>{stage.description}</p>
+					<div class="mb-4 border-b border-stone-900 pb-3 dark:border-stone-400">
+						<span class="text-4xl leading-4 font-medium tracking-tight lg:text-6xl">{`0${index + 1}${stage.footnote ? '*' : ''}`}</span>
+						<h3 class="text-xl leading-4 font-semibold tracking-tight lg:text-2xl">
+							{stage.title}
+						</h3>
+					</div>
+					<p class="text-base leading-7 lg:pr-29 lg:text-lg xl:pr-0 2xl:pr-18">
+						{stage.description}
+					</p>
 				</div>
 			))
 		}
 	</div>
-	<p id="workflow-footnote" class="mt-36 text-end text-sm leading-7 text-stone-500">
+	<p
+		id="workflow-footnote"
+		class="mt-16 text-start text-xs text-stone-600 sm:text-sm md:mt-36 md:text-end dark:text-stone-500"
+	>
 		{i18n.workflow.footnote}
 	</p>
 </section>

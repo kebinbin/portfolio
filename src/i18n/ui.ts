@@ -10,6 +10,8 @@ export const ui = {
 	en: {
 		'nav.brand': '.k',
 		'nav.projects': 'Projects',
+		'nav.experience': 'Experience',
+		'nav.workflow': 'How I work',
 		'nav.about': 'About',
 		'nav.contact': 'Contact',
 		'nav.lang': 'ES',
@@ -18,6 +20,8 @@ export const ui = {
 	},
 	es: {
 		'nav.projects': 'Proyectos',
+		'nav.experience': 'Experiencia',
+		'nav.workflow': 'Cómo trabajo',
 		'nav.about': 'Acerca',
 		'nav.contact': 'Contacto',
 		'nav.lang': 'EN'

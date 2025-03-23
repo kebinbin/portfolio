@@ -1,6 +1,6 @@
 ---
-title: Skeleton Layout Chrome Extension
-role: Software Development
+title: Skeleton Extension
+role: Development
 period: 2024
 publishDate: 2024-03-02 00:00:00
 img: /assets/case-study-3-16-9.webp

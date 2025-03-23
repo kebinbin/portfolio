@@ -1,6 +1,6 @@
 ---
 title: Skeleton Extension
-role: Software Development
+role: Development
 period: 2024
 publishDate: 2024-03-02 00:00:00
 img: /assets/case-study-2-16-9.webp

@@ -5,37 +5,35 @@ const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 ---
 
-<section class="container mb-64">
+<section class="container py-24 lg:py-32">
 	<header>
-		<a id="experiences"
-			><h2
-				class="text-start text-7xl font-medium leading-20 tracking-tighter text-stone-800 md:text-9xl md:leading-27 dark:text-stone-400"
-			>
-				<span class="inline-block">{i18n.experience.h2.start}</span>
-				<span class="block"></span>
-				<span class="inline-block">{i18n.experience.h2.middle}</span>
-				<span class="block"></span>
-				<span class="inline-block">{i18n.experience.h2.end}</span>
+		<a id="experience"
+			><h2 class="text-start text-[clamp(3rem,7.5vw,8rem)] leading-[.8em] font-semibold">
+				<span class="tracking-tightest block">{i18n.experience.h2['1']}</span>
+				<span class="inline tracking-tighter sm:block">{i18n.experience.h2['2']}</span>
+				<span class="tracking-tighter">{i18n.experience.h2['3']}</span>
 			</h2></a
 		>
 	</header>
-	<div class="mt-32 flex items-end justify-between">
-		<div class="flex max-w-prose flex-col gap-6">
+	<div class="mt-16 lg:mt-32">
+		<div class="mb-20 flex max-w-prose flex-col gap-y-12">
 			{
 				i18n.experience.experiences.map((experience) => (
 					<div class="flex flex-col gap-1">
-						<h3 class="text-xl font-bold">{experience.company}</h3>
-						<span class="font-light">{`${experience.role} · ${experience.dates}`}</span>
-						<p>{experience.paragraph}</p>
+						<div>
+							<h3 class="text-xl leading-5 font-semibold tracking-tight lg:text-2xl lg:leading-7">
+								{experience.company}
+							</h3>
+							<span class="text-sm font-medium text-stone-400 lg:text-base dark:text-stone-700">{`${experience.role} · ${experience.dates}`}</span>
+						</div>
+						<p class="text-base leading-7 lg:text-lg">{experience.paragraph}</p>
 					</div>
 				))
 			}
 		</div>
-		<div class="sticky bottom-10">
-			<span class="mr-1 font-light text-stone-500">{i18n.experience.cta.question}</span>
-			<a href={`#downloadresume`} class="font-semibold text-stone-500 underline"
-				>{i18n.experience.cta.link}</a
-			>
+		<div class="sticky bottom-0 bg-stone-100 py-4 text-end dark:bg-stone-950">
+			<span class="mr-1 font-light">{i18n.experience.cta.question}</span>
+			<a href={`#downloadresume`} class="font-semibold underline">{i18n.experience.cta.link}</a>
 		</div>
 	</div>
 </section>
