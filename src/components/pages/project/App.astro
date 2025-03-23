@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import CTA from '../../ui/CTA.astro'
+import CTA from '../home/sections/CTA.astro'
 
 const { project } = Astro.props
 const { slug } = project
@@ -16,7 +16,7 @@ const [, projectSlug] = slug.split('/')
 		class="aspect-video size-full object-cover"
 		transition:name={`${projectSlug}-hero-img`}
 	/>
-	<main class="container prose prose-lg prose-stone dark:prose-invert">
+	<main class="prose prose-lg prose-stone dark:prose-invert container">
 		<slot />
 	</main>
 	<CTA />

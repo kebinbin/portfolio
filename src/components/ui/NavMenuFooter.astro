@@ -10,14 +10,20 @@ const { noScript = false } = Astro.props
 ---
 
 <div
-	class="flex justify-between gap-3 bg-stone-200 p-6 md:items-center md:justify-end md:bg-transparent md:p-0 dark:bg-stone-900 md:dark:bg-transparent"
+	class="relative left-1/2 w-dvw max-w-none -translate-x-1/2 lg:static lg:left-0 lg:w-full lg:translate-0"
 >
-	<LanguagePicker />
-	{
-		!noScript && (
-			<div class="flex items-center">
-				<ThemeToggle />
-			</div>
-		)
-	}
+	<div
+		class="border-y border-solid border-stone-300 bg-stone-100 py-6 lg:border-0 lg:bg-transparent lg:p-0 dark:border-stone-800 dark:bg-stone-950 lg:dark:bg-transparent"
+	>
+		<div class="container flex justify-between gap-3 lg:items-center lg:justify-end lg:px-0">
+			<LanguagePicker />
+			{
+				!noScript && (
+					<div class="flex items-center">
+						<ThemeToggle />
+					</div>
+				)
+			}
+		</div>
+	</div>
 </div>

@@ -12,17 +12,24 @@ const projects = (await getCollection('projects'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4)
 
-const gridSpan = [7, 5, 5, 7]
+const gridSpan = [8, 4, 4, 8]
+// const gridSpan = [7, 5, 5, 7]
 ---
 
-<section class="mb-64">
+<section class="px-6 pb-16 lg:container lg:pb-32">
 	<header>
 		<a id="projects"><h2 class="sr-only">Selected Projects</h2></a>
 	</header>
-	<div class="mx-6 grid grid-cols-12 gap-y-12 lg:gap-x-6 lg:gap-y-28">
+	<div class="grid grid-cols-12 gap-x-6 gap-y-12 xl:gap-y-28 2xl:gap-x-8">
 		{
 			projects.map((project, index) => (
-				<div class={`col-span-12 ${gridSpan[index] === 7 ? 'lg:col-span-7' : 'lg:col-span-5'}`}>
+				<div
+					class={`relative col-span-12 lg:col-span-6 ${gridSpan[index] === 8 ? 'xl:col-span-8' : 'xl:col-span-4'} ${
+						index % 2 === 0
+							? 'lg:-ml-[calc((100vw-var(--breakpoint-lg)+2*4rem)/2-24px)] xl:-ml-[calc((100vw-var(--breakpoint-xl)+2*4rem)/2-24px)] 2xl:-ml-[calc((100vw-var(--breakpoint-2xl)+2*6rem)/2-32px)]'
+							: 'lg:-mr-[calc((100vw-var(--breakpoint-lg)+2*4rem)/2-24px)] xl:-mr-[calc((100vw-var(--breakpoint-xl)+2*4rem)/2-24px)] 2xl:-mr-[calc((100vw-var(--breakpoint-2xl)+2*6rem)/2-32px)]'
+					}`}
+				>
 					<ProjectPreview project={project} />
 				</div>
 			))

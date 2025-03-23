@@ -10,25 +10,24 @@ const t = useTranslations(lang)
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
 	{ label: t('nav.projects'), href: `/${lang}/#projects` },
+	{ label: t('nav.experience'), href: `/${lang}/#experience` },
+	{ label: t('nav.workflow'), href: `/${lang}/#workflow` },
 	{ label: t('nav.about'), href: `/${lang}/#about` },
 	{ label: t('nav.contact'), href: `/${lang}/#contact` }
 ]
 ---
 
 <nav
-	class="relative z-50 my-12 px-6 font-brand font-medium md:container md:grid md:grid-cols-nav md:items-center md:gap-4"
+	class="font-brand lg:grid-cols-nav relative z-50 container py-6 font-medium sm:py-12 lg:grid lg:items-center lg:gap-24 xl:gap-28"
 >
-	<div class="flex justify-between gap-2 md:p-0">
-		<a
-			href=`/${lang}/`
-			class="flex items-center gap-2 text-5xl font-bold lowercase text-stone-950 dark:text-stone-50"
-		>
+	<div class="flex justify-between gap-2 lg:p-0">
+		<a href=`/${lang}/` class="flex items-center gap-2 text-5xl font-black lowercase">
 			{t('nav.brand')}
 		</a>
 		<menu-button class="flex items-center">
 			<template>
 				<button
-					class="relative flex border-0 p-0 text-2xl aria-expanded:text-stone-600 [&[hidden]]:hidden"
+					class="relative flex border-0 p-0 text-2xl hover:text-stone-800 focus:text-stone-950 aria-expanded:text-stone-500 dark:hover:text-stone-400 dark:focus:text-stone-300 dark:aria-expanded:text-stone-700 [&[hidden]]:hidden"
 					aria-expanded="false"
 				>
 					<span class="sr-only">Menu</span>
@@ -37,7 +36,7 @@ const textLinks: { label: string; href: string }[] = [
 			</template>
 		</menu-button>
 	</div>
-	<div class="absolute inset-x-0 md:contents">
+	<div class="absolute inset-x-0 lg:contents">
 		<noscript>
 			<NavMenuItems links={textLinks} />
 		</noscript>
@@ -45,7 +44,7 @@ const textLinks: { label: string; href: string }[] = [
 			<NavMenuFooter noScript />
 		</noscript>
 	</div>
-	<div id="menu-content-js" class="absolute inset-x-0 md:[&.js-enabled]:contents" hidden>
+	<div id="menu-content-js" class="absolute inset-x-0 lg:[&.js-enabled]:contents" hidden>
 		<NavMenuItems links={textLinks} />
 		<NavMenuFooter />
 	</div>
@@ -80,7 +79,7 @@ const textLinks: { label: string; href: string }[] = [
 				setExpanded(e.matches)
 				btn.hidden = e.matches
 			}
-			const mediaQueries = window.matchMedia('(min-width: 768px)')
+			const mediaQueries = window.matchMedia('(min-width: 1024px)')
 			handleViewports(mediaQueries)
 			mediaQueries.addEventListener('change', handleViewports)
 		}
