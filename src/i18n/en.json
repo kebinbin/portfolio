@@ -1,194 +1,199 @@
 {
-	"hero": {
-		"h1": {
-			"1": "Fullstack",
-			"2": "Software",
-			"3": "Engineer_"
-		},
-		"name": {
-			"first": "Kevin",
-			"middle": "A.",
-			"last": "Castillo"
-		},
-		"p": "I'm a software engineer with experience in corporate environments, now working independently on front-end design and development. Check out my work, and feel free to reach out if you're interested in collaborating.",
-		"cta": {
-			"contact": "Contact me",
-			"work": "See my work"
-		},
-		"aside": {
-			"availableFor": "Available for offers and collaborations"
-		}
-	},
-	"experience": {
-		"h2": {
-			"1": "Companies &",
-			"2": "institutions I've",
-			"3": "worked with"
-		},
-		"experiences": [
-			{
-				"company": "Freelance",
-				"role": "Full-Stack Developer & Designer",
-				"dates": "Sep 2023 - Present",
-				"paragraph": "Currently designing and building case studies portfolio using Astro, React and Tailwind. Designed and developed several ReactJS components for ClashStats, a web application built on NextJS."
+	"home": {
+		"hero": {
+			"h1": {
+				"1": "Fullstack",
+				"2": "Software",
+				"3": "Engineer_"
 			},
-			{
-				"company": "Hewlett Packard Enterprise",
-				"role": "Software Engineer",
-				"dates": "Jun 2019 - Aug 2022",
-				"paragraph": "Led the development of new features, enhancements, and bug-fixes for a micro-services app used in HPE-associated factories world-wide built using React, Docker, Java, Spring, ActiveMQ, and more. Implemented solutions for production issues and developed multiple UI components."
+			"name": {
+				"first": "Kevin",
+				"middle": "A.",
+				"last": "Castillo"
 			},
-			{
-				"company": "Naluum Institute",
-				"role": "Web Designer & Developer",
-				"dates": "Nov 2018 - Dec 2019",
-				"paragraph": "Designed and developed the website for an international event being hosted by the institute for informational purposes and to automatically capture volunteer’s data. Developed a plugin to integrate WordPress with GoogleSheets to generate official record of event registration."
+			"p": "I'm a software engineer with experience in corporate environments, now working independently on front-end design and development. Check out my work, and feel free to reach out if you're interested in collaborating.",
+			"cta": {
+				"contact": "Contact me",
+				"work": "See my work"
 			},
-			{
-				"company": "Hewlett Packard",
-				"role": "Software Engineer",
-				"dates": "Jun 2015 - Aug 2016",
-				"paragraph": "Migrated features from the UI of a Test Executive application from GWT to ReactJS with FLUX. Re-designed many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
-			},
-			{
-				"company": "Sysdat Crest UPRM ",
-				"role": "Engineering Student",
-				"dates": "Jan 2015 - May 2015",
-				"paragraph": "Designed and deployed a normalized relational database using MySQL, developed front-end (AngularJS) features and back-end (PHP) functionality such as role-based access control, data input, sign-up, login, session management, menu’s according to role, and more."
+			"aside": {
+				"availableFor": "Available for offers and collaborations"
 			}
-		],
-		"cta": {
-			"question": "Want to know more?",
-			"link": "Download my resume"
-		}
-	},
-	"workflow": {
-		"h2": {
-			"1": "My workflow",
-			"2": "journey",
-			"3": "from design to deployment"
 		},
-		"stages": [
-			{
-				"title": "Project request",
-				"description": "Submit your project details to me via email so I can get an idea of what you are looking for. Expect a response within 48hrs to schedule a meeting to discuss your project.",
-				"footnote": false
+		"experience": {
+			"h2": {
+				"1": "Companies &",
+				"2": "institutions I've",
+				"3": "worked with"
 			},
-			{
-				"title": "First meeting",
-				"description": "Let’s know each other and see if we are a good fit to work together. This is a moment to discuss your goals, requirements and next steps in our journey collaborating together.",
-				"footnote": false
-			},
-			{
-				"title": "Proposal",
-				"description": "Once I have gathered enough information about the project requirements, I will send you a proposal that will document the next steps, estimated dates and the cost upfront.",
-				"footnote": false
-			},
-			{
-				"title": "UX/UI design",
-				"description": "After studying the provided material, I will design the UI. Regular updates and communication are essential aspects of my workflow, I will keep you in the loop.",
-				"footnote": true
-			},
-			{
-				"title": "Design agreement",
-				"description": "I will send to you the designed product for you to review.  If you want any updates, you have up to two free revisions, then a revision fee will be added depending on the changes.",
-				"footnote": true
-			},
-			{
-				"title": "Software development",
-				"description": "In this stage we will start the development and implementation of everything that was agreed after the design or proposal phases.",
-				"footnote": false
-			},
-			{
-				"title": "Product deployment",
-				"description": "We are ready to deploy and launch your project into production and make it available for your users / customers to use.",
-				"footnote": false
-			},
-			{
-				"title": "Guidance meeting",
-				"description": "After the product’s launch, let’s meet to guide you on how to use the application and so you can ask any questions you have.",
-				"footnote": false
+			"experiences": [
+				{
+					"company": "Freelance",
+					"role": "Full-Stack Developer & Designer",
+					"dates": "Sep 2023 - Present",
+					"paragraph": "Currently designing and building case studies portfolio using Astro, React and Tailwind. Designed and developed several ReactJS components for ClashStats, a web application built on NextJS."
+				},
+				{
+					"company": "Hewlett Packard Enterprise",
+					"role": "Software Engineer",
+					"dates": "Jun 2019 - Aug 2022",
+					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a micro-services app used in HPE-associated factories world-wide built using React, Docker, Java, Spring, ActiveMQ, and more. Implemented solutions for production issues and developed multiple UI components."
+				},
+				{
+					"company": "Naluum Institute",
+					"role": "Web Designer & Developer",
+					"dates": "Nov 2018 - Dec 2019",
+					"paragraph": "Designed and developed the website for an international event being hosted by the institute for informational purposes and to automatically capture volunteer’s data. Developed a plugin to integrate WordPress with GoogleSheets to generate official record of event registration."
+				},
+				{
+					"company": "Hewlett Packard",
+					"role": "Software Engineer",
+					"dates": "Jun 2015 - Aug 2016",
+					"paragraph": "Migrated features from the UI of a Test Executive application from GWT to ReactJS with FLUX. Re-designed many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
+				},
+				{
+					"company": "Sysdat Crest UPRM ",
+					"role": "Engineering Student",
+					"dates": "Jan 2015 - May 2015",
+					"paragraph": "Designed and deployed a normalized relational database using MySQL, developed front-end (AngularJS) features and back-end (PHP) functionality such as role-based access control, data input, sign-up, login, session management, menu’s according to role, and more."
+				}
+			],
+			"cta": {
+				"question": "Want to know more?",
+				"link": "Download my resume"
 			}
-		],
-		"footnote": "*The design and agreement of it (stages 4-5) can be omitted if you already have a design for your project."
-	},
-	"about": {
-		"h2": {
-			"1": "I craft",
-			"2": "digital magic",
-			"3": "using code"
 		},
-		"bio": {
-			"p1": "I’m a software engineer with over 5 years of experience, ranging from small non-profits to large tech companies with ambitious goals.",
-			"p2": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match.",
-			"p3": "Outside of work, I find inspiration through walking on nature, photography, traveling, and spending time in my garden. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
+		"workflow": {
+			"h2": {
+				"1": "My workflow",
+				"2": "journey",
+				"3": "from design to deployment"
+			},
+			"stages": [
+				{
+					"title": "Project request",
+					"description": "Submit your project details to me via email so I can get an idea of what you are looking for. Expect a response within 48hrs to schedule a meeting to discuss your project.",
+					"footnote": false
+				},
+				{
+					"title": "First meeting",
+					"description": "Let’s know each other and see if we are a good fit to work together. This is a moment to discuss your goals, requirements and next steps in our journey collaborating together.",
+					"footnote": false
+				},
+				{
+					"title": "Proposal",
+					"description": "Once I have gathered enough information about the project requirements, I will send you a proposal that will document the next steps, estimated dates and the cost upfront.",
+					"footnote": false
+				},
+				{
+					"title": "UX/UI design",
+					"description": "After studying the provided material, I will design the UI. Regular updates and communication are essential aspects of my workflow, I will keep you in the loop.",
+					"footnote": true
+				},
+				{
+					"title": "Design agreement",
+					"description": "I will send to you the designed product for you to review.  If you want any updates, you have up to two free revisions, then a revision fee will be added depending on the changes.",
+					"footnote": true
+				},
+				{
+					"title": "Software development",
+					"description": "In this stage we will start the development and implementation of everything that was agreed after the design or proposal phases.",
+					"footnote": false
+				},
+				{
+					"title": "Product deployment",
+					"description": "We are ready to deploy and launch your project into production and make it available for your users / customers to use.",
+					"footnote": false
+				},
+				{
+					"title": "Guidance meeting",
+					"description": "After the product’s launch, let’s meet to guide you on how to use the application and so you can ask any questions you have.",
+					"footnote": false
+				}
+			],
+			"footnote": "*The design and agreement of it (stages 4-5) can be omitted if you already have a design for your project."
 		},
-		"education": {
-			"h3": "UPR Mayagüez RUM",
-			"degree": "Computer Engineering",
-			"dates": "2009 - 2015",
-			"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
+		"about": {
+			"h2": {
+				"1": "I craft",
+				"2": "digital magic",
+				"3": "using code"
+			},
+			"bio": {
+				"p1": "I’m a software engineer with over 5 years of experience, ranging from small non-profits to large tech companies with ambitious goals.",
+				"p2": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match.",
+				"p3": "Outside of work, I find inspiration through walking on nature, photography, traveling, and spending time in my garden. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
+			},
+			"education": {
+				"h3": "UPR Mayagüez RUM",
+				"degree": "Computer Engineering",
+				"dates": "2009 - 2015",
+				"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
+			},
+			"technologies": {
+				"h3": "Technologies I use",
+				"list": [
+					"React",
+					"JavaScript/TypeScript",
+					"HTML",
+					"CSS/SASS",
+					"Astro",
+					"NextJS",
+					"Jest",
+					"REST",
+					"SQLServer",
+					"MySQL",
+					"PostgreSQL",
+					"Object Oriented Programming",
+					"Java",
+					"Spring",
+					"PHP",
+					"ActiveMQ",
+					"WebSocket",
+					"Docker",
+					"Micro-services",
+					"Flux",
+					"Git",
+					"Jenkins",
+					"Jira",
+					"Linux",
+					"Figma",
+					"Lightroom",
+					"WordPress",
+					"C",
+					"ASM"
+				]
+			},
+			"services": {
+				"h3": "Things I can help you with",
+				"list": [
+					"Front-end development",
+					"REST API",
+					"Real-time apps",
+					"Back-end development",
+					"Object-oriented programming",
+					"Relational databases",
+					"Web design",
+					"CI/CD pipelines"
+				]
+			},
+			"cta": {
+				"question": "Want to know more?",
+				"link": "Download my resume"
+			}
 		},
-		"technologies": {
-			"h3": "Technologies I enjoy using",
-			"list": [
-				"React",
-				"JavaScript/TypeScript",
-				"HTML",
-				"CSS/SASS",
-				"Astro",
-				"NextJS",
-				"Jest",
-				"REST",
-				"SQLServer",
-				"MySQL",
-				"PostgreSQL",
-				"Object Oriented Programming",
-				"Java",
-				"Spring",
-				"PHP",
-				"ActiveMQ",
-				"WebSocket",
-				"Docker",
-				"Micro-services",
-				"Flux",
-				"Git",
-				"Jenkins",
-				"Jira",
-				"Linux",
-				"Figma",
-				"Lightroom",
-				"WordPress",
-				"C",
-				"ASM"
-			]
+		"contact": {
+			"h2": {
+				"1": "Let's work together."
+			},
+			"paragraph": "Shoot me a note with your project details at "
 		},
-		"services": {
-			"h3": "Things I can help you with",
-			"list": [
-				"Front-end development",
-				"REST API",
-				"Real-time apps",
-				"Back-end development",
-				"Object-oriented programming",
-				"Relational databases",
-				"Web design",
-				"CI/CD pipelines"
-			]
-		},
-		"cta": {
-			"question": "Want to know more?",
-			"link": "Download my resume"
+		"footer": {},
+		"metadata": {
+			"email": "kevin.castillo@works.com"
 		}
 	},
-	"contact": {
-		"h2": {
-			"1": "Let's work together."
-		},
-		"paragraph": "Shoot me a note with your project details at "
-	},
-	"footer": {},
-	"metadata": {
-		"email": "kevin.castillo@works.com"
+	"404": {
+		"p": "This page could not be found."
 	}
 }
