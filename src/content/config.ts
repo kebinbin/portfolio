@@ -5,6 +5,7 @@ export const collections = {
 		type: 'content',
 		schema: z.object({
 			title: z.string(),
+			type: z.string(),
 			role: z.string(),
 			period: z.string(),
 			description: z.string(),

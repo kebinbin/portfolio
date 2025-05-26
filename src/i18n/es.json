@@ -1,194 +1,202 @@
 {
-	"hero": {
-		"h1": {
-			"1": "Ingeniero de",
-			"2": "Software",
-			"3": "Fullstack_"
-		},
-		"name": {
-			"first": "Kevin",
-			"middle": "A.",
-			"last": "Castillo"
-		},
-		"p": "Soy ingeniero de software con experiencia en ambientes corporativos, al momento trabajo de forma independiente en diseño y desarrollo front-end. Vea mi trabajo y no dude en contacterme si le interesa que colaboremos.",
-		"cta": {
-			"contact": "Contácteme",
-			"work": "Vea mi trabajo"
-		},
-		"aside": {
-			"availableFor": "Disponible para ofertas y colaboraciones"
-		}
-	},
-	"experience": {
-		"h2": {
-			"1": "Compañías &",
-			"2": "instituciones en",
-			"3": "donde trabajé"
-		},
-		"experiences": [
-			{
-				"company": "Freelance",
-				"role": "Desarrollador & Diseñador",
-				"dates": "Sep 2023 - Presente",
-				"paragraph": "Actualmente diseñando y construyendo un portafolio de casos de estudio utilizando Astro, React y Tailwind. Diseñé y desarrollé varios componentes de ReactJS para ClashStats, una aplicación web en NextJS."
+	"home": {
+		"hero": {
+			"h1": {
+				"1": "Ingeniero de",
+				"2": "Software",
+				"3": "Fullstack_"
 			},
-			{
-				"company": "Hewlett Packard Enterprise",
-				"role": "Ingeniero de Software",
-				"dates": "Jun 2019 - Ago 2022",
-				"paragraph": "Lideré el desarrollo de nuevas funciones, mejoras y correcciones de errores para una aplicación de micro-servicios utilizada en fábricas asociadas a HPE en todo el mundo creada con React, Docker, Java, Spring, ActiveMQ y más. Implementé soluciones para problemas de producción y desarrollé múltiples componentes de UI."
+			"name": {
+				"first": "Kevin",
+				"middle": "A.",
+				"last": "Castillo"
 			},
-			{
-				"company": "Naluum Institute",
-				"role": "Diseñador Web & Desarrollador",
-				"dates": "Nov 2018 - Dic 2019",
-				"paragraph": "Diseñé y desarrollé el sitio web para un evento internacional organizado por el instituto con fines informativos y para capturar automáticamente los datos de los voluntarios. Desarrollé un plugin para integrar WordPress con GoogleSheets para generar un registro oficial de registro de eventos."
+			"p": "Soy ingeniero de software con experiencia en ambientes corporativos. Actualmente busco oportunidades full-time o freelance en desarrollo front-end. Vea mi trabajo y no dude en contacterme si le interesa que colaboremos.",
+			"cta": {
+				"contact": "Contácteme",
+				"work": "Vea mi trabajo"
 			},
-			{
-				"company": "Hewlett Packard",
-				"role": "Ingeniero de Software",
-				"dates": "Jun 2015 - Ago 2016",
-				"paragraph": "Migré varias funciones de la interfaz de usuario de una aplicación Test Executive de GWT a ReactJS con FLUX. Rediseñé multiples ‘views’, implementé nuevas funcionalidades y creé componentes reutilizables en React. Investigué, identifiqué y solucioné problemas de rendimiento relacionados al ‘rendering’ y a las actualizaciones en tiempo real."
-			},
-			{
-				"company": "Sysdat Crest UPRM ",
-				"role": "Estudiante de Ingeniería",
-				"dates": "Ene 2015 - May 2015",
-				"paragraph": "Diseñé e implementé una base de datos relacional normalizada (MySQL), desarrollé funcionalidades en el front-end (AngularJS) y backend (PHP) como control de acceso basado en roles, entrada de datos, registro, inicio de sesión, administración de sesiones, menús según rol y más."
+			"aside": {
+				"availableFor": "Disponible para ofertas y colaboraciones"
 			}
-		],
-		"cta": {
-			"question": "¿Desea saber más?",
-			"link": "Descargue mi resumé"
-		}
-	},
-	"workflow": {
-		"h2": {
-			"1": "Mi proceso",
-			"2": "de trabajo",
-			"3": "desde diseño al despliegue"
 		},
-		"stages": [
-			{
-				"title": "Solicitud de proyecto",
-				"description": "Envíe los detalles de su proyecto por correo electrónico para tener una idea de lo que está buscando. Espere una respuesta dentro de 48 horas para programar una reunión para discutir su proyecto.",
-				"footnote": false
+		"experience": {
+			"h2": {
+				"1": "Compañías &",
+				"2": "instituciones en",
+				"3": "donde trabajé"
 			},
-			{
-				"title": "Primera reunión",
-				"description": "Conozcámonos y veamos si somos aptos para trabajar juntos. Este es el momento para discutir sus objetivos, requisitos y próximos pasos para nuestro viaje colaborando juntos.",
-				"footnote": false
-			},
-			{
-				"title": "Propuesta",
-				"description": "Una vez se haya recopilado suficiente información sobre los requisitos del proyecto, le enviaré una propuesta que documentará los próximos pasos, las fechas estimadas y el costo por adelantado.",
-				"footnote": false
-			},
-			{
-				"title": "Diseño UX/UI",
-				"description": "Después de estudiar el material proporcionado, diseñaré la interfaz de usuario. Las actualizaciones periódicas y la comunicación son aspectos esenciales de mi flujo de trabajo, lo mantendré informado.",
-				"footnote": true
-			},
-			{
-				"title": "Acuerdo de diseño",
-				"description": "Le enviaré el producto diseñado para que lo revise.  Si desea alguna actualización, tiene hasta dos revisiones gratuitas, luego se agregará una tarifa de revisión dependiendo de los cambios deseados.",
-				"footnote": true
-			},
-			{
-				"title": "Desarrollo de software",
-				"description": "En esta etapa iniciaremos el desarrollo y la implementación a nivel de software de todo lo acordado luego de las fases de diseño o de la propuesta acordada.",
-				"footnote": false
-			},
-			{
-				"title": "Despliegue del producto",
-				"description": "Estamos listos para implementar y lanzar su proyecto a producción y ponerlo a la disposición de sus usuarios / clientes.",
-				"footnote": false
-			},
-			{
-				"title": "Reunión de orientación",
-				"description": "Luego del lanzamiento del producto, nos reuniremos para guiarle sobre cómo usar la aplicación y para que pueda consultar cualquier duda que tenga.",
-				"footnote": false
+			"experiences": [
+				{
+					"company": "Freelance",
+					"role": "Desarrollador Full-Stack & Diseñador",
+					"dates": "Dec 2024 - Presente",
+					"paragraph": "Diseñé e implementé componentes de ReactJS para ClashStats, una web app para una startup construida con Next.js. Construí casos de estudio para fortalecer mi experiencia en front-end y en flujos de trabajo de diseño UI/UX. Exploré Astro, View Transitions API, Figma, y sistemas de diseño para mejorar el diseño de interfaces y la consistencia."
+				},
+				{
+					"company": "Hewlett Packard Enterprise",
+					"role": "Ingeniero de Software",
+					"dates": "Jun 2019 - Ago 2022",
+					"paragraph": "Lideré el desarrollo de nuevas funciones, mejoras y correcciones de errores para una aplicación de micro-servicios utilizada en fábricas asociadas a HPE en todo el mundo creada con React, Docker, Java, Spring, ActiveMQ y más. Identifiqué e implementé soluciones para problemas en producción. Diseñé y desarrollé multiples partes de la interfaz de la aplicación web usada para monitorear el estado de la applicación.  Optimizé y mantuve el proceso de CI/CD en Jenkins."
+				},
+				{
+					"company": "Naluum Institute",
+					"role": "Diseñador Web & Desarrollador",
+					"dates": "Nov 2018 - Dic 2019",
+					"paragraph": "Diseñé y desarrollé el sitio web para un evento internacional organizado por el instituto con fines informativos y para capturar automáticamente los datos de los voluntarios. Desarrollé un plugin para integrar WordPress con GoogleSheets para generar un registro oficial de registro de eventos."
+				},
+				{
+					"company": "Hewlett Packard",
+					"role": "Ingeniero de Software",
+					"dates": "Jun 2015 - Ago 2016",
+					"paragraph": "Migré varias funciones de la interfaz de usuario de una aplicación Test Executive de GWT a ReactJS con FLUX. Rediseñé multiples ‘views’, implementé nuevas funcionalidades y creé componentes reutilizables en React. Investigué, identifiqué y solucioné problemas de rendimiento relacionados al ‘rendering’ y a las actualizaciones en tiempo real."
+				},
+				{
+					"company": "Sysdat Crest UPRM ",
+					"role": "Estudiante de Ingeniería",
+					"dates": "Ene 2015 - May 2015",
+					"paragraph": "Diseñé e implementé una base de datos relacional normalizada (MySQL), desarrollé funcionalidades en el front-end (AngularJS) y backend (PHP) como control de acceso basado en roles, entrada de datos, registro, inicio de sesión, administración de sesiones, menús según rol y más."
+				}
+			],
+			"cta": {
+				"question": "¿Desea saber más?",
+				"link": "Descargue mi resumé"
 			}
-		],
-		"footnote": "*El diseño y el acuerdo de éste (etapas 4-5) se pueden omitir si ya tiene un diseño para su proyecto."
-	},
-	"about": {
-		"h2": {
-			"1": "Creo",
-			"2": "magia digital",
-			"3": "usando código"
 		},
-		"bio": {
-			"p1": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",
-			"p2": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Agiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar.",
-			"p3": "Fuera del trabajo, encuentro inspiración al caminar en la naturaleza, practicar fotografía, viajar y pasar tiempo en mi huerta. Mi curiosidad y hambre por nuevos conocimientos me impulsan a aprender e innovar constantemente. Para mí, la creatividad, el trabajo y el juego están profundamente conectados."
+		"workflow": {
+			"h2": {
+				"1": "Mi proceso",
+				"2": "de trabajo",
+				"3": "desde diseño al despliegue"
+			},
+			"stages": [
+				{
+					"title": "Solicitud de Proyecto",
+					"description": "Envíe los detalles de su proyecto por correo electrónico para tener una idea de lo que está buscando. Espere una respuesta dentro de 48 horas para programar una reunión para discutir su proyecto.",
+					"footnote": false
+				},
+				{
+					"title": "Primera Reunión",
+					"description": "Conozcámonos y veamos si somos aptos para trabajar juntos. Este es el momento para discutir sus objetivos, requisitos y próximos pasos para nuestro viaje colaborando juntos.",
+					"footnote": false
+				},
+				{
+					"title": "Propuesta",
+					"description": "Una vez se haya recopilado suficiente información sobre los requisitos del proyecto, le enviaré una propuesta que documentará los próximos pasos, las fechas estimadas y el costo por adelantado.",
+					"footnote": false
+				},
+				{
+					"title": "Diseño UX/UI",
+					"description": "Después de estudiar el material proporcionado, diseñaré la interfaz de usuario. Las actualizaciones periódicas y la comunicación son aspectos esenciales de mi flujo de trabajo, lo mantendré informado.",
+					"footnote": true
+				},
+				{
+					"title": "Acuerdo de Diseño",
+					"description": "Le enviaré el producto diseñado para que lo revise.  Si desea alguna actualización, tiene hasta dos revisiones gratuitas, luego se agregará una tarifa de revisión dependiendo de los cambios deseados.",
+					"footnote": true
+				},
+				{
+					"title": "Desarrollo de Software",
+					"description": "En esta etapa iniciaremos el desarrollo y la implementación a nivel de software de todo lo acordado luego de las fases de diseño o de la propuesta acordada.",
+					"footnote": false
+				},
+				{
+					"title": "Despliegue del Producto",
+					"description": "Estamos listos para implementar y lanzar su proyecto a producción y ponerlo a la disposición de sus usuarios / clientes.",
+					"footnote": false
+				},
+				{
+					"title": "Reunión de Orientación",
+					"description": "Luego del lanzamiento del producto, nos reuniremos para guiarle sobre cómo usar la aplicación y para que pueda consultar cualquier duda que tenga.",
+					"footnote": false
+				}
+			],
+			"footnote": {
+				"1": "Este es mi proceso personal, pero me adapto sin problema a metodologías como Agile o Scrum.",
+				"2": "El diseño y el acuerdo de éste (etapas 4-5) se pueden omitir si ya tiene un diseño para su proyecto."
+			}
 		},
-		"education": {
-			"h3": "UPR Mayagüez RUM",
-			"degree": "Ingeniería de Computadoras",
-			"dates": "2009 - 2015",
-			"paragraph": "BSCpE — Título de grado en Ingeniería en Computación enfocado en desarrollo de software."
+		"about": {
+			"h2": {
+				"1": "Creo",
+				"2": "magia digital",
+				"3": "usando código"
+			},
+			"bio": {
+				"p1": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",
+				"p2": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Agiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar.",
+				"p3": "Fuera del trabajo, encuentro inspiración al caminar en la naturaleza, practicar fotografía, viajar y pasar tiempo en mi huerta. Mi curiosidad y hambre por nuevos conocimientos me impulsan a aprender e innovar constantemente. Para mí, la creatividad, el trabajo y el juego están profundamente conectados."
+			},
+			"education": {
+				"h3": "UPR Mayagüez RUM",
+				"degree": "Ingeniería de Computadoras",
+				"dates": "2009 - 2015",
+				"paragraph": "BSCpE — Título de grado en Ingeniería en Computación enfocado en desarrollo de software."
+			},
+			"technologies": {
+				"h3": "Tecnologías que utilizo",
+				"list": [
+					"React",
+					"JavaScript/TypeScript",
+					"HTML",
+					"CSS/SASS",
+					"Astro",
+					"Next.js",
+					"Jest",
+					"REST",
+					"SQLServer",
+					"MySQL",
+					"PostgreSQL",
+					"Programación Orientada a Objetos",
+					"Java",
+					"Spring",
+					"PHP",
+					"ActiveMQ",
+					"WebSocket",
+					"Docker",
+					"Micro-Servicios",
+					"Flux",
+					"Git",
+					"Jenkins",
+					"Jira",
+					"Linux",
+					"Figma",
+					"Lightroom",
+					"WordPress",
+					"C",
+					"ASM"
+				]
+			},
+			"services": {
+				"h3": "En qué puedo ayudarle",
+				"list": [
+					"Desarrollo front-end",
+					"REST API",
+					"Real-time apps",
+					"Desarrollo de back-end",
+					"Programación Orientada a Objetos",
+					"Bases de datos relacionales",
+					"Diseño web",
+					"Procesos de CI/CD"
+				]
+			},
+			"cta": {
+				"question": "¿Desea saber más?",
+				"link": "Descargue mi resumé"
+			}
 		},
-		"technologies": {
-			"h3": "Tecnologías que disfruto usar",
-			"list": [
-				"React",
-				"JavaScript/TypeScript",
-				"HTML",
-				"CSS/SASS",
-				"Astro",
-				"NextJS",
-				"Jest",
-				"REST",
-				"SQLServer",
-				"MySQL",
-				"PostgreSQL",
-				"Programación Orientada a Objetos",
-				"Java",
-				"Spring",
-				"PHP",
-				"ActiveMQ",
-				"WebSocket",
-				"Docker",
-				"Micro-Servicios",
-				"Flux",
-				"Git",
-				"Jenkins",
-				"Jira",
-				"Linux",
-				"Figma",
-				"Lightroom",
-				"WordPress",
-				"C",
-				"ASM"
-			]
+		"contact": {
+			"h2": {
+				"1": "Trabajemos juntos."
+			},
+			"paragraph": "Envíeme una nota con los detalles de su proyecto a "
 		},
-		"services": {
-			"h3": "En qué puedo ayudarle",
-			"list": [
-				"Desarrollo front-end",
-				"REST API",
-				"Real-time apps",
-				"Desarrollo de back-end",
-				"Programación Orientada a Objetos",
-				"Bases de datos relacionales",
-				"Diseño web",
-				"Procesos de CI/CD"
-			]
-		},
-		"cta": {
-			"question": "¿Desea saber más?",
-			"link": "Descargue mi resumé"
+		"footer": {},
+		"metadata": {
+			"email": "hello@kevincastillo.io"
 		}
 	},
-	"contact": {
-		"h2": {
-			"1": "Trabajemos juntos."
-		},
-		"paragraph": "Envíeme una nota con los detalles de su proyecto a "
-	},
-	"footer": {},
-	"metadata": {
-		"email": "kevin.castillo@works.com"
+	"404": {
+		"p": "No se pudo encontrar esta página."
 	}
 }

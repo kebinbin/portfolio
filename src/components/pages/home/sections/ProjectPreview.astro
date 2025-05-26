@@ -12,22 +12,29 @@ const [, projectSlug] = slug.split('/')
 
 <article>
 	<a href={`projects/${projectSlug}`} class="flex flex-col gap-2 lg:gap-3">
-		<img
-			src={data.img}
-			alt={data.img_alt || ''}
-			loading="lazy"
-			decoding="async"
-			class="aspect-video size-full object-cover"
-			transition:name={`${projectSlug}-hero-img`}
-		/>
+		<div
+			class="w-full overflow-hidden rounded-[.5rem] border-5 border-stone-500/20 shadow-xl outline-1 outline-stone-950/25 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7 dark:border-stone-900/20 dark:outline-stone-100/5"
+		>
+			<img
+				src={data.img}
+				alt={data.img_alt || ''}
+				loading="lazy"
+				decoding="async"
+				class="aspect-video size-full object-cover"
+				transition:name={`${projectSlug}-hero-img`}
+			/>
+		</div>
+
 		<div
 			class="flex flex-row justify-between text-xl leading-5 font-semibold tracking-tight lg:text-2xl lg:leading-7"
 		>
 			<div class="capitalize">
-				<span class="mb-1 block sm:mb-0 sm:inline">{data.title}</span>
-				<span class="font-light">{data.role}</span>
+				<span transition:name={`${projectSlug}-title`} class="mb-1 block sm:mb-0 sm:inline"
+					>{data.title}</span
+				>
+				<span transition:name={`${projectSlug}-type`} class="font-light">{data.type}</span>
 			</div>
-			<div class="uppercase">{data.period}</div>
+			<div transition:name={`${projectSlug}-period`} class="uppercase">{data.period}</div>
 		</div>
 	</a>
 </article>
