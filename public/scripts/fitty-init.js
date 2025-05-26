@@ -10,6 +10,4 @@ function applyFitty() {
 document.addEventListener('DOMContentLoaded', applyFitty)
 
 // Re-run after Astro View Transitions finish
-document.addEventListener('astro:after-swap', () => {
-	applyFitty()
-})
+document.addEventListener('astro:after-swap', applyFitty)
