@@ -8,7 +8,7 @@ const [, projectSlug] = slug.split('/')
 ---
 
 <Layout>
-	<header class="container pt-8 pb-16 sm:pb-28 lg:pt-16 xl:pt-12">
+	<header class="container py-6">
 		<div class="flex flex-col gap-2 xl:gap-12">
 			<div class="overflow-hidden leading-none">
 				<h1
@@ -52,7 +52,7 @@ const [, projectSlug] = slug.split('/')
 			/>
 		</div>
 	</header>
-	<main class="container flex flex-col gap-20">
+	<main class="container flex flex-col gap-20 py-16">
 		<slot />
 	</main>
 	<CTA />
