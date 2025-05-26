@@ -1,6 +1,8 @@
 ---
 import { getI18N } from '../../../../i18n'
+import { getLangFromUrl } from '../../../../i18n/utils'
 
+const lang = getLangFromUrl(Astro.url)
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale }).home
 ---
@@ -10,8 +12,8 @@ const i18n = getI18N({ currentLocale }).home
 		<a id="experience"
 			><h2 class="text-start text-[clamp(3rem,7.5vw,8rem)] leading-[.8em] font-semibold">
 				<span class="tracking-tightest block">{i18n.experience.h2['1']}</span>
-				<span class="inline tracking-tighter sm:block">{i18n.experience.h2['2']}</span>
-				<span class="tracking-tighter">{i18n.experience.h2['3']}</span>
+				<span class="inline-block tracking-tighter sm:block">{i18n.experience.h2['2']}</span>
+				<span class="inline-block tracking-tighter">{i18n.experience.h2['3']}</span>
 			</h2></a
 		>
 	</header>
@@ -26,14 +28,16 @@ const i18n = getI18N({ currentLocale }).home
 							</h3>
 							<span class="text-sm font-medium text-stone-400 lg:text-base dark:text-stone-700">{`${experience.role} · ${experience.dates}`}</span>
 						</div>
-						<p class="text-base leading-7 lg:text-lg">{experience.paragraph}</p>
+						<p class="text-base leading-7 text-pretty lg:text-lg">{experience.paragraph}</p>
 					</div>
 				))
 			}
 		</div>
 		<div class="sticky bottom-0 bg-stone-100 py-4 text-end dark:bg-stone-950">
 			<span class="mr-1 font-light">{i18n.experience.cta.question}</span>
-			<a href={`#downloadresume`} class="font-semibold underline">{i18n.experience.cta.link}</a>
+			<a href={`/assets/resume/${lang}/resume-kevin.castillo.pdf`} class="font-semibold underline"
+				>{i18n.experience.cta.link}</a
+			>
 		</div>
 	</div>
 </section>

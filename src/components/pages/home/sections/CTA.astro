@@ -7,11 +7,15 @@ const i18n = getI18N({ currentLocale }).home
 <aside class="container flex h-[calc(100vh-7.625rem)] flex-col justify-center gap-24 text-center">
 	<a id="contact">
 		<h2 class="text-[clamp(4.5rem,9vw,10rem)] leading-[.8em] font-medium">
-			<span class="tracking-tightest">{i18n.contact.h2['1']}</span>
+			<span class="tracking-tightest inline-block">{i18n.contact.h2['1']}</span>
 		</h2>
 	</a>
 	<p class="text-stone-600 dark:text-stone-500">
 		{i18n.contact.paragraph}
-		<a class="underline" href="mailto:kevin@castillo.works">kevin@castillo.works</a>
+		<a
+			href={`mailto:${i18n.metadata.email}`}
+			class="underline hover:text-stone-900 focus:text-stone-950 dark:hover:text-stone-300 dark:focus:text-stone-200"
+			>{i18n.metadata.email}</a
+		>
 	</p>
 </aside>

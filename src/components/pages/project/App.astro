@@ -8,15 +8,51 @@ const [, projectSlug] = slug.split('/')
 ---
 
 <Layout>
-	<img
-		src={project.data.img}
-		alt={project.data.img_alt || ''}
-		loading="lazy"
-		decoding="async"
-		class="aspect-video size-full object-cover"
-		transition:name={`${projectSlug}-hero-img`}
-	/>
-	<main class="prose prose-lg prose-stone dark:prose-invert container">
+	<header class="container pt-8 pb-16 sm:pb-28 lg:pt-16 xl:pt-12">
+		<div class="flex flex-col gap-2 xl:gap-12">
+			<div class="overflow-hidden leading-none">
+				<h1
+					transition:name={`${projectSlug}-title`}
+					class="tracking-tightest fit-text -ml-1 text-start font-medium capitalize lg:-ml-2 xl:text-center"
+				>
+					{project.data.title}
+				</h1>
+			</div>
+			<div class="flex flex-col gap-6 xl:flex-row">
+				<div
+					class="flex w-full max-w-2xl flex-wrap content-start items-start gap-x-2 gap-y-0 text-xl md:text-2xl lg:text-3xl"
+				>
+					<span
+						transition:name={`${projectSlug}-type`}
+						class="tracking-tightest font-light text-stone-600 dark:text-stone-500"
+						>{project.data.type}</span
+					>
+					<span class="font-semibold tracking-tight"
+						>{project.data.role}<span transition:name={`${projectSlug}-period`}
+							>({project.data.period})</span
+						></span
+					>
+				</div>
+				<div class="w-full">
+					<p class="text-base leading-7 text-pretty text-stone-600 lg:text-lg dark:text-stone-500">
+						{project.data.description}
+					</p>
+				</div>
+			</div>
+		</div>
+		<div
+			class="mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 border-stone-500/20 shadow-xl outline-1 outline-stone-950/25 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7 dark:border-stone-900/20 dark:outline-stone-100/5"
+		>
+			<img
+				src={project.data.img}
+				alt={project.data.img_alt || ''}
+				loading="lazy"
+				decoding="async"
+				transition:name={`${projectSlug}-hero-img`}
+			/>
+		</div>
+	</header>
+	<main class="container flex flex-col gap-20">
 		<slot />
 	</main>
 	<CTA />

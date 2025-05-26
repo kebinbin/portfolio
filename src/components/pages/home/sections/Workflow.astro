@@ -12,39 +12,37 @@ const i18n = getI18N({ currentLocale }).home
 				<div
 					class="mb-2 text-[clamp(3rem,7.5vw,8rem)] leading-[.8em] font-semibold tracking-tighter xl:mb-4"
 				>
-					<span>{i18n.workflow.h2['1']}</span>
-					<span class="sr-only sm:not-sr-only">{i18n.workflow.h2['2']}</span>
+					<span class="inline-block">{i18n.workflow.h2['1']}</span>
+					<span class="sr-only inline-block sm:not-sr-only">{i18n.workflow.h2['2']}</span>
 				</div>
 				<span
-					class="text-[clamp(1.75rem,4.5vw,5rem)] leading-[.8em] font-extralight tracking-tight text-stone-600 dark:text-stone-500"
-					>{i18n.workflow.h2['3']}</span
+					class="inline-block text-[clamp(1.75rem,4.5vw,5rem)] leading-[.8em] font-extralight tracking-tight text-stone-600 dark:text-stone-500"
+					>{i18n.workflow.h2['3']}*</span
 				>
 			</h2></a
 		>
 	</header>
 	<div
-		class="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-32 xl:grid-cols-3 2xl:gap-x-8"
+		class="mt-16 grid grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 lg:mt-32 xl:grid-cols-3 2xl:gap-x-8"
 	>
 		{
 			i18n.workflow.stages.map((stage, index) => (
 				<div class="flex flex-col gap-1">
-					<div class="mb-4 border-b border-stone-900 pb-3 dark:border-stone-400">
-						<span class="text-4xl leading-4 font-medium tracking-tight lg:text-6xl">{`0${index + 1}${stage.footnote ? '*' : ''}`}</span>
-						<h3 class="text-xl leading-4 font-semibold tracking-tight lg:text-2xl">
-							{stage.title}
-						</h3>
+					<div class="mb-4 flex flex-col border-b border-stone-900 pb-3 dark:border-stone-400">
+						<span class="text-6xl font-semibold tracking-tighter lg:text-6xl">{`0${index + 1}${stage.footnote ? '**' : ''}`}</span>
+						<h3 class="text-xl leading-4 font-bold tracking-tighter lg:text-2xl">{stage.title}</h3>
 					</div>
-					<p class="text-base leading-7 lg:pr-29 lg:text-lg xl:pr-0 2xl:pr-18">
+					<p class="text-base leading-7 text-pretty lg:pr-29 lg:text-lg xl:pr-0 2xl:pr-18">
 						{stage.description}
 					</p>
 				</div>
 			))
 		}
 	</div>
-	<p
-		id="workflow-footnote"
-		class="mt-16 text-start text-xs text-stone-600 sm:text-sm md:mt-36 md:text-end dark:text-stone-500"
+	<div
+		class="mt-24 mr-0 flex flex-col gap-3 text-start text-sm text-pretty text-stone-600 sm:mr-20 sm:text-sm md:mt-36 md:mr-0 md:gap-1 md:text-end dark:text-stone-500"
 	>
-		{i18n.workflow.footnote}
-	</p>
+		<p>* {i18n.workflow.footnote['1']}</p>
+		<p>** {i18n.workflow.footnote['2']}</p>
+	</div>
 </section>

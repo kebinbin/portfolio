@@ -5,8 +5,8 @@ const t = useTranslations(lang)
 
 const currentYear = new Date().getFullYear()
 const textLinks: { label: string; href: string }[] = [
-	{ label: t('footer.github'), href: 'https://github.com/me' },
-	{ label: t('footer.linkedin'), href: 'https://linkedin.com/me' }
+	{ label: t('footer.github'), href: 'https://github.com/kebinbin' },
+	{ label: t('footer.linkedin'), href: 'https://linkedin.com/in/kevin-castillo-719a7a142' }
 ]
 ---
 
@@ -21,6 +21,8 @@ const textLinks: { label: string; href: string }[] = [
 					<a
 						class="inline-block text-base font-medium tracking-wide text-stone-600 hover:text-stone-900 focus:text-stone-950 md:px-1 md:transition dark:text-stone-500 dark:hover:text-stone-300 dark:focus:text-stone-200"
 						href={link.href}
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						{' '}
 						{link.label}

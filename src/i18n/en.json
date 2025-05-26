@@ -11,7 +11,7 @@
 				"middle": "A.",
 				"last": "Castillo"
 			},
-			"p": "I'm a software engineer with experience in corporate environments, now working independently on front-end design and development. Check out my work, and feel free to reach out if you're interested in collaborating.",
+			"p": "I'm a software engineer with experience in corporate environments. I'm currently seeking full-time or freelance opportunities in front-end development. Check out my work, and feel free to reach out if you're interested in collaborating.",
 			"cta": {
 				"contact": "Contact me",
 				"work": "See my work"
@@ -30,14 +30,14 @@
 				{
 					"company": "Freelance",
 					"role": "Full-Stack Developer & Designer",
-					"dates": "Sep 2023 - Present",
-					"paragraph": "Currently designing and building case studies portfolio using Astro, React and Tailwind. Designed and developed several ReactJS components for ClashStats, a web application built on NextJS."
+					"dates": "Dec 2024 - Present",
+					"paragraph": "Designed and implemented ReactJS components for ClashStats, a startup’s web application built using Next.js. Built case study projects to deepen expertise in modern front-end frameworks and UI/UX design workflows. Explored Astro, View Transitions API, Figma, and modern design systems to improve interface design and consistency."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
 					"role": "Software Engineer",
 					"dates": "Jun 2019 - Aug 2022",
-					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a micro-services app used in HPE-associated factories world-wide built using React, Docker, Java, Spring, ActiveMQ, and more. Implemented solutions for production issues and developed multiple UI components."
+					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a micro-services app used in HPE-associated factories worldwide built using React, Docker, Java, Spring, ActiveMQ, and more. Identified and implemented solutions for issues in production. Designed and developed multiple parts of the web app's user interface used to monitor the app’s health. Optimized and maintained the Jenkins CI/CD pipeline."
 				},
 				{
 					"company": "Naluum Institute",
@@ -71,12 +71,12 @@
 			},
 			"stages": [
 				{
-					"title": "Project request",
+					"title": "Project Request",
 					"description": "Submit your project details to me via email so I can get an idea of what you are looking for. Expect a response within 48hrs to schedule a meeting to discuss your project.",
 					"footnote": false
 				},
 				{
-					"title": "First meeting",
+					"title": "First Meeting",
 					"description": "Let’s know each other and see if we are a good fit to work together. This is a moment to discuss your goals, requirements and next steps in our journey collaborating together.",
 					"footnote": false
 				},
@@ -86,32 +86,35 @@
 					"footnote": false
 				},
 				{
-					"title": "UX/UI design",
+					"title": "UX/UI Design",
 					"description": "After studying the provided material, I will design the UI. Regular updates and communication are essential aspects of my workflow, I will keep you in the loop.",
 					"footnote": true
 				},
 				{
-					"title": "Design agreement",
+					"title": "Design Agreement",
 					"description": "I will send to you the designed product for you to review.  If you want any updates, you have up to two free revisions, then a revision fee will be added depending on the changes.",
 					"footnote": true
 				},
 				{
-					"title": "Software development",
+					"title": "Software Development",
 					"description": "In this stage we will start the development and implementation of everything that was agreed after the design or proposal phases.",
 					"footnote": false
 				},
 				{
-					"title": "Product deployment",
+					"title": "Product Deployment",
 					"description": "We are ready to deploy and launch your project into production and make it available for your users / customers to use.",
 					"footnote": false
 				},
 				{
-					"title": "Guidance meeting",
+					"title": "Guidance Meeting",
 					"description": "After the product’s launch, let’s meet to guide you on how to use the application and so you can ask any questions you have.",
 					"footnote": false
 				}
 			],
-			"footnote": "*The design and agreement of it (stages 4-5) can be omitted if you already have a design for your project."
+			"footnote": {
+				"1": "This is my personal process, but I’m comfortable adapting to team workflows like Agile or Scrum.",
+				"2": "The design and agreement of it (stages 4-5) can be omitted if you already have a design for your project."
+			}
 		},
 		"about": {
 			"h2": {
@@ -138,7 +141,7 @@
 					"HTML",
 					"CSS/SASS",
 					"Astro",
-					"NextJS",
+					"Next.js",
 					"Jest",
 					"REST",
 					"SQLServer",
@@ -190,7 +193,7 @@
 		},
 		"footer": {},
 		"metadata": {
-			"email": "kevin.castillo@works.com"
+			"email": "hello@kevincastillo.io"
 		}
 	},
 	"404": {

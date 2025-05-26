@@ -1,5 +1,8 @@
 ---
 import { getI18N } from '../../../../i18n'
+import { getLangFromUrl } from '../../../../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale }).home
 const portrait = {
@@ -14,9 +17,9 @@ const portrait = {
 			><h2
 				class="text-start text-[clamp(3rem,7.75vw,8rem)] leading-[.85em] font-light tracking-tighter"
 			>
-				<span>{i18n.about.h2['1']}</span>
-				<span class="tracking-tightest font-medium">{i18n.about.h2['2']}</span>
-				<span class="inline sm:block">{i18n.about.h2['3']}</span>
+				<span class="inline-block">{i18n.about.h2['1']}</span>
+				<span class="tracking-tightest inline-block font-medium">{i18n.about.h2['2']}</span>
+				<span class="inline-block sm:block">{i18n.about.h2['3']}</span>
 			</h2></a
 		>
 	</header>
@@ -59,6 +62,8 @@ const portrait = {
 	</div>
 	<div class="mt-24 flex justify-end">
 		<span class="mr-1 font-light">{i18n.about.cta.question}</span>
-		<a href={`#downloadresume`} class="font-semibold underline">{i18n.about.cta.link}</a>
+		<a href={`/assets/resume/${lang}/resume-kevin.castillo.pdf`} class="font-semibold underline"
+			>{i18n.about.cta.link}</a
+		>
 	</div>
 </section>
