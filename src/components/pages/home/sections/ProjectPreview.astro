@@ -13,6 +13,7 @@ const [, projectSlug] = slug.split('/')
 <article>
 	<a href={`projects/${projectSlug}`} class="flex flex-col gap-2 lg:gap-3">
 		<div
+			transition:name={`${projectSlug}-hero-img`}
 			class="w-full overflow-hidden rounded-[.5rem] border-5 border-stone-500/20 shadow-xl outline-1 outline-stone-950/25 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7 dark:border-stone-900/20 dark:outline-stone-100/5"
 		>
 			<img
@@ -21,7 +22,6 @@ const [, projectSlug] = slug.split('/')
 				loading="lazy"
 				decoding="async"
 				class="aspect-video size-full object-cover"
-				transition:name={`${projectSlug}-hero-img`}
 			/>
 		</div>
 
