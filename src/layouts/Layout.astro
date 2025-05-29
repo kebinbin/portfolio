@@ -26,5 +26,12 @@ const lang = getLangFromUrl(Astro.url)
 		<slot />
 		<Footer />
 		<script src="/src/scripts/fitty-init.js"></script>
+		<script>
+			document.addEventListener('astro:after-swap', () =>
+				document
+					.querySelectorAll('video')
+					.forEach((v) => v.closest('[data-astro-transition-persist]') || (v.src = v.src))
+			)
+		</script>
 	</body>
 </html>
