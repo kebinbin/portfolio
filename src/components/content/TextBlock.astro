@@ -2,7 +2,7 @@
 const { title, class: passedClass = '' } = Astro.props
 ---
 
-<div class={`flex flex-col gap-6 xl:flex-row xl:gap-32 ${passedClass}`}>
+<div class={`flex flex-col gap-4 xl:flex-row xl:gap-32 ${passedClass}`}>
 	<h2 class="w-full text-3xl font-bold xl:max-w-[400px] xl:min-w-[400px]">{title}</h2>
 	<p class="text-base leading-7 lg:text-lg"><slot /></p>
 </div>

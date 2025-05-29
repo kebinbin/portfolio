@@ -26,16 +26,21 @@ const [, projectSlug] = slug.split('/')
 		</div>
 
 		<div
-			class="flex flex-row justify-between text-base leading-4 font-semibold tracking-tight sm:text-lg sm:leading-5 xl:text-xl xl:leading-6"
+			class="flex justify-between text-base leading-4 font-semibold tracking-tight sm:text-lg sm:leading-5 xl:text-xl xl:leading-6"
 		>
-			<div class="capitalize">
+			<div class="flex-1 capitalize">
 				<span
 					transition:name={`${projectSlug}-title`}
 					class="mb-1 block sm:mb-0 sm:inline lg:block xl:inline">{data.title}</span
 				>
 				<span transition:name={`${projectSlug}-type`} class="font-light">{data.type}</span>
 			</div>
-			<div transition:name={`${projectSlug}-period`} class="uppercase">{data.period}</div>
+			<div
+				transition:name={`${projectSlug}-period`}
+				class="flex-shrink-0 text-right whitespace-nowrap uppercase"
+			>
+				{data.period}
+			</div>
 		</div>
 	</a>
 </article>
