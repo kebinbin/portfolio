@@ -14,8 +14,8 @@ const { src, title } = Astro.props
 			class="h-auto w-full"
 			preload="metadata"
 			crossorigin="anonymous"
+			src={src}
 		>
-			<source src={src} type="video/mp4" />
 		</video>
 	</div>
 	<p>{title}</p>
