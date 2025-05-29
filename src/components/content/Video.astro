@@ -6,7 +6,7 @@ const { src, title } = Astro.props
 	<div
 		class="w-full overflow-hidden rounded-[.5rem] border-5 border-stone-500/20 shadow-xl outline-1 outline-stone-950/25 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7 dark:border-stone-900/20 dark:outline-stone-100/5"
 	>
-		<video autoplay muted loop playsinline class="h-auto w-full">
+		<video autoplay muted playsinline loop class="h-auto w-full" preload="metadata">
 			<source src={src} type="video/mp4" />
 		</video>
 	</div>
