@@ -10,7 +10,7 @@ const [, projectSlug] = slug.split('/')
 <Layout>
 	<header class="container py-6">
 		<div class="flex flex-col gap-2 xl:gap-12">
-			<div class="overflow-hidden leading-none">
+			<div class="leading-none">
 				<h1
 					transition:name={`${projectSlug}-title`}
 					class="tracking-tightest fit-text -ml-1 text-start font-medium capitalize lg:-ml-2 xl:text-center"
@@ -28,7 +28,7 @@ const [, projectSlug] = slug.split('/')
 						>{project.data.type}</span
 					>
 					<span class="font-semibold tracking-tight"
-						>{project.data.role}<span transition:name={`${projectSlug}-period`}>
+						>{project.data.role}<span transition:name={`${projectSlug}-period`} class="lowercase">
 							({project.data.period})</span
 						></span
 					>
@@ -52,7 +52,7 @@ const [, projectSlug] = slug.split('/')
 			/>
 		</div>
 	</header>
-	<main class="container flex flex-col gap-20 py-16">
+	<main class="container flex flex-col gap-10 py-8 xl:gap-20 xl:py-16">
 		<slot />
 	</main>
 	<CTA />
