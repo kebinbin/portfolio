@@ -10,7 +10,9 @@ const i18n = getI18N({ currentLocale }).home
 <section class="container py-24 lg:py-32">
 	<header>
 		<a id="experience"
-			><h2 class="text-start text-[clamp(3rem,7.5vw,8rem)] leading-[.8em] font-semibold">
+			><h2
+				class="text-start text-[clamp(2.5rem,12.5vw,4rem)] leading-[.85em] font-semibold sm:text-7xl md:text-7xl lg:text-8xl lg:leading-[.8em] 2xl:text-9xl"
+			>
 				<span class="tracking-tightest block">{i18n.experience.h2['1']}</span>
 				<span class="inline-block tracking-tighter sm:block">{i18n.experience.h2['2']}</span>
 				<span class="inline-block tracking-tighter">{i18n.experience.h2['3']}</span>
@@ -23,8 +25,8 @@ const i18n = getI18N({ currentLocale }).home
 				i18n.experience.experiences.map((experience) => (
 					<div class="flex flex-col gap-2">
 						<div class="flex flex-col tracking-tighter">
-							<h3 class="text-xl font-bold lg:text-2xl">{experience.company}</h3>
-							<div class="text-base font-normal text-stone-500 lg:text-lg">{`${experience.role} · ${experience.dates}`}</div>
+							<h3 class="text-2xl font-bold">{experience.company}</h3>
+							<div class="text-lg font-normal text-stone-500">{`${experience.role} · ${experience.dates}`}</div>
 						</div>
 						<p class="text-base leading-7 text-pretty lg:text-lg">{experience.paragraph}</p>
 					</div>

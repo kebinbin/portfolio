@@ -10,13 +10,15 @@ const i18n = getI18N({ currentLocale }).home
 		<a id="workflow"
 			><h2 class="text-start">
 				<div
-					class="mb-2 text-[clamp(3rem,7.5vw,8rem)] leading-[.8em] font-semibold tracking-tighter xl:mb-4"
+					class="mb-3 text-start text-[clamp(3rem,15vw,4.5rem)] leading-[.85em] font-semibold md:text-7xl lg:text-8xl lg:leading-[.8em] xl:mb-4 2xl:text-9xl"
 				>
-					<span class="inline-block">{i18n.workflow.h2['1']}</span>
-					<span class="sr-only inline-block sm:not-sr-only">{i18n.workflow.h2['2']}</span>
+					<span class="inline-block tracking-tighter">{i18n.workflow.h2['1']}</span>
+					<span class="sr-only inline-block tracking-tighter md:not-sr-only"
+						>{i18n.workflow.h2['2']}</span
+					>
 				</div>
 				<span
-					class="inline-block text-[clamp(1.75rem,4.5vw,5rem)] leading-[.8em] font-extralight tracking-tight text-stone-600 dark:text-stone-500"
+					class="inline-block text-start text-[clamp(1.25rem,7vw,2rem)] leading-[.85em] font-extralight tracking-tight text-stone-600 md:text-5xl lg:text-6xl lg:leading-[.8em] 2xl:text-7xl dark:text-stone-500"
 					>{i18n.workflow.h2['3']}*</span
 				>
 			</h2></a
@@ -27,7 +29,7 @@ const i18n = getI18N({ currentLocale }).home
 			i18n.workflow.stages.map((stage, index) => (
 				<div class="flex flex-col gap-1">
 					<div class="mb-4 flex flex-col border-b border-stone-900 pb-3 dark:border-stone-400">
-						<span class="text-6xl font-semibold tracking-tighter lg:text-6xl">{`0${index + 1}${stage.footnote ? '**' : ''}`}</span>
+						<span class="text-4xl font-semibold tracking-tighter lg:text-6xl">{`0${index + 1}${stage.footnote ? '**' : ''}`}</span>
 						<h3 class="text-xl leading-4 font-bold tracking-tighter lg:text-2xl">{stage.title}</h3>
 					</div>
 					<p class="text-base leading-7 text-pretty lg:pr-29 lg:text-lg xl:pr-0 2xl:pr-18">
@@ -38,7 +40,7 @@ const i18n = getI18N({ currentLocale }).home
 		}
 	</div>
 	<div
-		class="mt-24 mr-0 flex flex-col gap-3 text-start text-sm text-pretty text-stone-600 sm:mr-20 sm:text-sm md:mt-36 md:mr-0 md:gap-1 md:text-end dark:text-stone-500"
+		class="mt-24 mr-0 flex flex-col gap-3 text-start text-sm text-pretty text-stone-600 sm:mr-20 sm:text-sm md:mt-36 md:mr-0 md:gap-0 md:text-end dark:text-stone-500"
 	>
 		<p>* {i18n.workflow.footnote['1']}</p>
 		<p>** {i18n.workflow.footnote['2']}</p>
