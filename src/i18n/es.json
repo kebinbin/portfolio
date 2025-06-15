@@ -37,7 +37,7 @@
 					"company": "Hewlett Packard Enterprise",
 					"role": "Ingeniero de Software",
 					"dates": "Jun 2019 - Ago 2022",
-					"paragraph": "Lideré el desarrollo de nuevas funciones, mejoras y correcciones de errores para una aplicación de micro-servicios utilizada en fábricas asociadas a HPE en todo el mundo creada con React, Docker, Java, Spring, ActiveMQ y más. Identifiqué e implementé soluciones para problemas en producción. Diseñé y desarrollé multiples partes de la interfaz de la aplicación web usada para monitorear el estado de la applicación.  Optimizé y mantuve el proceso de CI/CD en Jenkins."
+					"paragraph": "Lideré el desarrollo de nuevas funciones, mejoras y correcciones de errores para una aplicación de micro-servicios utilizada en fábricas asociadas a HPE en todo el mundo creada con React, Docker, Java, Spring, ActiveMQ y más. Identifiqué e implementé soluciones para problemas en producción. Diseñé y desarrollé múltiples partes de la interfaz de la aplicación web usada para monitorear el estado de la applicación.  Optimizé y mantuve el proceso de CI/CD en Jenkins."
 				},
 				{
 					"company": "Naluum Institute",
@@ -49,7 +49,7 @@
 					"company": "Hewlett Packard",
 					"role": "Ingeniero de Software",
 					"dates": "Jun 2015 - Ago 2016",
-					"paragraph": "Migré varias funciones de la interfaz de usuario de una aplicación Test Executive de GWT a ReactJS con FLUX. Rediseñé multiples ‘views’, implementé nuevas funcionalidades y creé componentes reutilizables en React. Investigué, identifiqué y solucioné problemas de rendimiento relacionados al ‘rendering’ y a las actualizaciones en tiempo real."
+					"paragraph": "Migré varias funciones de la interfaz de usuario de una aplicación Test Executive de GWT a ReactJS con FLUX. Rediseñé múltiples ‘views’, implementé nuevas funcionalidades y creé componentes reutilizables en React. Investigué, identifiqué y solucioné problemas de rendimiento relacionados al ‘rendering’ y a las actualizaciones en tiempo real."
 				},
 				{
 					"company": "Sysdat Crest UPRM ",
