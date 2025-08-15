@@ -11,7 +11,7 @@
 				"middle": "A.",
 				"last": "Castillo"
 			},
-			"p": "I'm a software engineer with experience in corporate environments. I'm currently seeking full-time or freelance opportunities in front-end development. Check out my work, and feel free to reach out if you're interested in collaborating.",
+			"p": "Software Engineer with corporate background, building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Open to full-time or freelance opportunities—explore my work and let’s create something exceptional.",
 			"cta": {
 				"contact": "Contact me",
 				"work": "See my work"
@@ -28,34 +28,34 @@
 			},
 			"experiences": [
 				{
-					"company": "Freelance",
+					"company": "Freelance / Professional Development",
 					"role": "Full-Stack Developer & Designer",
-					"dates": "Sep 2023 - Present",
-					"paragraph": "Designed and implemented ReactJS components for ClashStats, a startup’s web application built using Next.js. Built case study projects to deepen expertise in modern front-end frameworks and UI/UX design workflows. Explored Astro, View Transitions API, Figma, and modern design systems to improve interface design and consistency."
+					"dates": "Sep 2022 - Present",
+					"paragraph": "Designed and implemented reusable UI components for ClashStats, a startup’s Next.js application. Built case study projects to strengthen expertise in modern front-end tools such as Astro and React. Enhanced UI/UX and visual design skills through self-directed study and practical application in Figma. Built cross-cultural communication skills through travel; relocated to Uruguay for personal & career growth."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
 					"role": "Software Engineer",
 					"dates": "Jun 2019 - Aug 2022",
-					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a micro-services app used in HPE-associated factories worldwide built using React, Docker, Java, Spring, ActiveMQ, and more. Identified and implemented solutions for issues in production. Designed and developed multiple parts of the web app's user interface used to monitor the app’s health. Optimized and maintained the Jenkins CI/CD pipeline."
+					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a microservices app used in HPE-partner factories worldwide built using Java, Spring Boot, REST, React, ActiveMQ, SQLServer and Docker. Identified and implemented solutions for issues in production. Developed new features for the React-based health monitoring service, including REST API, backend, and messaging logic for real-time updates.  Improved the UX, visual consistency and design. Managed the production environment from release deployments, maintenance, support, to troubleshooting sessions with internal stakeholders and cross-functional teams. Optimized the Jenkins CI/CD pipeline."
 				},
 				{
-					"company": "Naluum Institute",
+					"company": "Freelance / Professional Development",
 					"role": "Web Designer & Developer",
-					"dates": "Nov 2018 - Dec 2019",
-					"paragraph": "Designed and developed the website for an international event being hosted by the institute for informational purposes and to automatically capture volunteer’s data. Developed a plugin to integrate WordPress with GoogleSheets to generate official record of event registration."
+					"dates": "Sep 2016 - Dec 2019",
+					"paragraph": "Delivered web design, development, and provided technical support to several non-profit organizations. Created a WordPress–Google Sheets integration plugin (PHP, JavaScript) to automate data handling. Practiced English through cultural immersion while studying agricultural practices across South America, earned a Permaculture Design Certification, and volunteered in post–Hurricane Maria recovery projects."
 				},
 				{
 					"company": "Hewlett Packard",
 					"role": "Software Engineer",
 					"dates": "Jun 2015 - Aug 2016",
-					"paragraph": "Migrated features from the UI of a Test Executive application from GWT to ReactJS with FLUX. Re-designed many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
+					"paragraph": "Migrated UI features of a factory app used to test servers from before shipment from Java GWT to React. Redesigned many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
 				},
 				{
-					"company": "Sysdat Crest UPRM ",
-					"role": "Engineering Student",
+					"company": "Sysdat Crest UPRM",
+					"role": "CAPSTONE Engineering Student",
 					"dates": "Jan 2015 - May 2015",
-					"paragraph": "Designed and deployed a normalized relational database using MySQL, developed front-end (AngularJS) features and back-end (PHP) functionality such as role-based access control, data input, sign-up, login, session management, menu’s according to role, and more."
+					"paragraph": "Designed the ER diagram, schema and deployed a normalized relational database (MySQL) to centralize data from CREST members and activities to automate the reports generation submitted to the NSF. Developed features in both front-end (AngularJS and Bootstrap) and back-end (PHP) such as role-based access control, data input, sign-up, login, session management, menus according to role, and more."
 				}
 			],
 			"cta": {
