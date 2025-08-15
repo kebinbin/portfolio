@@ -37,7 +37,7 @@
 					"company": "Hewlett Packard Enterprise",
 					"role": "Software Engineer",
 					"dates": "Jun 2019 - Aug 2022",
-					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a microservices app used in HPE-partner factories worldwide built using Java, Spring Boot, REST, React, ActiveMQ, SQLServer and Docker. Identified and implemented solutions for performance, cyber-security and synchronization issues. Developed new features for the React-based health monitoring service, including REST API, backend, and messaging logic for real-time updates.  Improved the UX, visual consistency and design. Managed the production environment from release deployments, maintenance, support, to troubleshooting sessions by communicating with internal stakeholders and cross-functional teams. Dockerized and improved Jenkins CI/CD pipeline which automated testing, builds, scans, and deployments. Optimized code by refactoring common functionality to reduce code-base size and possible issues."
+					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a microservices app used in HPE-partner factories worldwide built using Java, Spring Boot, REST, React, ActiveMQ, SQLServer and Docker. Identified and implemented solutions for issues in production. Developed new features for the React-based health monitoring service, including REST API, backend, and messaging logic for real-time updates.  Improved the UX, visual consistency and design. Managed the production environment from release deployments, maintenance, support, to troubleshooting sessions with internal stakeholders and cross-functional teams. Optimized the Jenkins CI/CD pipeline."
 				},
 				{
 					"company": "Freelance / Professional Development",
