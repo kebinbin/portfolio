@@ -55,7 +55,7 @@
 					"company": "Sysdat Crest UPRM",
 					"role": "CAPSTONE Engineering Student",
 					"dates": "Jan 2015 - May 2015",
-					"paragraph": "Diseñé el diagrama ER, el esquema y desplegué una base de datos relacional normalizada (MySQL) para centralizar información de miembros y actividades de CREST para la generación de reportes de NSF. Desarrollé funcionalidades frontend (AngularJS y Bootstrap) y backend (PHP), incluyendo control de acceso por roles, ingreso de datos, inicio de sesión, gestión de sesiones y menús según el rol del usuario."
+					"paragraph": "Designed the ER diagram, schema and deployed a normalized relational database (MySQL) to centralize data from CREST members and activities to automate the reports generation submitted to the NSF. Developed features in both front-end (AngularJS and Bootstrap) and back-end (PHP) such as role-based access control, data input, sign-up, login, session management, menus according to role, and more."
 				}
 			],
 			"cta": {
