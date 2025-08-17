@@ -49,7 +49,7 @@
 					"company": "Hewlett Packard",
 					"role": "Software Engineer",
 					"dates": "Jun 2015 - Aug 2016",
-					"paragraph": "Migrated UI features of a factory app used to test servers from before shipment from Java GWT to React. Redesigned many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
+					"paragraph": "Migrated UI features of a factory app used to test servers before shipment from Java GWT to React. Redesigned many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
 				},
 				{
 					"company": "Sysdat Crest UPRM",
@@ -128,8 +128,8 @@
 				"p3": "Outside of work, I find inspiration through walking on nature, photography, traveling, and spending time in my garden. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
 			},
 			"education": {
-				"h3": "UPR Mayagüez RUM",
-				"degree": "Computer Engineering",
+				"h3": "University of Puerto Rico",
+				"degree": "B.S. in Computer Engineering",
 				"dates": "2009 - 2015",
 				"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
 			},
