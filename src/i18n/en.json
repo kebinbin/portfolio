@@ -28,9 +28,15 @@
 			},
 			"experiences": [
 				{
+					"company": "Tata Consultancy Services",
+					"role": "Senior Analyst",
+					"dates": "Sep 2025 - Present",
+					"paragraph": "Undergoing technical training to support Java-based production applications for Apple."
+				},
+				{
 					"company": "Freelance / Professional Development",
 					"role": "Full-Stack Developer & Designer",
-					"dates": "Sep 2022 - Present",
+					"dates": "Sep 2022 - Sep 2025",
 					"paragraph": "Designed and implemented reusable UI components for ClashStats, a startup’s Next.js application. Built case study projects to strengthen expertise in modern front-end tools such as Astro and React. Enhanced UI/UX and visual design skills through self-directed study and practical application in Figma. Built cross-cultural communication skills through travel; relocated to Uruguay for personal & career growth."
 				},
 				{

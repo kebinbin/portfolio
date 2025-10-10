@@ -28,9 +28,15 @@
 			},
 			"experiences": [
 				{
+					"company": "Tata Consultancy Services",
+					"role": "Analista Senior",
+					"dates": "Sep 2025 - Presente",
+					"paragraph": "Realizando capacitación técnica para proveer soporte a aplicaciones Java en producción para Apple."
+				},
+				{
 					"company": "Freelance / Desarrollo Profesional",
 					"role": "Desarrollador Full-Stack & Diseñador",
-					"dates": "Sep 2022 - Presente",
+					"dates": "Sep 2022 - Sep 2025",
 					"paragraph": "Diseñé e implementé componentes reusables para la UI de ClashStats, una app en Next.js de una startup. Desarrollé proyectos para fortalecer la experiencia en herramientas de front-end como Astro y React. Mejoré habilidades de UI/UX y diseño visual mediante estudio autodirigido y aplicación práctica en Figma. Fortalecí mi comunicación intercultural viajando y me mudé a Uruguay para crecer profesionalmente."
 				},
 				{
