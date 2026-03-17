@@ -11,7 +11,7 @@
 				"middle": "A.",
 				"last": "Castillo"
 			},
-			"p": "Software Engineer with corporate background, building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Open to full-time or freelance opportunities—explore my work and let’s create something exceptional.",
+			"p": "Software Engineer with enterprise background, building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Open to full-time or freelance opportunities — explore my work and let’s create something exceptional.",
 			"cta": {
 				"contact": "Contact me",
 				"work": "See my work"
@@ -28,16 +28,10 @@
 			},
 			"experiences": [
 				{
-					"company": "Tata Consultancy Services",
-					"role": "Senior Analyst",
-					"dates": "Sep 2025 - Present",
-					"paragraph": "Undergoing technical training to support Java-based production applications for Apple."
-				},
-				{
 					"company": "Freelance / Professional Development",
 					"role": "Full-Stack Developer & Designer",
-					"dates": "Sep 2022 - Sep 2025",
-					"paragraph": "Designed and implemented reusable UI components for ClashStats, a startup’s Next.js application. Built case study projects to strengthen expertise in modern front-end tools such as Astro and React. Enhanced UI/UX and visual design skills through self-directed study and practical application in Figma. Built cross-cultural communication skills through travel; relocated to Uruguay for personal & career growth."
+					"dates": "Sep 2022 - Present",
+					"paragraph": "Currently building a Spatiotemporal event system API using Java, Spring Boot, PostgreSQL and PostGIS to power a wide range of proximity-based applications. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
@@ -135,7 +129,7 @@
 			},
 			"education": {
 				"h3": "University of Puerto Rico",
-				"degree": "B.S. in Computer Engineering",
+				"degree": "Computer Engineering",
 				"dates": "2009 - 2015",
 				"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
 			},
