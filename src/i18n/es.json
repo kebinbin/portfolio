@@ -11,7 +11,7 @@
 				"middle": "A.",
 				"last": "Castillo"
 			},
-			"p": "Ingeniero de software con experiencia en entornos corporativos, creando backends escalables, frontends intuitivos y UI/UX de calidad. Abierto a oportunidades full-time o freelance: explora mi trabajo y creemos algo excepcional.",
+			"p": "Ingeniero de software con experiencia en entornos corporativos, creando backends escalables, frontends intuitivos y UI/UX de calidad. Abierto a oportunidades full-time o freelance — explora mi trabajo y creemos algo excepcional.",
 			"cta": {
 				"contact": "Contácteme",
 				"work": "Vea mi trabajo"
@@ -28,16 +28,10 @@
 			},
 			"experiences": [
 				{
-					"company": "Tata Consultancy Services",
-					"role": "Analista Senior",
-					"dates": "Sep 2025 - Presente",
-					"paragraph": "Realizando capacitación técnica para proveer soporte a aplicaciones Java en producción para Apple."
-				},
-				{
 					"company": "Freelance / Desarrollo Profesional",
 					"role": "Desarrollador Full-Stack & Diseñador",
-					"dates": "Sep 2022 - Sep 2025",
-					"paragraph": "Diseñé e implementé componentes reusables para la UI de ClashStats, una app en Next.js de una startup. Desarrollé proyectos para fortalecer la experiencia en herramientas de front-end como Astro y React. Mejoré habilidades de UI/UX y diseño visual mediante estudio autodirigido y aplicación práctica en Figma. Fortalecí mi comunicación intercultural viajando y me mudé a Uruguay para crecer profesionalmente."
+					"dates": "Sep 2022 - Presente",
+					"paragraph": "Actualmente desarrollando una API de sistema de eventos espaciotemporales con Java, Spring Boot, PostgreSQL y PostGIS para impulsar una amplia gama de aplicaciones basadas en proximidad. Contribuí al diseño y desarrollo front-end de ClashStats, una app deportiva hecha con React / Next.js. Desarrollé mi portafolio personal de concepto a producción usando Figma, Astro y TailwindCSS."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
@@ -130,14 +124,14 @@
 			},
 			"bio": {
 				"p1": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",
-				"p2": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Agiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar.",
+				"p2": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Ágiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar.",
 				"p3": "Fuera del trabajo, encuentro inspiración al caminar en la naturaleza, practicar fotografía, viajar y pasar tiempo en mi huerta. Mi curiosidad y hambre por nuevos conocimientos me impulsan a aprender e innovar constantemente. Para mí, la creatividad, el trabajo y el juego están profundamente conectados."
 			},
 			"education": {
 				"h3": "Universidad de Puerto Rico",
-				"degree": "Lic. en Ingeniería en Computación",
+				"degree": "Ingeniería en Computadoras",
 				"dates": "2009 - 2015",
-				"paragraph": "BSCpE — Licenciatura en Ingeniería en Computación enfocado en desarrollo de software."
+				"paragraph": "BSCpE — Bachillerato en Ingeniería de Computadoras enfocado en desarrollo de software."
 			},
 			"technologies": {
 				"h3": "Tecnologías que utilizo",
