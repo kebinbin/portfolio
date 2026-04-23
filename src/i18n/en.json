@@ -31,7 +31,7 @@
 					"company": "Freelance / Professional Development",
 					"role": "Full-Stack Developer & Designer",
 					"dates": "Sep 2022 - Present",
-					"paragraph": "Currently building a Spatiotemporal event system API using Java, Spring Boot, PostgreSQL and PostGIS to power a wide range of proximity-based applications. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
+					"paragraph": "Currently building a proximity-based event system API using Java, Spring Boot, PostgreSQL and PostGIS. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
