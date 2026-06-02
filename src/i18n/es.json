@@ -31,7 +31,7 @@
 					"company": "Freelance / Desarrollo Profesional",
 					"role": "Desarrollador Full-Stack & Diseñador",
 					"dates": "Sep 2022 - Presente",
-					"paragraph": "Desarrollando una API de eventos basada en proximidad con Java, Spring Boot, PostgreSQL y PostGIS. Contribuí al diseño y desarrollo front-end de ClashStats, una app deportiva hecha con React / Next.js. Desarrollé mi portafolio personal de concepto a producción usando Figma, Astro y TailwindCSS."
+					"paragraph": "Desarrollando routini, un router open source para React con TypeScript, lazy loading y bundle de ~1.5KB. Contribuí al diseño y desarrollo front-end de ClashStats, una app deportiva hecha con React / Next.js. Desarrollé mi portafolio personal de concepto a producción usando Figma, Astro y TailwindCSS."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
