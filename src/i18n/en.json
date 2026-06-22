@@ -31,7 +31,7 @@
 					"company": "Freelance / Professional Development",
 					"role": "Full-Stack Developer & Designer",
 					"dates": "Sep 2022 - Present",
-					"paragraph": "Building routini, an open source router for React with TypeScript, lazy loading and ~1.5KB bundle. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
+					"paragraph": "Building Routini, an open-source minimal React router in TypeScript — 2.8KB, view transitions, lazy routes. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
 				},
 				{
 					"company": "Hewlett Packard Enterprise",
