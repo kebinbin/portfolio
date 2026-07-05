@@ -11,18 +11,19 @@ const t = useTranslations(lang)
 const textLinks: { label: string; href: string }[] = [
 	{ label: t('nav.projects'), href: `/${lang}/#projects` },
 	{ label: t('nav.experience'), href: `/${lang}/#experience` },
-	{ label: t('nav.workflow'), href: `/${lang}/#workflow` },
+	// { label: t('nav.workflow'), href: `/${lang}/#workflow` },
 	{ label: t('nav.about'), href: `/${lang}/#about` },
 	{ label: t('nav.contact'), href: `/${lang}/#contact` }
 ]
 ---
 
 <nav
-	class="font-brand lg:grid-cols-nav relative z-50 container py-6 font-medium sm:py-12 lg:grid lg:items-center lg:gap-24 xl:gap-28"
+	class="lg:grid-cols-nav text-retro-navy/55 dark:text-retro-bone/55 relative z-50 container py-6 text-xs tracking-[0.2em] uppercase sm:py-12 sm:text-sm lg:grid lg:items-center lg:gap-24 xl:gap-28"
 >
 	<div class="flex justify-between gap-2 lg:p-0">
-		<a href=`/${lang}/` class="flex items-center gap-2 text-5xl font-black lowercase">
-			{t('nav.brand')}
+		<a href=`/${lang}/` class="tracking-[0.28em]">
+			<span>{`${t('nav.brand.full.first')} ${t('nav.brand.full.middle')}`}</span>
+			<span class="text-retro-navy font-semibold">{t('nav.brand.full.last')}</span>
 		</a>
 		<menu-button class="flex items-center">
 			<template>

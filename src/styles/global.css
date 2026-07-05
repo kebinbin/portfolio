@@ -13,18 +13,31 @@
 	--breakpoint-2xl: 1536px;
 
 	--font-body: neue-haas-unica, sans-serif;
-	--font-brand: neue-haas-unica, sans-serif;
+	--font-brand: neue-haas-unica, sans-serif; /* remove */
 
 	--grid-template-columns-nav: 1fr auto auto;
 
 	--text-10xl: 10rem;
-
 	--leading-18: 4.5rem; /*remove?*/
 	--leading-20: 5rem;
 	--leading-27: 6.75rem; /*remove? */
 	--leading-32: 8rem;
 
 	--tracking-tightest: -0.075em;
+
+	/* For new design, some might be removed later */
+	--text-11xl: 10rem;
+
+	--tracking-display: -0.035em;
+
+	--color-retro-bone: #ece0c8;
+	--color-retro-gold: #e0a32e; /* not used right now */
+	--color-retro-orange: #d96f2b; /* not used right now */
+	--color-retro-rust: #b3401e;
+	--color-retro-brown: #6b3a1f;
+	--color-retro-blue: #33607f; /* not used right now */
+	--color-retro-navy: #1e3346;
+	--color-retro-green: #6d8a2e;
 }
 
 @utility container {
@@ -36,6 +49,12 @@
 	@variant 2xl {
 		padding-inline: 6rem;
 	}
+}
+
+@utility page-grid {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	column-gap: 1.5rem;
 }
 
 /*

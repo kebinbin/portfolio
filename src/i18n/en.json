@@ -2,23 +2,25 @@
 	"home": {
 		"hero": {
 			"h1": {
-				"1": "Fullstack",
-				"2": "Software",
-				"3": "Engineer_"
-			},
-			"name": {
-				"first": "Kevin",
-				"middle": "A.",
-				"last": "Castillo"
+				"1": "Design.",
+				"2": "Code.",
+				"3": "Ship."
 			},
 			"p": "Software Engineer with enterprise background, building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Open to full-time or freelance opportunities — explore my work and let’s create something exceptional.",
+			"meta": [
+				{ "label": "Building", "value": "Web apps · UI/UX · APIs" },
+				{ "label": "Toolkit", "value": "React · TypeScript · Java · Spring" },
+				{ "label": "Contact", "value": "hello@kevincastillo.io" }
+			],
 			"cta": {
-				"contact": "Contact me",
-				"work": "See my work"
+				"work": "Selected work"
 			},
 			"aside": {
 				"availableFor": "Available for offers and collaborations"
 			}
+		},
+		"projects": {
+			"h2": "Explore my work"
 		},
 		"experience": {
 			"h2": {

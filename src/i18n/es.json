@@ -2,23 +2,25 @@
 	"home": {
 		"hero": {
 			"h1": {
-				"1": "Ingeniero de",
-				"2": "Software",
-				"3": "Fullstack_"
-			},
-			"name": {
-				"first": "Kevin",
-				"middle": "A.",
-				"last": "Castillo"
+				"1": "Diseño.",
+				"2": "Código.",
+				"3": "Entrega."
 			},
 			"p": "Ingeniero de software con experiencia en entornos corporativos, creando backends escalables, frontends intuitivos y UI/UX de calidad. Abierto a oportunidades full-time o freelance — explora mi trabajo y creemos algo excepcional.",
+			"meta": [
+				{ "label": "Building", "value": "Apps web · UI/UX · APIs" },
+				{ "label": "Toolkit", "value": "React · TypeScript · Java · Spring" },
+				{ "label": "Contact", "value": "hello@kevincastillo.io" }
+			],
 			"cta": {
-				"contact": "Contácteme",
-				"work": "Vea mi trabajo"
+				"work": "Trabajo seleccionado"
 			},
 			"aside": {
 				"availableFor": "Disponible para ofertas y colaboraciones"
 			}
+		},
+		"projects": {
+			"h2": "Explore mi trabajo"
 		},
 		"experience": {
 			"h2": {
