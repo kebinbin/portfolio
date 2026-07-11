@@ -14,14 +14,14 @@ const { links } = Astro.props
 ---
 
 <ul
-	class="bg-retro-bone dark:bg-retro-navy m-0 flex list-none flex-col gap-5 p-6 sm:gap-7 lg:flex-row lg:bg-transparent lg:p-0 lg:dark:bg-transparent"
+	class="bg-surface m-0 flex list-none flex-col gap-5 p-6 sm:gap-7 lg:flex-row lg:bg-transparent lg:p-0"
 >
 	{
 		links.map(({ label, href }) => (
 			<li>
 				<a
 					aria-current={Astro.url.pathname === href}
-					class="inline-block hover:text-stone-900 focus:text-stone-950 lg:transition dark:hover:text-stone-300 dark:focus:text-stone-200"
+					class="hover:text-ink focus-visible:text-ink aria-[current=true]:text-ink inline-block transition-colors"
 					href={href}
 				>
 					{label}

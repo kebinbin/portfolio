@@ -8,9 +8,15 @@
 			},
 			"p": "Ingeniero de software con experiencia en entornos corporativos, creando backends escalables, frontends intuitivos y UI/UX de calidad. Abierto a oportunidades full-time o freelance — explora mi trabajo y creemos algo excepcional.",
 			"meta": [
-				{ "label": "Building", "value": "Apps web · UI/UX · APIs" },
-				{ "label": "Toolkit", "value": "React · TypeScript · Java · Spring" },
-				{ "label": "Contact", "value": "hello@kevincastillo.io" }
+				{
+					"label": "Worked with",
+					"values": ["hp", "hpe"]
+				},
+				{
+					"label": "Toolkit",
+					"values": ["react", "typescript", "java", "spring-boot", "docker", "sql"]
+				},
+				{ "label": "Contact", "values": ["hello@kevincastillo.io"] }
 			],
 			"cta": {
 				"work": "Trabajo seleccionado"
@@ -20,7 +26,8 @@
 			}
 		},
 		"projects": {
-			"h2": "Explore mi trabajo"
+			"h2": "Trabajo seleccionado",
+			"cta": "Ver caso de estudio"
 		},
 		"experience": {
 			"h2": {
@@ -29,12 +36,6 @@
 				"3": "donde trabajé"
 			},
 			"experiences": [
-				{
-					"company": "Freelance / Desarrollo Profesional",
-					"role": "Desarrollador Full-Stack & Diseñador",
-					"dates": "Sep 2022 - Presente",
-					"paragraph": "Desarrollando Routini, un router minimalista open source para React— 2.8KB, view transitions, lazy routes. Contribuí al diseño y desarrollo front-end de ClashStats, una app deportiva hecha con React / Next.js. Desarrollé mi portafolio personal de concepto a producción usando Figma, Astro y TailwindCSS."
-				},
 				{
 					"company": "Hewlett Packard Enterprise",
 					"role": "Ingeniero de Software",
@@ -120,17 +121,28 @@
 		},
 		"about": {
 			"h2": {
-				"1": "Creo",
-				"2": "magia digital",
-				"3": "usando código"
+				"1": "El creador",
+				"2": "detrás del",
+				"3": "trabajo"
 			},
 			"bio": {
-				"p1": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",
-				"p2": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Ágiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar.",
-				"p3": "Fuera del trabajo, encuentro inspiración al caminar en la naturaleza, practicar fotografía, viajar y pasar tiempo en mi huerta. Mi curiosidad y hambre por nuevos conocimientos me impulsan a aprender e innovar constantemente. Para mí, la creatividad, el trabajo y el juego están profundamente conectados."
+				"intro": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",
+				"career": {
+					"h3": "Lo que hago",
+					"p": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Ágiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar."
+				},
+				"extra": {
+					"h3": "Más allá de la pantalla",
+					"p": "Fuera del trabajo, encuentro inspiración al caminar en la naturaleza, practicar fotografía, viajar y pasar tiempo en mi huerta. Mi curiosidad y hambre por nuevos conocimientos me impulsan a aprender e innovar constantemente. Para mí, la creatividad, el trabajo y el juego están profundamente conectados."
+				}
+			},
+			"portrait": {
+				"img_alt": "Imagen de Kevin Castillo.",
+				"eyebrow": "Kevin Castillo · Ingeniero de Software"
 			},
 			"education": {
-				"h3": "Universidad de Puerto Rico",
+				"h3": "Educación",
+				"college": "Universidad de Puerto Rico",
 				"degree": "Ingeniería en Computadoras",
 				"dates": "2009 - 2015",
 				"paragraph": "BSCpE — Bachillerato en Ingeniería de Computadoras enfocado en desarrollo de software."
@@ -189,7 +201,8 @@
 		},
 		"contact": {
 			"h2": {
-				"1": "Trabajemos juntos."
+				"1": "Trabajemos",
+				"2": "juntos"
 			},
 			"paragraph": "Envíeme una nota con los detalles de su proyecto a "
 		},

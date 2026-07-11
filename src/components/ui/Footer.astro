@@ -1,34 +1,41 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+import Icon from '../icons/Icon.astro'
+import type { IconName } from '../icons/icons'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
 const currentYear = new Date().getFullYear()
-const textLinks: { label: string; href: string }[] = [
-	{ label: t('footer.github'), href: 'https://github.com/kebinbin' },
-	{ label: t('footer.linkedin'), href: 'https://linkedin.com/in/kevin-castillo-santiago' }
+const socialLinks: { icon: IconName; label: string; href: string }[] = [
+	{ icon: 'github-filled', label: t('footer.github'), href: 'https://github.com/kebinbin' },
+	{
+		icon: 'linkedin-filled',
+		label: t('footer.linkedin'),
+		href: 'https://linkedin.com/in/kevin-castillo-santiago'
+	}
 ]
 ---
 
-<footer class="container my-12 flex flex-wrap-reverse justify-between gap-y-2">
-	<p class="pr-6 text-stone-500 dark:text-stone-600">
-		&copy; {currentYear} Kevin Castillo
-	</p>
-	<ul class="m-0 flex list-none flex-wrap gap-6 sm:gap-16">
-		{
-			textLinks.map((link) => (
-				<li>
-					<a
-						class="inline-block text-base font-medium tracking-wide text-stone-600 hover:text-stone-900 focus:text-stone-950 md:px-1 md:transition dark:text-stone-500 dark:hover:text-stone-300 dark:focus:text-stone-200"
-						href={link.href}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{' '}
-						{link.label}
-					</a>
-				</li>
-			))
-		}
-	</ul>
+<footer>
+	<span aria-hidden="true" class="grid-line bleed-x block h-0 border-t"></span>
+	<div class="container flex flex-wrap-reverse items-center justify-between gap-y-3 py-8">
+		<p class="eyebrow text-ink/45">&copy; {currentYear} Kevin Castillo</p>
+		<ul class="m-0 flex list-none flex-wrap gap-8">
+			{
+				socialLinks.map((link) => (
+					<li>
+						<a
+							class="eyebrow text-ink/60 hover:text-ink focus-visible:text-ink flex items-center gap-2 transition-colors"
+							href={link.href}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Icon name={link.icon} class="size-3.5" />
+							{link.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
 </footer>

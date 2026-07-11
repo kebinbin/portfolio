@@ -13,7 +13,7 @@ export const ui = {
 		'nav.brand.full.middle': 'A.',
 		'nav.brand.full.last': 'Castillo',
 		'nav.projects': 'Work',
-		'nav.experience': 'Experience',
+		// 'nav.experience': 'Experience',
 		// 'nav.workflow': 'How I work',
 		'nav.about': 'About',
 		'nav.contact': 'Contact',
@@ -23,7 +23,7 @@ export const ui = {
 	},
 	es: {
 		'nav.projects': 'Trabajos',
-		'nav.experience': 'Experiencia',
+		// 'nav.experience': 'Experiencia',
 		// 'nav.workflow': 'Cómo trabajo',
 		'nav.about': 'Acerca',
 		'nav.contact': 'Contacto',

@@ -1,90 +1,196 @@
 ---
 import { getLangFromUrl } from '../../../../i18n/utils'
 import { getI18N } from '../../../../i18n'
+import Icon from '../../../icons/Icon.astro'
+import { icons } from '../../../icons/icons'
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale }).home
 const lang = getLangFromUrl(Astro.url)
+
+// The data band shows logos only — each meta value is either an icon name in the
+// central registry (rendered as a mark) or a plain string like the email (shown
+// as text). Icons resolve/size themselves through the shared <Icon> component.
+const isIcon = (value: string): value is keyof typeof icons => value in icons
+
+/**
+ * Optical left alignment (DESIGN.md §4.1): pull each display line left by its
+ * capital's ink inset, measured in neue-haas-unica 500 (canvas
+ * actualBoundingBoxLeft). Flat stems get their full side bearing (0.088em → the
+ * stem is flush with the column); round bowls inset less; pointed caps least.
+ */
+const CAP_PULL: Record<string, number> = {
+	B: 0.088,
+	D: 0.088,
+	E: 0.088,
+	F: 0.088,
+	H: 0.088,
+	I: 0.088,
+	K: 0.088,
+	L: 0.088,
+	M: 0.088,
+	N: 0.088,
+	P: 0.088,
+	R: 0.088,
+	U: 0.088,
+	C: 0.05,
+	G: 0.05,
+	O: 0.05,
+	Q: 0.05,
+	S: 0.044,
+	A: 0.012,
+	V: 0.012,
+	W: 0.012,
+	T: 0.01,
+	J: 0.02,
+	X: 0.01,
+	Y: 0.01,
+	Z: 0.01
+}
+const pull = (word: string) => CAP_PULL[word?.[0] ?? ''] ?? 0
+
+/**
+ * Baseline offsets of the three H1 lines, in units of the display font-size
+ * (measured in-browser: baseline sits 0.769em below each line's top; lines
+ * stack at 0.75em line-height). Used to pin the 3 horizontal rules and the
+ * right-rail labels exactly to the type baselines, responsively via calc().
+ */
+const BASELINE = [0.769, 1.519, 2.269]
+
+/**
+ * Left edge of grid column `i` (1-indexed) as a calc() against the 12-col grid
+ * with 1.5rem gaps: colLeft(i) = (i-1)/12 · (100% + 1.5rem).
+ */
+const colLeft = (i: number) => {
+	const f = (i - 1) / 12
+	return `calc(${(f * 100).toFixed(4)}% + ${(f * 1.5).toFixed(4)}rem)`
+}
 ---
 
-<header
-	class="relative container flex min-h-[calc(100svh-7.25rem)] flex-col pt-8 pb-10 sm:pt-12 sm:pb-14"
->
-	<!-- Grid with Plotted text blocks — left edges ON the vertical grid lines -->
-	<div aria-hidden="true" class="pointer-events-none absolute inset-0 hidden md:block">
-		<span class="bg-retro-navy/10 absolute inset-y-0 left-1/4 w-px"></span>
-		<span class="bg-retro-navy/10 absolute inset-y-0 left-2/4 w-px"></span>
-		<span class="bg-retro-navy/10 absolute inset-y-0 left-3/4 w-px"></span>
-		<span class="bg-retro-navy/10 absolute inset-x-0 top-1/3 h-px"></span>
-		<span class="bg-retro-navy/10 absolute inset-x-0 top-2/3 h-px"></span>
-	</div>
-	<p
-		aria-hidden="true"
-		class="text-retro-navy/80 absolute top-[13%] left-1/4 hidden flex-col text-xs font-medium tracking-[0.25em] uppercase md:flex"
-	>
-		<span>Software</span>
-		<span>Engineer</span>
-	</p>
-	<p
-		aria-hidden="true"
-		class="text-retro-navy/50 absolute top-1/3 left-3/4 hidden flex-col pt-3 text-[10px] tracking-[0.25em] uppercase md:flex"
-	>
-		<span>kevincastillo.io</span>
-	</p>
-	<p
-		aria-hidden="true"
-		class="text-retro-navy/50 absolute top-2/3 left-2/4 hidden flex-col pt-3 text-[10px] tracking-[0.25em] uppercase md:flex"
-	>
-		<span>Puerto Rico</span>
-		<span>GMT-4</span>
-	</p>
-	<!-- End of grid lines -->
+<header class="container flex min-h-[calc(100svh-7.25rem)] flex-col pb-10 sm:pb-14">
+	<!--
+		Unpadded relative wrapper: flex-centers the H1 in the leftover height and
+		is the content-box positioning context for the baseline rules and rail
+		labels (their colLeft()/calc offsets are measured against it). It has no
+		padding, so those offsets match the page-wide raster in Layout.astro.
+	-->
+	<div class="relative flex grow flex-col">
+		<!-- Vertical raster lines are page-wide (see Layout.astro). Only the
+		     3 baseline horizontal rules below are local to the hero. -->
 
-	<h1
-		aria-label={`${i18n.hero.h1['1']} ${i18n.hero.h1['2']} ${i18n.hero.h1['3']}`}
-		class="text-retro-navy flex grow flex-col justify-center py-6 font-medium"
-	>
-		<span aria-hidden="true" class="tracking-tightest block text-[14rem] leading-[0.75]"
-			>{i18n.hero.h1['1']}</span
-		>
-		<span aria-hidden="true" class="tracking-tightest block text-[14rem] leading-[0.75]"
-			>{i18n.hero.h1['2']}</span
-		>
-		<span aria-hidden="true" class="tracking-tightest block text-[14rem] leading-[0.75]"
-			>{i18n.hero.h1['3']}</span
-		>
-	</h1>
-	<!-- Bottom band -->
-	<div class="border-retro-navy/25 grid grid-cols-12 gap-x-8 gap-y-6 border-t pt-5">
-		<p
-			class="text-retro-navy/70 col-span-12 max-w-[54ch] text-sm leading-6 sm:col-span-6 sm:text-base"
-		>
-			{i18n.hero.p}
-		</p>
-		<dl
-			class="col-span-12 grid grid-cols-1 gap-x-6 gap-y-5 self-start sm:col-span-6 sm:col-start-7 sm:grid-cols-3 sm:gap-y-0"
-		>
-			{
-				i18n.hero.meta.map((item) => (
-					<div class="flex flex-col gap-1.5">
-						<dt class="text-retro-navy/55 text-[10px] tracking-[0.2em] uppercase sm:text-xs">
-							{item.label}
-						</dt>
-						<dd class="text-retro-navy text-sm leading-snug">{item.value}</dd>
-					</div>
-				))
-			}
-		</dl>
+		<!-- Top eyebrow, left edge on column 3 for large screens -->
+		<div class="page-grid relative">
+			<p
+				class="eyebrow text-ink/80 col-span-3 col-start-1 flex flex-col font-medium lg:col-start-3"
+			>
+				<span>Software</span>
+				<span>Engineer</span>
+			</p>
+		</div>
+
+		<!-- Display zone: H1 vertically centered; rules + rail labels pinned to baselines -->
+		<div class="relative flex grow items-center">
+			<div class="relative w-full" style="--display-size: clamp(3.75rem, 26vw, 14rem)">
+				<!-- 3 horizontal rules, exactly on the H1 baselines (desktop only) -->
+				{
+					BASELINE.map((b) => (
+						<span
+							aria-hidden="true"
+							class="grid-line absolute left-1/2 hidden h-0 w-screen -translate-x-1/2 border-t md:block"
+							style={`top: calc(var(--display-size) * ${b})`}
+						/>
+					))
+				}
+
+				<!-- Right rail: kevincastillo.io on column 10 @ line 1; location on column 8 @ line 3 -->
+				<p
+					aria-hidden="true"
+					class="text-ink/50 absolute hidden text-[10px] tracking-[0.25em] uppercase lg:block"
+					style={`top: calc(var(--display-size) * ${BASELINE[0]}); left: ${colLeft(10)}; transform: translateY(-0.4em)`}
+				>
+					kevincastillo.io
+				</p>
+				<p
+					aria-hidden="true"
+					class="text-ink/50 absolute hidden flex-col text-[10px] tracking-[0.25em] uppercase lg:flex"
+					style={`top: calc(var(--display-size) * ${BASELINE[2]}); left: ${colLeft(8)}; transform: translateY(-0.4em)`}
+				>
+					<span>Puerto Rico</span>
+					<span>GMT-4</span>
+				</p>
+
+				<h1
+					aria-label={`${i18n.hero.h1['1']} ${i18n.hero.h1['2']} ${i18n.hero.h1['3']}`}
+					class="text-ink relative"
+					style="padding-bottom: calc(var(--display-size) * 0.5)"
+				>
+					{
+						(['1', '2', '3'] as const).map((k) => (
+							<span
+								aria-hidden="true"
+								class="text-display block"
+								style={`margin-left: -${pull(i18n.hero.h1[k])}em`}
+							>
+								{i18n.hero.h1[k]}
+							</span>
+						))
+					}
+				</h1>
+			</div>
+		</div>
+
+		<!-- Full-bleed separator above the data band -->
+		<span aria-hidden="true" class="grid-line bleed-x block h-0 border-t"></span>
+
+		<!-- Data band: intro on cols 1–6, three meta columns split across cols 7–12.
+	     Below lg the meta drops to full width; below sm it stacks. -->
+		<div class="page-grid relative gap-y-8 lg:gap-y-0">
+			<p class="text-ink/70 col-span-12 max-w-[54ch] text-sm leading-6 lg:col-span-6 lg:text-base">
+				{i18n.hero.p}
+			</p>
+			<dl
+				class="col-span-12 grid grid-cols-1 gap-x-6 gap-y-5 self-start sm:grid-cols-3 sm:gap-y-0 lg:col-span-6 lg:col-start-7"
+			>
+				{
+					i18n.hero.meta.map((item) => (
+						<div class="flex flex-col gap-2">
+							<dt class="eyebrow text-ink/60">{item.label}</dt>
+							<dd
+								class="text-ink/80 m-0 flex flex-wrap items-center gap-x-3 gap-y-2"
+								aria-label={item.values.map((v) => (isIcon(v) ? icons[v].label : v)).join(', ')}
+							>
+								{item.values.map((value) =>
+									isIcon(value) ? (
+										<Icon
+											name={value}
+											class={`w-auto shrink-0 ${icons[value].size === 'lg' ? 'h-9' : 'h-5'}`}
+										/>
+									) : value.includes('@') ? (
+										<a href={`mailto:${value}`} class="hover:text-accent text-sm transition-colors">
+											{value}
+										</a>
+									) : (
+										<span class="text-sm">{value}</span>
+									)
+								)}
+							</dd>
+						</div>
+					))
+				}
+			</dl>
+		</div>
+
+		<!-- Availability + jump link -->
+		<aside class="relative flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pt-6">
+			<p class="text-ink/80 flex items-center gap-2.5 text-sm font-medium">
+				<span class="bg-retro-green size-2.5 rounded-full"></span>
+				{i18n.hero.aside.availableFor}
+			</p>
+			<a
+				href={`/${lang}/#projects`}
+				class="text-accent hover:text-accent-strong eyebrow font-medium transition-colors"
+				>{i18n.hero.cta.work}&nbsp;&nbsp;↓</a
+			>
+		</aside>
 	</div>
-	<!-- Availability + jump link -->
-	<aside class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pt-6">
-		<p class="text-retro-navy/80 flex items-center gap-2.5 text-sm font-medium">
-			<span class="bg-retro-green size-2.5 rounded-full"></span>
-			{i18n.hero.aside.availableFor}
-		</p>
-		<a
-			href={`/${lang}/#work`}
-			class="text-retro-rust hover:text-retro-brown text-xs font-medium tracking-[0.08em] uppercase"
-			>{i18n.hero.cta.work}&nbsp;&nbsp;↓</a
-		>
-	</aside>
 </header>
+<!-- <span aria-hidden="true" class="bleed-x bg-ink/6 block h-px"></span> -->

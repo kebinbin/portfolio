@@ -13,31 +13,68 @@
 	--breakpoint-2xl: 1536px;
 
 	--font-body: neue-haas-unica, sans-serif;
-	--font-brand: neue-haas-unica, sans-serif; /* remove */
 
 	--grid-template-columns-nav: 1fr auto auto;
 
 	--text-10xl: 10rem;
-	--leading-18: 4.5rem; /*remove?*/
-	--leading-20: 5rem;
-	--leading-27: 6.75rem; /*remove? */
-	--leading-32: 8rem;
 
 	--tracking-tightest: -0.075em;
-
-	/* For new design, some might be removed later */
-	--text-11xl: 10rem;
-
 	--tracking-display: -0.035em;
 
+	/* Type roles — see DESIGN.md §4 */
+	/* Width-driven: the poster fills the column, never shrinks by viewport
+	   height (that leaves the H1 small with dead space on the right). On short
+	   screens the hero simply grows past the fold and scrolls. Keep this value
+	   in sync with --display-size set inline on the hero H1 group. */
+	--text-display: clamp(3.75rem, 26vw, 14rem);
+	--text-display--line-height: 0.75;
+	--text-display--letter-spacing: -0.075em;
+	--text-display--font-weight: 500;
+
+	--text-headline-lg: clamp(3.5rem, 15vw, 11rem);
+	--text-headline-lg--line-height: 0.8;
+	--text-headline-lg--letter-spacing: -0.075em;
+	--text-headline-lg--font-weight: 500;
+
+	--text-headline: clamp(4rem, 13vw, 10rem);
+	--text-headline--line-height: 0.85;
+	--text-headline--letter-spacing: -0.075em;
+	--text-headline--font-weight: 500;
+
+	/* Retro print palette — see DESIGN.md §3 */
 	--color-retro-bone: #ece0c8;
-	--color-retro-gold: #e0a32e; /* not used right now */
-	--color-retro-orange: #d96f2b; /* not used right now */
+	--color-retro-ink: #211d16;
+	--color-retro-coal: #181512;
+	--color-retro-gold: #e0a32e;
+	--color-retro-orange: #d96f2b;
 	--color-retro-rust: #b3401e;
 	--color-retro-brown: #6b3a1f;
-	--color-retro-blue: #33607f; /* not used right now */
-	--color-retro-navy: #1e3346;
+	--color-retro-blue: #33607f; /* reserve */
+	--color-retro-navy: #1e3346; /* deprecated as text color — accent only */
 	--color-retro-green: #6d8a2e;
+}
+
+/* Semantic tokens: flip under .dark, exposed as colors below */
+:root {
+	--surface: var(--color-retro-bone);
+	--ink: var(--color-retro-ink);
+	--accent: var(--color-retro-rust);
+	--accent-strong: var(--color-retro-brown);
+	--grid-line: color-mix(in oklab, var(--ink) 5%, transparent);
+}
+.dark {
+	--surface: var(--color-retro-coal);
+	--ink: var(--color-retro-bone);
+	--accent: var(--color-retro-orange);
+	--accent-strong: var(--color-retro-gold);
+}
+
+@theme inline {
+	--color-surface: var(--surface);
+	--color-ink: var(--ink);
+	--color-accent: var(--accent);
+	--color-accent-strong: var(--accent-strong);
+	--color-grid-line: var(--grid-line);
 }
 
 @utility container {
@@ -51,10 +88,40 @@
 	}
 }
 
+/* Break a horizontal line (or any block) out of the centered container to the
+   full viewport width — see DESIGN.md §2.2. Works because `container` is
+   centered, so its horizontal center is the viewport's. For absolutely
+   positioned lines use `left-1/2 w-screen -translate-x-1/2` instead. `body`
+   has `overflow-x-clip`, so 100vw never adds a horizontal scrollbar. */
+@utility bleed-x {
+	width: 100vw;
+	max-width: 100vw;
+	margin-inline: calc(50% - 50vw);
+}
+
+@utility grid-line {
+	border-color: var(--grid-line);
+	border-style: dashed;
+}
+
 @utility page-grid {
 	display: grid;
-	grid-template-columns: repeat(12, minmax(0, 1fr));
+	grid-template-columns: repeat(1, minmax(0, 1fr));
 	column-gap: 1.5rem;
+	@variant sm {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+	@variant lg {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+	}
+}
+
+/* Plotted micro-label / meta type — see DESIGN.md §4.1 */
+@utility eyebrow {
+	font-size: 0.6875rem;
+	line-height: 1.45;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
 }
 
 /*
@@ -80,6 +147,16 @@
 		}
 	}
 
+	::selection {
+		background-color: var(--accent);
+		color: var(--surface);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
 	img {
 		max-width: 100%;
 		height: auto;
@@ -87,19 +164,6 @@
 
 	a {
 		text-decoration: none;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		/* text-transform: uppercase; */
-	}
-
-	p {
-		/* text-wrap: pretty; */
 	}
 
 	ul {
@@ -114,7 +178,6 @@
 		::view-transition-old(*),
 		::view-transition-new(*) {
 			animation-duration: 0.5s;
-			/* animation-timing-function: ease-in-out; */
 		}
 	}
 }

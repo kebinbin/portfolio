@@ -1,42 +1,36 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
-import { iconPaths } from './IconPaths'
+import { Icon as Iconify } from 'astro-icon/components'
+import { icons, type IconName } from './icons'
 
 interface Props {
-	icon: keyof typeof iconPaths
-	color?: string
-	size?: string
-	viewBox?: string
+	name: IconName
+	class?: string
+	/** Accessible label. When omitted the icon is decorative (aria-hidden). */
+	label?: string
 }
 
-const { color = 'currentcolor', icon, size } = Astro.props
-const iconPath = iconPaths[icon]
+const { name, class: className, label } = Astro.props
+const def = icons[name]
 
-const attrs: HTMLAttributes<'svg'> = {}
-if (size) attrs.style = { '--size': size }
-
-const { viewBox } = Astro.props
+// Default to 1em so bare <Icon name="list" /> matches surrounding text size.
+const cls = className ?? 'size-[1em]'
+const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' }
 ---
 
-<svg
-	xmlns="http://www.w3.org/2000/svg"
-	width="40"
-	height="40"
-	viewBox={viewBox || '0 0 256 256'}
-	{/* this needs to be removed, fix the icons viewBox */}
-	aria-hidden="true"
-	stroke={color}
-	stroke-width="6"
-	fill={color}
-	{...attrs}
->
-	<g set:html={iconPath} />
-</svg>
-
-<style>
-	svg {
-		vertical-align: middle;
-		width: var(--size, 1em);
-		height: var(--size, 1em);
-	}
-</style>
+{
+	def.source === 'iconify' ? (
+		<Iconify name={def.id} class={cls} {...a11y} />
+	) : def.source === 'phosphor' ? (
+		<svg
+			viewBox="0 0 256 256"
+			class={cls}
+			fill="currentColor"
+			stroke="currentColor"
+			stroke-width="6"
+			{...a11y}
+			set:html={def.body}
+		/>
+	) : (
+		<svg viewBox={def.viewBox} class={cls} fill="currentColor" {...a11y} set:html={def.body} />
+	)
+}

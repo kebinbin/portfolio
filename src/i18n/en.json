@@ -8,9 +8,15 @@
 			},
 			"p": "Software Engineer with enterprise background, building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Open to full-time or freelance opportunities — explore my work and let’s create something exceptional.",
 			"meta": [
-				{ "label": "Building", "value": "Web apps · UI/UX · APIs" },
-				{ "label": "Toolkit", "value": "React · TypeScript · Java · Spring" },
-				{ "label": "Contact", "value": "hello@kevincastillo.io" }
+				{
+					"label": "Worked with",
+					"values": ["hp", "hpe"]
+				},
+				{
+					"label": "Toolkit",
+					"values": ["react", "typescript", "java", "spring-boot", "docker", "sql"]
+				},
+				{ "label": "Contact", "values": ["hello@kevincastillo.io"] }
 			],
 			"cta": {
 				"work": "Selected work"
@@ -20,7 +26,8 @@
 			}
 		},
 		"projects": {
-			"h2": "Explore my work"
+			"h2": "Selected work",
+			"cta": "View case study"
 		},
 		"experience": {
 			"h2": {
@@ -29,12 +36,6 @@
 				"3": "worked with"
 			},
 			"experiences": [
-				{
-					"company": "Freelance / Professional Development",
-					"role": "Full-Stack Developer & Designer",
-					"dates": "Sep 2022 - Present",
-					"paragraph": "Building Routini, an open-source minimal React router in TypeScript — 2.8KB, view transitions, lazy routes. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
-				},
 				{
 					"company": "Hewlett Packard Enterprise",
 					"role": "Software Engineer",
@@ -120,17 +121,28 @@
 		},
 		"about": {
 			"h2": {
-				"1": "I craft",
-				"2": "digital magic",
-				"3": "using code"
+				"1": "The maker",
+				"2": "behind the",
+				"3": "work"
 			},
 			"bio": {
-				"p1": "I’m a software engineer with over 5 years of experience, ranging from small non-profits to large tech companies with ambitious goals.",
-				"p2": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match.",
-				"p3": "Outside of work, I find inspiration through walking on nature, photography, traveling, and spending time in my garden. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
+				"intro": "I’m a software engineer with over 5 years of experience, ranging from small non-profits to large tech companies with ambitious goals.",
+				"career": {
+					"h3": "What I do",
+					"p": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match."
+				},
+				"extra": {
+					"h3": "Beyond the screen",
+					"p": "Outside of work, I find inspiration through walking on nature, photography, traveling, and spending time in my garden. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
+				}
+			},
+			"portrait": {
+				"img_alt": "Portrait of Kevin Castillo.",
+				"eyebrow": "Kevin Castillo · Software Engineer"
 			},
 			"education": {
-				"h3": "University of Puerto Rico",
+				"h3": "Education",
+				"college": "University of Puerto Rico",
 				"degree": "Computer Engineering",
 				"dates": "2009 - 2015",
 				"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
@@ -189,7 +201,8 @@
 		},
 		"contact": {
 			"h2": {
-				"1": "Let's work together."
+				"1": "Let's work",
+				"2": "together"
 			},
 			"paragraph": "Shoot me a note with your project details at "
 		},
