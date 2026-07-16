@@ -1,0 +1,156 @@
+---
+title: Skeleton
+type: Chrome Extension
+role: Design & Development
+period: 2024 – 2026
+publishDate: 2024-05-20 00:00:00
+img: /assets/projects/case-study-1/mode-full.webp
+img_alt: Skeleton Layout's Full Visualization mode applied to a page — every element tinted by DOM depth, with structural outlines, no layout shift.
+description: |
+  A Manifest V3 Chrome extension that keeps a page's structure visible while you build it — coloring and outlining elements by DOM depth so wrappers, nesting, spacing and overflow stay on screen next to your editor. It injects generated CSS instead of touching your markup, isolates its own diagnostics in a closed Shadow DOM, and removes exactly what it added when you turn it off.
+tags:
+  - Design
+  - Development
+  - Extension
+---
+import TextBlock from '../../../components/content/TextBlock.astro'
+import Video from '../../../components/content/Video.astro'
+import Image from '../../../components/content/Image.astro'
+
+<TextBlock title="Why I built it">
+
+For years my instinct when a layout misbehaved was the same: drop a temporary `background` or `border` on a handful of elements so the invisible parts — empty wrappers, nesting levels, the box that's quietly adding margin — became visible while I edited. It works, but it's a chore: pick arbitrary colors, add outlines, keep working, then remember to strip all of it out before committing, and start over on the next component.
+
+**Skeleton Layout turns that habit into a toolbar toggle.** Where Chrome DevTools inspects a *selected* element (and needs its panel open), this paints the *whole page* at once and stays out of the way — pinned beside the code editor, no selection required. It doesn't try to replace DevTools; it's the persistent, zoomed-out companion to it. The design was fenced in by hard constraints from the start: never add classes, attributes, or inline styles to the page; never change layout dimensions; make it reversible in one click; and ask for as little permission as possible.
+
+</TextBlock>
+
+<TextBlock title="Coloring the whole page with CSS, not JavaScript">
+
+The core decision — the one everything else hangs off — is that the visualization is **generated CSS selectors**, not a script that walks the DOM adding classes. Depth mode emits rules shaped by nesting level:
+
+```js
+function depthSelector(depth) {
+  return `:where(:root${" > *".repeat(depth)})`
+}
+```
+
+Because it's CSS, any element the page renders *later* is styled for free — there's no `MutationObserver` re-tagging new nodes just to keep them colored. The overrides are split across Chrome's real cascade origins rather than hidden behind a wall of `!important`: base rules go in as `AUTHOR`, user-forced overrides as `USER`, so the "override page colors" toggles map to how the cascade actually resolves.
+
+```js
+export function buildStyleInjections(candidate) {
+  const { style } = normalizeConfig(candidate)
+  const rulesByOrigin = { AUTHOR: [], USER: [] }
+  const addRules = (rules, override) => {
+    rulesByOrigin[override ? 'USER' : 'AUTHOR'].push(...rules)
+  }
+  addRules(backgroundRules(style, style.overrideBgColor), style.overrideBgColor)
+  addRules(borderRules(style, style.overrideBorder), style.overrideBorder)
+  addRules(textRules(style, true), true)
+  return Object.entries(rulesByOrigin)
+    .filter(([, rules]) => rules.length > 0)
+    .map(([origin, rules]) => ({ origin, css: rules.join('\n') }))
+}
+```
+
+Two details earned their keep. Structure is drawn with **outlines, not borders**, with a negative `outline-offset` — a border would change box dimensions and reflow the page, defeating the purpose. And once the page was covered in wildcard rules, the extension's *own* tooltips got caught by them; the fix was to exclude every internal custom element from the generated selectors, not to patch one stray border.
+
+</TextBlock>
+
+<Image src="/assets/projects/case-study-1/mode-outline.webp" alt="Skeleton Layout's Outline Only mode — the page keeps its real colors while every element gains a structural outline." title="Outline Only keeps the page's real design intact and adds just the structural outlines — useful when color tinting would fight the content you're checking." />
+
+<TextBlock title="Three ways to look at a layout">
+
+The same engine drives three modes, chosen from the toolbar or a context submenu:
+
+- **Full visualization** — depth- or sibling-based background tints (a six-color editable palette or monochrome), structural outlines, and optional auto-contrast text.
+- **Outline only** — leaves the page's colors alone and shows structure through outlines, for when tinting would obscure what you're inspecting.
+- **Hover inspector** — no tinting at all; hover to read an element's box model.
+
+Settings live in Chrome's **side panel**, not a separate tab, so the page you're studying stays on screen while you tune the palette. And a mode switch never costs you your customization: your Full Visualization palette and opacity are stashed in a separate `fullStyle` so flipping to Outline or Inspector and back restores exactly what you had.
+
+</TextBlock>
+
+<Image src="/assets/projects/case-study-1/mode-inspector.webp" alt="Skeleton Layout's Hover Inspector — a box-model tooltip over a hovered element showing margin, border, padding and content values, display and box-sizing, plus flex/grid status." title="The Hover Inspector reads the full box model — margin, border, padding, content on all four sides, plus display, box-sizing, overflow, and flex/grid roles — without adding a single class or inline style to the element." />
+
+<TextBlock title="The inspector — reading the box model without touching the DOM">
+
+The hover inspector reports tag, id, dimensions, depth, `display`, `box-sizing`, overflow state, the full four-sided box model, flex/grid membership, stacking context, `z-index` and more — and it does all of it without mutating the inspected element. Instead it mounts its overlays and tooltip inside a **closed Shadow DOM** host appended to the document, so the page's CSS can't reach in and the extension's wildcard rules can't reach out:
+
+```js
+const host = document.createElement('skeleton-layout-element-inspector')
+const shadow = host.attachShadow({ mode: 'closed' })
+shadow.append(style, ...overlays, tooltip)
+document.documentElement.append(host)
+```
+
+The overlay stylesheet opens with `all: initial !important` to shrug off inherited page styles, positions are scheduled through `requestAnimationFrame`, and the tooltip clamps itself to the viewport. The layout classification lives in its own file with no DOM dependency so it can be unit-tested off a real page. The fiddliest piece was grid-track counting: you can't just split `grid-template-columns` on spaces, because `repeat()` and line names nest their own syntax — so it carries a small parser that tracks bracket and paren depth.
+
+</TextBlock>
+
+<TextBlock title="Live preview without corrupting saved state">
+
+Editing settings previews instantly on the live page — but a preview must never quietly become your saved config, and an early version got that wrong in a dozen ways (opacity reverting, palette drafts lost on scroll, previews stranded when the panel closed). The fix was to model three distinct phases — **saved**, **draft**, and **previewed** — in a `SettingsState` object that owns every transition and hands back normalized copies, so callers can't mutate saved state through a stray reference:
+
+```js
+switchMode(mode) {
+  if (!QUICK_MODES.includes(mode)) return this.draft
+  const fullStyle =
+    this.#draft.style.mode === 'full' ? this.#draft.style : this.#draft.fullStyle
+  const style = mode === 'full' ? fullStyle : presetConfigForMode(mode).style
+  return this.updateDraft({ style, fullStyle })
+}
+```
+
+The side panel opens a named `settings-preview` port; preview requests are debounced (120 ms), tagged with request IDs, and serialized through a promise queue. The service worker marks each tab with a `previewOwner`, so one panel can't stomp another's preview, and a disconnect reverts any preview it still owned. Save is a separate commit path — closing the panel discards an unsaved preview instead of leaking it into storage.
+
+</TextBlock>
+
+<Image src="/assets/projects/case-study-1/settings.webp" alt="Skeleton Layout's settings in the Chrome side panel — mode selector, editable six-color palette, background opacity, outline style and width, and text-color controls, all native inputs." title="Settings live in Chrome's side panel so the page stays visible while you tune it — native controls throughout, with a live preview that never commits until you save." />
+
+<TextBlock title="Reversible by construction — insert before remove">
+
+Turning the extension off has to leave *no* trace, which sounds trivial until you learn that `chrome.scripting.removeCSS()` demands the exact CSS text **and** cascade origin used to insert it. So the service worker stores the precise generated injection set in `chrome.storage.session`, keyed by tab id, and on a settings change it diffs the old and new `{ css, origin }` pairs. The order matters: new CSS goes in *before* stale CSS comes out, so the page never flashes unstyled mid-change.
+
+```js
+// Insert replacements first so the page never renders without an active
+// visualization between settings changes.
+for (const injection of additions) {
+  await chrome.scripting.insertCSS({
+    target: { tabId },
+    css: injection.css,
+    origin: injection.origin,
+  })
+  inserted.push(injection)
+}
+await setTabState(tabId, injections /* … */)
+await removeInjections(tabId, removals)
+```
+
+A per-tab promise lock serializes everything — a toolbar click, a settings update, a navigation event and a preview request can't race — and a partial failure rolls back the CSS it just inserted while leaving the previously working visualization intact. Because Manifest V3 service workers stop and restart at will, the toolbar badge (`ON` / `OL` / `IN`, or an orange `!` when Chrome blocks injection) is always rebuilt from session storage rather than kept in memory.
+
+</TextBlock>
+
+<TextBlock title="Overflow diagnostics, honestly labeled experimental">
+
+A separate, opt-in diagnostic hunts for horizontal overflow — the classic "why is there a scrollbar" bug. It flags likely document-level overflow in red and possible clipping in amber, drawing every marker onto a **single Canvas 2D surface** inside a closed Shadow DOM rather than spawning an overlay node per candidate. It's bounded on purpose: a 20 ms scan budget, caps of 12,000 scanned elements / 1,000 candidates / 300 drawn markers, and debounced re-scans on mutation and scroll-idle.
+
+The first version was too eager — it flagged inline text longer than its line box, intentional scroll containers, big decorative type. So the classifier was narrowed to separate *confirmed* page overflow from *possible* clipping and to ignore common intentional cases. But overflow intent can't be read from geometry alone, so it stays labeled **experimental** and the count is a hint, not a verdict.
+
+</TextBlock>
+
+<TextBlock title="A small surface, and as few permissions as possible">
+
+The manifest asks for five permissions — `activeTab`, `contextMenus`, `scripting`, `sidePanel`, `storage` — and declares **zero** `host_permissions`. Nothing runs on a site until you invoke the extension there, and diagnostic content scripts are injected only when their feature is on; there are no static content scripts sitting on every page. Preferences sync via `chrome.storage.sync`; ephemeral per-tab state lives in `chrome.storage.session`. There's no telemetry, no analytics, no page content ever leaves the browser — which also means I have no usage data, a deliberate trade.
+
+The whole thing is plain JavaScript, HTML and CSS with **no build step and no runtime dependencies** — about 3,900 lines of production source, 51 automated tests (Node's native `node:test`), packaged into a **15-file, ~35 KB** archive by a custom release script that builds a *deterministic* ZIP (fixed timestamps, sorted paths, level-9 deflate) and refuses to ship if the manifest and package versions disagree, if `host_permissions` sneaks in, or if it finds `eval`, `new Function`, or a remote script tag.
+
+</TextBlock>
+
+<TextBlock title="Where it stands">
+
+Skeleton Layout is a **release candidate at v0.3.0**, fully usable as an unpacked extension but not yet in the Chrome Web Store — there's no tagged release, the store screenshots and demo recording aren't done, and it has no public users or reviews yet. It's honest about its ceiling, too: injected CSS can't cross Shadow DOM boundaries, the current scripting target skips iframes, pseudo-elements aren't colored as their own nodes, and nesting past depth 64 stops getting a fresh color. It's Chrome-only (116+, for the Side Panel API), and the auto-contrast math compares against the generated palette color, not the composited result once a translucent tint mixes with the page — so it's a strong heuristic, not a guaranteed WCAG figure.
+
+The road to a real launch is mostly validation, not features: run the packaged ZIP in a clean profile, work the manual QA checklist across real sites, record the demo, tag `v0.3.0`, and submit — first to trusted testers. After that, real user reports get to decide whether overflow detection graduates, gets redesigned, or gets cut.
+
+</TextBlock>
