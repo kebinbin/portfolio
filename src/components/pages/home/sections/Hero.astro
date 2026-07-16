@@ -82,8 +82,8 @@ const colLeft = (i: number) => {
 			<p
 				class="eyebrow text-ink/80 col-span-3 col-start-1 flex flex-col font-medium lg:col-start-3"
 			>
-				<span>Software</span>
-				<span>Engineer</span>
+				<span>{i18n.hero.eyebrow.role[0]}</span>
+				<span>{i18n.hero.eyebrow.role[1]}</span>
 			</p>
 		</div>
 
@@ -107,15 +107,15 @@ const colLeft = (i: number) => {
 					class="text-ink/50 absolute hidden text-[10px] tracking-[0.25em] uppercase lg:block"
 					style={`top: calc(var(--display-size) * ${BASELINE[0]}); left: ${colLeft(10)}; transform: translateY(-0.4em)`}
 				>
-					kevincastillo.io
+					{i18n.hero.eyebrow.site}
 				</p>
 				<p
 					aria-hidden="true"
 					class="text-ink/50 absolute hidden flex-col text-[10px] tracking-[0.25em] uppercase lg:flex"
 					style={`top: calc(var(--display-size) * ${BASELINE[2]}); left: ${colLeft(8)}; transform: translateY(-0.4em)`}
 				>
-					<span>Puerto Rico</span>
-					<span>GMT-4</span>
+					<span>{i18n.hero.eyebrow.location[0]}</span>
+					<span>{i18n.hero.eyebrow.location[1]}</span>
 				</p>
 
 				<h1

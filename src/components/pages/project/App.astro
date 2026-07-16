@@ -9,40 +9,39 @@ const [, projectSlug] = slug.split('/')
 
 <Layout>
 	<header class="container py-6">
-		<div class="flex flex-col gap-2 xl:gap-12">
-			<div class="leading-none">
+		<div class="page-grid items-start gap-y-8 xl:gap-y-14">
+			<div class="col-span-12 leading-none">
 				<h1
 					transition:name={`${projectSlug}-title`}
-					class="tracking-tightest fit-text -ml-1 text-start font-medium capitalize lg:-ml-2 xl:text-center"
+					class="tracking-tightest -ml-1 text-[clamp(3.5rem,16vw,12rem)] leading-[0.9] font-medium capitalize lg:-ml-2"
 				>
 					{project.data.title}
 				</h1>
 			</div>
-			<div class="flex flex-col gap-6 xl:flex-row">
-				<div
-					class="flex w-full max-w-2xl flex-wrap content-start items-start gap-x-2 gap-y-0 text-xl md:text-2xl lg:text-3xl"
+			<div class="col-span-12 lg:col-span-5">
+				<div class="eyebrow text-ink/45 flex flex-wrap items-center gap-2.5">
+					<span transition:name={`${projectSlug}-period`} class="text-ink font-semibold">
+						{project.data.period}
+					</span>
+					<span aria-hidden="true" class="bg-ink/25 h-px w-6"></span>
+					<span>{project.data.role}</span>
+				</div>
+				<p
+					transition:name={`${projectSlug}-type`}
+					class="text-ink mt-3 text-2xl font-light tracking-tight text-pretty capitalize lg:text-3xl"
 				>
-					<span
-						transition:name={`${projectSlug}-type`}
-						class="tracking-tightest font-light text-stone-600 dark:text-stone-500"
-						>{project.data.type}</span
-					>
-					<span class="font-semibold tracking-tight"
-						>{project.data.role}<span transition:name={`${projectSlug}-period`} class="lowercase">
-							({project.data.period})</span
-						></span
-					>
-				</div>
-				<div class="w-full">
-					<p class="text-base leading-7 text-pretty text-stone-600 lg:text-lg dark:text-stone-500">
-						{project.data.description}
-					</p>
-				</div>
+					{project.data.type}
+				</p>
+			</div>
+			<div class="col-span-12 lg:col-span-6 lg:col-start-7 lg:pt-1">
+				<p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">
+					{project.data.description}
+				</p>
 			</div>
 		</div>
 		<div
 			transition:name={`${projectSlug}-hero-img`}
-			class="mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 border-stone-950/7 shadow-xl outline-1 outline-stone-950/15 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7 dark:border-stone-900/20 dark:outline-stone-100/5"
+			class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7"
 		>
 			<img
 				src={project.data.img}
@@ -52,7 +51,7 @@ const [, projectSlug] = slug.split('/')
 			/>
 		</div>
 	</header>
-	<main class="container flex flex-col gap-10 py-8 xl:gap-20 xl:py-16">
+	<main class="case-study container flex flex-col gap-10 py-8 xl:gap-20 xl:py-16">
 		<slot />
 	</main>
 	<CTA />

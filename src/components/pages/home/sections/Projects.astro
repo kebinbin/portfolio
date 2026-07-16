@@ -35,9 +35,11 @@ const projects = (await getCollection('projects'))
 								href={`projects/${projectSlug}`}
 								class={`col-span-12 block ${imageLeft ? 'lg:col-span-8' : 'lg:col-span-8 lg:col-start-5'}`}
 							>
-								<div class="overflow-hidden rounded-[.5rem] border-[5px] border-black/8 shadow-[0_28px_55px_-16px_rgba(0,0,0,0.45)] outline outline-1 outline-black/12 md:rounded-[1rem] md:border-[6px] xl:rounded-[1.5rem] xl:border-[7px]">
+								<div
+									transition:name={`${projectSlug}-hero-img`}
+									class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
+								>
 									<img
-										transition:name={`${projectSlug}-hero-img`}
 										src={data.img}
 										alt={data.img_alt || ''}
 										loading={index === 0 ? 'eager' : 'lazy'}

@@ -14,10 +14,6 @@
 
 	--font-body: neue-haas-unica, sans-serif;
 
-	--grid-template-columns-nav: 1fr auto auto;
-
-	--text-10xl: 10rem;
-
 	--tracking-tightest: -0.075em;
 	--tracking-display: -0.035em;
 
@@ -180,4 +176,147 @@
 			animation-duration: 0.5s;
 		}
 	}
+}
+
+/*
+  Case-study section numbering (DESIGN.md §9.6). Each `TextBlock` is a numbered
+  section — auto-numbered with a CSS counter so authoring stays plain (no manual
+  index). Only `.text-block` increments, so interleaved Image/Video blocks don't
+  advance the count. Reuses the home Projects ledger device (bold index +
+  hairline).
+*/
+.case-study {
+	counter-reset: textblock;
+}
+.text-block {
+	counter-increment: textblock;
+}
+.text-block-index::before {
+	content: counter(textblock, decimal-leading-zero);
+}
+
+/*
+  Project case-study prose (DESIGN.md §9.6). MDX authored inside `.project-prose`
+  (TextBlock body): markdown paragraphs, lists, sub-subheads, inline `code`, and
+  Shiki-highlighted fenced blocks — all mapped onto the design tokens so the
+  case studies read in the same voice as the rest of the site. `code` is the one
+  functional exception to the single-font rule: a system monospace stack (no
+  web font downloaded), used only for code, never for display/brand type.
+*/
+@utility project-prose {
+	--code-font:
+		ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+	color: color-mix(in oklab, var(--ink) 72%, transparent);
+	font-size: 1rem;
+	line-height: 1.75;
+	text-wrap: pretty;
+
+	& > * + * {
+		margin-top: 1.25em;
+	}
+
+	& strong {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	/* Sub-subheads within a case-study section — one step below TextBlock's
+	   Title h2. Kept on the type ladder: medium weight, tight tracking, ink. */
+	& h3 {
+		margin-top: 2em;
+		color: var(--ink);
+		font-size: 1.5rem;
+		font-weight: 500;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+	}
+	& h4 {
+		margin-top: 1.75em;
+		color: var(--ink);
+		font-size: 1.125rem;
+		font-weight: 600;
+	}
+
+	/* Swiss dash markers instead of bullets, aligned to the grid feel */
+	& ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+	}
+	& li {
+		position: relative;
+		padding-left: 1.5em;
+	}
+	& li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.85em;
+		width: 0.75em;
+		height: 1px;
+		background: var(--accent);
+	}
+	& ol {
+		list-style: decimal;
+		padding-left: 1.5em;
+	}
+	& ol li {
+		padding-left: 0.25em;
+	}
+	& ol li::before {
+		content: none;
+	}
+
+	& a {
+		color: var(--accent);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		transition: color 0.15s;
+	}
+	& a:hover {
+		color: var(--accent-strong);
+	}
+
+	/* Inline code — subtle ink-tinted pill. Excludes code inside fenced blocks. */
+	& :not(pre) > code {
+		font-family: var(--code-font);
+		font-size: 0.875em;
+		padding: 0.15em 0.4em;
+		border-radius: 0.35rem;
+		background: color-mix(in oklab, var(--ink) 8%, transparent);
+		color: var(--ink);
+		white-space: nowrap;
+	}
+}
+
+/*
+  Shiki fenced code blocks (build-time highlighted, class `astro-code`). Panel
+  background is overridden to a palette tint so blocks sit in the design instead
+  of the theme's stock white/black; token colors come from Shiki. Light theme
+  colors are applied inline by default; the `.dark` rule swaps to the dark vars
+  (CSS only — no client JS).
+*/
+pre.astro-code {
+	margin-top: 1.25em;
+	padding: 1.25rem 1.5rem;
+	border-radius: 0.75rem;
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.6;
+	background: color-mix(in oklab, var(--ink) 4%, var(--surface)) !important;
+	border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+}
+pre.astro-code code {
+	font-family:
+		ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+	font-size: inherit;
+	background: none;
+	padding: 0;
+}
+:where(.dark) pre.astro-code,
+:where(.dark) pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
 }

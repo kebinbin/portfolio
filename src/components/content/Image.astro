@@ -1,0 +1,26 @@
+---
+import { existsSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+
+const { src, alt = '', title } = Astro.props
+const publicPath = fileURLToPath(new URL(`../../../public${src}`, import.meta.url))
+const exists = existsSync(publicPath)
+---
+
+<div class="flex flex-col gap-3">
+	<div
+		class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
+	>
+		{
+			exists ? (
+				<img src={src} alt={alt} loading="lazy" decoding="async" class="h-auto w-full" />
+			) : (
+				<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
+					<span class="text-xs font-semibold tracking-wide uppercase">Screenshot placeholder</span>
+					<span class="text-ink/60 max-w-md text-sm text-pretty">{alt}</span>
+				</div>
+			)
+		}
+	</div>
+	{title && <p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">{title}</p>}
+</div>
