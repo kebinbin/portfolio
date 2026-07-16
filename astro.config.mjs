@@ -6,6 +6,9 @@ import icon from 'astro-icon'
 
 // https://astro.build/config
 export default defineConfig({
+	// Canonical origin — lets MainHead.astro emit absolute URLs for
+	// canonical/og:image/hreflang.
+	site: 'https://kevincastillo.io',
 	i18n: {
 		defaultLocale: 'en',
 		locales: ['es', 'en']

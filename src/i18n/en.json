@@ -136,7 +136,9 @@
 		},
 		"footer": {},
 		"metadata": {
-			"email": "hello@kevincastillo.io"
+			"email": "hello@kevincastillo.io",
+			"title": "Kevin Castillo — Software Engineer",
+			"description": "Software engineer with enterprise background building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Design. Code. Ship."
 		}
 	},
 	"404": {

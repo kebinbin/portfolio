@@ -136,7 +136,9 @@
 		},
 		"footer": {},
 		"metadata": {
-			"email": "hello@kevincastillo.io"
+			"email": "hello@kevincastillo.io",
+			"title": "Kevin Castillo — Ingeniero de Software",
+			"description": "Ingeniero de software con experiencia en entornos corporativos, creando backends escalables, frontends intuitivos y UI/UX de calidad. Diseño. Código. Entrega."
 		}
 	},
 	"404": {

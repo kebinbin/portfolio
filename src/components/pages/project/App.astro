@@ -7,7 +7,13 @@ const { slug } = project
 const [, projectSlug] = slug.split('/')
 ---
 
-<Layout>
+<Layout
+	title={`${project.data.title} — Kevin Castillo`}
+	description={project.data.description}
+	image={project.data.img}
+	imageAlt={project.data.img_alt}
+	type="article"
+>
 	<header class="container py-6">
 		<div class="page-grid items-start gap-y-8 xl:gap-y-14">
 			<div class="col-span-12 leading-none">
