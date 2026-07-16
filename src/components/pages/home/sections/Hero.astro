@@ -49,12 +49,18 @@ const CAP_PULL: Record<string, number> = {
 const pull = (word: string) => CAP_PULL[word?.[0] ?? ''] ?? 0
 
 /**
- * Baseline offsets of the three H1 lines, in units of the display font-size
- * (measured in-browser: baseline sits 0.769em below each line's top; lines
- * stack at 0.75em line-height). Used to pin the 3 horizontal rules and the
- * right-rail labels exactly to the type baselines, responsively via calc().
+ * Baseline offsets of the three H1 lines, in units of the display font-size,
+ * measured in-browser with the real neue-haas-unica webfont. Two components:
+ *  - alphabetic baseline: 0.787em below each line's top (flat-bottom glyphs like
+ *    D/H/i/n rest here); lines stack at the 0.775 line-height set on
+ *    --text-display in global.css → 0.787 + 0.775·n.
+ *  - +0.015em: round glyphs (C/O/S/o/e/s) overshoot ~0.015em (3.36px @224) below
+ *    the alphabetic baseline. "Code." is *all* round letters, so a rule on the
+ *    metric baseline reads a couple px high — we drop to the visual ink bottom.
+ * → BASELINE[n] = 0.787 + 0.015 + 0.775·n. Re-measure if the line-height or the
+ * H1 words change materially (scratchpad baseline + overshoot rigs).
  */
-const BASELINE = [0.769, 1.519, 2.269]
+const BASELINE = [0.802, 1.577, 2.352]
 
 /**
  * Left edge of grid column `i` (1-indexed) as a calc() against the 12-col grid
@@ -101,18 +107,18 @@ const colLeft = (i: number) => {
 					))
 				}
 
-				<!-- Right rail: kevincastillo.io on column 10 @ line 1; location on column 8 @ line 3 -->
+				<!-- Right rail: kevincastillo.io on column 11 @ line 1; location on column 9 @ line 3 -->
 				<p
 					aria-hidden="true"
-					class="text-ink/50 absolute hidden text-[10px] tracking-[0.25em] uppercase lg:block"
-					style={`top: calc(var(--display-size) * ${BASELINE[0]}); left: ${colLeft(10)}; transform: translateY(-0.4em)`}
+					class=`text-ink/50 absolute hidden text-[10px] tracking-[0.25em] uppercase ${lang === 'es' ? "2xl:block" : "xl:block"}`
+					style={`top: calc(var(--display-size) * ${BASELINE[0]}); left: ${colLeft(11)}; transform: translateY(-0.4em)`}
 				>
 					{i18n.hero.eyebrow.site}
 				</p>
 				<p
 					aria-hidden="true"
-					class="text-ink/50 absolute hidden flex-col text-[10px] tracking-[0.25em] uppercase lg:flex"
-					style={`top: calc(var(--display-size) * ${BASELINE[2]}); left: ${colLeft(8)}; transform: translateY(-0.4em)`}
+					class=`text-ink/50 absolute hidden flex-col text-[10px] tracking-[0.25em] uppercase ${lang === 'es' ? "2xl:flex" : "xl:flex"}`
+					style={`top: calc(var(--display-size) * ${BASELINE[lang === 'es' ? 1 : 2]}); left: ${colLeft(lang === 'es' ? 9 : 8)}; transform: translateY(-0.4em)`}
 				>
 					<span>{i18n.hero.eyebrow.location[0]}</span>
 					<span>{i18n.hero.eyebrow.location[1]}</span>

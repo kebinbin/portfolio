@@ -4,7 +4,7 @@
 			"h1": {
 				"1": "Diseño.",
 				"2": "Código.",
-				"3": "Entrega."
+				"3": "Producto."
 			},
 			"eyebrow": {
 				"role": ["Ingeniero", "de Software"],
@@ -36,9 +36,9 @@
 		},
 		"about": {
 			"h2": {
-				"1": "Una breve",
-				"2": "introducción",
-				"3": "a mi historia"
+				"1": "Un poco",
+				"2": "sobre mí",
+				"3": "y mi trabajo"
 			},
 			"bio": {
 				"intro": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",

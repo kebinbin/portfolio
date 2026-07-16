@@ -14,7 +14,7 @@ const projects = (await getCollection('projects'))
 ---
 
 <section class="pt-24 lg:pt-24">
-	<header class="container mb-6 flex flex-col">
+	<header class="container flex flex-col">
 		<a id="projects"
 			><h2 class="text-headline text-ink">
 				{i18n.projects.h2}<span class="text-accent ml-4">.</span>
@@ -30,7 +30,7 @@ const projects = (await getCollection('projects'))
 				const number = String(index + 1).padStart(2, '0')
 				return (
 					<li class="block">
-						<article class="page-grid container items-center py-12 lg:py-18">
+						<article class="page-grid container items-center gap-y-6 py-12 lg:gap-y-0 lg:py-18">
 							<a
 								href={`projects/${projectSlug}`}
 								class={`col-span-12 block ${imageLeft ? 'lg:col-span-8' : 'lg:col-span-8 lg:col-start-5'}`}
