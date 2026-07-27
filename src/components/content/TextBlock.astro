@@ -2,8 +2,15 @@
 const { title, class: passedClass = '' } = Astro.props
 ---
 
-<div class={`text-block flex flex-col gap-4 xl:flex-row xl:gap-32 ${passedClass}`}>
-	<div class="w-full xl:max-w-[360px] xl:min-w-[360px]">
+<!--
+	On the 12-col page-grid (same grid as the home page). Big screens (lg+):
+	title on cols 1–4, prose on cols 5–12 (col-start-5 / span 8) — 4 / 8, no
+	blank column. Below lg the grid collapses to 1 col so title stacks above
+	prose (gap-y-4). min-w-0 on the prose lets fenced code blocks scroll instead
+	of overflowing.
+-->
+<div class={`text-block page-grid gap-y-4 lg:gap-y-0 ${passedClass}`}>
+	<div class="col-span-12 lg:col-span-4 lg:pr-12">
 		<div aria-hidden="true" class="eyebrow text-ink/45 mb-4 flex items-center gap-3">
 			<span class="text-block-index text-ink font-semibold"></span>
 			<span class="bg-ink/25 h-px w-8"></span>
@@ -14,5 +21,5 @@ const { title, class: passedClass = '' } = Astro.props
 			{title}
 		</h2>
 	</div>
-	<div class="project-prose w-full min-w-0"><slot /></div>
+	<div class="project-prose col-span-12 min-w-0 lg:col-span-8 lg:col-start-5"><slot /></div>
 </div>

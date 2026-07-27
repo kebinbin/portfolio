@@ -58,10 +58,19 @@ const textLinks: { label: string; href: string }[] = [
 		<NavMenuFooter />
 	</div>
 
-	<!-- Full-bleed bottom rule, same tier/color as the hero baseline lines -->
+	<!--
+		Full-bleed bottom rule, same tier/color as the hero baseline lines.
+		Width set via an arbitrary property (not `border-b`) — Tailwind v4's
+		border-width utilities also set border-*-style via --tw-border-style
+		(defaults solid), which at the `lg:` breakpoint lands later in the
+		cascade than grid-line's plain `border-style: dashed` and silently
+		overrides just this side back to solid. The arbitrary property only
+		touches width, leaving grid-line's dashed style intact.
+	-->
 	<span
 		aria-hidden="true"
-		class="grid-line absolute bottom-0 left-1/2 h-0 w-screen -translate-x-1/2 border-b"></span>
+		class="grid-line absolute bottom-0 left-1/2 h-0 w-screen -translate-x-1/2 lg:[border-bottom-width:1px]"
+	></span>
 </nav>
 
 <script>
