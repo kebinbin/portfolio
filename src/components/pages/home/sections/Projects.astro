@@ -1,4 +1,6 @@
 ---
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { getCollection } from 'astro:content'
 import { getI18N } from '../../../../i18n'
 
@@ -11,6 +13,13 @@ const projects = (await getCollection('projects'))
 		return project.slug.split('/')[0] === currentLocale
 	})
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+
+// Mirrors content/Image.astro: an uncaptured card image renders a labeled
+// placeholder instead of a broken <img>, since this card is rendered directly
+// (not through the Image content component).
+function imageExists(src: string) {
+	return existsSync(join(process.cwd(), 'public', src))
+}
 ---
 
 <section class="pt-24 lg:pt-24">
@@ -39,13 +48,22 @@ const projects = (await getCollection('projects'))
 									transition:name={`${projectSlug}-hero-img`}
 									class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
 								>
-									<img
-										src={data.img}
-										alt={data.img_alt || ''}
-										loading={index === 0 ? 'eager' : 'lazy'}
-										decoding="async"
-										class="aspect-video size-full object-cover"
-									/>
+									{imageExists(data.img) ? (
+										<img
+											src={data.img}
+											alt={data.img_alt || ''}
+											loading={index === 0 ? 'eager' : 'lazy'}
+											decoding="async"
+											class="aspect-video size-full object-cover"
+										/>
+									) : (
+										<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
+											<span class="text-xs font-semibold tracking-wide uppercase">
+												Card image placeholder
+											</span>
+											<span class="text-ink/60 max-w-md text-sm text-pretty">{data.img_alt}</span>
+										</div>
+									)}
 								</div>
 							</a>
 

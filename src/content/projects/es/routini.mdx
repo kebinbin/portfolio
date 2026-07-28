@@ -4,14 +4,20 @@ type: Librería de Router para React
 role: Diseño & Desarrollo
 period: En progreso
 publishDate: 2026-05-20 00:00:00
-img: /assets/projects/case-study-2/routini-1.webp
-img_alt: El hero de la landing page de Routini — "Routing. Nothing else." — 2.8 KB comprimido, TypeScript desde el primer día, rutas lazy incluidas.
+img: /assets/projects/case-study-2/hero.webp
+img_alt: El hero de la landing page de Routini — "Just routing, not much more than that." — 3.2 KB comprimido, v0.2.2, React 18+.
 description: |
-  Un router para React pequeño, pensado desde TypeScript desde el primer día, que construí desde cero — 8 exports, cero dependencias en tiempo de ejecución, cerca de 2.8 KB comprimido — con rutas lazy, View Transitions, precarga de enlaces y un boundary de errores por chunk incluidos de base. Viene con su propio sitio de documentación, enrutado y construido con la misma librería.
+  Un router para React pequeño, pensado desde TypeScript desde el primer día, que construí desde cero — 9 exports, cero dependencias en tiempo de ejecución, cerca de 3.2 KB comprimido — con rutas lazy, View Transitions, precarga de enlaces, restauración de scroll y un boundary de errores por chunk incluidos de base. Viene con su propio sitio de documentación, enrutado y construido con la misma librería.
 tags:
   - Desarrollo
   - Código Abierto
   - TypeScript
+live:
+  url: https://routini.dev/
+  label: routini.dev
+source:
+  url: https://github.com/kebinbin/routini
+  label: Ver código
 ---
 import TextBlock from '../../../components/content/TextBlock.astro'
 import Video from '../../../components/content/Video.astro'
@@ -21,17 +27,15 @@ import Image from '../../../components/content/Image.astro'
 
 La mayoría de las apps de React usan React Router por defecto y heredan todo un framework junto con él — loaders, actions, una capa de datos — cuando lo único que querían era mapear URLs a componentes. Las alternativas realmente pequeñas existen, pero suelen ser JavaScript escrito a mano con archivos `.d.ts` añadidos encima, no pensadas desde TypeScript.
 
-**Routini es mi respuesta a ese vacío:** un router que hace enrutamiento y nada más, diseñado alrededor de cuatro restricciones estrictas — una API pública de 8 exports, cero dependencias en tiempo de ejecución, TypeScript desde la primera línea, y un bundle lo bastante pequeño como para verificarlo en CI. Diseñé la superficie de la API, escribí los internos, y construí el sitio de documentación que la acompaña. Toma prestadas formas de API modernas de React Router y un instinto minimalista de los routers más pequeños, pero cada línea es mía.
+**Routini es mi respuesta a ese vacío:** un router que hace enrutamiento y nada más, diseñado alrededor de cuatro restricciones estrictas — una API pública de 9 exports, cero dependencias en tiempo de ejecución, TypeScript desde la primera línea, y un bundle lo bastante pequeño como para verificarlo en CI. Diseñé la superficie de la API, escribí los internos, y construí el sitio de documentación que la acompaña. Toma prestadas formas de API modernas de React Router y un instinto minimalista de los routers más pequeños, pero cada línea es mía.
 
 </TextBlock>
 
-<Image src="/assets/projects/case-study-2/bento-built-in.webp" alt="La grilla bento 'Built in' de Routini en la landing page — diagramas animados para rutas lazy, precarga de enlaces, navegación declarativa o imperativa, layouts con Outlet, el boundary de errores, View Transitions, redirecciones, parámetros de ruta y de búsqueda, useLocation y scroll a anclas por hash." title="La sección 'Built in' de la landing page — cada capacidad tiene su propio diagrama animado y enlaza directamente a su entrada en los docs. Diez funcionalidades, y aún por debajo de 3 KB." />
-
 <TextBlock title="Toda la API en una pantalla">
 
-La superficie pública son ocho exports más una utilidad — lo bastante pequeña como para leerla de una sentada, y la restricción que mantiene honesta a la librería.
+La superficie pública son nueve exports — lo bastante pequeña como para leerla de una sentada, y la restricción que mantiene honesta a la librería.
 
-- `<Router>` — el envoltorio de configuración. Recibe un arreglo `routes`, hijos `<Route>`, o ambos.
+- `<Router>` — el envoltorio de configuración. Recibe un arreglo `routes`, hijos `<Route>`, o ambos, más un `scrollRestoration` opcional (arriba al navegar hacia adelante, posición restaurada al ir atrás/adelante — sobre la ventana por defecto, o apuntado a un contenedor de scroll anidado).
 - `<Route>` — una definición de ruta que no renderiza nada; está marcada con un `Symbol.for` para que la detección sobreviva la minificación en producción.
 - `<Link>` — navegación que cae al comportamiento nativo del navegador con teclas modificadoras, clics que no son el principal, o un `target` distinto de `_self`.
 - `<Outlet>` — opcional; renderiza la página coincidente dentro de un layout compartido.
@@ -118,15 +122,21 @@ Y `useSearchParams` es el export que mantiene coherente todo lo demás. En lugar
 
 <TextBlock title="Pequeño a propósito — y demostrablemente">
 
-"Pequeño" es una afirmación, así que la hice medible. Routini pesa **2.79 KB comprimido con gzip / 2.50 KB con brotli**, medido por un script en el repo que replica exactamente el método de bundlephobia — bundle con esbuild, compresión y minificación con terser, y luego gzip/brotli — así que el número en la landing page usa la *misma* metodología que las comparaciones con la competencia que están junto a él. CI falla el build si lo supera, lo que significa que una nueva funcionalidad tiene que ganarse sus bytes o no entra.
+"Pequeño" es una afirmación, así que la hice medible. Routini pesa **3.2 KB comprimido con gzip**, medido por un script en el repo que replica exactamente el método de bundlephobia — bundle con esbuild, compresión y minificación con terser, y luego gzip/brotli — así que el número en la landing page usa la *misma* metodología que las comparaciones con la competencia que están junto a él. CI falla el build si lo supera, lo que significa que una nueva funcionalidad tiene que ganarse sus bytes o no entra.
 
 Debajo: **cero dependencias en tiempo de ejecución** (solo `react`/`react-dom` como peers), **~100 pruebas** que cubren el matcher, la navegación, popstate, la carga lazy, advertencias solo de desarrollo y el boundary de errores (Vitest + Testing Library + happy-dom), y **Changesets** para que cada cambio visible para el usuario se publique con una entrada en el changelog. Es ESM primero pero también envía CJS, con salidas `.d.ts`/`.d.cts` verificadas a mano.
 
 </TextBlock>
 
-<Image src="/assets/projects/case-study-2/quick-start-tabs.webp" alt="La sección Quick Start de la landing page — un bloque de código resaltado con Shiki a la izquierda y una lista vertical de pestañas a la derecha que cambia entre cinco ejemplos: configuración, rutas lazy, parámetros tipados, navegar desde código, y ruta actual." title="Quick Start en la landing page — cinco ejemplos reales, resaltados en tiempo de build con Shiki, así que ni un solo byte de JS de resaltado llega al cliente." />
+<TextBlock title="Un playground para verificación manual">
 
-<TextBlock title="Decisiones de API que puedo defender">
+Las pruebas automatizadas atrapan regresiones, pero algunas cosas — si esta View Transition realmente se ve bien, si la precarga por hover realmente se dispara, si el botón de reset del boundary de errores se comporta como se espera — necesitan ojos encima, no solo aserciones. El monorepo lleva un playground enlazado como workspace: una app deliberadamente sencilla y sin publicar que ejercita cada export de forma aislada, una demo por cada entrada de la barra lateral, con los paneles de Network y Console del navegador haciendo doble función de salida de pruebas — chunks lazy cargando, precargas disparándose, logging de `onError`, todo visible en tiempo real. Es la forma más rápida de confirmar que un cambio en la librería no rompió exactamente el comportamiento que apuntaba a arreglar.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-2/playground.mp4" title="El playground de routini — una app deliberadamente sencilla con una demo por funcionalidad (carga lazy, useParams, View Transitions, precarga de enlaces, el boundary de errores, restauración de scroll y más), construida para verificar el comportamiento manualmente, devtools en mano." />
+
+<TextBlock title="Nombres y valores por defecto">
 
 Una superficie pequeña hace que cada decisión de nombre y de valor por defecto pese, así que varias se discutieron dejando constancia.
 
@@ -136,14 +146,20 @@ Una superficie pequeña hace que cada decisión de nombre y de valor por defecto
 
 <TextBlock title="Un sitio que se enruta a sí mismo">
 
-Todo el sitio de marketing y documentación está construido con Routini y usa casi cada funcionalidad que promociona. La página de inicio corre de hero a footer como una ruta eager; las páginas de Docs y Examples son lazy, con code-splitting, y precargan al pasar el mouse; una ruta comodín maneja los 404. Todo vive bajo un prefijo `:lang` obligatorio (`en`/`es`), con `/` redirigiendo mediante `<Navigate>` y un segmento de idioma desconocido atrapado por una verificación en tiempo de render — ya que restringir un parámetro a `en|es` está intencionalmente fuera de alcance. La página de Docs es un layout de dos columnas estilo react.dev: una barra lateral fija que sigue la sección activa por la posición del scroll, una sección por export, y enlaces con ancla por hash que se desplazan suavemente incluso a una ruta cuyo chunk aún no ha cargado. Los fragmentos de código en todo el sitio se resaltan en *tiempo de build* con Shiki, así que el resaltador de sintaxis nunca llega al navegador.
+Todo el sitio de marketing y documentación está construido con Routini y usa casi cada funcionalidad que promociona. La página de inicio corre de hero a footer como una ruta eager; las páginas de Docs y Examples son lazy, con code-splitting, y precargan al pasar el mouse; una ruta comodín maneja los 404. Todo vive bajo un prefijo `:lang` obligatorio (`en`/`es`), con `/` redirigiendo mediante `<Navigate>` y un segmento de idioma desconocido atrapado por una verificación en tiempo de render — ya que restringir un parámetro a `en|es` está intencionalmente fuera de alcance. La página de Docs es un layout de dos columnas estilo react.dev: una barra lateral fija que sigue la sección activa por la posición del scroll, una sección por export, y enlaces con ancla por hash que se desplazan suavemente incluso a una ruta cuyo chunk aún no ha cargado. La página de Examples la complementa con recetas para copiar y pegar de patrones comunes — una app básica, rutas con code-splitting, parámetros tipados — más enlaces a apps completas construidas con Routini, Sona entre ellas. Los fragmentos de código en todo el sitio se resaltan en *tiempo de build* con Shiki, así que el resaltador de sintaxis nunca llega al navegador.
 
 </TextBlock>
 
-<Image src="/assets/projects/case-study-2/docs-two-column.webp" alt="La página de Docs de Routini en su layout de dos columnas — una barra lateral izquierda fija que agrupa cada export bajo Componentes, Hooks, Utilidad y Guías, y una columna principal con la firma, descripción y un ejemplo de código en vivo de cada export." title="La página de Docs — una sección por export con su firma real, una barra lateral con scroll-spy, y navegación por hash fluida que funciona incluso en rutas lazy." />
+<Image src="/assets/projects/case-study-2/docs.webp" alt="La página de Docs de Routini en su layout de dos columnas — una barra lateral izquierda fija que agrupa cada export bajo Componentes, Hooks, Utilidad y Guías, y una columna principal con la firma, descripción y props de cada export." title="La página de Docs — una sección por export con su firma real, una barra lateral con scroll-spy, y navegación por hash fluida que funciona incluso en rutas lazy." />
+
+<Image src="/assets/projects/case-study-2/examples.webp" alt="La página de Examples de Routini — recetas para copiar y pegar de patrones comunes como una app básica y rutas con code-splitting, más enlaces a apps completas construidas con Routini." title="La página de Examples — recetas de patrones comunes, más apps reales construidas con Routini, Sona entre ellas." />
 
 <TextBlock title="En qué punto está">
 
-Routini está en pre-1.0 y sin publicar — completa según su propio roadmap, pero el primer release en npm está condicionado a propósito a lanzar una app real construida con ella (ver Sona, a continuación), para que se publique probada contra una interfaz con forma de producto real y no solo contra sus propias pruebas. La única capacidad bajo reconsideración activa son las **rutas anidadas con layouts compartidos**: durante mucho tiempo fuera de alcance para proteger el presupuesto de tamaño, es lo único que un router realmente pequeño suele terminar necesitando, y el techo de un solo layout de la app de demostración es la evidencia más clara de ello. Después de publicar: un dominio routini.dev dedicado, previews de despliegue para el sitio de docs, y un pequeño helper de enlace activo para `<Link>` para que los consumidores dejen de implementar `aria-current` a mano.
+Routini está **publicada en npm y en vivo en [routini.dev](https://routini.dev)**. Sigue en pre-1.0 — completa según su propio roadmap, pero retenida a propósito antes de un 1.0 hasta que la API la haya ejercitado alguien más que yo. El primer release estuvo condicionado a lanzar una app real construida con ella (ver Sona, a continuación), así que salió probada contra una interfaz con forma de producto real y no solo contra sus propias pruebas.
+
+La única capacidad bajo reconsideración activa son las **rutas anidadas con layouts compartidos**: durante mucho tiempo fuera de alcance para proteger el presupuesto de tamaño, es lo único que un router realmente pequeño suele terminar necesitando, y el techo de un solo layout de la app de demostración es la evidencia más clara de ello. `ssrPath` solo evita que `Router` falle si alguna vez se renderiza donde `window` no está definido — una salvaguarda, no soporte real de SSR, que (junto con un `@routini/vite-plugin` para enrutado basado en archivos y un pequeño helper de enlace activo para `<Link>`, para que los consumidores dejen de implementar `aria-current` a mano) sigue en el roadmap.
 
 </TextBlock>
+
+<Image src="/assets/projects/case-study-2/npmjs.webp" alt="La página del paquete npm de Routini — v0.2.2, licencia MIT, cero dependencias, publicado e instalable públicamente." title="El paquete de routini en npm — publicado y listo para `npm install`." />

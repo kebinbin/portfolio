@@ -1,22 +1,38 @@
 ---
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
+
 const { src, title } = Astro.props
+// Mirrors Image.astro: a missing capture renders a labeled placeholder rather
+// than a broken player, so an unrecorded demo never ships as dead media.
+const exists = existsSync(join(process.cwd(), 'public', src))
 ---
 
 <div class="flex flex-col gap-3">
 	<div
 		class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
 	>
-		<video
-			autoplay
-			muted
-			playsinline
-			loop
-			class="h-auto w-full"
-			preload="metadata"
-			crossorigin="anonymous"
-			src={src}
-		>
-		</video>
+		{
+			exists ? (
+				<video
+					autoplay
+					muted
+					playsinline
+					loop
+					class="h-auto w-full"
+					preload="metadata"
+					crossorigin="anonymous"
+					src={src}
+				/>
+			) : (
+				<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
+					<span class="text-xs font-semibold tracking-wide uppercase">
+						Screen recording placeholder
+					</span>
+					<span class="text-ink/60 max-w-md text-sm text-pretty">{title}</span>
+				</div>
+			)
+		}
 	</div>
 	<p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">
 		{title}
