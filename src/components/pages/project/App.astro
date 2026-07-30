@@ -24,23 +24,20 @@ const heroExists = existsSync(join(process.cwd(), 'public', img))
 >
 	<header class="container py-6">
 		<!--
-			Header on the 12-col page-grid. H1 full-width on top; below it the meta
+			Header on the page-grid. H1 full-width on top; below it the meta
 			(period · role + type) on cols 1–4 and the description on cols 5–12 —
 			4 / 8, no blank column between. The 4-col meta gives the inline
 			period · role room to sit on one line. Typography of the meta is the
-			original treatment (eyebrow period·role, light tagline). Stacks to one
-			column below lg.
+			original treatment (eyebrow period·role, light tagline). Stacks to a
+			single 6-col-wide column below lg.
 		-->
 		<div class="page-grid items-start gap-y-8 lg:gap-y-12">
-			<div class="col-span-12 leading-none">
-				<h1
-					transition:name={`${projectSlug}-title`}
-					class="tracking-tightest -ml-1 text-[clamp(3.5rem,16vw,12rem)] leading-[0.9] font-medium lg:-ml-2"
-				>
+			<div class="col-span-6 lg:col-span-12">
+				<h1 transition:name={`${projectSlug}-title`} class="text-display -ml-1 lg:-ml-2">
 					{project.data.title}
 				</h1>
 			</div>
-			<div class="col-span-12 lg:col-span-4 lg:pr-12">
+			<div class="col-span-6 lg:col-span-4 lg:pr-12">
 				<div class="eyebrow text-ink/45 flex flex-wrap items-center gap-2.5">
 					<span transition:name={`${projectSlug}-period`} class="text-ink font-semibold">
 						{project.data.period}
@@ -55,7 +52,7 @@ const heroExists = existsSync(join(process.cwd(), 'public', img))
 					{project.data.type}
 				</p>
 			</div>
-			<div class="col-span-12 lg:col-span-8 lg:col-start-5 lg:pt-1">
+			<div class="col-span-6 lg:col-span-8 lg:col-start-5 lg:pt-1">
 				<p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">
 					{project.data.description}
 				</p>

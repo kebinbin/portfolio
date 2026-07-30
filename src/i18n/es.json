@@ -4,7 +4,7 @@
 			"h1": {
 				"1": "Diseño.",
 				"2": "Código.",
-				"3": "Producto."
+				"3": "Crece."
 			},
 			"eyebrow": {
 				"role": ["Ingeniero", "de Software"],
@@ -31,7 +31,7 @@
 			}
 		},
 		"projects": {
-			"h2": "Trabajo seleccionado",
+			"h2": "Trabajo reciente",
 			"cta": "Ver caso de estudio"
 		},
 		"about": {
@@ -119,7 +119,8 @@
 					"Programación Orientada a Objetos",
 					"Bases de datos relacionales",
 					"Diseño web",
-					"Procesos de CI/CD"
+					"Procesos de CI/CD",
+					"Micro-Servicios"
 				]
 			},
 			"cta": {

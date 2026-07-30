@@ -41,15 +41,10 @@ const lang = getLangFromUrl(Astro.url)
 			<div class="page-grid container h-full grid-rows-1">
 				{
 					/* Reveal exactly one cell per column so cell count == column count
-					   at each breakpoint (1 / 6 / 12), matching page-grid — otherwise
-					   the extra cells wrap into phantom rows. */
+					   at each breakpoint (6 / 12), matching page-grid — otherwise the
+					   extra cells wrap into phantom rows. */
 					Array.from({ length: 12 }).map((_, i) => (
-						<span
-							class:list={[
-								'grid-line border-x',
-								i === 0 ? '' : i < 6 ? 'hidden sm:block' : 'hidden lg:block'
-							]}
-						/>
+						<span class:list={['grid-line border-x', i < 6 ? '' : 'hidden lg:block']} />
 					))
 				}
 			</div>

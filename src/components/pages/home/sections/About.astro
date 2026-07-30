@@ -12,21 +12,21 @@ const portraitImg = '/assets/kevin-castillo-portrait.webp'
 
 <section class="container pt-20 lg:pt-32">
 	<!--
-		Header, two distinct compositions by breakpoint:
-		- sm (tablet, 640–1023): H2 on its own full-width row on top; intro
-		  paragraph (left) + portrait (right) as two top-aligned columns below.
+		Header, three distinct compositions by breakpoint:
+		- below sm: everything stacks full-width (col-span-6) in source order.
+		- sm–lg (tablet): H2 on its own full-width row on top; intro paragraph
+		  (left) + portrait (right) as two top-aligned columns below.
 		- lg (desktop, 1024+): H2 + intro paragraph together on the left columns
 		  (explicit row-start-1 / row-start-2 stacks intro directly under H2 in
 		  the same column range), portrait row-spans both rows on the right,
 		  self-end so it bottom-aligns with the intro paragraph like the original
 		  desktop layout.
-		Below sm the grid is 1 column, so all three stack in source order.
-		H2 needs an explicit sm:col-span-6 (not bare col-span-12) — otherwise at
-		the 6-col sm breakpoint a 12-span child forces 6 implicit tracks, which
-		shrinks the explicit tracks the sibling intro/portrait spans rely on.
+		H2 needs an explicit col-span-6 (not bare col-span-12) — on the 6-col
+		grid a 12-span child forces 6 implicit tracks, which shrinks the
+		explicit tracks the sibling intro/portrait spans rely on.
 	-->
 	<header class="page-grid items-start gap-y-10 lg:gap-y-12">
-		<a id="about" class="col-span-12 block sm:col-span-6 lg:col-span-8 lg:row-start-1"
+		<a id="about" class="col-span-6 block lg:col-span-8 lg:row-start-1"
 			><h2 class="text-headline text-ink">
 				<span class="font-light tracking-tighter">{h2['1']}</span>
 				<span class="font-semibold">{h2['2']}</span>
@@ -36,12 +36,12 @@ const portraitImg = '/assets/kevin-castillo-portrait.webp'
 			</h2></a
 		>
 		<p
-			class="text-ink col-span-12 text-2xl leading-tight font-medium tracking-tight sm:col-span-3 lg:col-span-8 lg:row-start-2 lg:max-w-[40ch] lg:text-3xl"
+			class="text-ink col-span-6 text-2xl leading-tight font-medium tracking-tight sm:col-span-3 lg:col-span-8 lg:row-start-2 lg:max-w-[40ch] lg:text-3xl"
 		>
 			{bio.intro}
 		</p>
 		<div
-			class="col-span-12 sm:col-span-3 sm:col-start-4 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:self-end"
+			class="col-span-6 sm:col-span-3 sm:col-start-4 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:self-end"
 		>
 			<img
 				data-portrait-img
@@ -56,15 +56,15 @@ const portraitImg = '/assets/kevin-castillo-portrait.webp'
 	</header>
 
 	<div class="page-grid mt-12 items-start gap-y-10">
-		<div class="col-span-12 sm:col-span-3 lg:col-span-3">
+		<div class="col-span-6 sm:col-span-3 lg:col-span-3">
 			<h3 class="eyebrow text-ink/45 block">{bio.career.h3}</h3>
 			<p class="text-ink/70 mt-3 text-sm leading-7 text-pretty">{bio.career.p}</p>
 		</div>
-		<div class="col-span-12 sm:col-span-3 sm:col-start-4 lg:col-span-3 lg:col-start-5">
+		<div class="col-span-6 sm:col-span-3 sm:col-start-4 lg:col-span-3 lg:col-start-5">
 			<h3 class="eyebrow text-ink/45 block">{bio.extra.h3}</h3>
 			<p class="text-ink/70 mt-3 text-sm leading-7 text-pretty">{bio.extra.p}</p>
 		</div>
-		<div class="col-span-12 sm:col-span-6 lg:col-span-4 lg:col-start-9">
+		<div class="col-span-6 lg:col-span-4 lg:col-start-9">
 			<h3 class="eyebrow text-ink/45 block">{education.h3}</h3>
 			{
 				education.list.map((edu) => (

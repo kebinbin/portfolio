@@ -18,11 +18,19 @@
 	--tracking-display: -0.035em;
 
 	/* Type roles — see DESIGN.md §4 */
-	/* Width-driven: the poster fills the column, never shrinks by viewport
-	   height (that leaves the H1 small with dead space on the right). On short
-	   screens the hero simply grows past the fold and scrolls. Keep this value
-	   in sync with --display-size set inline on the hero H1 group. */
-	--text-display: clamp(3.75rem, 26vw, 14rem);
+	/* H1 size: fixed per breakpoint (see the @variant ladder below), not
+	   vw-fluid. `.container` (Tailwind's built-in behavior, still active
+	   under our padding-only @utility override) has a real stepped max-width
+	   at every breakpoint from `xs` up — 480/640/768/1024/1280/1536px,
+	   verified by measuring computed style, matches the 1152px-at-1440 note
+	   in CLAUDE.md — so within any one bucket the column is a constant and a
+	   clamp() bounded to it would just evaluate to a fixed number anyway.
+	   Below `xs` the container has no max-width yet (genuinely fluid), which
+	   is the one place a clamp still does something. The hero's inline
+	   --display-size reads var(--text-display) directly, so there's a single
+	   source of truth for both the rendered size and the baseline/rail math
+	   derived from it. */
+	--text-display: clamp(4rem, 26.67vw, 7rem);
 	--text-display--line-height: 0.775;
 	--text-display--letter-spacing: -0.075em;
 	--text-display--font-weight: 500;
@@ -32,7 +40,7 @@
 	--text-headline-lg--letter-spacing: -0.075em;
 	--text-headline-lg--font-weight: 500;
 
-	--text-headline: clamp(4rem, 13vw, 10rem);
+	--text-headline: clamp(3rem, 20vw, 5rem);
 	--text-headline--line-height: 0.85;
 	--text-headline--letter-spacing: -0.075em;
 	--text-headline--font-weight: 500;
@@ -56,14 +64,44 @@
 	--ink: var(--color-retro-ink);
 	--accent: var(--color-retro-rust);
 	--accent-strong: var(--color-retro-brown);
-	--grid-line: color-mix(in oklab, var(--ink) 5%, transparent);
+	--grid-line: color-mix(in oklab, var(--ink) 7%, transparent);
 }
 .dark {
 	--surface: var(--color-retro-coal);
 	--ink: var(--color-retro-bone);
 	--accent: var(--color-retro-orange);
 	--accent-strong: var(--color-retro-gold);
-	--grid-line: color-mix(in oklab, var(--ink) 3%, transparent);
+	--grid-line: color-mix(in oklab, var(--ink) 7%, transparent);
+}
+
+/* Hero H1 size ladder — xs/sm both 8rem (small screens read as one size
+   bucket), then +2rem per breakpoint from `md` to `xl`, then flat (14rem is
+   the DESIGN.md-documented ceiling: the col-8 rail-label collision math in
+   Hero.astro is tuned against it). @variant pulls the actual min-width from
+   --breakpoint-* above instead of duplicating the numbers in a raw @media
+   query — same pattern already used in @utility page-grid. Unlayered so it
+   overrides the @theme-layer token regardless of source order. */
+:root {
+	@variant xs {
+		--text-display: 7rem;
+		--text-headline: 6rem;
+	}
+	@variant sm {
+		--text-display: 8rem;
+		--text-headline: 6rem;
+	}
+	@variant md {
+		--text-display: 12rem;
+		--text-headline: 7rem;
+	}
+	@variant lg {
+		--text-display: 14rem;
+		--text-headline: 9rem;
+	}
+	@variant xl {
+		--text-display: 14rem;
+		--text-headline: 11rem;
+	}
 }
 
 @theme inline {
@@ -101,13 +139,16 @@
 	border-style: dashed;
 }
 
+/* 6 columns at every width up to `lg` (1024px), 12 from `lg` up — no 1-col
+   phase below `sm`. Consumers give every child an explicit unprefixed
+   col-span/col-start for the 6-col tier (never a bare col-span-12 meant as
+   "full width" — on a real 6-col grid that forces 6 implicit tracks and
+   shrinks any narrower sibling sharing the row) plus lg: overrides for the
+   12-col tier. See DESIGN.md/CLAUDE.md. */
 @utility page-grid {
 	display: grid;
-	grid-template-columns: repeat(1, minmax(0, 1fr));
+	grid-template-columns: repeat(6, minmax(0, 1fr));
 	column-gap: 1.5rem;
-	@variant sm {
-		grid-template-columns: repeat(6, minmax(0, 1fr));
-	}
 	@variant lg {
 		grid-template-columns: repeat(12, minmax(0, 1fr));
 	}

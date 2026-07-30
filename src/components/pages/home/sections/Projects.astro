@@ -1,6 +1,6 @@
 ---
 import { existsSync } from 'node:fs'
-import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { getCollection } from 'astro:content'
 import { getI18N } from '../../../../i18n'
 
@@ -18,14 +18,14 @@ const projects = (await getCollection('projects'))
 // placeholder instead of a broken <img>, since this card is rendered directly
 // (not through the Image content component).
 function imageExists(src: string) {
-	return existsSync(join(process.cwd(), 'public', src))
+	return existsSync(fileURLToPath(new URL(`../../../../../public${src}`, import.meta.url)))
 }
 ---
 
 <section class="pt-24 lg:pt-24">
 	<header class="container flex flex-col">
 		<a id="projects"
-			><h2 class="text-headline text-ink">
+			><h2 class="text-headline text-ink xs:pb-8 pb-4">
 				{i18n.projects.h2}<span class="text-accent ml-4">.</span>
 			</h2></a
 		>
@@ -38,11 +38,45 @@ function imageExists(src: string) {
 				const imageLeft = index % 2 === 0
 				const number = String(index + 1).padStart(2, '0')
 				return (
-					<li class="block">
-						<article class="page-grid container items-center gap-y-6 py-12 lg:gap-y-0 lg:py-18">
+					<li class="container">
+						<article class="page-grid items-center gap-y-6 py-12 xl:gap-y-0 xl:py-18">
+							<div
+								class={`col-span-6 grid grid-cols-6 gap-x-6 gap-y-6 lg:col-span-12 xl:col-span-3 xl:row-start-1 xl:pt-1 ${imageLeft ? 'xl:col-start-10' : 'xl:col-start-1'}`}
+							>
+								<div class="col-span-6 lg:col-span-2 xl:col-span-6">
+									<span class="eyebrow text-ink/45 flex items-center gap-2.5">
+										<span class="text-ink font-semibold">{number}</span>
+										<span aria-hidden="true" class="bg-ink/25 h-px w-6" />
+										<span transition:name={`${projectSlug}-period`}>{data.period}</span>
+									</span>
+									<a href={`projects/${projectSlug}`} class="mt-2 block xl:mt-4">
+										<h3
+											transition:name={`${projectSlug}-title`}
+											class="text-ink tracking-display text-[clamp(2.5rem,4vw,3.75rem)] leading-[0.95] font-medium"
+										>
+											{data.title}
+										</h3>
+									</a>
+									<span
+										transition:name={`${projectSlug}-type`}
+										class="text-ink/70 mt-1 block text-xl tracking-tight capitalize xl:mt-3"
+									>
+										{data.type}
+									</span>
+								</div>
+								<div class="col-span-6 lg:col-span-4 xl:col-span-6">
+									<p class="text-ink/70 text-sm leading-6 text-pretty">{data.description}</p>
+									<a
+										href={`projects/${projectSlug}`}
+										class="eyebrow text-accent hover:text-accent-strong mt-8 hidden w-fit items-center gap-2 font-semibold transition-colors xl:flex"
+									>
+										{i18n.projects.cta} →
+									</a>
+								</div>
+							</div>
 							<a
 								href={`projects/${projectSlug}`}
-								class={`col-span-12 block ${imageLeft ? 'lg:col-span-8' : 'lg:col-span-8 lg:col-start-5'}`}
+								class={`col-span-6 block lg:col-span-12 xl:col-span-8 xl:row-start-1 ${imageLeft ? 'xl:col-start-1' : 'xl:col-start-5'}`}
 							>
 								<div
 									transition:name={`${projectSlug}-hero-img`}
@@ -66,37 +100,12 @@ function imageExists(src: string) {
 									)}
 								</div>
 							</a>
-
-							<div
-								class={`col-span-12 flex flex-col lg:pt-1 ${imageLeft ? 'lg:col-span-3 lg:col-start-10' : 'lg:col-span-3 lg:col-start-1 lg:row-start-1'}`}
+							<a
+								href={`projects/${projectSlug}`}
+								class="eyebrow text-accent hover:text-accent-strong col-span-6 ml-auto flex w-fit items-center gap-2 font-semibold transition-colors lg:col-span-12 lg:mt-4 xl:hidden"
 							>
-								<span class="eyebrow text-ink/45 flex items-center gap-2.5">
-									<span class="text-ink font-semibold">{number}</span>
-									<span aria-hidden="true" class="bg-ink/25 h-px w-6" />
-									<span transition:name={`${projectSlug}-period`}>{data.period}</span>
-								</span>
-								<a href={`projects/${projectSlug}`} class="mt-4 block">
-									<h3
-										transition:name={`${projectSlug}-title`}
-										class="text-ink tracking-display text-[clamp(2.5rem,4vw,3.75rem)] leading-[0.95] font-medium"
-									>
-										{data.title}
-									</h3>
-								</a>
-								<span
-									transition:name={`${projectSlug}-type`}
-									class="text-ink/70 mt-3 block text-lg tracking-tight capitalize"
-								>
-									{data.type}
-								</span>
-								<p class="text-ink/70 mt-6 max-w-[40ch] text-sm leading-6">{data.description}</p>
-								<a
-									href={`projects/${projectSlug}`}
-									class="eyebrow text-accent hover:text-accent-strong mt-8 inline-flex items-center gap-2 font-semibold transition-colors"
-								>
-									{i18n.projects.cta} →
-								</a>
-							</div>
+								{i18n.projects.cta} →
+							</a>
 						</article>
 					</li>
 				)
