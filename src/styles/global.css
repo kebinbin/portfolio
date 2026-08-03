@@ -40,10 +40,15 @@
 	--text-headline-lg--letter-spacing: -0.075em;
 	--text-headline-lg--font-weight: 500;
 
-	--text-headline: clamp(3rem, 20vw, 5rem);
+	--text-headline: clamp(3rem, 23vw, 7rem);
 	--text-headline--line-height: 0.85;
 	--text-headline--letter-spacing: -0.075em;
 	--text-headline--font-weight: 500;
+
+	--text-project-title: clamp(2rem, 10vw, 3rem);
+	--text-project-title--line-height: 0.85;
+	--text-project-title--letter-spacing: -0.075em;
+	--text-project-title--font-weight: 500;
 
 	/* Retro print palette — see DESIGN.md §3 */
 	--color-retro-bone: #ece0c8;
@@ -84,23 +89,28 @@
 :root {
 	@variant xs {
 		--text-display: 7rem;
-		--text-headline: 6rem;
+		--text-headline: 7rem;
+		--text-project-title: 3rem;
 	}
 	@variant sm {
 		--text-display: 8rem;
 		--text-headline: 6rem;
+		--text-project-title: 3rem;
 	}
 	@variant md {
 		--text-display: 12rem;
-		--text-headline: 7rem;
+		--text-headline: 6.5rem;
+		--text-project-title: 4rem;
 	}
 	@variant lg {
 		--text-display: 14rem;
 		--text-headline: 9rem;
+		--text-project-title: 4rem;
 	}
 	@variant xl {
 		--text-display: 14rem;
 		--text-headline: 11rem;
+		--text-project-title: 4rem;
 	}
 }
 

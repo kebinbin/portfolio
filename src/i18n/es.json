@@ -32,16 +32,15 @@
 		},
 		"projects": {
 			"h2": "Trabajo reciente",
-			"cta": "Ver caso de estudio"
+			"cta": "Ver caso de estudio",
+			"resumeCta": "Ver mi historial laboral completo",
+			"experienceEyebrow": "Proyectos y experiencia"
 		},
 		"about": {
-			"h2": {
-				"1": "Un poco",
-				"2": "sobre mí",
-				"3": "y mi trabajo"
-			},
+			"h2": "Más que código",
+			"eyebrow": "Sobre mí",
 			"bio": {
-				"intro": "Soy un ingeniero de software con más de 5 años de experiencia, trabajando desde pequeñas organizaciones sin fines de lucro hasta grandes empresas tecnológicas con objetivos ambiciosos.",
+				"intro": "Soy ingeniero de software con alrededor de cinco años de experiencia profesional, incluyendo puestos en HP y Hewlett Packard Enterprise. También he colaborado con organizaciones sin fines de lucro y continúo desarrollando productos digitales bien diseñados y herramientas de código abierto.",
 				"career": {
 					"h3": "Lo que hago",
 					"p": "Disfruto enfrentando desafíos diversos, desde diseñar y desarrollar componentes de UI/UX intuitivos hasta construir servicios de backend a nivel producción en colaboración con equipos Ágiles. Ya sea resolviendo problemas con código, creando diseños elegantes o plasmando ideas en papel, aporto creatividad y un compromiso con una calidad difícil de igualar."
@@ -79,9 +78,9 @@
 				"h3": "Tecnologías que utilizo",
 				"list": [
 					"React",
-					"JavaScript/TypeScript",
+					"JavaScript / TypeScript",
 					"HTML",
-					"CSS/SASS",
+					"CSS / SASS",
 					"Astro",
 					"Next.js",
 					"Jest",
@@ -89,14 +88,12 @@
 					"SQLServer",
 					"MySQL",
 					"PostgreSQL",
-					"Programación Orientada a Objetos",
 					"Java",
 					"Spring",
 					"PHP",
 					"ActiveMQ",
 					"WebSocket",
 					"Docker",
-					"Micro-Servicios",
 					"Flux",
 					"Git",
 					"Jenkins",
@@ -110,7 +107,7 @@
 				]
 			},
 			"services": {
-				"h3": "En qué puedo ayudarle",
+				"h3": "Habilidades",
 				"list": [
 					"Desarrollo front-end",
 					"REST API",

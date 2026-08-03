@@ -3,11 +3,10 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import Layout from '../../../layouts/Layout.astro'
 import CTA from '../home/sections/CTA.astro'
+import Hero from './sections/Hero.astro'
 
 const { project } = Astro.props
-const { slug } = project
-const [, projectSlug] = slug.split('/')
-const { live, source, img, img_alt } = project.data
+const { img, img_alt } = project.data
 
 // Mirrors content/Image.astro: an uncaptured hero renders a labeled
 // placeholder instead of a broken <img>, since this hero is rendered directly
@@ -29,78 +28,15 @@ const heroExists = existsSync(join(process.cwd(), 'public', img))
 			4 / 8, no blank column between. The 4-col meta gives the inline
 			period · role room to sit on one line. Typography of the meta is the
 			original treatment (eyebrow period·role, light tagline). Stacks to a
-			single 6-col-wide column below lg.
+			single 6-col-wide column below lg. Markup lives in sections/Hero.astro,
+			reusable as a home-page project card.
 		-->
-		<div class="page-grid items-start gap-y-8 lg:gap-y-12">
-			<div class="col-span-6 lg:col-span-12">
-				<h1 transition:name={`${projectSlug}-title`} class="text-display -ml-1 lg:-ml-2">
-					{project.data.title}
-				</h1>
-			</div>
-			<div class="col-span-6 lg:col-span-4 lg:pr-12">
-				<div class="eyebrow text-ink/45 flex flex-wrap items-center gap-2.5">
-					<span transition:name={`${projectSlug}-period`} class="text-ink font-semibold">
-						{project.data.period}
-					</span>
-					<span aria-hidden="true" class="bg-ink/25 h-px w-6"></span>
-					<span>{project.data.role}</span>
-				</div>
-				<p
-					transition:name={`${projectSlug}-type`}
-					class="text-ink mt-3 text-2xl font-light tracking-tight text-pretty capitalize lg:text-3xl"
-				>
-					{project.data.type}
-				</p>
-			</div>
-			<div class="col-span-6 lg:col-span-8 lg:col-start-5 lg:pt-1">
-				<p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">
-					{project.data.description}
-				</p>
-				{
-					(live || source) && (
-						<div class="mt-8 flex flex-wrap gap-3">
-							{live && (
-								<a
-									href={live.url}
-									target="_blank"
-									rel="noreferrer"
-									class="eyebrow bg-ink text-surface hover:bg-accent inline-flex items-center gap-2 px-6 py-4 font-semibold transition-colors"
-								>
-									{live.label} ↗
-								</a>
-							)}
-							{source && (
-								<a
-									href={source.url}
-									target="_blank"
-									rel="noreferrer"
-									class="eyebrow border-ink/25 text-ink/70 hover:border-ink hover:text-ink inline-flex items-center gap-2 border px-6 py-4 font-semibold transition-colors"
-								>
-									{source.label} ↗
-								</a>
-							)}
-						</div>
-					)
-				}
-			</div>
-		</div>
-		<div
-			transition:name={`${projectSlug}-hero-img`}
-			class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7"
-		>
-			{
-				heroExists ? (
-					<img src={img} alt={img_alt || ''} loading="lazy" decoding="async" />
-				) : (
-					<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
-						<span class="text-xs font-semibold tracking-wide uppercase">
-							Hero image placeholder
-						</span>
-						<span class="text-ink/60 max-w-md text-sm text-pretty">{img_alt}</span>
-					</div>
-				)
-			}
-		</div>
+		<Hero
+			project={project}
+			titleClass="text-display pb-8 lg:pb-12"
+			typeClass="text-ink mt-3 text-2xl font-light tracking-tight text-pretty capitalize lg:text-3xl"
+			showCtaButtons
+		/>
 	</header>
 	<main class="case-study container flex flex-col gap-10 py-8 xl:gap-20 xl:py-16">
 		<slot />

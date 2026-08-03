@@ -32,16 +32,15 @@
 		},
 		"projects": {
 			"h2": "Selected work",
-			"cta": "View case study"
+			"cta": "View case study",
+			"resumeCta": "See my full work history",
+			"experienceEyebrow": "Projects and experience"
 		},
 		"about": {
-			"h2": {
-				"1": "A little",
-				"2": "about me",
-				"3": "and my work"
-			},
+			"h2": "Beyond code",
+			"eyebrow": "About me",
 			"bio": {
-				"intro": "I’m a software engineer with over 5 years of experience, ranging from small non-profits to large tech companies with ambitious goals.",
+				"intro": "I’m a software engineer with around five years of professional experience, including enterprise roles at HP and Hewlett Packard Enterprise. I’ve also collaborated with nonprofit organizations and continue to build polished digital products and open-source tools.",
 				"career": {
 					"h3": "What I do",
 					"p": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match."
@@ -79,9 +78,9 @@
 				"h3": "Technologies I use",
 				"list": [
 					"React",
-					"JavaScript/TypeScript",
+					"JavaScript / TypeScript",
 					"HTML",
-					"CSS/SASS",
+					"CSS / SASS",
 					"Astro",
 					"Next.js",
 					"Jest",
@@ -89,14 +88,12 @@
 					"SQLServer",
 					"MySQL",
 					"PostgreSQL",
-					"Object Oriented Programming",
 					"Java",
 					"Spring",
 					"PHP",
 					"ActiveMQ",
 					"WebSocket",
 					"Docker",
-					"Micro-services",
 					"Flux",
 					"Git",
 					"Jenkins",
@@ -110,7 +107,7 @@
 				]
 			},
 			"services": {
-				"h3": "Things I can help you with",
+				"h3": "Skills",
 				"list": [
 					"Front-end development",
 					"REST API",
