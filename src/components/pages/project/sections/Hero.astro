@@ -1,77 +1,42 @@
 ---
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
-import { getI18N } from '../../../../i18n'
-import { getLangFromUrl } from '../../../../i18n/utils'
+import Icon from '../../../icons/Icon.astro'
 
-/**
- * The project detail page's hero — mirrors home/sections/Hero.astro's role
- * for this page. Also reusable as a home-page project card: title size
- * (titleClass), the live/source CTA buttons (showCtaButtons — detail page
- * only), and the image link + "view case study" link (showCaseStudyLink —
- * card use) all vary per caller.
- */
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale }).home
-const lang = getLangFromUrl(Astro.url)
-
-const {
-	project,
-	titleClass,
-	typeClass,
-	showCtaButtons = false,
-	showCaseStudyLink = false,
-	eager = false,
-	enableTransitions = true
-} = Astro.props
-
+const { project } = Astro.props
 const { slug } = project
 const [, projectSlug] = slug.split('/')
 const { live, source, img, img_alt } = project.data
-
-// Mirrors content/Image.astro: an uncaptured hero renders a labeled
-// placeholder instead of a broken <img>, since this hero is rendered
-// directly (not through the Image content component).
-const heroExists = existsSync(join(process.cwd(), 'public', img))
-
-// `transition:name` is a compile-time directive: Astro's compiler statically
-// scans the template source for the literal `transition:name=` token to
-// generate the view-transition CSS/scoping at build time. A spread like
-// {...{'transition:name': x}} hides that token inside a runtime object, so
-// the compiler never sees it — the attribute falls through as inert HTML and
-// nothing morphs. The value can still be dynamic; only the attribute name
-// itself has to be literal in the markup below.
-const tName = (name: string) => (enableTransitions ? name : undefined)
-const href = `/${lang}/projects/${projectSlug}`
 ---
 
-<div class="page-grid items-start">
+<div class="page-grid items-start gap-y-8 lg:gap-y-12">
 	<div class="col-span-6 lg:col-span-12">
-		<h1 transition:name={tName(`${projectSlug}-title`)} class={titleClass}>
+		<h1 transition:name={`${projectSlug}-title`} class="text-display -ml-1 lg:-ml-2">
 			{project.data.title}
 		</h1>
 	</div>
 	<div class="col-span-6 lg:col-span-4 lg:pr-12">
 		<div class="eyebrow text-ink/45 flex flex-wrap items-center gap-2.5">
-			<span transition:name={tName(`${projectSlug}-period`)} class="text-ink font-semibold">
+			<span transition:name={`${projectSlug}-period`} class="text-ink font-semibold">
 				{project.data.period}
 			</span>
 			<span aria-hidden="true" class="bg-ink/25 h-px w-6"></span>
 			<span>{project.data.role}</span>
 		</div>
-		<p transition:name={tName(`${projectSlug}-type`)} class={typeClass}>
+		<p
+			transition:name={`${projectSlug}-type`}
+			class="text-ink mt-3 text-2xl font-light tracking-tight text-pretty capitalize lg:text-3xl"
+		>
 			{project.data.type}
 		</p>
 	</div>
 	<div class="col-span-6 lg:col-span-8 lg:col-start-5 lg:pt-1">
 		<p
-			transition:name={tName(`${projectSlug}-description`)}
+			transition:name={`${projectSlug}-description`}
 			class="text-ink/70 text-base leading-7 text-pretty lg:text-lg"
 		>
 			{project.data.description}
 		</p>
 		{
-			showCtaButtons && (live || source) && (
+			(live || source) && (
 				<div class="mt-8 flex flex-wrap gap-3">
 					{live && (
 						<a
@@ -80,7 +45,8 @@ const href = `/${lang}/projects/${projectSlug}`
 							rel="noreferrer"
 							class="eyebrow bg-ink text-surface hover:bg-accent inline-flex items-center gap-2 px-6 py-4 font-semibold transition-colors"
 						>
-							{live.label} ↗
+							{live.label}
+							<Icon name="arrow-up-right" class="size-[0.9em]" />
 						</a>
 					)}
 					{source && (
@@ -90,7 +56,8 @@ const href = `/${lang}/projects/${projectSlug}`
 							rel="noreferrer"
 							class="eyebrow border-ink/25 text-ink/70 hover:border-ink hover:text-ink inline-flex items-center gap-2 border px-6 py-4 font-semibold transition-colors"
 						>
-							{source.label} ↗
+							{source.label}
+							<Icon name="arrow-up-right" class="size-[0.9em]" />
 						</a>
 					)}
 				</div>
@@ -98,37 +65,9 @@ const href = `/${lang}/projects/${projectSlug}`
 		}
 	</div>
 </div>
-
-{
-	(() => {
-		const frame = (
-			<div
-				transition:name={tName(`${projectSlug}-hero-img`)}
-				class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:mt-10 xl:rounded-[1.5rem] xl:border-7"
-			>
-				{heroExists ? (
-					<img src={img} alt={img_alt || ''} loading={eager ? 'eager' : 'lazy'} decoding="async" />
-				) : (
-					<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
-						<span class="text-xs font-semibold tracking-wide uppercase">
-							Hero image placeholder
-						</span>
-						<span class="text-ink/60 max-w-md text-sm text-pretty">{img_alt}</span>
-					</div>
-				)}
-			</div>
-		)
-		return showCaseStudyLink ? <a href={href}>{frame}</a> : frame
-	})()
-}
-
-{
-	showCaseStudyLink && (
-		<a
-			href={href}
-			class="eyebrow text-accent hover:text-accent-strong mt-4 flex w-fit items-center gap-2 font-semibold transition-colors"
-		>
-			{i18n.projects.cta} →
-		</a>
-	)
-}
+<div
+	transition:name={`${projectSlug}-hero-img`}
+	class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7"
+>
+	<img src={img} alt={img_alt || ''} loading="lazy" decoding="async" />
+</div>

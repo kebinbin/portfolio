@@ -1,23 +1,16 @@
 ---
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
 import Layout from '../../../layouts/Layout.astro'
 import CTA from '../home/sections/CTA.astro'
 import Hero from './sections/Hero.astro'
 
 const { project } = Astro.props
 const { img, img_alt } = project.data
-
-// Mirrors content/Image.astro: an uncaptured hero renders a labeled
-// placeholder instead of a broken <img>, since this hero is rendered directly
-// (not through the Image content component).
-const heroExists = existsSync(join(process.cwd(), 'public', img))
 ---
 
 <Layout
 	title={`${project.data.title} — Kevin Castillo`}
 	description={project.data.description}
-	image={heroExists ? img : undefined}
+	image={img}
 	imageAlt={img_alt}
 	type="article"
 >
@@ -29,14 +22,9 @@ const heroExists = existsSync(join(process.cwd(), 'public', img))
 			period · role room to sit on one line. Typography of the meta is the
 			original treatment (eyebrow period·role, light tagline). Stacks to a
 			single 6-col-wide column below lg. Markup lives in sections/Hero.astro,
-			reusable as a home-page project card.
+			kept as its own file for organization — not reused elsewhere.
 		-->
-		<Hero
-			project={project}
-			titleClass="text-display pb-8 lg:pb-12"
-			typeClass="text-ink mt-3 text-2xl font-light tracking-tight text-pretty capitalize lg:text-3xl"
-			showCtaButtons
-		/>
+		<Hero project={project} />
 	</header>
 	<main class="case-study container flex flex-col gap-10 py-8 xl:gap-20 xl:py-16">
 		<slot />

@@ -2,6 +2,7 @@
 import MainHead from '../components/layouts/MainHead.astro'
 import Nav from '../components/ui/Nav.astro'
 import Footer from '../components/ui/Footer.astro'
+import GridRaster from '../components/ui/GridRaster.astro'
 import { getLangFromUrl } from '../i18n/utils'
 import { ClientRouter } from 'astro:transitions'
 
@@ -29,26 +30,7 @@ const lang = getLangFromUrl(Astro.url)
 		<ClientRouter />
 	</head>
 	<body class="font-body bg-surface text-ink min-h-full overflow-x-clip antialiased">
-		<!--
-			Page-wide vertical raster (DESIGN.md §2.2): the 12 columns + their gaps
-			= 24 hairlines are identical on every section, so they live here once,
-			`fixed` behind all content (`-z-10`: above the body background, below
-			in-flow content). Built from the same `container` + `page-grid` classes
-			every section uses, so the lines align to all page content. Horizontal
-			rules stay per-section/component.
-		-->
-		<div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
-			<div class="page-grid container h-full grid-rows-1">
-				{
-					/* Reveal exactly one cell per column so cell count == column count
-					   at each breakpoint (6 / 12), matching page-grid — otherwise the
-					   extra cells wrap into phantom rows. */
-					Array.from({ length: 12 }).map((_, i) => (
-						<span class:list={['grid-line border-x', i < 6 ? '' : 'hidden lg:block']} />
-					))
-				}
-			</div>
-		</div>
+		<GridRaster class="fixed inset-0 -z-10" />
 		<Nav />
 		<slot />
 		<Footer />

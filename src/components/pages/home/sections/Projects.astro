@@ -1,6 +1,4 @@
 ---
-import { existsSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 import { getCollection } from 'astro:content'
 import { getI18N } from '../../../../i18n'
 import { getLangFromUrl } from '../../../../i18n/utils'
@@ -12,9 +10,6 @@ const lang = getLangFromUrl(Astro.url)
 const projects = (await getCollection('projects'))
 	.filter((project) => project.slug.split('/')[0] === currentLocale)
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-
-const imageExists = (src: string) =>
-	existsSync(fileURLToPath(new URL(`../../../../../public${src}`, import.meta.url)))
 
 // H2 baseline as a fraction of --text-headline, so the rule lands on the type's feet.
 const H2_BASELINE = 0.835
@@ -129,22 +124,13 @@ const yearRange = `${Math.min(...years)} — ${Math.max(...years)}`
 																	transition:name={`${projectSlug}-hero-img`}
 																	class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
 																>
-																	{imageExists(data.img) ? (
-																		<img
-																			src={data.img}
-																			alt={data.img_alt || ''}
-																			loading={index === 0 ? 'eager' : 'lazy'}
-																			decoding="async"
-																			class="aspect-video size-full object-cover"
-																		/>
-																	) : (
-																		<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
-																			<span class="eyebrow font-semibold">{data.title}</span>
-																			<span class="text-ink/60 max-w-md text-sm text-pretty">
-																				{data.img_alt}
-																			</span>
-																		</div>
-																	)}
+																	<img
+																		src={data.img}
+																		alt={data.img_alt || ''}
+																		loading={index === 0 ? 'eager' : 'lazy'}
+																		decoding="async"
+																		class="aspect-video size-full object-cover"
+																	/>
 																</div>
 															</a>
 														</div>

@@ -21,6 +21,14 @@ export type IconDef =
 export const icons = {
 	// — UI icons (Phosphor, stroke) —
 	list: { source: 'phosphor', body: iconPaths['list'], label: 'Menu' },
+	// Replaces a literal "↗" (U+2197): iOS/Android substitute the emoji glyph
+	// for that codepoint, so the character rendered full-color and off-baseline
+	// on phones. An inline SVG is the only way to guarantee the mark.
+	'arrow-up-right': {
+		source: 'phosphor',
+		body: iconPaths['arrow-up-right'],
+		label: 'Opens in a new tab'
+	},
 	github: { source: 'phosphor', body: iconPaths['github-logo'], label: 'GitHub' },
 	linkedin: { source: 'phosphor', body: iconPaths['linkedin-logo'], label: 'LinkedIn' },
 
