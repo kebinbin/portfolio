@@ -1,6 +1,7 @@
 ---
 import { getI18N } from '../../../../i18n'
 import { getLangFromUrl } from '../../../../i18n/utils'
+import { getImageSize } from '../../../content/imageSize'
 
 const lang = getLangFromUrl(Astro.url)
 const { currentLocale } = Astro
@@ -9,6 +10,10 @@ const { bio, education, services, h2, eyebrow, cta, portrait, technologies } = g
 }).home.about
 
 const portraitImg = '/assets/kevin-castillo-portrait.webp'
+// The aspect-[3/4] class already reserves this box, so these attributes are
+// belt-and-braces rather than a CLS fix — they keep the intrinsic ratio correct
+// if the stylesheet is ever slow or the class changes.
+const portraitSize = getImageSize(portraitImg)
 
 // Skills and Technologies merge under one "Skills" heading (services.h3
 // already reads "Skills") instead of two separately labeled lists.
@@ -81,6 +86,8 @@ const H2_BASELINE = 0.835
 			<img
 				src={portraitImg}
 				alt={portrait.img_alt}
+				width={portraitSize?.width}
+				height={portraitSize?.height}
 				loading="lazy"
 				decoding="async"
 				class="aspect-[3/4] w-full object-cover object-top"
