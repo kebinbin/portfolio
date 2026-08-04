@@ -4,30 +4,39 @@ type: Extensión de Chrome
 role: Diseño & Desarrollo
 period: 2024 – 2026
 publishDate: 2024-05-20 00:00:00
-img: /assets/projects/case-study-1/mode-full.webp
-img_alt: El modo Full Visualization de Skeleton Layout aplicado a una página — cada elemento coloreado según su profundidad en el DOM, con contornos estructurales y sin mover el layout.
+img: /assets/projects/case-study-1/skeleton-hero.webp
+img_alt: Skeleton Layout visualizando el caso de estudio de Sona.io junto a su código fuente en un espacio de trabajo con pantalla dividida.
 description: |
-  Una extensión de Chrome (Manifest V3) que mantiene visible la estructura de una página mientras la construyes — colorea y contornea los elementos según su profundidad en el DOM para que wrappers, anidamientos, espaciados y overflow permanezcan a la vista junto a tu editor. Inyecta CSS generado en lugar de tocar tu marcado, aísla sus propios diagnósticos en un Shadow DOM cerrado y elimina exactamente lo que añadió cuando la apagas.
+  Skeleton Layout es una extensión de Chrome para Manifest V3 que hace visible la estructura de una página durante el desarrollo. Colorea y contornea el DOM sin modificar el marcado ni el layout, mantiene sus propios diagnósticos aislados y elimina cada estilo inyectado al desactivarse.
 tags:
   - Diseño
   - Desarrollo
   - Extensión
+live:
+  url: https://kebinbin.github.io/skeleton-chrome-extension/
+  label: Visitar sitio
+source:
+  url: https://github.com/kebinbin/skeleton-chrome-extension
+  label: Ver código
 ---
 import TextBlock from '../../../components/content/TextBlock.astro'
-import Video from '../../../components/content/Video.astro'
 import Image from '../../../components/content/Image.astro'
+import ImageGrid from '../../../components/content/ImageGrid.astro'
+import Video from '../../../components/content/Video.astro'
 
 <TextBlock title="Por qué la construí">
 
-Durante años, mi instinto cuando un layout se portaba mal era el mismo: ponerle un `background` o un `border` temporal a un puñado de elementos para que las partes invisibles — wrappers vacíos, niveles de anidamiento, la caja que calladamente añade un margen — se hicieran visibles mientras editaba. Funciona, pero es un fastidio: elegir colores arbitrarios, añadir contornos, seguir trabajando y luego acordarse de quitarlo todo antes de hacer commit, para empezar de nuevo en el siguiente componente.
+Durante años, cuando un layout se comportaba mal, recurría a la misma solución: fondos y bordes temporales que hacían visibles los wrappers vacíos, los niveles de anidamiento y el espaciado inesperado. Funcionaba, pero cada sesión de depuración comenzaba con CSS arbitrario y terminaba recordando que debía eliminarlo.
 
-**Skeleton Layout convierte ese hábito en un botón de la barra de herramientas.** Donde las DevTools de Chrome inspeccionan un elemento *seleccionado* (y necesitan su panel abierto), esto pinta la *página entera* de una sola vez y se mantiene fuera del camino — fijada junto al editor de código, sin necesidad de seleccionar nada. No pretende reemplazar las DevTools; es su acompañante persistente y con vista de conjunto. El diseño estuvo acotado por restricciones estrictas desde el inicio: nunca añadir clases, atributos ni estilos en línea a la página; nunca cambiar las dimensiones del layout; que sea reversible en un clic; y pedir la menor cantidad de permisos posible.
+**Skeleton Layout convierte esa solución temporal en un botón de la barra de herramientas.** Chrome DevTools es excelente para inspeccionar un elemento seleccionado; Skeleton mantiene la *página completa* visible como un mapa estructural mientras el navegador está junto al editor. Funciona como un complemento persistente y con vista de conjunto a DevTools. Fijé cuatro restricciones antes de escribir código: nunca añadir clases, atributos ni estilos en línea a la página; nunca cambiar las dimensiones del layout; hacer que cada cambio sea reversible en un clic; y solicitar el menor acceso posible.
 
 </TextBlock>
 
+<Video src="/assets/projects/case-study-1/skeleton-plugin-develop.mp4" title="Editando un componente en el editor mientras la visualización sigue activa al lado. El servidor de desarrollo recarga, el marcado se reemplaza y los contornos se vuelven a dibujar sobre los elementos nuevos por su cuenta — a la extensión nunca se le avisa de que algo cambió." />
+
 <TextBlock title="Colorear la página entera con CSS, no con JavaScript">
 
-La decisión central — de la que cuelga todo lo demás — es que la visualización son **selectores de CSS generados**, no un script que recorre el DOM añadiendo clases. El modo por profundidad emite reglas moldeadas por el nivel de anidamiento:
+Construí la visualización a partir de **selectores de CSS generados** en lugar de un script que recorre el DOM añadiendo clases, y el resto de la arquitectura se desprende de ahí. El modo por profundidad genera reglas según el nivel de anidamiento:
 
 ```js
 function depthSelector(depth) {
@@ -35,7 +44,7 @@ function depthSelector(depth) {
 }
 ```
 
-Como es CSS, cualquier elemento que la página renderice *después* queda estilizado gratis — no hace falta un `MutationObserver` re-etiquetando nodos nuevos solo para mantenerlos coloreados. Los overrides se reparten entre los orígenes reales de la cascada de Chrome en vez de esconderse tras un muro de `!important`: las reglas base entran como `AUTHOR`, los overrides forzados por el usuario como `USER`, así los interruptores de "sobrescribir los colores de la página" se corresponden con cómo resuelve la cascada de verdad.
+Como el navegador evalúa esos selectores continuamente, los elementos renderizados más tarde quedan incluidos sin que un `MutationObserver` tenga que volver a etiquetar el DOM. Los overrides utilizan los orígenes de cascada de Chrome en lugar de depender de una pared de `!important`: las reglas base se insertan como `AUTHOR` y los overrides solicitados por el usuario como `USER`. Los ajustes se corresponden así con la manera en que la cascada resuelve los estilos.
 
 ```js
 export function buildStyleInjections(candidate) {
@@ -53,29 +62,56 @@ export function buildStyleInjections(candidate) {
 }
 ```
 
-Dos detalles se ganaron su lugar. La estructura se dibuja con **contornos (`outline`), no con bordes**, y un `outline-offset` negativo — un borde cambiaría las dimensiones de la caja y provocaría reflow, arruinando el propósito. Y una vez que la página quedó cubierta de reglas comodín, los *propios* tooltips de la extensión quedaban atrapados por ellas; la solución fue excluir cada elemento personalizado interno de los selectores generados, no parchear un borde suelto.
+Dos detalles protegen la página inspeccionada. La estructura se dibuja con **contornos (`outline`), no con bordes**, utilizando un `outline-offset` negativo; los bordes cambiarían las dimensiones de las cajas y provocarían reflow. Los selectores comodín también excluyen cada elemento personalizado interno, manteniendo los tooltips y overlays de la extensión fuera de la visualización.
 
 </TextBlock>
-
-<Image src="/assets/projects/case-study-1/mode-outline.webp" alt="El modo Outline Only de Skeleton Layout — la página conserva sus colores reales mientras cada elemento recibe un contorno estructural." title="Outline Only mantiene intacto el diseño real de la página y añade solo los contornos estructurales — útil cuando el tinte de color pelearía con el contenido que estás revisando." />
 
 <TextBlock title="Tres maneras de mirar un layout">
 
-El mismo motor impulsa tres modos, elegibles desde la barra de herramientas o un submenú contextual:
+El mismo motor impulsa tres modos, disponibles desde la barra de herramientas o el menú contextual:
 
 - **Full visualization** — tintes de fondo por profundidad o por posición entre hermanos (una paleta editable de seis colores o monocromo), contornos estructurales y texto con contraste automático opcional.
-- **Outline only** — deja en paz los colores de la página y muestra la estructura mediante contornos, para cuando el tinte ocultaría lo que estás inspeccionando.
-- **Hover inspector** — sin tinte alguno; pasa el cursor para leer el modelo de caja de un elemento.
+- **Outline only** — conserva los colores de la página y muestra la estructura mediante contornos, para cuando el tinte ocultaría el contenido bajo inspección.
+- **Hover inspector** — sin tinte alguno; el cursor sobre un elemento muestra su modelo de caja.
 
-Los ajustes viven en el **panel lateral** de Chrome, no en una pestaña aparte, así la página que estudias permanece a la vista mientras afinas la paleta. Y cambiar de modo nunca te cuesta tu personalización: tu paleta y opacidad de Full Visualization se guardan en un `fullStyle` separado, así que pasar a Outline o Inspector y volver restaura exactamente lo que tenías.
+Los ajustes viven en el **panel lateral** de Chrome, lo que mantiene visible la página inspeccionada mientras se afina la paleta. Las preferencias de Full Visualization se guardan por separado en `fullStyle`, por lo que cambiar a Outline o Inspector y regresar restaura exactamente la paleta y la opacidad configuradas.
 
 </TextBlock>
 
-<Image src="/assets/projects/case-study-1/mode-inspector.webp" alt="El Hover Inspector de Skeleton Layout — un tooltip del modelo de caja sobre un elemento con el cursor encima, mostrando valores de margin, border, padding y content, display y box-sizing, además del estado flex/grid." title="El Hover Inspector lee el modelo de caja completo — margin, border, padding y content en los cuatro lados, además de display, box-sizing, overflow y roles flex/grid — sin añadir una sola clase ni estilo en línea al elemento." />
+<ImageGrid
+	title="La misma página en cada modo. Outline Only añade estructura sin tocar el color; el modo monocromo tiñe por profundidad en un solo tono cuando el color competiría con el diseño; la paleta de seis colores separa los niveles hermanos de un vistazo; el inspector elimina el tinte por completo y reporta un solo elemento. Las etiquetas ámbar y el conteo en la esquina son el diagnóstico experimental de overflow, tratado más abajo."
+	items={[
+		{
+			src: '/assets/projects/case-study-1/mode-original.webp',
+			label: 'Original — extensión apagada',
+			alt: 'La landing page de una cabaña en alquiler renderizada con normalidad, sin estilos de la extensión: títulos editoriales, una grilla de dos fotos y un panel de cita.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-outline.webp',
+			label: 'Solo contornos',
+			alt: 'La misma página con un contorno estructural punteado en cada elemento, mientras los colores y las fotografías propios de la página quedan intactos.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-monochrome.webp',
+			label: 'Visualización completa · monocromo',
+			alt: 'La misma página teñida por profundidad de anidamiento en un único tono verde azulado, con contornos blancos punteados marcando cada límite de elemento.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-full.webp',
+			label: 'Visualización completa · paleta de seis colores',
+			alt: 'La misma página teñida con la paleta de seis colores por profundidad, donde cada nivel de anidamiento toma su propio tono para separar visualmente los contenedores hermanos.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-inspector.webp',
+			label: 'Inspector al pasar el puntero',
+			alt: 'El inspector sobre un contenedor grid, mostrando los anillos anidados de margin, border y padding con etiquetas de 30px, y un tooltip que indica div.project-copy, Grid, Grid item, 846.1 por 108.3px, profundidad 8, tres pistas de columna y una de fila.'
+		}
+	]}
+/>
 
 <TextBlock title="El inspector — leer el modelo de caja sin tocar el DOM">
 
-El inspector al pasar el cursor reporta etiqueta, id, dimensiones, profundidad, `display`, `box-sizing`, estado de overflow, el modelo de caja completo de los cuatro lados, pertenencia a flex/grid, contexto de apilamiento, `z-index` y más — y todo ello sin mutar el elemento inspeccionado. En su lugar monta sus overlays y su tooltip dentro de un host de **Shadow DOM cerrado** añadido al documento, para que el CSS de la página no pueda meterse dentro y las reglas comodín de la extensión no puedan salir:
+El inspector reporta etiqueta, id, dimensiones, profundidad, `display`, `box-sizing`, overflow, el modelo de caja completo, pertenencia a flex/grid, contexto de apilamiento y `z-index` sin mutar el elemento inspeccionado. Sus overlays y su tooltip viven dentro de un host de **Shadow DOM cerrado**, aislados tanto del CSS de la página como de los selectores generados por la extensión:
 
 ```js
 const host = document.createElement('skeleton-layout-element-inspector')
@@ -84,13 +120,13 @@ shadow.append(style, ...overlays, tooltip)
 document.documentElement.append(host)
 ```
 
-La hoja de estilos del overlay abre con `all: initial !important` para sacudirse los estilos heredados de la página, las posiciones se programan con `requestAnimationFrame` y el tooltip se ajusta a los límites del viewport. La clasificación del layout vive en su propio archivo sin dependencia del DOM para poder probarse en unit tests fuera de una página real. La pieza más delicada fue contar las pistas del grid: no puedes simplemente partir `grid-template-columns` por espacios, porque `repeat()` y los nombres de línea anidan su propia sintaxis — así que lleva un pequeño parser que rastrea la profundidad de corchetes y paréntesis.
+La hoja de estilos del overlay comienza con `all: initial !important`, las posiciones se programan mediante `requestAnimationFrame` y el tooltip se ajusta a los límites del viewport. La clasificación del layout vive en un módulo independiente del DOM para poder probarla de forma aislada. Contar las pistas del grid necesitó un pequeño parser, porque `repeat()` y los nombres de línea anidan su propia sintaxis y dividir `grid-template-columns` por espacios da conteos incorrectos. Los totales de pistas resueltos son lo que el tooltip reporta arriba como `3 tracks` y `1 track`, junto con los gaps, la alineación y la profundidad del elemento.
 
 </TextBlock>
 
 <TextBlock title="Vista previa en vivo sin corromper el estado guardado">
 
-Editar los ajustes se previsualiza al instante sobre la página en vivo — pero una vista previa nunca debe convertirse calladamente en tu configuración guardada, y una versión temprana se equivocaba en esto de una docena de maneras (la opacidad revirtiéndose, borradores de paleta perdidos al hacer scroll, previews abandonadas al cerrar el panel). La solución fue modelar tres fases distintas — **saved**, **draft** y **previewed** — en un objeto `SettingsState` que posee cada transición y devuelve copias normalizadas, para que quien lo llame no pueda mutar el estado guardado a través de una referencia suelta:
+Los cambios en los ajustes se previsualizan de inmediato sobre la página, pero una vista previa nunca debe convertirse silenciosamente en la configuración guardada. Las primeras versiones expusieron varios errores de estado: opacidad revertida, borradores de paleta perdidos y previews que permanecían después de cerrar el panel. Los corregí modelando tres fases explícitas — **saved**, **draft** y **previewed** — en un objeto `SettingsState` que controla cada transición y devuelve copias normalizadas:
 
 ```js
 switchMode(mode) {
@@ -102,15 +138,19 @@ switchMode(mode) {
 }
 ```
 
-El panel lateral abre un puerto con nombre `settings-preview`; las solicitudes de preview se hacen con debounce (120 ms), se etiquetan con IDs y se serializan en una cola de promesas. El service worker marca cada pestaña con un `previewOwner`, así un panel no puede pisar la preview de otro, y una desconexión revierte cualquier preview que aún fuera suya. Guardar es una ruta de commit aparte — cerrar el panel descarta una preview sin guardar en vez de filtrarla al almacenamiento.
+El panel lateral se comunica mediante un puerto llamado `settings-preview`. Las solicitudes utilizan un debounce de 120 ms, llevan identificadores y se serializan mediante una cola de promesas. Cada pestaña registra un `previewOwner`; al desconectarse, el panel revierte cualquier preview que todavía le pertenezca. Guardar sigue una ruta separada, por lo que cerrar el panel descarta los cambios sin guardar en lugar de filtrarlos al almacenamiento.
 
 </TextBlock>
 
-<Image src="/assets/projects/case-study-1/settings.webp" alt="Los ajustes de Skeleton Layout en el panel lateral de Chrome — selector de modo, paleta editable de seis colores, opacidad de fondo, estilo y grosor de contorno, y controles de color de texto, todos con inputs nativos." title="Los ajustes viven en el panel lateral de Chrome para que la página siga visible mientras la afinas — controles nativos en todo, con una vista previa en vivo que nunca hace commit hasta que guardas." />
+<Image
+	src="/assets/projects/case-study-1/settings.webp"
+	alt="El panel de ajustes de Skeleton Layout: una sección Mode con un desplegable de visualización, un interruptor de visualización de grid y atajos de teclado reasignables; una sección Background con la paleta de seis tonos, deslizadores de luminosidad por ciclo y de opacidad, e interruptores de override; secciones Outline y Text; y una sección Diagnostics con detalles al pasar el puntero y un detector experimental de overflow."
+	title="Toda la superficie de ajustes, que vive en un panel lateral estrecho de Chrome junto a la página inspeccionada. Cada control es un input nativo. Reset, Revert y Save son acciones separadas porque el panel mantiene un borrador: Revert descarta la vista previa en vivo, y nada llega al almacenamiento hasta pulsar Save. Los dos checkboxes de override son los orígenes de cascada AUTHOR y USER descritos antes, y el detector de overflow lleva su etiqueta de experimental en la propia interfaz, no solo en la documentación."
+/>
 
 <TextBlock title="Reversible por construcción — insertar antes de eliminar">
 
-Apagar la extensión debe *no* dejar rastro, lo que suena trivial hasta que descubres que `chrome.scripting.removeCSS()` exige exactamente el mismo texto CSS **y** el mismo origen de cascada usados al insertarlo. Así que el service worker guarda el conjunto exacto de inyecciones generadas en `chrome.storage.session`, indexado por id de pestaña, y ante un cambio de ajustes hace un diff de los pares `{ css, origin }` viejos y nuevos. El orden importa: el CSS nuevo entra *antes* de que salga el viejo, para que la página nunca parpadee sin estilos a mitad del cambio.
+Apagar la extensión no debe dejar rastro. Como `chrome.scripting.removeCSS()` exige exactamente el mismo texto CSS **y** el mismo origen de cascada usados al insertarlo, el service worker guarda cada inyección generada en `chrome.storage.session`, indexada por id de pestaña. Ante un cambio de ajustes compara los pares `{ css, origin }` anteriores y nuevos. El CSS nuevo se inserta *antes* de retirar el anterior, evitando un parpadeo sin estilos entre configuraciones.
 
 ```js
 // Insert replacements first so the page never renders without an active
@@ -127,30 +167,32 @@ await setTabState(tabId, injections /* … */)
 await removeInjections(tabId, removals)
 ```
 
-Un lock de promesa por pestaña serializa todo — un clic en la barra, una actualización de ajustes, un evento de navegación y una solicitud de preview no pueden competir — y un fallo parcial revierte el CSS que acaba de insertar dejando intacta la visualización que ya funcionaba. Como los service workers de Manifest V3 se detienen y reinician a su antojo, el badge de la barra (`ON` / `OL` / `IN`, o un `!` naranja cuando Chrome bloquea la inyección) siempre se reconstruye desde el almacenamiento de sesión en vez de mantenerse en memoria.
+Un lock de promesa por pestaña evita que las acciones de la barra, las actualizaciones de ajustes, la navegación y las solicitudes de preview compitan entre sí. Un fallo parcial revierte el CSS recién insertado y conserva la visualización anterior. Los service workers de Manifest V3 pueden reiniciarse entre eventos, así que el badge de la barra (`ON`, `OL`, `IN`, o un `!` naranja cuando Chrome bloquea la inyección) se reconstruye desde el almacenamiento de sesión en cada arranque.
 
 </TextBlock>
 
 <TextBlock title="Diagnóstico de overflow, honestamente etiquetado como experimental">
 
-Un diagnóstico aparte y opcional busca overflow horizontal — el clásico bug de "¿por qué hay una barra de scroll?". Marca en rojo el overflow probable a nivel de documento y en ámbar el posible recorte, dibujando cada marca sobre una **única superficie Canvas 2D** dentro de un Shadow DOM cerrado en lugar de crear un nodo de overlay por candidato. Está acotado a propósito: un presupuesto de escaneo de 20 ms, topes de 12.000 elementos escaneados / 1.000 candidatos / 300 marcas dibujadas, y re-escaneos con debounce ante mutaciones y al quedar quieto el scroll.
+Un diagnóstico opcional busca overflow horizontal y marca en rojo el overflow probable del documento y en ámbar el posible recorte. Cada indicador se dibuja sobre una **única superficie Canvas 2D** dentro de un Shadow DOM cerrado, lo que evita crear un nodo de overlay por candidato. El escaneo está limitado a 20 ms, hasta 12.000 elementos, 1.000 candidatos y 300 indicadores, con nuevos escaneos mediante debounce después de mutaciones y desplazamientos.
 
-La primera versión era demasiado ansiosa — marcaba texto en línea más largo que su caja de línea, contenedores de scroll intencionales, tipografía decorativa grande. Así que el clasificador se afinó para separar el overflow *confirmado* de la página del recorte *posible* e ignorar los casos intencionales comunes. Pero la intención de un overflow no puede leerse solo desde la geometría, así que se queda etiquetado como **experimental** y el conteo es una pista, no un veredicto.
+Mi primer clasificador producía falsos positivos con texto en línea, contenedores de scroll intencionales y tipografía decorativa grande. Ahora separa el overflow *confirmado* de la página del recorte *posible* e ignora los casos intencionales comunes. Las etiquetas ámbar `possible overflow-y` y `possible clipped-x` de las capturas de arriba son esa clasificación prudente en acción: cada una nombra el elemento y el eje en lugar de afirmar que hay un error. La geometría no puede revelar la intención con certeza, por lo que la función continúa etiquetada como **experimental** y su conteo debe leerse como una pista.
 
 </TextBlock>
 
 <TextBlock title="Una superficie pequeña, y la menor cantidad de permisos posible">
 
-El manifest pide cinco permisos — `activeTab`, `contextMenus`, `scripting`, `sidePanel`, `storage` — y declara **cero** `host_permissions`. Nada se ejecuta en un sitio hasta que invocas la extensión ahí, y los content scripts de diagnóstico se inyectan solo cuando su función está activa; no hay content scripts estáticos sentados en cada página. Las preferencias se sincronizan vía `chrome.storage.sync`; el estado efímero por pestaña vive en `chrome.storage.session`. No hay telemetría, ni analítica, ni contenido de página que salga del navegador — lo que también significa que no tengo datos de uso, un intercambio deliberado.
+El manifest solicita cinco permisos — `activeTab`, `contextMenus`, `scripting`, `sidePanel` y `storage` — con **cero** `host_permissions`. Nada se ejecuta en un sitio hasta que la extensión se invoca ahí, y los scripts de diagnóstico se inyectan solo mientras su función está activa. Las preferencias se sincronizan mediante `chrome.storage.sync`; el estado efímero de cada pestaña permanece en `chrome.storage.session`. No hay telemetría ni analítica, y el contenido de la página nunca sale del navegador.
 
-Todo es JavaScript, HTML y CSS puros, **sin paso de build ni dependencias en tiempo de ejecución** — cerca de 3.900 líneas de código de producción, 51 pruebas automatizadas (con el `node:test` nativo de Node), empaquetadas en un archivo **de 15 ficheros y ~35 KB** por un script de release propio que construye un ZIP *determinista* (timestamps fijos, rutas ordenadas, deflate nivel 9) y se niega a publicar si el manifest y el package no coinciden en versión, si se cuela un `host_permissions`, o si encuentra `eval`, `new Function` o una etiqueta de script remoto.
+La extensión utiliza JavaScript, HTML y CSS puros, **sin paso de build ni dependencias en tiempo de ejecución**: aproximadamente 4.100 líneas de código de producción y 52 pruebas automatizadas con el `node:test` nativo de Node. Escribí un script de release que la empaqueta en un **archivo determinista de 15 ficheros y ~36 KiB**, con timestamps fijos, rutas ordenadas y deflate nivel 9. El empaquetado falla si las versiones del manifest y el package no coinciden, si aparecen permisos persistentes de host, o si el código contiene evaluación dinámica o scripts remotos.
 
 </TextBlock>
 
 <TextBlock title="En qué punto está">
 
-Skeleton Layout es un **release candidate en la v0.3.0**, plenamente usable como extensión desempaquetada pero aún no en la Chrome Web Store — no hay release etiquetado, las capturas de la tienda y la grabación de demo no están hechas, y todavía no tiene usuarios públicos ni reseñas. También es honesto sobre su techo: el CSS inyectado no cruza los límites del Shadow DOM, el target de scripting actual omite los iframes, los pseudo-elementos no se colorean como nodos propios, y el anidamiento más allá de la profundidad 64 deja de recibir un color nuevo. Es solo para Chrome (116+, por la API del panel lateral), y la matemática de contraste automático compara contra el color de la paleta generada, no contra el resultado compuesto una vez que un tinte translúcido se mezcla con la página — así que es una heurística fuerte, no una cifra WCAG garantizada.
+Skeleton Layout es un **release candidate en la v0.3.0** que puede instalarse hoy como extensión desempaquetada. El archivo de distribución, la documentación, la política de privacidad y el sitio público están listos; antes de la primera publicación en la Chrome Web Store quedan las pruebas en un perfil limpio, los recursos de la ficha de la tienda y el envío a testers de confianza.
 
-El camino a un lanzamiento real es sobre todo validación, no funciones: correr el ZIP empaquetado en un perfil limpio, recorrer la lista de QA manual en sitios reales, grabar la demo, etiquetar `v0.3.0` y enviar — primero a testers de confianza. Después de eso, los reportes de usuarios reales decidirán si la detección de overflow se gradúa, se rediseña o se elimina.
+Los límites actuales están claros: el CSS inyectado no puede cruzar los límites del Shadow DOM, los documentos dentro de iframes se omiten, los pseudo-elementos no se colorean de forma independiente y el coloreado por profundidad termina en el nivel 64. Skeleton es exclusivo para Chrome, 116 en adelante por la API del panel lateral. El contraste automático es una heurística: compara contra el color generado de la paleta, no contra el resultado compuesto una vez que un tinte translúcido se mezcla con la página, así que no es una cifra WCAG garantizada.
+
+Lo que queda es validación: probar el ZIP empaquetado en un perfil limpio y en sitios representativos, preparar los recursos de la ficha de la tienda, etiquetar `v0.3.0` y enviarlo a testers de confianza. Sus comentarios determinarán si la detección de overflow se gradúa, cambia de dirección o se elimina.
 
 </TextBlock>

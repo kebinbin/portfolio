@@ -104,14 +104,14 @@ const colLeft = (i: number) => {
 			<!-- Right rail: kevincastillo.io on column 11 @ line 1; location on column 9 @ line 3 -->
 			<p
 				aria-hidden="true"
-				class=`text-ink/50 absolute hidden text-[8px] lg:text-[10px] tracking-[0.25em] uppercase ${lang === 'es' ? "xl:block" : "sm:block"}`
+				class="text-ink/50 absolute hidden text-[8px] tracking-[0.25em] uppercase sm:block lg:text-[10px]"
 				style={`top: calc(var(--display-size) * ${BASELINE[0]}); left: ${colLeft(11)}; transform: translateY(-0.4em)`}
 			>
 				{i18n.hero.eyebrow.site}
 			</p>
 			<p
 				aria-hidden="true"
-				class=`text-ink/50 absolute hidden flex-col text-[8px] lg:text-[10px] tracking-[0.25em] uppercase ${lang === 'es' ? "xl:flex" : "sm:flex"}`
+				class="text-ink/50 absolute hidden flex-col text-[8px] tracking-[0.25em] uppercase sm:flex lg:text-[10px]"
 				style={`top: calc(var(--display-size) * ${BASELINE[lang === 'es' ? 1 : 2]}); left: ${colLeft(9)}; transform: translateY(-0.4em)`}
 			>
 				<span>{i18n.hero.eyebrow.location[0]}</span>

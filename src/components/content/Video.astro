@@ -3,8 +3,9 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 
 const { src, title } = Astro.props
-// Mirrors Image.astro: a missing capture renders a labeled placeholder rather
-// than a broken player, so an unrecorded demo never ships as dead media.
+// A missing capture renders a labeled placeholder rather than a broken player,
+// so an unrecorded demo never ships as dead media. No case study relies on this
+// today — every referenced video exists — but it stays as a guard for new ones.
 const exists = existsSync(join(process.cwd(), 'public', src))
 ---
 

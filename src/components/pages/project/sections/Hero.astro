@@ -69,5 +69,5 @@ const { live, source, img, img_alt } = project.data
 	transition:name={`${projectSlug}-hero-img`}
 	class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7"
 >
-	<img src={img} alt={img_alt || ''} loading="lazy" decoding="async" />
+	<img src={img} alt={img_alt || ''} loading="eager" fetchpriority="high" decoding="async" />
 </div>

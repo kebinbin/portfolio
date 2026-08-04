@@ -1,0 +1,65 @@
+---
+/**
+ * A set of related screenshots shown side by side for comparison, each in the
+ * shared device frame with its own label, under one caption.
+ *
+ * The first item spans the full column width — it reads as the baseline the
+ * rest are compared against — and the remaining items sit two-up. With five
+ * items that lands as three rows (1 + 2 + 2) with no empty cell. Below `sm`
+ * every item stacks to one column.
+ *
+ * items: { src, alt, label }[]
+ */
+import { getImageSize } from './imageSize'
+
+const { items = [], title } = Astro.props
+// Intrinsic size reserves each cell before load (no CLS). `w-full h-auto` still
+// controls rendered size — these attributes only supply the aspect ratio.
+const sized = items.map((item) => ({ ...item, size: getImageSize(item.src) }))
+const [lead, ...rest] = sized
+
+const frame =
+	'border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6'
+---
+
+<div class="flex flex-col gap-3">
+	<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+		{
+			lead && (
+				<figure class="flex flex-col gap-2 sm:col-span-2">
+					<div class={frame}>
+						<img
+							src={lead.src}
+							alt={lead.alt || ''}
+							width={lead.size?.width}
+							height={lead.size?.height}
+							loading="lazy"
+							decoding="async"
+							class="h-auto w-full"
+						/>
+					</div>
+					{lead.label && <figcaption class="eyebrow text-ink/60">{lead.label}</figcaption>}
+				</figure>
+			)
+		}
+		{
+			rest.map((item) => (
+				<figure class="flex flex-col gap-2">
+					<div class={frame}>
+						<img
+							src={item.src}
+							alt={item.alt || ''}
+							width={item.size?.width}
+							height={item.size?.height}
+							loading="lazy"
+							decoding="async"
+							class="h-auto w-full"
+						/>
+					</div>
+					{item.label && <figcaption class="eyebrow text-ink/60">{item.label}</figcaption>}
+				</figure>
+			))
+		}
+	</div>
+	{title && <p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">{title}</p>}
+</div>

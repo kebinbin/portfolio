@@ -7,7 +7,7 @@ publishDate: 2026-06-20 00:00:00
 img: /assets/projects/case-study-3/sona.io-hero.webp
 img_alt: El feed "Para ti" de Sona — barra de actividad, grid de artistas cercanos y el reproductor persistente en la parte inferior.
 description: |
-  Sona es la vitrina principal de Routini: una aplicación de una sola página con estado, de descubrimiento musical y de eventos — tres lentes enrutadas, un reproductor persistente que sobrevive cada navegación, View Transitions de elemento compartido y estado reactivo en la URL. Encuentra artistas y presentaciones locales experimentando primero la música, no un volante.
+  Sona es una aplicación de una sola página para descubrir música y eventos, construida como la demostración que pone a Routini bajo carga: tres lentes enrutadas sobre un mismo conjunto de datos, un reproductor que sigue sonando en cada navegación, View Transitions de elemento compartido y el estado del mapa guardado en la URL. Diseñada primero en Figma y luego construida en React 19, TypeScript y Tailwind CSS v4.
 tags:
   - Diseño
   - Desarrollo
@@ -21,33 +21,33 @@ source:
 ---
 import TextBlock from '../../../components/content/TextBlock.astro'
 import Video from '../../../components/content/Video.astro'
-import Image from '../../../components/content/Image.astro'
+import ImageBezel from '../../../components/content/ImageBezel.astro'
 
 <TextBlock title="Qué es Sona">
 
-Sona empezó como un diseño en Figma — un ejercicio personal para afinar mis habilidades de diseño de UI y de producto — explorando una sola idea: descubrir música local *escuchando* primero, no desplazándote por volantes — ver dónde toca un artista próximamente, quién comparte ese escenario, y darle a artistas independientes una forma de llegar a audiencias cercanas. Es un producto hipotético; si alguna vez se convierte en un servicio real es una pregunta abierta.
+Sona empezó como un archivo de Figma, un ejercicio personal de diseño de UI y de producto alrededor de una idea: descubrir música local escuchando primero, ver dónde toca un artista próximamente y quién comparte ese escenario, y darle a los artistas independientes una forma de llegar a audiencias cercanas. Es un producto hipotético. Si alguna vez se convierte en un servicio es una pregunta abierta.
 
-Lo que **sí es** hoy es un front-end genuino y nada más: diseñado de principio a fin en Figma primero, y luego construido desde ese archivo en React 19, TypeScript y Tailwind CSS v4 — una vez terminado el diseño, construirlo de verdad fue el siguiente paso natural para darle a [Routini](/es/projects/routini), el pequeño router que escribí, un terreno de prueba genuino. No hay backend — cada artista, evento, recinto y distancia es una simulación fija y sembrada, y lo de "cerca de ti" está montado, no medido. Un sitio de documentación demuestra que un router funciona; una app como esta demuestra que aguanta bajo presión — un reproductor que nunca se detiene, rutas con code-splitting, estado reactivo en la URL, y animaciones de elemento compartido, todo en un solo shell con estado.
+Hoy es un front-end y nada más. Lo diseñé de principio a fin en Figma y luego lo construí desde ese archivo en React 19, TypeScript y Tailwind CSS v4, lo que le dio a [Routini](/es/projects/routini) un lugar exigente donde correr. No hay backend: cada artista, evento, recinto y distancia es una simulación fija y sembrada, y lo de "cerca de ti" está montado. Un sitio de documentación demuestra que un router funciona. Una aplicación de esta forma muestra cómo se comporta con un reproductor persistente, rutas con code-splitting, estado en la URL y animación de elemento compartido en un solo shell con estado.
 
 </TextBlock>
 
 <TextBlock title="Un solo shell, tres formas de descubrir">
 
-Todo vive dentro de un único marco persistente: una barra superior con búsqueda y una campana de actividad, una barra lateral "Para ti" en escritorio, el contenido enrutado, y un pie de página que contiene el reproductor (con una barra de pestañas móvil que reemplaza a la barra lateral en pantallas pequeñas). Un control segmentado cambia entre tres lentes enrutadas sobre el mismo conjunto de datos cercanos:
+Todo vive dentro de un único marco persistente: una barra superior con búsqueda y una campana de actividad, una barra lateral "Para ti" en escritorio, el contenido enrutado, y un pie de página que contiene el reproductor. En pantallas pequeñas una barra de pestañas reemplaza a la barra lateral. Un control segmentado cambia entre tres lentes enrutadas sobre el mismo conjunto de datos cercanos:
 
-- **Artistas** — ordenados por distancia (simulada) (*"0.9 km · 10 de mayo"*), cada tarjeta con un corazón para seguir, alternable entre vistas inmersiva, lista y grilla.
-- **Eventos** — cada presentación próxima como su propia tarjeta; también la pestaña móvil "Eventos".
-- **Mapa** — esos mismos eventos ubicados geográficamente en un mapa interactivo real.
+- **Artistas** — ordenados por distancia simulada (*"0.9 km · 10 de mayo"*), cada tarjeta con un corazón para seguir, alternable entre vistas inmersiva, lista y grilla.
+- **Eventos** — cada presentación próxima como su propia tarjeta, y la pestaña móvil "Eventos".
+- **Mapa** — esos mismos eventos ubicados geográficamente en un mapa interactivo.
 
-No son tres funcionalidades pegadas — son tres rutas sobre un mismo modelo de datos, compartiendo un encabezado fijo. Tocar cualquier artista o evento navega a una página de detalle completa.
+Las tres lentes son rutas sobre un mismo modelo de datos, compartiendo un encabezado fijo. Seleccionar cualquier artista o evento navega a una página de detalle completa.
 
 </TextBlock>
 
-<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Recorriendo las tres vistas de la lente Artistas — inmersiva, lista y grilla — y luego cambiando a Eventos y Mapa: cada pestaña es una ruta real de Routini, así que la URL cambia junto con la vista." />
+<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Recorriendo las tres vistas de la lente Artistas — inmersiva, lista y grilla — y luego cambiando a Eventos y Mapa. Cada pestaña es una ruta de Routini, así que la URL cambia junto con la vista." />
 
-<TextBlock title="El reproductor que nunca se detiene — el Outlet opcional de Routini">
+<TextBlock title="El reproductor persistente y el Outlet opcional de Routini">
 
-El truco que hace que toda la app se sienta como un producto es que el reproductor sigue sonando mientras navegas. Eso es consecuencia directa de una decisión de diseño de Routini: `<Outlet>` es opcional, y el layout es decisión de quien consume la librería. El reproductor y la navegación viven *fuera* del Outlet, así que la navegación solo cambia la página — el elemento de audio nunca está en la parte del árbol que se desmonta:
+El reproductor sigue sonando mientras el resto de la aplicación navega. Eso se desprende de una decisión de Routini: `<Outlet>` es opcional y el layout le pertenece a quien consume la librería. El reproductor y la navegación viven fuera del Outlet, así que una navegación cambia únicamente la página y el elemento de audio nunca está en la parte del árbol que se desmonta:
 
 ```tsx
 import { Router, Outlet } from "routini";
@@ -66,56 +66,60 @@ export default function App() {
 }
 ```
 
-El estado de reproducción (canción actual, cola, volumen) vive en un pequeño store, y el reproductor se renderiza en dos layouts — una barra móvil compacta y una versión de escritorio más completa de tres columnas, ambos sobre un slider de Radix — con un espacio de arte siempre reservado para que el pie de página nunca salte.
+El estado de reproducción (canción actual, cola, volumen) vive en un pequeño store. El reproductor se renderiza en dos layouts, una barra móvil compacta y una versión de escritorio de tres columnas, ambos construidos sobre un slider de Radix, con un espacio de arte reservado que evita que el pie de página se desplace cuando carga una pista.
 
 </TextBlock>
 
-<Video src="/assets/projects/case-study-3/persistent-player.mp4" title="Reproduciendo una canción mientras se navega del feed a la página de un artista y luego a la de un evento — ambos saltos son View Transitions reales de elemento compartido (la foto del artista transformándose en su hero, y luego el póster del evento transformándose en el suyo), y la canción nunca se detiene, porque el reproductor vive fuera del Outlet enrutado." />
+<Video src="/assets/projects/case-study-3/persistent-player.mp4" title="Reproduciendo una canción mientras se navega del feed a la página de un artista y luego a la de un evento. Ambos saltos son View Transitions de elemento compartido — la foto del artista transformándose en su hero, y luego el póster del evento en el suyo — y la canción continúa, porque el reproductor vive fuera del Outlet enrutado." />
 
 <TextBlock title="Páginas de detalle, y la transformación entre ellas">
 
-Toca un artista y su foto del feed, su nombre y la fecha de su próxima presentación se **transforman** en el hero en la parte superior de su página — una verdadera View Transition de elemento compartido, emparejada por `view-transition-name`, no un fundido. De ahí en adelante la página es contenido plano: una lista de canciones, próximas presentaciones, co-intérpretes calculados a partir de los line-ups compartidos de eventos en lugar de escritos a mano.
+Seleccionar un artista transforma su foto del feed, su nombre y la fecha de su próxima presentación en el hero de la parte superior de su página. Es una View Transition de elemento compartido emparejada por `view-transition-name`. De ahí en adelante la página es contenido plano: una lista de canciones, próximas presentaciones, y co-intérpretes derivados de los line-ups compartidos de eventos en lugar de listas escritas a mano.
 
-La página del evento lleva el mismo truco más lejos: su hero usa una copia difuminada a sangre completa del póster detrás del arte nítido, y el mismo nombre `poster-<id>` se comparte entre la grilla de eventos, los popups del mapa y este hero — así que los tres se transforman entre sí, un mismo vocabulario de animación impulsado enteramente por nombres de transición coincidentes, no por una librería.
-
-</TextBlock>
-
-<TextBlock title="El mapa — el mejor argumento para un store enfocado solo en el pathname">
-
-La lente Mapa renderiza un pin por **recinto** para que los shows co-localizados no se apilen, y pasar el mouse sobre un pin abre un popup con tema construido a partir de la misma tarjeta usada en otros lados (así que su póster también se transforma en el hero del evento); cuando un recinto tiene varios shows, un pequeño control `‹ 1/2 ›` los recorre en el sitio.
-
-La parte interesante es la URL. El viewport actual — `?lat&lng&z` — se escribe en el query string en cada desplazamiento y zoom mediante el `useSearchParams` de Routini. Como el store de ubicación de Routini está **enfocado solo en el pathname por diseño**, escribir ese query nunca vuelve a montar la costosa instancia de Leaflet debajo. Un router cuyo store rastree la URL completa desmontaría el mapa y lo reconstruiría en cada arrastre; aquí simplemente se actualiza, en silencio. Es la demostración más clara y difícil de fingir de esa decisión arquitectónica en todo el proyecto.
+La página del evento extiende el mismo patrón. Su hero coloca una copia difuminada y a sangre completa del póster detrás del arte nítido, y el nombre `poster-<id>` se comparte entre la grilla de eventos, los popups del mapa y el hero, así que los tres se transforman entre sí. No hay ninguna librería de animación involucrada; los nombres coincidentes hacen el trabajo.
 
 </TextBlock>
 
-<Video src="/assets/projects/case-study-3/map-url-sync.mp4" title="Pasando el mouse sobre un pin para abrir su popup, y luego desplazando y haciendo zoom en el mapa — la barra de direcciones se reescribe en vivo con lat, lng y z, sin que el mapa mismo se vuelva a montar." />
+<TextBlock title="El mapa y el store enfocado solo en el pathname">
 
-<TextBlock title="Seguir, y un feed de actividad con una razón de ser">
+La lente Mapa renderiza un pin por **recinto** para que los shows co-localizados no se apilen, y pasar el puntero sobre un pin abre un popup con tema construido a partir de la misma tarjeta usada en otros lados, lo que significa que su póster también se transforma en el hero del evento. Cuando un recinto tiene varios shows, un pequeño control `‹ 1/2 ›` los recorre en el sitio.
 
-Un corazón en el feed y en cada página de artista activa un seguir persistido, y de esos seguimientos la app deriva un feed de actividad "Para ti" — nuevos shows y lanzamientos de los artistas que sigues, en la barra lateral de escritorio y detrás de la campana móvil. Estas filas omiten intencionalmente la View Transition (un avatar circular no puede transformarse limpiamente en un hero horizontal como sí lo hace el arte rectangular del feed — saber cuándo *no* animar es parte del diseño), y la página en sí reemplazó un patrón anterior de notificaciones maestro-detalle que, bajo el enrutamiento plano de Routini, solo funcionaba como una solución alternativa: una señal honesta de dónde está realmente el techo del router.
+El viewport se guarda en la URL. `?lat&lng&z` se escribe en el query string en cada desplazamiento y zoom mediante el `useSearchParams` de Routini. Como el store de ubicación está **enfocado solo en el pathname**, escribir ese query no vuelve a montar la instancia de Leaflet que está debajo. Un router cuyo store rastreara la URL completa destruiría y reconstruiría el mapa en cada arrastre. Este es el único lugar del proyecto donde ese diseño del store es visiblemente estructural.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-3/map-url-sync.mp4" title="Pasando el puntero sobre un pin para abrir su popup, y luego desplazando y haciendo zoom en el mapa — la barra de direcciones se reescribe en vivo con lat, lng y z, y el mapa nunca se vuelve a montar debajo." />
+
+<TextBlock title="Seguimientos y el feed de actividad">
+
+Un corazón en el feed y en cada página de artista activa un seguimiento persistido, y el feed de actividad "Para ti" se deriva de esos seguimientos: nuevos shows y lanzamientos de los artistas seguidos, en la barra lateral de escritorio y detrás de la campana móvil.
+
+Estas filas omiten la View Transition a propósito. Un avatar circular no se transforma limpiamente en un hero horizontal como sí lo hace el arte rectangular del feed, y saber dónde detener la animación es parte del diseño. La página también reemplazó un patrón anterior de notificaciones maestro-detalle que solo funcionaba como solución alternativa bajo el enrutamiento plano de Routini, lo cual es una indicación justa de dónde están los límites del router.
 
 </TextBlock>
 
 <TextBlock title="Cómo Sona pone a prueba a Routini">
 
-Cada capacidad que el router anuncia se usa aquí bajo condiciones realistas:
+La mayoría de las capacidades del router se usan aquí bajo condiciones realistas:
 
-- **Lazy + precarga** — cada ruta debajo del feed eager de Artistas tiene code-splitting y precarga al pasar el mouse sobre un enlace, así la navegación se siente instantánea en lugar de mostrar un cargador.
-- **`errorFallback`** — un fallback personalizado distingue un chunk fallido (por un deploy desactualizado) de un error de render ordinario y ofrece la recuperación correcta para cada caso: "Reload" para un chunk desactualizado, "Try again" para todo lo demás, más un `<Link>` de regreso al feed en cualquier caso.
-- **View Transitions de elemento compartido** — las transformaciones feed→artista y póster→evento, conectadas con nada más que `view-transition-name`s coincidentes.
-- **`useParams`** impulsa las páginas de artista y evento; **`useLocation`** decide cuándo la barra lateral se elimina para un layout de ancho completo y cuál lente está activa; **`<Navigate>`** maneja la redirección raíz a `/artists`.
+- **Lazy y precarga** — cada ruta debajo del feed eager de Artistas tiene code-splitting y precarga al pasar el puntero sobre un enlace, así que la navegación se resuelve sin mostrar un cargador.
+- **`errorFallback`** — un fallback personalizado separa un chunk fallido, normalmente por un deploy desactualizado, de un error de render ordinario, y ofrece la recuperación correspondiente a cada caso: "Reload" para un chunk desactualizado, "Try again" en los demás, con un `<Link>` de regreso al feed en ambos casos.
+- **View Transitions de elemento compartido** — las transformaciones de feed a artista y de póster a evento, conectadas con valores `view-transition-name` coincidentes.
+- **`useParams`** impulsa las páginas de artista y evento. **`useLocation`** decide cuándo la barra lateral desaparece para un layout de ancho completo y cuál lente está activa. **`<Navigate>`** maneja la redirección raíz a `/artists`.
 - **`useSearchParams`** mantiene el viewport del mapa en la URL sin volver a montarlo.
-- **`scrollRestoration`** — delimitado al propio `<main>` con scroll de `AppLayout` mediante `scrollContainer` en lugar de la ventana: cambiar de lente empieza cada una desde arriba, y volver con Atrás a una lista restaura exactamente la posición de scroll donde la dejaste.
+- **`scrollRestoration`** — delimitado mediante `scrollContainer` al propio `<main>` con scroll de `AppLayout` en vez de la ventana, así que cambiar de lente empieza cada una desde arriba y volver atrás a una lista restaura su posición anterior.
 - **El `<Outlet>` opcional** es lo que permite que el reproductor persista en cada navegación.
 
-Debajo de la interfaz no hay servidor alguno — 18 artistas, 14 eventos y 12 recintos vienen de un generador con semilla fija y se importan de forma estática, así que "se presentará pronto con" y "otros eventos en este recinto" son *derivados*, las distancias están asignadas y no medidas, y el conjunto de datos es estable entre regeneraciones. Las canciones son pistas reales, no audio de relleno; el tema es un toggle `data-theme` aplicado antes del primer pintado para que no haya destello.
+Debajo de la interfaz no hay servidor. Dieciocho artistas, catorce eventos y doce recintos vienen de un generador con semilla fija y se importan de forma estática, así que "se presentará pronto con" y "otros eventos en este recinto" se derivan de esos datos, las distancias están asignadas, y el conjunto de datos se mantiene estable entre regeneraciones. Las canciones son archivos de audio reales. El tema es un toggle `data-theme` aplicado antes del primer pintado, así que la página no destella al cargar.
 
 </TextBlock>
 
 <TextBlock title="En qué punto está">
 
-Sona demuestra que Routini es más que suficiente para una app con estado y un solo layout, y que sus historias de View Transitions y estado en la URL son genuinamente sólidas. Es igual de útil por lo que *expone*: el patrón del reproductor persistente fuera del `<Outlet>` depende de que Routini tenga exactamente un `<Outlet>` por app — todavía no hay forma de anidar un segundo layout, con su propio outlet, dentro del primero, como suele necesitar una sección de ajustes o de administración con su propio chrome persistente anidado dentro del shell principal. Ese es el argumento más fuerte dentro de la app para que Routini eventualmente incorpore rutas anidadas. Algunos de los exports del router también quedan sin ejercitar aquí (`navigate()`, `preload="render"`/`"viewport"`), así que todavía no es una vitrina completa.
+Sona está desplegada y es pública. Demuestra que Routini alcanza para una aplicación con estado y un solo layout, y que su comportamiento de View Transitions y de estado en la URL se sostiene en algo más exigente que un sitio de documentación.
 
-Como producto, Sona es un prototipo de front-end — desplegado y público, sin backend detrás todavía. Geolocalización real en lugar de distancias simuladas, una capa de datos real, un espacio de envío para artistas independientes, y RSVPs con enlaces reales de boletos son los siguientes pasos naturales si llega a convertirse en un servicio real. Pero como caso de estudio, ya logró lo que se propuso: poner a prueba un router de 3.2 KB en una SPA genuinamente exigente y con estado, y verlo sostenerse sin concesiones.
+También muestra los límites. El patrón del reproductor persistente depende de que Routini tenga exactamente un `<Outlet>` por aplicación, y todavía no hay forma de anidar un segundo layout con su propio outlet dentro del primero, que es lo que suele necesitar una sección de ajustes o de administración. Ese es el argumento más fuerte dentro de la aplicación para las rutas anidadas. Algunos exports también quedan sin ejercitar aquí: `navigate()` y los modos de precarga `render` y `viewport`.
+
+Como producto, Sona es un prototipo de front-end sin backend detrás. Geolocalización real en lugar de distancias simuladas, una capa de datos, un espacio de envío para artistas independientes, y RSVPs con enlaces de boletos son los siguientes pasos si llega a convertirse en un servicio.
 
 </TextBlock>
