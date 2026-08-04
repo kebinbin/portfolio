@@ -1,10 +1,14 @@
 ---
 import Icon from '../../../icons/Icon.astro'
+import { getImageSize } from '../../../content/imageSize'
 
 const { project } = Astro.props
 const { slug } = project
 const [, projectSlug] = slug.split('/')
 const { live, source, img, img_alt } = project.data
+// Intrinsic size reserves the box before load. This is the LCP image on the
+// route, so a late reflow here is the most expensive one on the page.
+const heroSize = getImageSize(img)
 ---
 
 <div class="page-grid items-start gap-y-8 lg:gap-y-12">
@@ -69,5 +73,13 @@ const { live, source, img, img_alt } = project.data
 	transition:name={`${projectSlug}-hero-img`}
 	class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 mx-auto mt-12 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:mt-24 xl:rounded-[1.5rem] xl:border-7"
 >
-	<img src={img} alt={img_alt || ''} loading="eager" fetchpriority="high" decoding="async" />
+	<img
+		src={img}
+		alt={img_alt || ''}
+		width={heroSize?.width}
+		height={heroSize?.height}
+		loading="eager"
+		fetchpriority="high"
+		decoding="async"
+	/>
 </div>
