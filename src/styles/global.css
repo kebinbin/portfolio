@@ -13,18 +13,113 @@
 	--breakpoint-2xl: 1536px;
 
 	--font-body: neue-haas-unica, sans-serif;
-	--font-brand: neue-haas-unica, sans-serif;
-
-	--grid-template-columns-nav: 1fr auto auto;
-
-	--text-10xl: 10rem;
-
-	--leading-18: 4.5rem; /*remove?*/
-	--leading-20: 5rem;
-	--leading-27: 6.75rem; /*remove? */
-	--leading-32: 8rem;
 
 	--tracking-tightest: -0.075em;
+	--tracking-display: -0.035em;
+
+	/* Type roles — see DESIGN.md §4 */
+	/* H1 size: fixed per breakpoint (see the @variant ladder below), not
+	   vw-fluid. `.container` (Tailwind's built-in behavior, still active
+	   under our padding-only @utility override) has a real stepped max-width
+	   at every breakpoint from `xs` up — 480/640/768/1024/1280/1536px,
+	   verified by measuring computed style, matches the 1152px-at-1440 note
+	   in CLAUDE.md — so within any one bucket the column is a constant and a
+	   clamp() bounded to it would just evaluate to a fixed number anyway.
+	   Below `xs` the container has no max-width yet (genuinely fluid), which
+	   is the one place a clamp still does something. The hero's inline
+	   --display-size reads var(--text-display) directly, so there's a single
+	   source of truth for both the rendered size and the baseline/rail math
+	   derived from it. */
+	--text-display: clamp(4rem, 26.67vw, 7rem);
+	--text-display--line-height: 0.775;
+	--text-display--letter-spacing: -0.075em;
+	--text-display--font-weight: 500;
+
+	--text-headline-lg: clamp(3.5rem, 15vw, 11rem);
+	--text-headline-lg--line-height: 0.8;
+	--text-headline-lg--letter-spacing: -0.075em;
+	--text-headline-lg--font-weight: 500;
+
+	--text-headline: clamp(3rem, 23vw, 7rem);
+	--text-headline--line-height: 0.85;
+	--text-headline--letter-spacing: -0.075em;
+	--text-headline--font-weight: 500;
+
+	--text-project-title: clamp(2rem, 10vw, 3rem);
+	--text-project-title--line-height: 0.85;
+	--text-project-title--letter-spacing: -0.075em;
+	--text-project-title--font-weight: 500;
+
+	/* Retro print palette — see DESIGN.md §3 */
+	--color-retro-bone: #ece0c8;
+	--color-retro-ink: #211d16;
+	--color-retro-coal: #181512;
+	--color-retro-gold: #e0a32e;
+	--color-retro-orange: #d96f2b;
+	--color-retro-rust: #b3401e;
+	--color-retro-brown: #6b3a1f;
+	--color-retro-blue: #33607f; /* reserve */
+	--color-retro-navy: #1e3346; /* deprecated as text color — accent only */
+	--color-retro-green: #6d8a2e;
+}
+
+/* Semantic tokens: flip under .dark, exposed as colors below */
+:root {
+	--surface: var(--color-retro-bone);
+	--ink: var(--color-retro-ink);
+	--accent: var(--color-retro-rust);
+	--accent-strong: var(--color-retro-brown);
+	--grid-line: color-mix(in oklab, var(--ink) 7%, transparent);
+}
+.dark {
+	--surface: var(--color-retro-coal);
+	--ink: var(--color-retro-bone);
+	--accent: var(--color-retro-orange);
+	--accent-strong: var(--color-retro-gold);
+	--grid-line: color-mix(in oklab, var(--ink) 7%, transparent);
+}
+
+/* Hero H1 size ladder — xs/sm both 8rem (small screens read as one size
+   bucket), then +2rem per breakpoint from `md` to `xl`, then flat (14rem is
+   the DESIGN.md-documented ceiling: the col-8 rail-label collision math in
+   Hero.astro is tuned against it). @variant pulls the actual min-width from
+   --breakpoint-* above instead of duplicating the numbers in a raw @media
+   query — same pattern already used in @utility page-grid. Unlayered so it
+   overrides the @theme-layer token regardless of source order. */
+:root {
+	@variant xs {
+		--text-display: 7rem;
+		--text-headline: 7rem;
+		--text-project-title: 3rem;
+	}
+	@variant sm {
+		--text-display: 8rem;
+		--text-headline: 6rem;
+		--text-project-title: 3rem;
+	}
+	@variant md {
+		--text-display: 12rem;
+		--text-headline: 6.5rem;
+		--text-project-title: 4rem;
+	}
+	@variant lg {
+		--text-display: 14rem;
+		--text-headline: 9rem;
+		--text-project-title: 4rem;
+	}
+	@variant xl {
+		--text-display: 14rem;
+		--text-headline: 11rem;
+		--text-project-title: 4rem;
+	}
+}
+
+@theme inline {
+	--color-surface: var(--surface);
+	--color-ink: var(--ink);
+	--color-accent: var(--accent);
+	--color-accent-strong: var(--accent-strong);
+	--color-grid-line: var(--grid-line);
 }
 
 @utility container {
@@ -36,6 +131,45 @@
 	@variant 2xl {
 		padding-inline: 6rem;
 	}
+}
+
+/* Break a horizontal line (or any block) out of the centered container to the
+   full viewport width — see DESIGN.md §2.2. Works because `container` is
+   centered, so its horizontal center is the viewport's. For absolutely
+   positioned lines use `left-1/2 w-screen -translate-x-1/2` instead. `body`
+   has `overflow-x-clip`, so 100vw never adds a horizontal scrollbar. */
+@utility bleed-x {
+	width: 100vw;
+	max-width: 100vw;
+	margin-inline: calc(50% - 50vw);
+}
+
+@utility grid-line {
+	border-color: var(--grid-line);
+	border-style: dashed;
+}
+
+/* 6 columns at every width up to `lg` (1024px), 12 from `lg` up — no 1-col
+   phase below `sm`. Consumers give every child an explicit unprefixed
+   col-span/col-start for the 6-col tier (never a bare col-span-12 meant as
+   "full width" — on a real 6-col grid that forces 6 implicit tracks and
+   shrinks any narrower sibling sharing the row) plus lg: overrides for the
+   12-col tier. See DESIGN.md/CLAUDE.md. */
+@utility page-grid {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	column-gap: 1.5rem;
+	@variant lg {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+	}
+}
+
+/* Plotted micro-label / meta type — see DESIGN.md §4.1 */
+@utility eyebrow {
+	font-size: 0.6875rem;
+	line-height: 1.45;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
 }
 
 /*
@@ -61,6 +195,16 @@
 		}
 	}
 
+	::selection {
+		background-color: var(--accent);
+		color: var(--surface);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
 	img {
 		max-width: 100%;
 		height: auto;
@@ -68,19 +212,6 @@
 
 	a {
 		text-decoration: none;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		/* text-transform: uppercase; */
-	}
-
-	p {
-		/* text-wrap: pretty; */
 	}
 
 	ul {
@@ -95,7 +226,149 @@
 		::view-transition-old(*),
 		::view-transition-new(*) {
 			animation-duration: 0.5s;
-			/* animation-timing-function: ease-in-out; */
 		}
 	}
+}
+
+/*
+  Case-study section numbering (DESIGN.md §9.6). Each `TextBlock` is a numbered
+  section — auto-numbered with a CSS counter so authoring stays plain (no manual
+  index). Only `.text-block` increments, so interleaved Image/Video blocks don't
+  advance the count. Reuses the home Projects ledger device (bold index +
+  hairline).
+*/
+.case-study {
+	counter-reset: textblock;
+}
+.text-block {
+	counter-increment: textblock;
+}
+.text-block-index::before {
+	content: counter(textblock, decimal-leading-zero);
+}
+
+/*
+  Project case-study prose (DESIGN.md §9.6). MDX authored inside `.project-prose`
+  (TextBlock body): markdown paragraphs, lists, sub-subheads, inline `code`, and
+  Shiki-highlighted fenced blocks — all mapped onto the design tokens so the
+  case studies read in the same voice as the rest of the site. `code` is the one
+  functional exception to the single-font rule: a system monospace stack (no
+  web font downloaded), used only for code, never for display/brand type.
+*/
+@utility project-prose {
+	--code-font: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+		monospace;
+	color: color-mix(in oklab, var(--ink) 72%, transparent);
+	font-size: 1rem;
+	line-height: 1.75;
+	text-wrap: pretty;
+
+	& > * + * {
+		margin-top: 1.25em;
+	}
+
+	& strong {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	/* Sub-subheads within a case-study section — one step below TextBlock's
+	   Title h2. Kept on the type ladder: medium weight, tight tracking, ink. */
+	& h3 {
+		margin-top: 2em;
+		color: var(--ink);
+		font-size: 1.5rem;
+		font-weight: 500;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+	}
+	& h4 {
+		margin-top: 1.75em;
+		color: var(--ink);
+		font-size: 1.125rem;
+		font-weight: 600;
+	}
+
+	/* Swiss dash markers instead of bullets, aligned to the grid feel */
+	& ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+	}
+	& li {
+		position: relative;
+		padding-left: 1.5em;
+	}
+	& li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.85em;
+		width: 0.75em;
+		height: 1px;
+		background: var(--accent);
+	}
+	& ol {
+		list-style: decimal;
+		padding-left: 1.5em;
+	}
+	& ol li {
+		padding-left: 0.25em;
+	}
+	& ol li::before {
+		content: none;
+	}
+
+	& a {
+		color: var(--accent);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		transition: color 0.15s;
+	}
+	& a:hover {
+		color: var(--accent-strong);
+	}
+
+	/* Inline code — subtle ink-tinted pill. Excludes code inside fenced blocks. */
+	& :not(pre) > code {
+		font-family: var(--code-font);
+		font-size: 0.875em;
+		padding: 0.15em 0.4em;
+		border-radius: 0.35rem;
+		background: color-mix(in oklab, var(--ink) 8%, transparent);
+		color: var(--ink);
+		white-space: nowrap;
+	}
+}
+
+/*
+  Shiki fenced code blocks (build-time highlighted, class `astro-code`). Panel
+  background is overridden to a palette tint so blocks sit in the design instead
+  of the theme's stock white/black; token colors come from Shiki. Light theme
+  colors are applied inline by default; the `.dark` rule swaps to the dark vars
+  (CSS only — no client JS).
+*/
+pre.astro-code {
+	margin-top: 1.25em;
+	padding: 1.25rem 1.5rem;
+	border-radius: 0.75rem;
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.6;
+	background: color-mix(in oklab, var(--ink) 4%, var(--surface)) !important;
+	border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+}
+pre.astro-code code {
+	font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+		monospace;
+	font-size: inherit;
+	background: none;
+	padding: 0;
+}
+:where(.dark) pre.astro-code,
+:where(.dark) pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
 }

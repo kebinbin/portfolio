@@ -1,55 +1,196 @@
 ---
 import { getLangFromUrl } from '../../../../i18n/utils'
 import { getI18N } from '../../../../i18n'
+import Icon from '../../../icons/Icon.astro'
+import { icons } from '../../../icons/icons'
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale }).home
 const lang = getLangFromUrl(Astro.url)
+
+// The data band shows logos only — each meta value is either an icon name in the
+// central registry (rendered as a mark) or a plain string like the email (shown
+// as text). Icons resolve/size themselves through the shared <Icon> component.
+const isIcon = (value: string): value is keyof typeof icons => value in icons
+
+/**
+ * Optical left alignment (DESIGN.md §4.1): pull each display line left by its
+ * capital's ink inset, measured in neue-haas-unica 500 (canvas
+ * actualBoundingBoxLeft). Flat stems get their full side bearing (0.088em → the
+ * stem is flush with the column); round bowls inset less; pointed caps least.
+ */
+const CAP_PULL: Record<string, number> = {
+	B: 0.088,
+	D: 0.088,
+	E: 0.088,
+	F: 0.088,
+	H: 0.088,
+	I: 0.088,
+	K: 0.088,
+	L: 0.088,
+	M: 0.088,
+	N: 0.088,
+	P: 0.088,
+	R: 0.088,
+	U: 0.088,
+	C: 0.05,
+	G: 0.05,
+	O: 0.05,
+	Q: 0.05,
+	S: 0.044,
+	A: 0.012,
+	V: 0.012,
+	W: 0.012,
+	T: 0.01,
+	J: 0.02,
+	X: 0.01,
+	Y: 0.01,
+	Z: 0.01
+}
+const pull = (word: string) => CAP_PULL[word?.[0] ?? ''] ?? 0
+
+/**
+ * Baseline offsets of the three H1 lines, in units of the display font-size,
+ * measured in-browser with the real neue-haas-unica webfont. Two components:
+ *  - alphabetic baseline: 0.787em below each line's top (flat-bottom glyphs like
+ *    D/H/i/n rest here); lines stack at the 0.775 line-height set on
+ *    --text-display in global.css → 0.787 + 0.775·n.
+ *  - +0.015em: round glyphs (C/O/S/o/e/s) overshoot ~0.015em (3.36px @224) below
+ *    the alphabetic baseline. "Code." is *all* round letters, so a rule on the
+ *    metric baseline reads a couple px high — we drop to the visual ink bottom.
+ * → BASELINE[n] = 0.787 + 0.015 + 0.775·n. Re-measure if the line-height or the
+ * H1 words change materially (scratchpad baseline + overshoot rigs).
+ */
+const BASELINE = [0.802, 1.577, 2.352]
+
+/**
+ * Left edge of grid column `i` (1-indexed) as a calc() against the 12-col grid
+ * with 1.5rem gaps: colLeft(i) = (i-1)/12 · (100% + 1.5rem).
+ */
+const colLeft = (i: number) => {
+	const f = (i - 1) / 12
+	return `calc(${(f * 100).toFixed(4)}% + ${(f * 1.5).toFixed(4)}rem)`
+}
 ---
 
-<header class="container flex flex-col gap-4 pt-8 pb-16 sm:pb-28 lg:pt-16 xl:pt-28 xl:pb-40">
-	<div class="flex flex-col gap-8 sm:gap-10 lg:gap-14">
-		<div class="flex flex-col gap-4 lg:gap-8 xl:gap-14">
-			<div class="text-sm font-light tracking-widest uppercase sm:text-xl">
-				<span>{i18n.hero.name.first}</span>
-				<span>{i18n.hero.name.middle}</span>
-				<span class="font-bold">{i18n.hero.name.last}</span>
-			</div>
-			<h1
-				class="2xl:text-10xl text-start text-[clamp(3.25rem,17vw,5.25rem)] leading-[.85em] font-semibold sm:text-8xl lg:leading-[.8em] xl:text-9xl"
+<header class="container flex min-h-[calc(100svh-7.25rem)] flex-col pb-10 sm:pb-14">
+	<!-- Vertical raster lines are page-wide (see Layout.astro). Only the
+	     3 baseline horizontal rules below are local to the hero. -->
+
+	<!-- Top eyebrow, left edge on column 3 for large screens -->
+	<div class="page-grid relative pb-10 2xl:pb-16">
+		<p
+			class="text-ink/50 col-span-3 col-start-1 flex flex-col text-[8px] tracking-[0.25em] uppercase lg:col-start-3 lg:text-[10px]"
+		>
+			<span>{i18n.hero.eyebrow.role[0]}</span>
+			<span>{i18n.hero.eyebrow.role[1]}</span>
+		</p>
+	</div>
+
+	<!-- Display zone: H1 vertically centered in leftover space between the
+	     eyebrow above and the data band/aside below. -->
+	<div class="relative flex grow items-center pb-4">
+		<div class="relative w-full" style="--display-size: var(--text-display)">
+			<!-- 3 horizontal rules, exactly on the H1 baselines (desktop only) -->
+			{
+				BASELINE.map((b) => (
+					<span
+						aria-hidden="true"
+						class="grid-line absolute left-1/2 h-0 w-screen -translate-x-1/2 border-t"
+						style={`top: calc(var(--display-size) * ${b})`}
+					/>
+				))
+			}
+
+			<!-- Right rail: kevincastillo.io on column 11 @ line 1; location on column 9 @ line 3 -->
+			<p
+				aria-hidden="true"
+				class="text-ink/50 absolute hidden text-[8px] tracking-[0.25em] uppercase sm:block lg:text-[10px]"
+				style={`top: calc(var(--display-size) * ${BASELINE[0]}); left: ${colLeft(11)}; transform: translateY(-0.4em)`}
 			>
-				<span class="tracking-tightest block">{i18n.hero.h1['1']}</span>
-				<span class="inline-block tracking-tight">{i18n.hero.h1['2']}</span>
-				<span class="tracking-tightest inline-block">{i18n.hero.h1['3']}</span>
+				{i18n.hero.eyebrow.site}
+			</p>
+			<p
+				aria-hidden="true"
+				class="text-ink/50 absolute hidden flex-col text-[8px] tracking-[0.25em] uppercase sm:flex lg:text-[10px]"
+				style={`top: calc(var(--display-size) * ${BASELINE[lang === 'es' ? 1 : 2]}); left: ${colLeft(9)}; transform: translateY(-0.4em)`}
+			>
+				<span>{i18n.hero.eyebrow.location[0]}</span>
+				<span>{i18n.hero.eyebrow.location[1]}</span>
+			</p>
+
+			<h1
+				aria-label={`${i18n.hero.h1['1']} ${i18n.hero.h1['2']} ${i18n.hero.h1['3']}`}
+				class="text-ink relative"
+				style="padding-bottom: calc(var(--display-size) * 0.5)"
+			>
+				{
+					(['1', '2', '3'] as const).map((k) => (
+						<span
+							aria-hidden="true"
+							class="text-display block"
+							style={`margin-left: -${pull(i18n.hero.h1[k])}em`}
+						>
+							{i18n.hero.h1[k]}
+						</span>
+					))
+				}
 			</h1>
 		</div>
-		<p class="max-w-[55ch] text-base leading-7 text-stone-600 lg:text-lg dark:text-stone-500">
+	</div>
+
+	<!-- Full-bleed separator above the data band -->
+	<span aria-hidden="true" class="grid-line bleed-x block h-0 border-t"></span>
+
+	<!-- Data band: full-width intro + 3-up meta (2 of 6 cols per item) below
+	     lg; intro on cols 1–6, meta split across cols 7–12 at lg+. -->
+	<div class="page-grid relative gap-y-8 pb-4 lg:gap-y-0">
+		<p class="text-ink/70 col-span-6 max-w-[54ch] text-sm leading-6 lg:col-span-5 lg:text-base">
 			{i18n.hero.p}
 		</p>
-		<div class="flex flex-row flex-wrap gap-3 font-medium">
-			<a
-				href={`mailto:${i18n.metadata.email}`}
-				class="flex min-w-32 grow items-center justify-center border border-solid border-stone-900 bg-stone-900 px-4 py-3 text-center text-xs tracking-widest text-stone-100 uppercase sm:text-base md:min-w-56 md:grow-0 dark:border-stone-400 dark:bg-stone-400 dark:text-stone-950"
-			>
-				{i18n.hero.cta.contact}
-			</a>
-			<a
-				href=`/${lang}/#projects`
-				class="flex min-w-32 grow items-center justify-center border border-solid border-stone-900 bg-stone-100 px-4 py-3 text-center text-xs tracking-widest text-stone-900 uppercase sm:text-base md:min-w-56 md:grow-0 dark:border-stone-400 dark:bg-stone-950 dark:text-stone-400"
-			>
-				{i18n.hero.cta.work}
-			</a>
-		</div>
+		<dl class="col-span-6 grid grid-cols-3 gap-x-6 gap-y-8 self-start lg:col-span-6 lg:col-start-7">
+			{
+				i18n.hero.meta.map((item) => (
+					<div class="col-span-3 flex flex-col gap-2 sm:col-span-1 sm:gap-3">
+						<dt class="eyebrow text-ink/60">{item.label}</dt>
+						<dd
+							class="text-ink/80 m-0 flex flex-wrap items-center gap-x-1.5 gap-y-2 2xl:gap-x-3"
+							aria-label={item.values.map((v) => (isIcon(v) ? icons[v].label : v)).join(', ')}
+						>
+							{item.values.map((value) =>
+								isIcon(value) ? (
+									<Icon
+										name={value}
+										class={`w-auto shrink-0 ${icons[value].size === 'lg' ? 'h-9 lg:h-8 xl:h-9' : 'h-5 lg:h-4 xl:h-5'}`}
+									/>
+								) : value.includes('@') ? (
+									<a
+										href={`mailto:${value}`}
+										class="hover:text-accent text-xs transition-colors sm:text-sm"
+									>
+										{value}
+									</a>
+								) : (
+									<span class="text-sm">{value}</span>
+								)
+							)}
+						</dd>
+					</div>
+				))
+			}
+		</dl>
 	</div>
-	<aside class="flex flex-col gap-1 py-2 font-normal md:relative">
-		<p
-			class="flex items-center justify-end gap-2 text-xs font-medium text-stone-600 before:size-4 before:rounded-full before:bg-lime-500 sm:text-base md:justify-start dark:text-stone-500"
-		>
+
+	<!-- Availability + jump link -->
+	<aside class="relative flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pt-6">
+		<p class="text-ink/80 flex items-center gap-2.5 text-sm font-medium">
+			<span class="bg-retro-green size-2.5 rounded-full"></span>
 			{i18n.hero.aside.availableFor}
 		</p>
 		<a
-			href={`mailto:${i18n.metadata.email}`}
-			class="-right-4 -bottom-12 text-end text-xs leading-none text-stone-400 hover:text-stone-900 focus:text-stone-950 sm:text-base md:absolute md:text-start md:[writing-mode:vertical-lr] dark:text-stone-700 dark:hover:text-stone-300 dark:focus:text-stone-200"
-			>{i18n.metadata.email}</a
+			href={`/${lang}/#projects`}
+			class="text-accent hover:text-accent-strong eyebrow font-medium transition-colors"
+			>{i18n.hero.cta.work}&nbsp;&nbsp;↓</a
 		>
 	</aside>
 </header>
+<!-- <span aria-hidden="true" class="bleed-x bg-ink/6 block h-px"></span> -->

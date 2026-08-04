@@ -2,22 +2,26 @@
 import { getI18N } from '../../../../i18n'
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale }).home
+const { h2, paragraph } = i18n.contact
+const { email } = i18n.metadata
 ---
 
-<aside class="container flex h-[calc(100vh-7.625rem)] flex-col justify-center gap-24 text-center">
-	<a id="contact">
-		<h2
-			class="2xl:text-10xl text-[clamp(3.25rem,17vw,5.25rem)] leading-[.85em] font-medium sm:text-8xl lg:leading-[.8em] xl:text-9xl"
+<aside class="container flex min-h-[calc(100svh-5rem)] flex-col items-center justify-center">
+	<div class="flex h-full flex-col items-center justify-center gap-20 text-center lg:gap-26">
+		<a id="contact"
+			><h2 class="text-ink text-headline-lg">
+				<span class="block font-light">{h2['1']}</span>
+				<span class="block font-semibold">{h2['2']}<span class="text-accent">.</span></span>
+			</h2></a
 		>
-			<span class="tracking-tightest inline-block">{i18n.contact.h2['1']}</span>
-		</h2>
-	</a>
-	<p class="text-stone-600 dark:text-stone-500">
-		{i18n.contact.paragraph}
-		<a
-			href={`mailto:${i18n.metadata.email}`}
-			class="underline hover:text-stone-900 focus:text-stone-950 dark:hover:text-stone-300 dark:focus:text-stone-200"
-			>{i18n.metadata.email}</a
-		>
-	</p>
+		<p class="text-ink/60 text-sm leading-7 lg:text-base">
+			{paragraph}
+			<a
+				href={`mailto:${email}`}
+				class="text-accent hover:text-accent-strong font-medium transition-colors"
+			>
+				{email}
+			</a>
+		</p>
+	</div>
 </aside>

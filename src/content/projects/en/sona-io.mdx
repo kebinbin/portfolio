@@ -1,21 +1,125 @@
 ---
 title: Sona.io
-type: Music-first Event Finder
+type: Music & Event Discovery App
 role: Design & Development
 period: In progress
-publishDate: 2025-05-20 00:00:00
-img: /assets/projects/case-study-2/hero-img-1920x1080.webp
-img_alt: Sona's feed showcasing artists performing soon in the San Juan area.
+publishDate: 2026-06-20 00:00:00
+img: /assets/projects/case-study-3/sona.io-hero.webp
+img_alt: Sona's "For you" feed — activity sidebar, near-you artist discovery grid, and the persistent bottom player.
 description: |
-  Discover new music artists and events happening near you or around the world by experiencing the music first — not just relying on traditional flyers or event listings. Explore artist profiles, see where they'll be performing next, and discover other artists sharing the stage at the same events.
+  Sona is a single-page music and event discovery application, built as the demo that puts Routini under load: three routed lenses over one dataset, a player that keeps playing across every navigation, shared-element View Transitions, and map state held in the URL. Designed in Figma first, then built in React 19, TypeScript and Tailwind CSS v4.
 tags:
   - Design
   - Development
   - Product Design
+live:
+  url: https://music-player-chi-pied.vercel.app
+  label: Visit site
+source:
+  url: https://github.com/kebinbin/routini/tree/main/examples/music-player
+  label: View source
 ---
 import TextBlock from '../../../components/content/TextBlock.astro'
 import Video from '../../../components/content/Video.astro'
+import ImageBezel from '../../../components/content/ImageBezel.astro'
 
-<TextBlock title="Behind this project">This web app is designed to make local music more accessible — helping users discover nearby events and instantly connect with artists through their music. It also provides independent artists with a space to reach local audiences and promote their shows, bridging the gap between digital streaming and live performance.</TextBlock>
-<Video src="/assets/projects/case-study-2/video-2.mp4" title="Learn more about artists you're interested in by listening to more of their music and seeing who they'll be performing with and where." />
-<TextBlock title="Next Steps">While this project currently exists as a Figma prototype, it lays the foundation for a full-featured web application focused on local music discovery. The next steps include refining the UI to cover edge cases, improving mobile responsiveness, and finalizing the visual system. Once the design is complete, I plan to implement the front-end using modern frameworks, followed by a scalable back-end with user accounts, music playback, and event management. Features like artist uploads, ticket links, and API integrations for venue data will be explored as the product evolves.</TextBlock>
+<TextBlock title="What Sona is">
+
+Sona began as a Figma file, a personal exercise in UI and product design around one idea: discovering local music by listening first, seeing where an artist plays next and who shares that stage, and giving independent artists a way to reach nearby audiences. It is a hypothetical product. Whether it ever becomes a service is an open question.
+
+Today it is a front-end and nothing more. I designed it end to end in Figma, then built it from that file in React 19, TypeScript and Tailwind CSS v4, which gave [Routini](/en/projects/routini) somewhere demanding to run. There is no backend: every artist, event, venue and distance is a seeded, hardcoded simulation, and "near you" is staged. A documentation site shows that a router works. An application of this shape shows how it behaves with a persistent player, code-split routes, URL state and shared-element animation in one stateful shell.
+
+</TextBlock>
+
+<TextBlock title="One shell, three ways to discover">
+
+Everything sits inside a single persistent frame: a top bar with search and an activity bell, a "For you" sidebar on desktop, the routed content, and a footer that holds the player. On small screens a tab bar replaces the sidebar. A segmented control switches between three routed lenses over the same near-you dataset:
+
+- **Artists** — sorted by simulated distance (*"0.9 km · May 10"*), each card with a follow heart, switchable between immersive, list and grid layouts.
+- **Events** — every upcoming show as its own card, and the mobile "Events" tab.
+- **Map** — those same events placed geographically on an interactive map.
+
+The three lenses are routes over one data model, sharing a sticky header. Selecting any artist or event navigates to a full detail page.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Cycling through the Artists lens's three layouts — immersive, list and grid — then switching to Events and Map. Each tab is a Routini route, so the URL changes with the view." />
+
+<TextBlock title="The persistent player and Routini's optional Outlet">
+
+The player keeps playing while the rest of the application navigates. That follows from one Routini decision: `<Outlet>` is optional and layout belongs to the consumer. The player and the navigation sit outside the Outlet, so a navigation swaps only the page and the audio element is never in the part of the tree that unmounts:
+
+```tsx
+import { Router, Outlet } from "routini";
+
+export default function App() {
+  return (
+    <Router routes={routes}>
+      <TopBar />
+      <main>
+        <Outlet />   {/* only this swaps on navigation */}
+      </main>
+      <Player />     {/* lives outside the Outlet → keeps playing */}
+      <BottomNav />
+    </Router>
+  );
+}
+```
+
+Playback state (current song, queue, volume) lives in a small store. The player renders in two layouts, a compact mobile bar and a three-column desktop version, both built on a Radix slider, with a reserved artwork slot that keeps the footer from shifting when a track loads.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-3/persistent-player.mp4" title="Playing a track while navigating from the feed to an artist page and on to an event page. Both hops are shared-element View Transitions — the artist's photo morphing into its hero, then the event's poster art into its own — and the song continues, because the player sits outside the routed Outlet." />
+
+<TextBlock title="Detail pages, and the morph between them">
+
+Selecting an artist morphs their feed photo, name and next-show date into the hero at the top of their page. It is a shared-element View Transition matched by `view-transition-name`. From there the page is plain content: a tracklist, upcoming shows, and co-performers derived from shared event line-ups instead of hand-authored lists.
+
+The event page extends the same pattern. Its hero places a blurred, full-bleed copy of the poster behind the sharp artwork, and the `poster-<id>` name is shared between the events grid, the map popups and the hero, so all three morph into each other. No animation library is involved; the matching names do the work.
+
+</TextBlock>
+
+<TextBlock title="The map and the pathname-only store">
+
+The Map lens renders one pin per **venue** so co-located shows do not stack, and hovering a pin opens a themed popup built from the same card used elsewhere, which means its poster morphs into the event hero as well. When a venue hosts several shows, a small `‹ 1/2 ›` control cycles them in place.
+
+The viewport is held in the URL. `?lat&lng&z` is written to the query string on every pan and zoom through Routini's `useSearchParams`. Because the location store is **pathname-only**, writing that query does not remount the Leaflet instance underneath it. A router whose store tracked the whole URL would destroy and rebuild the map on every drag. This is the one place in the project where that store design is visibly load-bearing.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-3/map-url-sync.mp4" title="Hovering a pin to open its popup, then panning and zooming the map — the address bar rewrites itself live with lat, lng and z, and the map never remounts underneath." />
+
+<TextBlock title="Follows and the activity feed">
+
+A heart on the feed and on every artist page toggles a persisted follow, and the "For you" activity feed is derived from those follows: new shows and releases from followed artists, in the desktop sidebar and behind the mobile bell.
+
+These rows skip the View Transition on purpose. A circular avatar does not morph cleanly into a horizontal hero the way the feed's rectangular artwork does, and knowing where to stop animating is part of the design. The page also replaced an earlier notifications master–detail pattern that only ever worked as a workaround under Routini's flat routing, which is a fair indication of where the router's limits sit.
+
+</TextBlock>
+
+<TextBlock title="How Sona exercises Routini">
+
+Most of the router's capabilities are used here under realistic conditions:
+
+- **Lazy and preload** — every route below the eager Artists feed is code-split and preloads on link hover, so navigation resolves without showing a loader.
+- **`errorFallback`** — a custom fallback separates a failed chunk load, usually a stale deploy, from an ordinary render error, and offers the matching recovery for each: "Reload" for a stale chunk, "Try again" otherwise, with a `<Link>` back to the feed in both cases.
+- **Shared-element View Transitions** — the feed-to-artist and poster-to-event morphs, wired with matching `view-transition-name` values.
+- **`useParams`** drives the artist and event pages. **`useLocation`** decides when the sidebar drops for a full-width layout and which lens is active. **`<Navigate>`** handles the root redirect to `/artists`.
+- **`useSearchParams`** keeps the map's viewport in the URL without remounting it.
+- **`scrollRestoration`** — scoped through `scrollContainer` to `AppLayout`'s own scrolling `<main>` instead of the window, so switching lenses starts each lens at the top and navigating back into a list restores its previous position.
+- **The optional `<Outlet>`** is what allows the player to persist across every navigation.
+
+There is no server under the UI. Eighteen artists, fourteen events and twelve venues come from a seeded generator and are imported statically, so "performing soon with" and "other events at this venue" are derived from that data, distances are assigned, and the dataset stays stable across regenerations. The songs are real audio files. The theme is a `data-theme` toggle applied before first paint, so the page does not flash on load.
+
+</TextBlock>
+
+<TextBlock title="Where it stands">
+
+Sona is deployed and public. It shows that Routini is sufficient for a stateful, single-layout application, and that its View Transition and URL-state behavior hold up in something more demanding than a documentation site.
+
+It also shows the limits. The persistent-player pattern depends on Routini having exactly one `<Outlet>` per application, and there is no way yet to nest a second layout with its own outlet inside the first, which a settings or admin section usually needs. That is the strongest in-application case for nested routes. A few exports stay unexercised here as well: `navigate()`, and the `render` and `viewport` preload modes.
+
+As a product, Sona is a front-end prototype with no backend behind it. Real geolocation in place of simulated distances, a data layer, a submission surface for independent artists, and RSVPs with ticket links are the next steps if it grows into a service.
+
+</TextBlock>

@@ -2,144 +2,85 @@
 	"home": {
 		"hero": {
 			"h1": {
-				"1": "Fullstack",
-				"2": "Software",
-				"3": "Engineer_"
+				"1": "Design.",
+				"2": "Code.",
+				"3": "Ship."
 			},
-			"name": {
-				"first": "Kevin",
-				"middle": "A.",
-				"last": "Castillo"
+			"eyebrow": {
+				"role": ["Software", "Engineer"],
+				"site": "kevincastillo.io",
+				"location": ["Puerto Rico", "GMT-4"]
 			},
 			"p": "Software Engineer with enterprise background, building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Open to full-time or freelance opportunities — explore my work and let’s create something exceptional.",
+			"meta": [
+				{
+					"label": "Formerly at",
+					"values": ["hp", "hpe"]
+				},
+				{
+					"label": "Core stack",
+					"values": ["react", "typescript", "java", "spring-boot", "docker", "sql"]
+				},
+				{ "label": "Contact", "values": ["hello@kevincastillo.io"] }
+			],
 			"cta": {
-				"contact": "Contact me",
-				"work": "See my work"
+				"work": "Selected work"
 			},
 			"aside": {
 				"availableFor": "Available for offers and collaborations"
 			}
 		},
-		"experience": {
-			"h2": {
-				"1": "Companies &",
-				"2": "institutions I've",
-				"3": "worked with"
-			},
-			"experiences": [
-				{
-					"company": "Freelance / Professional Development",
-					"role": "Full-Stack Developer & Designer",
-					"dates": "Sep 2022 - Present",
-					"paragraph": "Building Routini, an open-source minimal React router in TypeScript — 2.8KB, view transitions, lazy routes. Contributed to front-end design and development for ClashStats, a sports app built with React / Next.js. Built my personal portfolio website from concept to production using Figma, Astro, and TailwindCSS."
-				},
-				{
-					"company": "Hewlett Packard Enterprise",
-					"role": "Software Engineer",
-					"dates": "Jun 2019 - Aug 2022",
-					"paragraph": "Led the development of new features, enhancements, and bug-fixes for a microservices app used in HPE-partner factories worldwide built using Java, Spring Boot, REST, React, ActiveMQ, SQLServer and Docker. Identified and implemented solutions for issues in production. Developed new features for the React-based health monitoring service, including REST API, backend, and messaging logic for real-time updates.  Improved the UX, visual consistency and design. Managed the production environment from release deployments, maintenance, support, to troubleshooting sessions with internal stakeholders and cross-functional teams. Optimized the Jenkins CI/CD pipeline."
-				},
-				{
-					"company": "Freelance / Professional Development",
-					"role": "Web Designer & Developer",
-					"dates": "Sep 2016 - Dec 2019",
-					"paragraph": "Delivered web design, development, and provided technical support to several non-profit organizations. Created a WordPress–Google Sheets integration plugin (PHP, JavaScript) to automate data handling. Practiced English through cultural immersion while studying agricultural practices across South America, earned a Permaculture Design Certification, and volunteered in post–Hurricane Maria recovery projects."
-				},
-				{
-					"company": "Hewlett Packard",
-					"role": "Software Engineer",
-					"dates": "Jun 2015 - Aug 2016",
-					"paragraph": "Migrated UI features of a factory app used to test servers before shipment from Java GWT to React. Redesigned many views, implemented new features and created reusable React components. Researched, identified and fixed performance bottlenecks related to real-time updates and rendering."
-				},
-				{
-					"company": "Sysdat Crest UPRM",
-					"role": "CAPSTONE Engineering Student",
-					"dates": "Jan 2015 - May 2015",
-					"paragraph": "Designed the ER diagram, schema and deployed a normalized relational database (MySQL) to centralize data from CREST members and activities to automate the reports generation submitted to the NSF. Developed features in both front-end (AngularJS and Bootstrap) and back-end (PHP) such as role-based access control, data input, sign-up, login, session management, menus according to role, and more."
-				}
-			],
-			"cta": {
-				"question": "Want to know more?",
-				"link": "Download my resume"
-			}
-		},
-		"workflow": {
-			"h2": {
-				"1": "My workflow",
-				"2": "journey",
-				"3": "from design to deployment"
-			},
-			"stages": [
-				{
-					"title": "Project Request",
-					"description": "Submit your project details to me via email so I can get an idea of what you are looking for. Expect a response within 48hrs to schedule a meeting to discuss your project.",
-					"footnote": false
-				},
-				{
-					"title": "First Meeting",
-					"description": "Let’s know each other and see if we are a good fit to work together. This is a moment to discuss your goals, requirements and next steps in our journey collaborating together.",
-					"footnote": false
-				},
-				{
-					"title": "Proposal",
-					"description": "Once I have gathered enough information about the project requirements, I will send you a proposal that will document the next steps, estimated dates and the cost upfront.",
-					"footnote": false
-				},
-				{
-					"title": "UX/UI Design",
-					"description": "After studying the provided material, I will design the UI. Regular updates and communication are essential aspects of my workflow, I will keep you in the loop.",
-					"footnote": true
-				},
-				{
-					"title": "Design Agreement",
-					"description": "I will send to you the designed product for you to review.  If you want any updates, you have up to two free revisions, then a revision fee will be added depending on the changes.",
-					"footnote": true
-				},
-				{
-					"title": "Software Development",
-					"description": "In this stage we will start the development and implementation of everything that was agreed after the design or proposal phases.",
-					"footnote": false
-				},
-				{
-					"title": "Product Deployment",
-					"description": "We are ready to deploy and launch your project into production and make it available for your users / customers to use.",
-					"footnote": false
-				},
-				{
-					"title": "Guidance Meeting",
-					"description": "After the product’s launch, let’s meet to guide you on how to use the application and so you can ask any questions you have.",
-					"footnote": false
-				}
-			],
-			"footnote": {
-				"1": "This is my personal process, but I’m comfortable adapting to team workflows like Agile or Scrum.",
-				"2": "The design and agreement of it (stages 4-5) can be omitted if you already have a design for your project."
-			}
+		"projects": {
+			"h2": "Selected work",
+			"cta": "View case study",
+			"resumeCta": "See my full work history",
+			"experienceEyebrow": "Projects and experience"
 		},
 		"about": {
-			"h2": {
-				"1": "I craft",
-				"2": "digital magic",
-				"3": "using code"
-			},
+			"h2": "Beyond code",
+			"eyebrow": "About me",
 			"bio": {
-				"p1": "I’m a software engineer with over 5 years of experience, ranging from small non-profits to large tech companies with ambitious goals.",
-				"p2": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match.",
-				"p3": "Outside of work, I find inspiration through walking on nature, photography, traveling, and spending time in my garden. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
+				"intro": "I’m a software engineer with around five years of professional experience, including enterprise roles at HP and Hewlett Packard Enterprise. I’ve also collaborated with nonprofit organizations and continue to build polished digital products and open-source tools.",
+				"career": {
+					"h3": "What I do",
+					"p": "I thrive on tackling diverse challenges, from designing and developing intuitive UI/UX components to building production-grade backend services in collaboration with Agile teams. Whether I’m solving problems through code, crafting elegant designs, or sketching out ideas on paper, I bring creativity and a commitment to quality that’s hard to match."
+				},
+				"extra": {
+					"h3": "Beyond the screen",
+					"p": "Outside of work, I find inspiration through walking on nature, photography, traveling, and cultivating both my garden and my knowledge of sustainable agriculture. My curiosity and hunger for knowledge drive me to constantly learn and innovate. For me, creativity, work, and play are all deeply interconnected."
+				}
+			},
+			"portrait": {
+				"img_alt": "Portrait of Kevin Castillo.",
+				"eyebrow": "Kevin Castillo · Software Engineer"
 			},
 			"education": {
-				"h3": "University of Puerto Rico",
-				"degree": "Computer Engineering",
-				"dates": "2009 - 2015",
-				"paragraph": "BSCpE — Bachelor degree in Computer Engineering focused in software development."
+				"h3": "Education",
+				"list": [
+					{
+						"college": "University of Puerto Rico",
+						"degree": "B.S.Computer Engineering (BSCpE)",
+						"dates": "2009 - 2015"
+					},
+					{
+						"college": "Naluum Permaculture Institute",
+						"degree": "Permaculture Design Certificate",
+						"dates": "2018"
+					},
+					{
+						"college": "Josco Bravo School of Agroecology",
+						"degree": "Course for Agroecological Producers and Promoters",
+						"dates": "2026"
+					}
+				]
 			},
 			"technologies": {
 				"h3": "Technologies I use",
 				"list": [
 					"React",
-					"JavaScript/TypeScript",
+					"JavaScript / TypeScript",
 					"HTML",
-					"CSS/SASS",
+					"CSS / SASS",
 					"Astro",
 					"Next.js",
 					"Jest",
@@ -147,14 +88,12 @@
 					"SQLServer",
 					"MySQL",
 					"PostgreSQL",
-					"Object Oriented Programming",
 					"Java",
 					"Spring",
 					"PHP",
 					"ActiveMQ",
 					"WebSocket",
 					"Docker",
-					"Micro-services",
 					"Flux",
 					"Git",
 					"Jenkins",
@@ -168,7 +107,7 @@
 				]
 			},
 			"services": {
-				"h3": "Things I can help you with",
+				"h3": "Skills",
 				"list": [
 					"Front-end development",
 					"REST API",
@@ -177,7 +116,8 @@
 					"Object-oriented programming",
 					"Relational databases",
 					"Web design",
-					"CI/CD pipelines"
+					"CI/CD pipelines",
+					"Micro-services"
 				]
 			},
 			"cta": {
@@ -187,13 +127,16 @@
 		},
 		"contact": {
 			"h2": {
-				"1": "Let's work together."
+				"1": "Let's work",
+				"2": "together"
 			},
 			"paragraph": "Shoot me a note with your project details at "
 		},
 		"footer": {},
 		"metadata": {
-			"email": "hello@kevincastillo.io"
+			"email": "hello@kevincastillo.io",
+			"title": "Kevin Castillo — Software Engineer",
+			"description": "Software engineer with enterprise background building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX. Design. Code. Ship."
 		}
 	},
 	"404": {

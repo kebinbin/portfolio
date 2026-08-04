@@ -4,16 +4,21 @@ import CTA from './sections/CTA.astro'
 import Hero from './sections/Hero.astro'
 import Projects from './sections/Projects.astro'
 import About from './sections/About.astro'
-import Experiences from './sections/Experiences.astro'
-import Workflow from './sections/Workflow.astro'
+import { getI18N } from '../../../i18n'
+
+const { currentLocale } = Astro
+const meta = getI18N({ currentLocale }).home.metadata
 ---
 
-<Layout>
-	<Hero />
+<Layout
+	title={meta.title}
+	description={meta.description}
+	image="/assets/og-home.png"
+	imageAlt="Kevin Castillo — Design. Code. Ship."
+>
 	<main>
+		<Hero />
 		<Projects />
-		<Experiences />
-		<Workflow />
 		<About />
 	</main>
 	<CTA />

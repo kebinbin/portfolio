@@ -1,0 +1,167 @@
+---
+title: Routini
+type: React Router Library
+role: Design & Development
+period: '2026'
+publishDate: 2026-05-20 00:00:00
+img: /assets/projects/case-study-2/routini-hero.webp
+img_alt: Routini's landing page hero — "Just routing, not much more than that." — 3.2 KB gzipped, v0.2.2, React 18+.
+description: |
+  Routini is a small TypeScript-first React router: nine exports, zero runtime dependencies, about 3.2 KB gzipped. Lazy routes, View Transitions, link preloading, scroll restoration and a chunk-error boundary are part of the library. Its documentation site is built with Routini and routed by it.
+tags:
+  - Development
+  - Open Source
+  - TypeScript
+live:
+  url: https://routini.dev/
+  label: routini.dev
+source:
+  url: https://github.com/kebinbin/routini
+  label: View source
+---
+import TextBlock from '../../../components/content/TextBlock.astro'
+import Video from '../../../components/content/Video.astro'
+import ImageBezel from '../../../components/content/ImageBezel.astro'
+
+<TextBlock title="Why I built it">
+
+React Router is the default choice for most React applications, and it brings a framework along with it: loaders, actions, a data layer. Many projects need none of that. They need to map URLs to components. Smaller alternatives exist, though most of them are JavaScript with type declarations added afterwards.
+
+I built Routini for that case. Four constraints defined it: a public API of nine exports, zero runtime dependencies, TypeScript from the first line, and a bundle small enough to enforce in CI. I wrote the library and the documentation site that ships with it. The API shapes follow the conventions React Router established, because familiar names are worth more here than original ones.
+
+</TextBlock>
+
+<TextBlock title="The whole API on one screen">
+
+The public surface is nine exports. That number is the constraint the rest of the library is held to: a feature that cannot be expressed through the existing exports has to justify a tenth.
+
+- `<Router>` — the configuration wrapper. Takes a `routes` array, `<Route>` children, or both, plus opt-in `scrollRestoration` (top on forward navigation, restored position on back and forward — window-scoped by default, or pointed at a nested scroll container).
+- `<Route>` — a route definition that renders nothing. It is tagged with a `Symbol.for` marker so detection survives production minification.
+- `<Link>` — navigation that falls back to native browser behavior on modifier keys, non-primary clicks, or a non-`_self` target.
+- `<Outlet>` — optional. Renders the matched page inside a shared layout.
+- `<Navigate>` — a declarative redirect that replaces history by default, so it does not leave an entry that traps the back button.
+- `useLocation()` — the current path plus an imperative `navigate()`.
+- `useParams<T>()` — typed route parameters read from the URL.
+- `useSearchParams()` — a reactive `[URLSearchParams, setter]` pair.
+- `navigate(to, options?)` — the same navigation, callable from anywhere.
+
+A typical setup combines an eager route, code-split routes and a catch-all. No configuration file and no build step are required:
+
+```tsx
+import { Router } from "routini";
+import Home from "./pages/Home";
+
+const routes = [
+  { path: "/", component: Home },                        // eager — first paint
+  { path: "/artists/:id", lazy: () => import("./Artist") }, // code-split on demand
+  { path: "*", lazy: () => import("./NotFound") },        // catch-all 404
+];
+
+export default function App() {
+  return <Router routes={routes} />;
+}
+```
+
+</TextBlock>
+
+<TextBlock title="Lazy routes by default">
+
+Any route can take a `lazy` thunk in place of a `component`, and that is the documented default rather than an optimization to apply later. Routini performs the dynamic `import()` and provides the Suspense boundary, with a per-route `loading` fallback or a global one on `<Router>`. Each page ships as its own chunk and is fetched when its route matches.
+
+Routini does not use `React.lazy` internally. `React.lazy` suspends for one frame on a component's first render, so a route whose chunk is already cached still shows its loading fallback before the page appears. Routini resolves lazy chunks through a small state machine, which lets a warm route render synchronously. Preloading depends on that behavior to be worth doing at all.
+
+</TextBlock>
+
+<TextBlock title="Instant navigation: preload and View Transitions">
+
+Two features cover the gap between a click and the next page.
+
+**Link preload** fetches a route's chunk before the navigation happens. `preload="hover"` fires on pointer-enter or focus. `preload="render"` schedules through `requestIdleCallback`, so it yields to higher-priority work. `preload="viewport"` uses a single shared `IntersectionObserver` for every viewport link on the page instead of one observer per link. All three go through one module-level preloader, deduplicated with a `WeakSet`, so a chunk is fetched at most once however many links point at it.
+
+**View Transitions** animate the navigation itself. Opting in per navigation (`viewTransition` on a `<Link>`, or `navigate(to, { viewTransition: true })`) wraps the commit in `document.startViewTransition`. The new route has to commit synchronously inside the browser's snapshot-animate-snapshot callback, which requires `flushSync` to get past React's batching. Without it the animation fails silently, so a regression test covers that line. Two elements that share a `view-transition-name` across pages are morphed into each other by the browser:
+
+```tsx
+import { Link } from "routini";
+
+// A feed card that morphs its artwork into the detail page's hero.
+function ArtistCard({ artist }) {
+  return (
+    <Link to={`/artists/${artist.id}`} viewTransition>
+      <img
+        src={artist.photo}
+        style={{ viewTransitionName: `photo-${artist.id}` }}
+      />
+    </Link>
+  );
+}
+```
+
+Back and forward inherit the same animation. A browser gesture has no call site to carry the intent, so Routini records it in `history.state` when a navigation animates and replays it on `popstate`. Symmetric transitions cost no additional API.
+
+</TextBlock>
+
+<TextBlock title="Resilience: a chunk-aware error boundary">
+
+Code-splitting introduces a failure mode that rarely appears in development. When a dynamic `import()` fails, after a stale deploy or a dropped connection, Suspense does not catch it, because Suspense handles suspension and a failed import is an error. The tree unmounts and the page goes blank. Routini wraps every route in an internal error boundary that catches both a failed chunk load and ordinary render errors.
+
+Two optional `<Router>` props expose it, `errorFallback` and `onError`, and the fallback receives `{ error, reset, reload, isChunkError }`. `reset()` drops the failed lazy entry and re-runs the import; React memoizes a rejected `lazy` permanently, so the module has to be replaced instead of retried. The boundary also resets on navigation through a reset key without remounting children, so a same-route parameter change keeps its state. Routini does not reload the page automatically or write to `sessionStorage`. Automatic recovery needs persistent state to avoid reload loops, which is more state than a router should own, so recovery is left to the consumer.
+
+</TextBlock>
+
+<TextBlock title="The internals behind the nine exports">
+
+Three internal decisions carry most of the weight.
+
+The location store is built on React 18's `useSyncExternalStore`. The more common `useState` and `useEffect` pairing has a race here: effects run child-up, so a `<Navigate>` rendered in the initial tree fires its navigation before `<Router>`'s own effect attaches a listener. The URL changes and the rendered route stays stale until a refresh. `useSyncExternalStore` reads the live snapshot after every commit, which closes that window.
+
+Route matching has no dependency. A regex-matching library was the last one, and a fifteen-line segment matcher replaced it. That removed the ReDoS surface, and a static segment containing special characters (`/files/a.b`) now compares literally, where a regex would read the `.` as any character. Matching is case-sensitive, which follows URL convention.
+
+`useSearchParams` keeps its own subscription and snapshots `window.location.search`. Widening the location store to the full URL would remount the matched route on every query change, so the store stays **pathname-only** and a query update re-renders only the components that read it. Sona, the demo application, depends on this: its map writes viewport coordinates to the URL on every pan.
+
+</TextBlock>
+
+<TextBlock title="Size as a measured constraint">
+
+Routini ships at **3.2 KB gzipped**. A script in the repository produces that number with bundlephobia's method — esbuild bundle, terser compress and mangle, then gzip and brotli — so it matches the methodology behind the competitor figures shown next to it on the landing page. CI fails the build when the bundle crosses its budget, which forces a new feature to account for its size before it merges.
+
+The package has **zero runtime dependencies**, with `react` and `react-dom` as peers. Roughly **100 tests** cover the matcher, navigation, popstate, lazy loading, development warnings and the error boundary, using Vitest, Testing Library and happy-dom. Changesets gates releases, so every user-visible change publishes with a changelog entry. The build is ESM-first and also emits CJS, and I check the generated `.d.ts` and `.d.cts` outputs by hand.
+
+</TextBlock>
+
+<TextBlock title="A playground for manual verification">
+
+Automated tests catch regressions, though some behavior has to be watched: whether a View Transition looks right, whether hover preload fires, whether the error boundary's reset button recovers the route. The monorepo carries a workspace-linked playground for that, an unpublished application with one demo per sidebar entry, each exercising a single export. The browser's Network and Console panels serve as its output — lazy chunks loading, preloads firing, `onError` logging. It is the fastest way to confirm that a change to the library left the behavior it targeted intact.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-2/playground.mp4" title="The Routini playground — one demo per feature (lazy loading, useParams, View Transitions, link preload, the error boundary, scroll restoration), built for manual verification with the browser devtools open." />
+
+<TextBlock title="Naming and defaults">
+
+A nine-export surface makes naming and defaults expensive to revise later, so a few of the choices are worth recording.
+
+`<Navigate>` kept its name instead of becoming `<Redirect>`. It can also push a history entry through `replace={false}`, and `<Redirect replace={false}>` contradicts itself, while `<Navigate replace={false}>` stays coherent with a redirect-safe default. There is no `noMatch` prop, because a catch-all `path: "*"` covers the same case and matches ecosystem convention; it renders at the current URL and does not redirect to one, a distinction the landing page diagrams show explicitly. View Transitions are opt-in per navigation and not a `<Router>` flag: they freeze interaction while animating and their design lives in CSS, so the call site is the right place to decide. Competitor names appear in one public place, the bundle-size chart, with versions pinned in a comment; elsewhere the documentation says "a full-featured router" without naming one.
+
+</TextBlock>
+
+<TextBlock title="A site that routes itself">
+
+The marketing and documentation site is built with Routini and uses most of the features it documents. The homepage runs hero through footer as an eager route, the Docs and Examples pages are lazy, code-split and preload on hover, and a catch-all handles 404s. Every page sits under a required `:lang` prefix (`en`/`es`), with `/` redirecting through `<Navigate>` and an unknown language segment caught by a render-time guard, since constraining a parameter to `en|es` is out of scope for the matcher. The Docs page uses a two-column layout in the style of react.dev: a sticky sidebar that tracks the active section by scroll position, one section per export, and hash anchors that scroll smoothly even to a route whose chunk has not loaded. The Examples page adds copy-paste recipes for common patterns — a basic application, code-split routes, typed parameters — and links out to full applications built with Routini, Sona among them. Shiki highlights every code sample at build time, so no syntax highlighter reaches the browser.
+
+</TextBlock>
+
+<ImageBezel src="/assets/projects/case-study-2/docs.webp" alt="Routini's Docs page in its two-column layout — a sticky left sidebar grouping every export under Components, Hooks, Utility and Guides, and a main column with each export's signature, description and props." title="The Docs page — one section per export with its signature, a scroll-spy sidebar, and hash navigation that works on lazy routes." />
+
+<ImageBezel src="/assets/projects/case-study-2/examples.webp" alt="Routini's Examples page — copy-paste recipes for common patterns like a basic app and code-split routes, plus links to full apps built with Routini." title="The Examples page — recipes for common patterns and links to applications built with Routini, including Sona." />
+
+<TextBlock title="Where it stands">
+
+Routini is **published on npm and live at [routini.dev](https://routini.dev)**. It is pre-1.0: feature-complete against its own roadmap, and held there until the API has been used by someone other than me. The first release was gated on shipping a real application built with it, so it went out tested against a production-shaped UI and not only against its own test suite.
+
+The known limits start with nested routes and shared layouts. Those were kept out of scope to protect the size budget, and they are the capability a small router is most often asked for; the single-layout ceiling in the demo application is the clearest evidence for adding them. `ssrPath` keeps `Router` from crashing where `window` is undefined, which is a safety guard with no SSR support behind it.
+
+The remaining roadmap is nested routes, a `@routini/vite-plugin` for file-based routing, and an active-link helper for `<Link>` that sets `aria-current` so consumers stop writing it by hand. A 1.0 depends on the API being exercised by projects I did not write.
+
+</TextBlock>
+
+<ImageBezel src="/assets/projects/case-study-2/npmjs.webp" alt="Routini's npm package page — v0.2.2, MIT licensed, zero dependencies, published and publicly installable." title="The Routini package on npm — published under MIT with zero dependencies." />

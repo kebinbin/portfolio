@@ -2,30 +2,38 @@
 import MainHead from '../components/layouts/MainHead.astro'
 import Nav from '../components/ui/Nav.astro'
 import Footer from '../components/ui/Footer.astro'
+import GridRaster from '../components/ui/GridRaster.astro'
 import { getLangFromUrl } from '../i18n/utils'
 import { ClientRouter } from 'astro:transitions'
 
 interface Props {
 	title?: string | undefined
 	description?: string | undefined
+	image?: string | undefined
+	imageAlt?: string | undefined
+	type?: 'website' | 'article' | undefined
 }
 
-const { title, description } = Astro.props
+const { title, description, image, imageAlt, type } = Astro.props
 const lang = getLangFromUrl(Astro.url)
 ---
 
 <html lang={lang} class="scroll-smooth">
 	<head>
-		<MainHead title={title} description={description} />
+		<MainHead
+			title={title}
+			description={description}
+			image={image}
+			imageAlt={imageAlt}
+			type={type}
+		/>
 		<ClientRouter />
 	</head>
-	<body
-		class="font-body min-h-full overflow-x-clip bg-stone-100 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-400"
-	>
+	<body class="font-body bg-surface text-ink min-h-full overflow-x-clip antialiased">
+		<GridRaster class="fixed inset-0 -z-10" />
 		<Nav />
 		<slot />
 		<Footer />
-		<script src="/src/scripts/fitty-init.js"></script>
 		<script>
 			document.addEventListener('astro:after-swap', () =>
 				document

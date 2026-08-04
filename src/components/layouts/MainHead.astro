@@ -1,24 +1,56 @@
 ---
 import '../../styles/global.css'
+import { getLangFromUrl } from '../../i18n/utils'
 
 interface Props {
 	title?: string | undefined
 	description?: string | undefined
+	image?: string | undefined
+	imageAlt?: string | undefined
+	type?: 'website' | 'article' | undefined
 }
 
 const {
-	title = 'Kevin Castillo: Portfolio website',
-	description = 'The personal site of Kevin Castillo, a Full-Stack software engineer, developer and web designer'
+	title = 'Kevin Castillo — Software Engineer',
+	description = 'Software engineer with enterprise background building scalable back-end systems, intuitive front-end interfaces, and thoughtful UI/UX.',
+	image,
+	imageAlt,
+	type = 'website'
 } = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+// Absolute URLs against the canonical origin (astro.config `site`).
+const canonical = new URL(Astro.url.pathname, Astro.site)
+const ogImage = image ? new URL(image, Astro.site) : undefined
+// The en/es page pair differs only by the leading language segment.
+const altPath = (to: string) =>
+	new URL(Astro.url.pathname.replace(/^\/(en|es)/, `/${to}`), Astro.site)
+const ogLocale = lang === 'es' ? 'es_PR' : 'en_US'
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" property="og:description" content={description} />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang="en" href={altPath('en')} />
+<link rel="alternate" hreflang="es" href={altPath('es')} />
+<link rel="alternate" hreflang="x-default" href={altPath('en')} />
+
+<!-- Open Graph / social preview card -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="Kevin Castillo" />
+<meta property="og:locale" content={ogLocale} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+{ogImage && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://use.typekit.net" crossorigin />
 <link rel="stylesheet" href="https://use.typekit.net/nph0vhx.css" />
 <script is:inline>
 	// This code is inlined in the head to make dark mode instant & blocking.

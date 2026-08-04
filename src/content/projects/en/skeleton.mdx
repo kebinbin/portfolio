@@ -1,0 +1,198 @@
+---
+title: Skeleton
+type: Chrome Extension
+role: Design & Development
+period: 2024 – 2026
+publishDate: 2024-05-20 00:00:00
+img: /assets/projects/case-study-1/skeleton-hero.webp
+img_alt: Skeleton Layout visualizing the Sona.io portfolio case study beside its source code in a split-screen workspace.
+description: |
+  Skeleton Layout is a Manifest V3 Chrome extension that makes a page's structure visible during development. It colors and outlines the DOM without changing markup or layout, keeps its own diagnostics isolated, and removes every injected style when switched off.
+tags:
+  - Design
+  - Development
+  - Extension
+live:
+  url: https://kebinbin.github.io/skeleton-chrome-extension/
+  label: Visit site
+source:
+  url: https://github.com/kebinbin/skeleton-chrome-extension
+  label: View source
+---
+import TextBlock from '../../../components/content/TextBlock.astro'
+import Image from '../../../components/content/Image.astro'
+import ImageGrid from '../../../components/content/ImageGrid.astro'
+import Video from '../../../components/content/Video.astro'
+
+<TextBlock title="Why I built it">
+
+For years, when a layout misbehaved, I reached for the same workaround: temporary backgrounds and borders that made empty wrappers, nesting levels and unexpected spacing visible. It worked, but every debugging session began with arbitrary CSS and ended with remembering to remove it.
+
+**Skeleton Layout turns that workaround into a toolbar toggle.** Chrome DevTools is excellent for inspecting a selected element; Skeleton keeps the *whole page* visible as a structural map while the browser sits beside the editor. It works as a persistent, zoomed-out companion to DevTools. I set four constraints before writing any code: never add classes, attributes or inline styles to the page; never change layout dimensions; make every change reversible in one click; and request as little access as possible.
+
+</TextBlock>
+
+<Video src="/assets/projects/case-study-1/skeleton-plugin-develop.mp4" title="Editing a component in the editor while the visualization stays on beside it. The dev server hot-reloads, the markup is replaced, and the outlines redraw over the new elements on their own — the extension is never told that anything changed." />
+
+<TextBlock title="Coloring the whole page with CSS, not JavaScript">
+
+I built the visualization out of **generated CSS selectors** instead of a script that walks the DOM adding classes, and the rest of the architecture follows from that. Depth mode emits rules shaped by nesting level:
+
+```js
+function depthSelector(depth) {
+  return `:where(:root${" > *".repeat(depth)})`
+}
+```
+
+Because the browser evaluates those selectors continuously, elements rendered later are included without a `MutationObserver` re-tagging the DOM. Overrides use Chrome's cascade origins instead of relying on a wall of `!important`: base rules are inserted as `AUTHOR`, while user-forced overrides use `USER`. The settings therefore map directly to how the cascade resolves.
+
+```js
+export function buildStyleInjections(candidate) {
+  const { style } = normalizeConfig(candidate)
+  const rulesByOrigin = { AUTHOR: [], USER: [] }
+  const addRules = (rules, override) => {
+    rulesByOrigin[override ? 'USER' : 'AUTHOR'].push(...rules)
+  }
+  addRules(backgroundRules(style, style.overrideBgColor), style.overrideBgColor)
+  addRules(borderRules(style, style.overrideBorder), style.overrideBorder)
+  addRules(textRules(style, true), true)
+  return Object.entries(rulesByOrigin)
+    .filter(([, rules]) => rules.length > 0)
+    .map(([origin, rules]) => ({ origin, css: rules.join('\n') }))
+}
+```
+
+Two details protect the page being inspected. Structure is drawn with **outlines, not borders**, using a negative `outline-offset`; borders would change box dimensions and cause reflow. The generated wildcard selectors also exclude every internal custom element, keeping the extension's own tooltips and overlays outside the visualization.
+
+</TextBlock>
+
+<TextBlock title="Three ways to look at a layout">
+
+The same engine drives three modes, available from the toolbar or context menu:
+
+- **Full visualization** — depth- or sibling-based background tints (a six-color editable palette or monochrome), structural outlines, and optional auto-contrast text.
+- **Outline only** — keeps the page's colors and shows structure through outlines, for cases where tinting would obscure the content under inspection.
+- **Hover inspector** — no tinting at all; pointing at an element reads out its box model.
+
+Settings live in Chrome's **side panel**, which keeps the inspected page visible while the palette is being tuned. Full Visualization preferences are stored separately in `fullStyle`, so switching to Outline or Inspector and back restores the exact palette and opacity that were configured.
+
+</TextBlock>
+
+<ImageGrid
+	title="The same page under each mode. Outline Only adds structure without touching color; monochrome tints by depth in one hue when color would compete with the design; the six-color palette separates sibling levels at a glance; the inspector drops tinting entirely and reports one element. The amber labels and the running count in the corner are the experimental overflow diagnostic, covered below."
+	items={[
+		{
+			src: '/assets/projects/case-study-1/mode-original.webp',
+			label: 'Original — extension off',
+			alt: 'A cabin rental landing page rendered normally, with no extension styles applied: editorial headings, a two-up photo grid and a quote panel.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-outline.webp',
+			label: 'Outline only',
+			alt: "The same page with every element given a dashed structural outline while the page's own colors and photography stay untouched."
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-monochrome.webp',
+			label: 'Full visualization · monochrome',
+			alt: 'The same page tinted by nesting depth in a single teal hue, with dashed white outlines marking every element boundary.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-full.webp',
+			label: 'Full visualization · six-color palette',
+			alt: 'The same page tinted with the six-color depth palette, each nesting level taking its own hue so sibling containers separate visually.'
+		},
+		{
+			src: '/assets/projects/case-study-1/mode-inspector.webp',
+			label: 'Hover inspector',
+			alt: 'The hover inspector over a grid container, showing nested margin, border and padding rings with 30px labels, and a tooltip reading div.project-copy, Grid, Grid item, 846.1 by 108.3px, depth 8, three column tracks and one row track.'
+		}
+	]}
+/>
+
+<TextBlock title="The inspector — reading the box model without touching the DOM">
+
+The hover inspector reports tag, id, dimensions, depth, `display`, `box-sizing`, overflow, the full four-sided box model, flex/grid membership, stacking context and `z-index` without mutating the inspected element. Its overlays and tooltip live inside a **closed Shadow DOM** host, isolating them from both the page's CSS and the extension's generated selectors:
+
+```js
+const host = document.createElement('skeleton-layout-element-inspector')
+const shadow = host.attachShadow({ mode: 'closed' })
+shadow.append(style, ...overlays, tooltip)
+document.documentElement.append(host)
+```
+
+The overlay stylesheet begins with `all: initial !important`, positions are scheduled through `requestAnimationFrame`, and the tooltip clamps itself to the viewport. Layout classification lives in a DOM-independent module so it can be unit-tested. Grid-track counting needed a small parser, because `repeat()` and named lines nest their own syntax and splitting `grid-template-columns` on spaces produces wrong counts. The resolved track totals are what the tooltip reports above as `3 tracks` and `1 track`, alongside the element's gaps, alignment and depth.
+
+</TextBlock>
+
+<TextBlock title="Live preview without corrupting saved state">
+
+Settings preview instantly on the live page, but a preview must never silently become the saved configuration. Early versions exposed several state bugs: reverted opacity, lost palette drafts and previews left behind after the panel closed. I fixed them by modeling three explicit phases — **saved**, **draft**, and **previewed** — in a `SettingsState` object that owns every transition and returns normalized copies:
+
+```js
+switchMode(mode) {
+  if (!QUICK_MODES.includes(mode)) return this.draft
+  const fullStyle =
+    this.#draft.style.mode === 'full' ? this.#draft.style : this.#draft.fullStyle
+  const style = mode === 'full' ? fullStyle : presetConfigForMode(mode).style
+  return this.updateDraft({ style, fullStyle })
+}
+```
+
+The side panel communicates through a named `settings-preview` port. Requests are debounced at 120 ms, tagged with IDs and serialized through a promise queue. Each tab records a `previewOwner`; disconnecting reverts any preview that panel still owns. Saving follows a separate commit path, so closing the panel discards unsaved changes instead of leaking them into storage.
+
+</TextBlock>
+
+<Image
+	src="/assets/projects/case-study-1/settings.webp"
+	alt="Skeleton Layout's settings panel: a Mode section with a visualization dropdown, a grid-visualization toggle and reassignable keyboard shortcuts; a Background section with the six-hue palette, lightness-per-cycle and opacity sliders, and override toggles; Outline and Text sections; and a Diagnostics section with hover details and an experimental overflow detector."
+	title="The whole settings surface, which lives in a narrow Chrome side panel beside the page being inspected. Every control is a native input. Reset, Revert and Save are separate actions because the panel holds a draft: Revert throws away the live preview, and nothing reaches storage until Save. The two override checkboxes are the AUTHOR and USER cascade origins described earlier, and the overflow detector carries its experimental label in the UI, not only in the docs."
+/>
+
+<TextBlock title="Reversible by construction — insert before remove">
+
+Turning the extension off must leave no trace. Because `chrome.scripting.removeCSS()` requires the exact CSS text **and** cascade origin used during insertion, the service worker stores each generated injection in `chrome.storage.session`, keyed by tab id. On a settings change it diffs the old and new `{ css, origin }` pairs. New CSS is inserted *before* stale CSS is removed, preventing an unstyled flash between configurations.
+
+```js
+// Insert replacements first so the page never renders without an active
+// visualization between settings changes.
+for (const injection of additions) {
+  await chrome.scripting.insertCSS({
+    target: { tabId },
+    css: injection.css,
+    origin: injection.origin,
+  })
+  inserted.push(injection)
+}
+await setTabState(tabId, injections /* … */)
+await removeInjections(tabId, removals)
+```
+
+A per-tab promise lock prevents toolbar actions, settings updates, navigation events and preview requests from racing. A partial failure rolls back newly inserted CSS while preserving the previous working visualization. Manifest V3 service workers can restart between events, so the toolbar badge (`ON`, `OL`, `IN`, or an orange `!` when Chrome blocks injection) is reconstructed from session storage on each wake.
+
+</TextBlock>
+
+<TextBlock title="Overflow diagnostics, honestly labeled experimental">
+
+An opt-in diagnostic searches for horizontal overflow, marking likely document-level overflow in red and possible clipping in amber. Every marker is drawn onto a **single Canvas 2D surface** inside a closed Shadow DOM, which avoids creating an overlay node per candidate. The scan is bounded: 20 ms, up to 12,000 elements, 1,000 candidates and 300 markers, with debounced re-scans after mutations and scrolling.
+
+My first classifier produced false positives for inline text, intentional scroll containers and large decorative type. It now separates *confirmed* page overflow from *possible* clipping and ignores the common intentional cases. The amber `possible overflow-y` and `possible clipped-x` tags in the screenshots above are that hedged classification doing its job: each names the element and the axis rather than asserting a bug. Geometry cannot reveal intent with certainty, so the feature stays labeled **experimental** and its count should be read as a hint.
+
+</TextBlock>
+
+<TextBlock title="A small surface, and as few permissions as possible">
+
+The manifest requests five permissions — `activeTab`, `contextMenus`, `scripting`, `sidePanel`, and `storage` — with **zero** `host_permissions`. Nothing runs on a site until the extension is invoked there, and diagnostic scripts are injected only while their feature is active. Preferences sync through `chrome.storage.sync`; ephemeral tab state stays in `chrome.storage.session`. There is no telemetry or analytics, and page content never leaves the browser.
+
+The extension is plain JavaScript, HTML and CSS with **no build step and no runtime dependencies**: approximately 4,100 lines of production source and 52 automated tests using Node's native `node:test`. I wrote a release script that packages it into a **deterministic 15-file, ~36 KiB archive** with fixed timestamps, sorted paths and level-9 deflate. Packaging fails if the manifest and package versions disagree, if persistent host permissions appear, or if the source contains dynamic evaluation or remote scripts.
+
+</TextBlock>
+
+<TextBlock title="Where it stands">
+
+Skeleton Layout is a **v0.3.0 release candidate** that can be installed today as an unpacked extension. Its release archive, documentation, privacy policy and public website are ready; clean-profile QA, Chrome Web Store listing assets and trusted-tester submission remain before the first store release.
+
+The current limits are explicit: injected CSS cannot cross Shadow DOM boundaries, iframe documents are skipped, pseudo-elements are not colored independently, and depth coloring stops at level 64. Skeleton is Chrome-only, 116 and above for the Side Panel API. Automatic contrast is a heuristic: it compares against the generated palette color, not the composited result once a translucent tint blends with the page, so it is not a guaranteed WCAG figure.
+
+What remains is validation: test the packaged ZIP in a clean profile across representative sites, cut the store listing assets, tag `v0.3.0`, and submit it to trusted testers. Their feedback will determine whether overflow detection graduates, changes direction or is removed.
+
+</TextBlock>

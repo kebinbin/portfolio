@@ -1,0 +1,30 @@
+---
+/**
+ * The page-wide vertical raster (DESIGN.md §2.2): the 12 columns + their gaps
+ * = 24 hairlines, built from the same `container` + `page-grid` classes every
+ * section uses, so the lines align to all page content.
+ *
+ * Rendered once in Layout as `fixed inset-0 -z-10` (above the body background,
+ * below in-flow content), and a second time inside any opaque panel that would
+ * otherwise paint over it — see the home page's contact/footer overlay.
+ * Horizontal rules stay per-section/component.
+ */
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<div aria-hidden="true" class:list={['pointer-events-none', className]}>
+	<div class="page-grid container h-full grid-rows-1">
+		{
+			/* Reveal exactly one cell per column so cell count == column count
+			   at each breakpoint (6 / 12), matching page-grid — otherwise the
+			   extra cells wrap into phantom rows. */
+			Array.from({ length: 12 }).map((_, i) => (
+				<span class:list={['grid-line border-x', i < 6 ? '' : 'hidden lg:block']} />
+			))
+		}
+	</div>
+</div>

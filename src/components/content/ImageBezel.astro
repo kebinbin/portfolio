@@ -1,0 +1,25 @@
+---
+import { getImageSize } from './imageSize'
+
+const { src, alt = '', title } = Astro.props
+// Intrinsic size reserves the box before load (no CLS). `w-full h-auto` still
+// controls rendered size — these attributes only supply the aspect ratio.
+const size = getImageSize(src)
+---
+
+<div class="flex flex-col gap-3">
+	<div
+		class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
+	>
+		<img
+			src={src}
+			alt={alt}
+			width={size?.width}
+			height={size?.height}
+			loading="lazy"
+			decoding="async"
+			class="h-auto w-full"
+		/>
+	</div>
+	{title && <p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">{title}</p>}
+</div>

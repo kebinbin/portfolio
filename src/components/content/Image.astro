@@ -1,0 +1,36 @@
+---
+/**
+ * Plain content image — no device bezel. Use for artwork that is not a browser
+ * or app viewport: standalone UI panels, diagrams, tall portrait captures.
+ * For browser/page screenshots use ImageBezel.astro, which frames them.
+ *
+ * Unlike ImageBezel/ImageGrid/Video (full container width — they read as
+ * figures), this sits on the page-grid in the SAME slot as TextBlock prose:
+ * cols 5–12 at lg+, full 6-col width below. An unframed panel floating at
+ * container width reads as misaligned next to the text it belongs to.
+ *
+ * `width` optionally caps the image inside that column and centers it.
+ */
+import { getImageSize } from './imageSize'
+
+const { src, alt = '', title, width } = Astro.props
+// Intrinsic size reserves the box before load (no CLS). `w-full h-auto` still
+// controls rendered size — these attributes only supply the aspect ratio.
+const size = getImageSize(src)
+---
+
+<div class="page-grid">
+	<div class="col-span-6 flex min-w-0 flex-col gap-3 lg:col-span-8 lg:col-start-5">
+		<img
+			src={src}
+			alt={alt}
+			width={size?.width}
+			height={size?.height}
+			loading="lazy"
+			decoding="async"
+			class="mx-auto h-auto w-full"
+			style={width ? `max-width: ${width}` : undefined}
+		/>
+		{title && <p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">{title}</p>}
+	</div>
+</div>

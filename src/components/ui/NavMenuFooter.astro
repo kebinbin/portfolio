@@ -9,12 +9,8 @@ interface Props {
 const { noScript = false } = Astro.props
 ---
 
-<div
-	class="relative left-1/2 w-dvw max-w-none -translate-x-1/2 lg:static lg:left-0 lg:w-full lg:translate-0"
->
-	<div
-		class="border-y border-solid border-stone-300 bg-stone-100 py-6 lg:border-0 lg:bg-transparent lg:p-0 dark:border-stone-800 dark:bg-stone-950 lg:dark:bg-transparent"
-	>
+<div class="relative left-1/2 w-dvw max-w-none -translate-x-1/2 lg:contents">
+	<div class="bg-surface border-ink/25 border-y border-solid py-6 lg:contents">
 		<div class="container flex justify-between gap-3 lg:items-center lg:justify-end lg:px-0">
 			<LanguagePicker />
 			{

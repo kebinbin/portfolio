@@ -1,38 +1,397 @@
 ---
 import { getCollection } from 'astro:content'
-import ProjectPreview from './ProjectPreview.astro'
+import { getI18N } from '../../../../i18n'
+import { getLangFromUrl } from '../../../../i18n/utils'
+import { getImageSize } from '../../../content/imageSize'
 
 const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale }).home
+const lang = getLangFromUrl(Astro.url)
 
-// Content Fetching: List four most recent work projects
 const projects = (await getCollection('projects'))
-	.filter((project) => {
-		return project.slug.split('/')[0] === currentLocale
-	})
+	.filter((project) => project.slug.split('/')[0] === currentLocale)
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 2)
 
-const gridSpan = [8, 4, 4, 8]
-// const gridSpan = [7, 5, 5, 7]
+// H2 baseline as a fraction of --text-headline, so the rule lands on the type's feet.
+const H2_BASELINE = 0.835
+
+const years = projects.map((p) => p.data.publishDate.getFullYear())
+const indexRange = `01 — ${String(projects.length).padStart(2, '0')}`
+const yearRange = `${Math.min(...years)} — ${Math.max(...years)}`
 ---
 
-<section class="px-6 pb-16 lg:container lg:pb-32">
-	<header>
-		<a id="projects"><h2 class="sr-only">Selected Projects</h2></a>
-	</header>
-	<div class="grid grid-cols-12 gap-x-6 gap-y-12 xl:gap-y-28 2xl:gap-x-8">
-		{
-			projects.map((project, index) => (
-				<div
-					class={`relative col-span-12 lg:col-span-6 ${gridSpan[index] === 8 ? 'xl:col-span-8' : 'xl:col-span-4'} ${
-						index % 2 === 0
-							? 'lg:-ml-[calc((100vw-var(--breakpoint-lg)+2*4rem)/2-24px)] xl:-ml-[calc((100vw-var(--breakpoint-xl)+2*4rem)/2-24px)] 2xl:-ml-[calc((100vw-var(--breakpoint-2xl)+2*6rem)/2-32px)]'
-							: 'lg:-mr-[calc((100vw-var(--breakpoint-lg)+2*4rem)/2-24px)] xl:-mr-[calc((100vw-var(--breakpoint-xl)+2*4rem)/2-24px)] 2xl:-mr-[calc((100vw-var(--breakpoint-2xl)+2*6rem)/2-32px)]'
-					}`}
-				>
-					<ProjectPreview project={project} />
+<section class="pt-30 lg:pt-32">
+	<div class="track" style={`--count: ${projects.length}`} data-projects>
+		<div class="stage">
+			<div class="frame" data-frame>
+				<div class="reel" data-reel>
+					<header class="relative container">
+						<a id="projects"
+							><h2 class="text-headline text-ink pb-8 lg:pb-16">
+								{i18n.projects.h2}<span class="text-accent ml-4">.</span>
+							</h2></a
+						>
+						<span
+							aria-hidden="true"
+							class="grid-line absolute left-1/2 hidden h-0 w-screen -translate-x-1/2 border-t lg:block"
+							style={`top: calc(var(--text-headline) * ${H2_BASELINE})`}></span>
+						<p
+							aria-hidden="true"
+							class="text-ink/50 absolute right-6 hidden flex-col text-right text-[10px] tracking-[0.25em] uppercase lg:right-16 xl:flex 2xl:right-24"
+							style={`top: calc(var(--text-headline) * ${H2_BASELINE}); transform: translateY(-0.4em)`}
+						>
+							<span>{indexRange}</span>
+							<span class="text-ink/35">{yearRange}</span>
+						</p>
+					</header>
+
+					<div class="flex flex-[1_0_auto] flex-col">
+						<ul>
+							{
+								projects.map((project, index) => {
+									const { data, slug } = project
+									const [, projectSlug] = slug.split('/')
+									const href = `projects/${projectSlug}`
+									const number = String(index + 1).padStart(2, '0')
+									return (
+										<li class="row" data-row data-open={index === 0 ? '' : null}>
+											<span aria-hidden="true" class="grid-line bleed-x block h-0 border-t" />
+
+											<div class="summary fold" data-summary>
+												<div class="clip">
+													<div class="container">
+														<div class="page-grid items-center py-5 lg:py-3">
+															<span class="eyebrow text-ink col-span-1 font-semibold">
+																{number}
+															</span>
+															<span class="title text-ink col-span-5 text-2xl tracking-tight lg:text-3xl">
+																{data.title}
+															</span>
+															<span class="text-ink/55 col-span-6 hidden text-base capitalize lg:col-span-4 lg:block">
+																{data.type}
+															</span>
+															<span class="eyebrow text-ink/40 col-span-6 hidden lg:col-span-2 lg:block lg:text-right">
+																{data.period}
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="detail fold" data-detail>
+												<div class="clip">
+													<div class="reveal container">
+														<div class="page-grid items-start py-6 lg:py-8">
+															<div class="col-span-6 lg:col-span-4 lg:row-start-1">
+																<span class="eyebrow text-ink/45 flex items-center gap-2.5">
+																	<span class="text-ink font-semibold">{number}</span>
+																	<span aria-hidden="true" class="bg-ink/25 h-px w-6" />
+																	<span transition:name={`${projectSlug}-period`}>
+																		{data.period}
+																	</span>
+																</span>
+																<a href={href} class="mt-2 block xl:mt-4">
+																	<h3
+																		transition:name={`${projectSlug}-title`}
+																		class="text-ink tracking-display text-[clamp(2.5rem,4vw,3.75rem)] leading-[0.95] font-medium"
+																	>
+																		{data.title}
+																	</h3>
+																</a>
+																<p
+																	transition:name={`${projectSlug}-type`}
+																	class="text-ink/70 mt-2 text-xl tracking-tight capitalize lg:mt-3"
+																>
+																	{data.type}
+																</p>
+																<p
+																	transition:name={`${projectSlug}-description`}
+																	class="text-ink/70 mt-6 text-sm leading-6 text-pretty lg:mt-8"
+																>
+																	{data.description}
+																</p>
+																<a
+																	href={href}
+																	class="eyebrow text-accent hover:text-accent-strong mt-8 flex w-fit items-center gap-2 font-semibold transition-colors"
+																>
+																	{i18n.projects.cta} →
+																</a>
+															</div>
+															<a
+																href={href}
+																class="col-span-6 mt-8 block lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:mt-0"
+															>
+																<div
+																	transition:name={`${projectSlug}-hero-img`}
+																	class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
+																>
+																	<img
+																		src={data.img}
+																		alt={data.img_alt || ''}
+																		width={getImageSize(data.img)?.width}
+																		height={getImageSize(data.img)?.height}
+																		loading={index === 0 ? 'eager' : 'lazy'}
+																		decoding="async"
+																		class="aspect-video size-full object-cover"
+																	/>
+																</div>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+									)
+								})
+							}
+						</ul>
+						<span aria-hidden="true" class="grid-line bleed-x block h-0 border-t"></span>
+					</div>
+
+					<div class="container flex flex-none justify-end pt-6 pb-8 lg:pb-10">
+						<a
+							href={`/assets/resume/${lang}/resume-kevin.castillo.pdf`}
+							class="eyebrow text-accent hover:text-accent-strong font-semibold transition-colors"
+						>
+							{i18n.projects.resumeCta} →
+						</a>
+					</div>
 				</div>
-			))
-		}
+			</div>
+		</div>
 	</div>
 </section>
+
+<style>
+	/* Pinning lives in CSS rather than utility classes: the unpinned fallback
+	   below keys off viewport height and orientation, which Tailwind cannot
+	   express, and both states are far easier to read side by side. */
+	.track {
+		height: calc(100vh + var(--count) * 70vh);
+	}
+
+	.stage {
+		position: sticky;
+		top: 0;
+		display: flex;
+		height: 100vh;
+		flex-direction: column;
+	}
+
+	.frame {
+		display: flex;
+		flex: 1;
+		min-height: 0;
+		flex-direction: column;
+		justify-content: safe center;
+		overflow: clip;
+	}
+
+	/* Slides the reel so the expanded project stays inside the frame when it is
+	   taller than the viewport. --shift is written by the script below. */
+	.reel {
+		position: relative;
+		display: flex;
+		flex: none;
+		min-height: 100%;
+		flex-direction: column;
+		padding-block-start: 3.5rem;
+		transform: translateY(calc(-1 * var(--shift, 0px)));
+	}
+
+	/* 0fr → 1fr is the animatable way to collapse a row to nothing. */
+	.fold {
+		display: grid;
+		transition: grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.clip {
+		overflow: hidden;
+		min-height: 0;
+	}
+
+	.summary {
+		grid-template-rows: 1fr;
+	}
+
+	.detail {
+		grid-template-rows: 0fr;
+	}
+
+	.row[data-open] .summary {
+		grid-template-rows: 0fr;
+	}
+
+	.row[data-open] .detail {
+		grid-template-rows: 1fr;
+	}
+
+	.reveal {
+		opacity: 0;
+		transform: translateY(0.5rem);
+		transition:
+			opacity 0.4s ease 0.08s,
+			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+	}
+
+	.row[data-open] .reveal {
+		opacity: 1;
+		transform: none;
+	}
+
+	.title {
+		transition: opacity 0.45s ease;
+	}
+
+	.row:not([data-open]) .title {
+		opacity: 0.55;
+	}
+
+	/* Unpinned: normal flow, every project expanded. */
+	@media (width < 64rem), (height < 44rem), (orientation: portrait) {
+		.track {
+			height: auto;
+		}
+
+		.stage {
+			position: static;
+			display: block;
+			height: auto;
+		}
+
+		.frame {
+			display: block;
+			overflow: visible;
+		}
+
+		.reel {
+			display: block;
+			min-height: 0;
+			padding-block-start: 0;
+			transform: none;
+		}
+
+		.summary {
+			grid-template-rows: 0fr;
+		}
+
+		.detail {
+			grid-template-rows: 1fr;
+		}
+
+		.reveal {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.fold,
+		.reveal,
+		.title {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	const PINNED = '(width >= 64rem) and (height >= 44rem) and (orientation: landscape)'
+
+	let teardown: (() => void) | null = null
+
+	function initProjects() {
+		teardown?.()
+		teardown = null
+
+		const track = document.querySelector<HTMLElement>('[data-projects]')
+		const frame = document.querySelector<HTMLElement>('[data-frame]')
+		const reel = document.querySelector<HTMLElement>('[data-reel]')
+		const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-row]'))
+		if (!track || !frame || !reel || !rows.length) return
+
+		const pinned = window.matchMedia(PINNED)
+		const controller = new AbortController()
+		const { signal } = controller
+		let active = -1
+		let scrollFrame = 0
+		let settleFrame = 0
+		let settleUntil = 0
+
+		function open(row: HTMLElement, isOpen: boolean) {
+			row.toggleAttribute('data-open', isOpen)
+			const summary = row.querySelector<HTMLElement>('[data-summary]')
+			const detail = row.querySelector<HTMLElement>('[data-detail]')
+			if (summary) summary.inert = isOpen
+			if (detail) detail.inert = !isOpen
+		}
+
+		function updateShift() {
+			const overflow = reel.offsetHeight - frame.clientHeight
+			if (!pinned.matches || active < 0 || overflow <= 0) {
+				reel.style.setProperty('--shift', '0px')
+				return
+			}
+			const row = rows[active]
+			const bottom =
+				active === rows.length - 1 ? reel.offsetHeight : row.offsetTop + row.offsetHeight
+			const shift = Math.min(Math.max(bottom - frame.clientHeight, 0), overflow)
+			reel.style.setProperty('--shift', `${shift}px`)
+		}
+
+		// Row heights animate for ~550ms, so re-measure across that window.
+		function settle() {
+			settleUntil = performance.now() + 700
+			if (settleFrame) return
+			const step = () => {
+				updateShift()
+				settleFrame = performance.now() < settleUntil ? requestAnimationFrame(step) : 0
+			}
+			settleFrame = requestAnimationFrame(step)
+		}
+
+		function setActive(index: number) {
+			if (index === active) return
+			active = index
+			rows.forEach((row, i) => open(row, i === index))
+			settle()
+		}
+
+		function measure() {
+			if (!pinned.matches) {
+				active = -1
+				rows.forEach((row) => open(row, true))
+				return
+			}
+			const span = track.offsetHeight - window.innerHeight
+			const progress = span > 0 ? -track.getBoundingClientRect().top / span : 0
+			setActive(Math.min(rows.length - 1, Math.max(0, Math.floor(progress * rows.length))))
+		}
+
+		function onViewportChange() {
+			measure()
+			updateShift()
+		}
+
+		function onScroll() {
+			if (scrollFrame) return
+			scrollFrame = requestAnimationFrame(() => {
+				scrollFrame = 0
+				measure()
+			})
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true, signal })
+		window.addEventListener('resize', onViewportChange, { signal })
+		pinned.addEventListener('change', onViewportChange, { signal })
+		onViewportChange()
+
+		teardown = () => {
+			controller.abort()
+			cancelAnimationFrame(scrollFrame)
+			cancelAnimationFrame(settleFrame)
+		}
+	}
+
+	initProjects()
+	document.addEventListener('astro:page-load', initProjects)
+</script>

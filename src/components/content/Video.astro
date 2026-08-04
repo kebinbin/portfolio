@@ -1,24 +1,41 @@
 ---
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
+
 const { src, title } = Astro.props
+// A missing capture renders a labeled placeholder rather than a broken player,
+// so an unrecorded demo never ships as dead media. No case study relies on this
+// today — every referenced video exists — but it stays as a guard for new ones.
+const exists = existsSync(join(process.cwd(), 'public', src))
 ---
 
 <div class="flex flex-col gap-3">
 	<div
-		class="w-full overflow-hidden rounded-[.5rem] border-5 border-stone-500/20 shadow-xl outline-1 outline-stone-950/25 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7 dark:border-stone-900/20 dark:outline-stone-100/5"
+		class="border-ink/7 outline-ink/15 dark:border-ink/5 dark:outline-ink/8 w-full overflow-hidden rounded-[.5rem] border-5 shadow-xl outline-1 md:rounded-[1rem] md:border-6 xl:rounded-[1.5rem] xl:border-7"
 	>
-		<video
-			autoplay
-			muted
-			playsinline
-			loop
-			class="h-auto w-full"
-			preload="metadata"
-			crossorigin="anonymous"
-			src={src}
-		>
-		</video>
+		{
+			exists ? (
+				<video
+					autoplay
+					muted
+					playsinline
+					loop
+					class="h-auto w-full"
+					preload="metadata"
+					crossorigin="anonymous"
+					src={src}
+				/>
+			) : (
+				<div class="bg-ink/5 text-ink/40 flex aspect-video w-full flex-col items-center justify-center gap-2 p-8 text-center">
+					<span class="text-xs font-semibold tracking-wide uppercase">
+						Screen recording placeholder
+					</span>
+					<span class="text-ink/60 max-w-md text-sm text-pretty">{title}</span>
+				</div>
+			)
+		}
 	</div>
-	<p class="text-base leading-7 text-pretty text-stone-600 lg:text-lg dark:text-stone-500">
+	<p class="text-ink/70 text-base leading-7 text-pretty lg:text-lg">
 		{title}
 	</p>
 </div>
