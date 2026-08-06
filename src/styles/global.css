@@ -69,14 +69,14 @@
 	--ink: var(--color-retro-ink);
 	--accent: var(--color-retro-rust);
 	--accent-strong: var(--color-retro-brown);
-	--grid-line: color-mix(in oklab, var(--ink) 7%, transparent);
+	--grid-line: color-mix(in oklab, var(--ink) 5%, transparent);
 }
 .dark {
 	--surface: var(--color-retro-coal);
 	--ink: var(--color-retro-bone);
 	--accent: var(--color-retro-orange);
 	--accent-strong: var(--color-retro-gold);
-	--grid-line: color-mix(in oklab, var(--ink) 7%, transparent);
+	--grid-line: color-mix(in oklab, var(--ink) 3%, transparent);
 }
 
 /* Hero H1 size ladder — xs/sm both 8rem (small screens read as one size
