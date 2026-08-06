@@ -7,7 +7,7 @@ publishDate: 2026-05-20 00:00:00
 img: /assets/projects/case-study-2/routini-hero.webp
 img_alt: El hero de la landing page de Routini — "Just routing, not much more than that." — 3.2 KB comprimido, v0.2.2, React 18+.
 description: |
-  Routini es un router para React pequeño y escrito en TypeScript desde el inicio: nueve exports, cero dependencias en tiempo de ejecución, cerca de 3.2 KB comprimido. Las rutas lazy, las View Transitions, la precarga de enlaces, la restauración de scroll y un boundary de errores por chunk forman parte de la librería. Su sitio de documentación está construido con Routini y enrutado por ella.
+  Routini es un router para React pequeño, escrito en TypeScript: cerca de 3.2 KB comprimido, cero dependencias en tiempo de ejecución y una API pública de nueve exports. Las rutas lazy, las View Transitions, la precarga de enlaces, la restauración de scroll y un boundary de errores por chunk forman parte de la librería. Su sitio de documentación está construido con Routini y enrutado por ella.
 tags:
   - Desarrollo
   - Código Abierto
@@ -25,15 +25,15 @@ import ImageBezel from '../../../components/content/ImageBezel.astro'
 
 <TextBlock title="Por qué lo construí">
 
-React Router es la opción por defecto en la mayoría de las aplicaciones React, y trae consigo un framework completo: loaders, actions, una capa de datos. Muchos proyectos no necesitan nada de eso. Necesitan mapear URLs a componentes. Existen alternativas más pequeñas, aunque casi todas son JavaScript con declaraciones de tipos añadidas después.
+Los routers establecidos de React han crecido hasta convertirse en capas de datos: loaders, actions, caché y las convenciones que los acompañan. Es la decisión correcta para aplicaciones que necesitan todo eso, y es mucho que cargar para un proyecto que solo necesita mapear URLs a componentes.
 
-Construí Routini para ese caso. Cuatro restricciones lo definieron: una API pública de nueve exports, cero dependencias en tiempo de ejecución, TypeScript desde la primera línea, y un bundle lo bastante pequeño como para verificarlo en CI. Escribí la librería y el sitio de documentación que la acompaña. Las formas de la API siguen las convenciones que estableció React Router, porque aquí los nombres familiares valen más que los originales.
+Construí Routini para el segundo caso. Tres restricciones lo definieron: un bundle lo bastante pequeño como para verificarlo en CI, cero dependencias en tiempo de ejecución, y una API pública lo bastante pequeña como para documentarla en una sola página. Escribí la librería en TypeScript y construí el sitio de documentación que la acompaña. Las formas de la API siguen convenciones que el ecosistema ya estableció, porque aquí los nombres familiares valen más que los originales.
 
 </TextBlock>
 
 <TextBlock title="Toda la API en una pantalla">
 
-La superficie pública son nueve exports. Ese número es la restricción a la que se somete el resto de la librería: una funcionalidad que no pueda expresarse con los exports existentes tiene que justificar un décimo.
+Nueve exports componen la API pública, y estos son todos.
 
 - `<Router>` — el envoltorio de configuración. Recibe un arreglo `routes`, hijos `<Route>`, o ambos, más un `scrollRestoration` opcional (arriba al navegar hacia adelante, posición restaurada al ir atrás y adelante; sobre la ventana por defecto, o apuntado a un contenedor de scroll anidado).
 - `<Route>` — una definición de ruta que no renderiza nada. Está marcada con un `Symbol.for` para que la detección sobreviva a la minificación en producción.
@@ -41,7 +41,7 @@ La superficie pública son nueve exports. Ese número es la restricción a la qu
 - `<Outlet>` — opcional. Renderiza la página coincidente dentro de un layout compartido.
 - `<Navigate>` — una redirección declarativa que reemplaza el historial por defecto, de modo que no deja una entrada que atrape el botón "atrás".
 - `useLocation()` — la ruta actual más un `navigate()` imperativo.
-- `useParams<T>()` — parámetros de ruta tipados leídos desde la URL.
+- `useParams<T>()` — parámetros de ruta desde la URL, devueltos con el tipo que indique quien llama.
 - `useSearchParams()` — un par reactivo `[URLSearchParams, setter]`.
 - `navigate(to, options?)` — la misma navegación, invocable desde cualquier lugar.
 
@@ -108,7 +108,7 @@ Dos props opcionales de `<Router>` lo exponen, `errorFallback` y `onError`, y el
 
 </TextBlock>
 
-<TextBlock title="Los internos detrás de los nueve exports">
+<TextBlock title="Los internos detrás de la API pequeña">
 
 Tres decisiones internas cargan con la mayor parte del peso.
 
@@ -122,7 +122,7 @@ El matcher de rutas no tiene dependencias. La última fue una librería de expre
 
 <TextBlock title="El tamaño como restricción medida">
 
-Routini pesa **3.2 KB comprimido con gzip**. Un script en el repositorio produce ese número con el método de bundlephobia — bundle con esbuild, compresión y minificación con terser, luego gzip y brotli — de modo que coincide con la metodología detrás de las cifras de la competencia que aparecen junto a él en la landing page. CI falla el build cuando el bundle supera su presupuesto, lo que obliga a que una funcionalidad nueva justifique su tamaño antes de integrarse.
+Routini pesa **3.2 KB comprimido con gzip**. Un script en el repositorio produce ese número con el método de bundlephobia — bundle con esbuild, compresión y minificación con terser, luego gzip y brotli — de modo que coincide con la metodología detrás de las otras cifras junto a las que aparece en la landing page. CI falla el build cuando el bundle supera su presupuesto, lo que obliga a que una funcionalidad nueva justifique su tamaño antes de integrarse.
 
 El paquete tiene **cero dependencias en tiempo de ejecución**, con `react` y `react-dom` como peers. Alrededor de **100 pruebas** cubren el matcher, la navegación, popstate, la carga lazy, las advertencias de desarrollo y el boundary de errores, con Vitest, Testing Library y happy-dom. Changesets controla los releases, así que cada cambio visible para el usuario se publica con una entrada en el changelog. El build es ESM primero y también emite CJS, y verifico a mano las salidas `.d.ts` y `.d.cts` generadas.
 
@@ -138,9 +138,9 @@ Las pruebas automatizadas atrapan regresiones, aunque cierto comportamiento hay 
 
 <TextBlock title="Nombres y valores por defecto">
 
-Una superficie de nueve exports hace que los nombres y los valores por defecto sean costosos de cambiar después, así que vale la pena dejar constancia de algunas decisiones.
+Una API pública pequeña hace que los nombres y los valores por defecto sean costosos de cambiar después, así que vale la pena dejar constancia de algunas decisiones.
 
-`<Navigate>` conservó su nombre en lugar de convertirse en `<Redirect>`. También puede agregar una entrada al historial mediante `replace={false}`, y `<Redirect replace={false}>` se contradice a sí mismo, mientras que `<Navigate replace={false}>` sigue siendo coherente con un valor por defecto seguro para redirecciones. No hay una prop `noMatch`, porque una ruta comodín `path: "*"` cubre el mismo caso y coincide con la convención del ecosistema; renderiza en la URL actual y no redirige a otra, una distinción que los diagramas de la landing page muestran de forma explícita. Las View Transitions son opcionales por navegación y no una bandera de `<Router>`: congelan la interacción mientras animan y su diseño vive en CSS, así que el sitio de llamada es el lugar correcto para decidir. Los nombres de la competencia aparecen en un solo lugar público, el gráfico de tamaño de bundle, con las versiones fijadas en un comentario; en el resto la documentación dice "un router con todas las funcionalidades" sin nombrar a ninguno.
+`<Navigate>` conservó su nombre en lugar de convertirse en `<Redirect>`. También puede agregar una entrada al historial mediante `replace={false}`, y `<Redirect replace={false}>` se contradice a sí mismo, mientras que `<Navigate replace={false}>` sigue siendo coherente con un valor por defecto seguro para redirecciones. No hay una prop `noMatch`, porque una ruta comodín `path: "*"` cubre el mismo caso y coincide con la convención del ecosistema; renderiza en la URL actual y no redirige a otra, una distinción que los diagramas de la landing page muestran de forma explícita. Las View Transitions son opcionales por navegación y no una bandera de `<Router>`: congelan la interacción mientras animan y su diseño vive en CSS, así que el sitio de llamada es el lugar correcto para decidir. Otros routers se nombran en un solo lugar, el gráfico de tamaño de bundle, con la versión medida fijada en un comentario para que la comparación siga siendo verificable; en el resto la documentación dice "un router con todas las funcionalidades" y deja la elección a quien lee.
 
 </TextBlock>
 
@@ -159,6 +159,8 @@ El sitio de marketing y documentación está construido con Routini y usa la may
 Routini está **publicada en npm y en vivo en [routini.dev](https://routini.dev)**. Sigue en pre-1.0: completa según su propio roadmap, y ahí se queda hasta que la API la haya usado alguien más que yo. El primer release estuvo condicionado a lanzar una aplicación real construida con ella, así que salió probada contra una interfaz con forma de producto y no solo contra sus propias pruebas.
 
 Los límites conocidos empiezan por las rutas anidadas con layouts compartidos. Quedaron fuera de alcance para proteger el presupuesto de tamaño, y son la capacidad que más se le pide a un router pequeño; el techo de un solo layout en la aplicación de demostración es la evidencia más clara para agregarlas. `ssrPath` evita que `Router` falle donde `window` no está definido, y es una salvaguarda sin soporte de SSR detrás.
+
+La seguridad de tipos es deliberada pero superficial. La librería está escrita en TypeScript y publica sus propias declaraciones, así que props, opciones y formas de retorno están verificadas. Sin embargo, las rutas son cadenas de texto corrientes: `useParams<T>()` devuelve el tipo que nombre quien llama, y nada deriva `{ id: string }` de `/artists/:id` ni rechaza un `navigate()` hacia una ruta inexistente. Inferir eso implicaría tipos de plantilla literal atravesando toda la API, que es un cambio de diseño real y no pequeño.
 
 El roadmap restante son las rutas anidadas, un `@routini/vite-plugin` para enrutado basado en archivos, y un helper de enlace activo para `<Link>` que establezca `aria-current` para que los consumidores dejen de escribirlo a mano. Un 1.0 depende de que la API sea ejercitada por proyectos que yo no haya escrito.
 

@@ -1,13 +1,13 @@
 ---
 title: Routini
-type: React Router Library
+type: Routing Library for React
 role: Design & Development
 period: '2026'
 publishDate: 2026-05-20 00:00:00
 img: /assets/projects/case-study-2/routini-hero.webp
 img_alt: Routini's landing page hero — "Just routing, not much more than that." — 3.2 KB gzipped, v0.2.2, React 18+.
 description: |
-  Routini is a small TypeScript-first React router: nine exports, zero runtime dependencies, about 3.2 KB gzipped. Lazy routes, View Transitions, link preloading, scroll restoration and a chunk-error boundary are part of the library. Its documentation site is built with Routini and routed by it.
+  Routini is a small React router written in TypeScript: about 3.2 KB gzipped, zero runtime dependencies, and a public API of nine exports. Lazy routes, View Transitions, link preloading, scroll restoration and a chunk-error boundary are part of the library. Its documentation site is built with Routini and routed by it.
 tags:
   - Development
   - Open Source
@@ -25,15 +25,15 @@ import ImageBezel from '../../../components/content/ImageBezel.astro'
 
 <TextBlock title="Why I built it">
 
-React Router is the default choice for most React applications, and it brings a framework along with it: loaders, actions, a data layer. Many projects need none of that. They need to map URLs to components. Smaller alternatives exist, though most of them are JavaScript with type declarations added afterwards.
+The established React routers have grown into data layers: loaders, actions, caching, and the conventions to go with them. That is the right trade for applications that need those things, and it is a lot to carry for a project that only needs to map URLs to components.
 
-I built Routini for that case. Four constraints defined it: a public API of nine exports, zero runtime dependencies, TypeScript from the first line, and a bundle small enough to enforce in CI. I wrote the library and the documentation site that ships with it. The API shapes follow the conventions React Router established, because familiar names are worth more here than original ones.
+I built Routini for the second case. Three constraints defined it: a bundle small enough to enforce in CI, zero runtime dependencies, and a public API small enough to document on a single page. I wrote the library in TypeScript and built the documentation site that ships with it. The API shapes follow conventions the ecosystem already established, because familiar names are worth more here than original ones.
 
 </TextBlock>
 
 <TextBlock title="The whole API on one screen">
 
-The public surface is nine exports. That number is the constraint the rest of the library is held to: a feature that cannot be expressed through the existing exports has to justify a tenth.
+Nine exports make up the public API, and this is all of them.
 
 - `<Router>` — the configuration wrapper. Takes a `routes` array, `<Route>` children, or both, plus opt-in `scrollRestoration` (top on forward navigation, restored position on back and forward — window-scoped by default, or pointed at a nested scroll container).
 - `<Route>` — a route definition that renders nothing. It is tagged with a `Symbol.for` marker so detection survives production minification.
@@ -41,7 +41,7 @@ The public surface is nine exports. That number is the constraint the rest of th
 - `<Outlet>` — optional. Renders the matched page inside a shared layout.
 - `<Navigate>` — a declarative redirect that replaces history by default, so it does not leave an entry that traps the back button.
 - `useLocation()` — the current path plus an imperative `navigate()`.
-- `useParams<T>()` — typed route parameters read from the URL.
+- `useParams<T>()` — route parameters from the URL, returned as a caller-supplied type.
 - `useSearchParams()` — a reactive `[URLSearchParams, setter]` pair.
 - `navigate(to, options?)` — the same navigation, callable from anywhere.
 
@@ -108,7 +108,7 @@ Two optional `<Router>` props expose it, `errorFallback` and `onError`, and the 
 
 </TextBlock>
 
-<TextBlock title="The internals behind the nine exports">
+<TextBlock title="The internals behind the small API">
 
 Three internal decisions carry most of the weight.
 
@@ -122,7 +122,7 @@ Route matching has no dependency. A regex-matching library was the last one, and
 
 <TextBlock title="Size as a measured constraint">
 
-Routini ships at **3.2 KB gzipped**. A script in the repository produces that number with bundlephobia's method — esbuild bundle, terser compress and mangle, then gzip and brotli — so it matches the methodology behind the competitor figures shown next to it on the landing page. CI fails the build when the bundle crosses its budget, which forces a new feature to account for its size before it merges.
+Routini ships at **3.2 KB gzipped**. A script in the repository produces that number with bundlephobia's method — esbuild bundle, terser compress and mangle, then gzip and brotli — so it matches the methodology behind the other figures it is shown next to on the landing page. CI fails the build when the bundle crosses its budget, which forces a new feature to account for its size before it merges.
 
 The package has **zero runtime dependencies**, with `react` and `react-dom` as peers. Roughly **100 tests** cover the matcher, navigation, popstate, lazy loading, development warnings and the error boundary, using Vitest, Testing Library and happy-dom. Changesets gates releases, so every user-visible change publishes with a changelog entry. The build is ESM-first and also emits CJS, and I check the generated `.d.ts` and `.d.cts` outputs by hand.
 
@@ -138,9 +138,9 @@ Automated tests catch regressions, though some behavior has to be watched: wheth
 
 <TextBlock title="Naming and defaults">
 
-A nine-export surface makes naming and defaults expensive to revise later, so a few of the choices are worth recording.
+A small public API makes naming and defaults expensive to revise later, so a few of the choices are worth recording.
 
-`<Navigate>` kept its name instead of becoming `<Redirect>`. It can also push a history entry through `replace={false}`, and `<Redirect replace={false}>` contradicts itself, while `<Navigate replace={false}>` stays coherent with a redirect-safe default. There is no `noMatch` prop, because a catch-all `path: "*"` covers the same case and matches ecosystem convention; it renders at the current URL and does not redirect to one, a distinction the landing page diagrams show explicitly. View Transitions are opt-in per navigation and not a `<Router>` flag: they freeze interaction while animating and their design lives in CSS, so the call site is the right place to decide. Competitor names appear in one public place, the bundle-size chart, with versions pinned in a comment; elsewhere the documentation says "a full-featured router" without naming one.
+`<Navigate>` kept its name instead of becoming `<Redirect>`. It can also push a history entry through `replace={false}`, and `<Redirect replace={false}>` contradicts itself, while `<Navigate replace={false}>` stays coherent with a redirect-safe default. There is no `noMatch` prop, because a catch-all `path: "*"` covers the same case and matches ecosystem convention; it renders at the current URL and does not redirect to one, a distinction the landing page diagrams show explicitly. View Transitions are opt-in per navigation and not a `<Router>` flag: they freeze interaction while animating and their design lives in CSS, so the call site is the right place to decide. Other routers are named in one place only, the bundle-size chart, with the measured version pinned in a comment so the comparison stays checkable; elsewhere the documentation refers to "a full-featured router" and leaves the choice to the reader.
 
 </TextBlock>
 
@@ -159,6 +159,8 @@ The marketing and documentation site is built with Routini and uses most of the 
 Routini is **published on npm and live at [routini.dev](https://routini.dev)**. It is pre-1.0: feature-complete against its own roadmap, and held there until the API has been used by someone other than me. The first release was gated on shipping a real application built with it, so it went out tested against a production-shaped UI and not only against its own test suite.
 
 The known limits start with nested routes and shared layouts. Those were kept out of scope to protect the size budget, and they are the capability a small router is most often asked for; the single-layout ceiling in the demo application is the clearest evidence for adding them. `ssrPath` keeps `Router` from crashing where `window` is undefined, which is a safety guard with no SSR support behind it.
+
+Type safety is deliberate but shallow. The library is written in TypeScript and ships its own declarations, so props, options and return shapes are checked. Route paths are ordinary strings, though: `useParams<T>()` returns whatever type the caller names, and nothing derives `{ id: string }` from `/artists/:id` or rejects a `navigate()` to a route that does not exist. Inferring those would mean template-literal path types threaded through the whole API, which is a real design change and not a small one.
 
 The remaining roadmap is nested routes, a `@routini/vite-plugin` for file-based routing, and an active-link helper for `<Link>` that sets `aria-current` so consumers stop writing it by hand. A 1.0 depends on the API being exercised by projects I did not write.
 

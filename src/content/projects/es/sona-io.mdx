@@ -7,7 +7,7 @@ publishDate: 2026-06-20 00:00:00
 img: /assets/projects/case-study-3/sona.io-hero.webp
 img_alt: El feed "Para ti" de Sona — barra de actividad, grid de artistas cercanos y el reproductor persistente en la parte inferior.
 description: |
-  Sona es una aplicación de una sola página para descubrir música y eventos, construida como la demostración que pone a Routini bajo carga: tres lentes enrutadas sobre un mismo conjunto de datos, un reproductor que sigue sonando en cada navegación, View Transitions de elemento compartido y el estado del mapa guardado en la URL. Diseñada primero en Figma y luego construida en React 19, TypeScript y Tailwind CSS v4.
+  Sona es una aplicación front-end para descubrir música y eventos, construida para someter a Routini al tipo de carga que un sitio de documentación no puede producir: tres lentes enrutadas sobre un mismo conjunto de datos, un reproductor que sigue sonando en cada navegación, View Transitions de elemento compartido y el estado del mapa guardado en la URL. Diseñada de principio a fin en Figma y luego construida en React 19, TypeScript y Tailwind CSS v4.
 tags:
   - Diseño
   - Desarrollo
@@ -23,11 +23,13 @@ import TextBlock from '../../../components/content/TextBlock.astro'
 import Video from '../../../components/content/Video.astro'
 import ImageBezel from '../../../components/content/ImageBezel.astro'
 
-<TextBlock title="Qué es Sona">
+<TextBlock title="Un front end construido para someter a Routini a carga real">
 
-Sona empezó como un archivo de Figma, un ejercicio personal de diseño de UI y de producto alrededor de una idea: descubrir música local escuchando primero, ver dónde toca un artista próximamente y quién comparte ese escenario, y darle a los artistas independientes una forma de llegar a audiencias cercanas. Es un producto hipotético. Si alguna vez se convierte en un servicio es una pregunta abierta.
+Sona es una aplicación front-end para descubrir música local: escuchar a un artista antes de leer sobre su trayectoria, ver dónde toca próximamente y quién comparte ese escenario, y darle a los artistas independientes una vía hacia audiencias cercanas. La diseñé de principio a fin en Figma y luego la construí en React 19, TypeScript y Tailwind CSS v4.
 
-Hoy es un front-end y nada más. Lo diseñé de principio a fin en Figma y luego lo construí desde ese archivo en React 19, TypeScript y Tailwind CSS v4, lo que le dio a [Routini](/es/projects/routini) un lugar exigente donde correr. No hay backend: cada artista, evento, recinto y distancia es una simulación fija y sembrada, y lo de "cerca de ti" está montado. Un sitio de documentación demuestra que un router funciona. Una aplicación de esta forma muestra cómo se comporta con un reproductor persistente, rutas con code-splitting, estado en la URL y animación de elemento compartido en un solo shell con estado.
+Existe porque un sitio de documentación no puede poner un router bajo presión real. El sitio de [Routini](/es/projects/routini) es un puñado de páginas casi estáticas: nunca mantiene audio a través de una navegación, nunca conserva viva una instancia costosa de mapa mientras cambia el query string, y nunca tiene que recuperarse de un chunk que falla en una ruta que alguien ya está mirando. Sona hace las tres cosas en un solo shell con estado, que es como descubrí dónde cede el router.
+
+El alcance se detiene en el front end de forma deliberada. Cada artista, evento, recinto y distancia viene de un fixture sembrado que se distribuye con el código, y lo de "cerca de ti" está montado, no medido. Poner un backend real detrás habría añadido un segundo sistema que depurar sin cambiar nada del enrutamiento, la animación ni el manejo de estado que el front end tenía que resolver bien.
 
 </TextBlock>
 
@@ -110,16 +112,16 @@ La mayoría de las capacidades del router se usan aquí bajo condiciones realist
 - **`scrollRestoration`** — delimitado mediante `scrollContainer` al propio `<main>` con scroll de `AppLayout` en vez de la ventana, así que cambiar de lente empieza cada una desde arriba y volver atrás a una lista restaura su posición anterior.
 - **El `<Outlet>` opcional** es lo que permite que el reproductor persista en cada navegación.
 
-Debajo de la interfaz no hay servidor. Dieciocho artistas, catorce eventos y doce recintos vienen de un generador con semilla fija y se importan de forma estática, así que "se presentará pronto con" y "otros eventos en este recinto" se derivan de esos datos, las distancias están asignadas, y el conjunto de datos se mantiene estable entre regeneraciones. Las canciones son archivos de audio reales. El tema es un toggle `data-theme` aplicado antes del primer pintado, así que la página no destella al cargar.
+El fixture es pequeño y fijo: dieciocho artistas, catorce eventos y doce recintos vienen de un generador con semilla fija y se importan de forma estática, así que "se presentará pronto con" y "otros eventos en este recinto" se derivan de esos datos, las distancias están asignadas, y el conjunto de datos se mantiene estable entre regeneraciones. Las canciones son archivos de audio reales. El tema es un toggle `data-theme` aplicado antes del primer pintado, así que la página no destella al cargar.
 
 </TextBlock>
 
 <TextBlock title="En qué punto está">
 
-Sona está desplegada y es pública. Demuestra que Routini alcanza para una aplicación con estado y un solo layout, y que su comportamiento de View Transitions y de estado en la URL se sostiene en algo más exigente que un sitio de documentación.
+Sona está desplegada y es pública. Sostiene un reproductor persistente, rutas con code-splitting, View Transitions de elemento compartido y estado en vivo en la URL sobre un router de 3.2 KB, las cuatro cosas a la vez, que es lo que se construyó para establecer.
 
 También muestra los límites. El patrón del reproductor persistente depende de que Routini tenga exactamente un `<Outlet>` por aplicación, y todavía no hay forma de anidar un segundo layout con su propio outlet dentro del primero, que es lo que suele necesitar una sección de ajustes o de administración. Ese es el argumento más fuerte dentro de la aplicación para las rutas anidadas. Algunos exports también quedan sin ejercitar aquí: `navigate()` y los modos de precarga `render` y `viewport`.
 
-Como producto, Sona es un prototipo de front-end sin backend detrás. Geolocalización real en lugar de distancias simuladas, una capa de datos, un espacio de envío para artistas independientes, y RSVPs con enlaces de boletos son los siguientes pasos si llega a convertirse en un servicio.
+Sona funciona sobre un fixture sembrado, sin una capa de datos en vivo detrás. Geolocalización real en lugar de distancias asignadas, persistencia detrás de los seguimientos, un espacio de envío para artistas independientes y RSVPs con enlaces de boletos son la siguiente fase, y ninguno de ellos cambia la arquitectura de front end que el proyecto se construyó para probar.
 
 </TextBlock>

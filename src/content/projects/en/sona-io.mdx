@@ -7,7 +7,7 @@ publishDate: 2026-06-20 00:00:00
 img: /assets/projects/case-study-3/sona.io-hero.webp
 img_alt: Sona's "For you" feed — activity sidebar, near-you artist discovery grid, and the persistent bottom player.
 description: |
-  Sona is a single-page music and event discovery application, built as the demo that puts Routini under load: three routed lenses over one dataset, a player that keeps playing across every navigation, shared-element View Transitions, and map state held in the URL. Designed in Figma first, then built in React 19, TypeScript and Tailwind CSS v4.
+  Sona is a front-end music and event discovery application, built to put Routini under the kind of load a documentation site cannot produce: three routed lenses over one dataset, a player that keeps playing across every navigation, shared-element View Transitions, and map state held in the URL. Designed end to end in Figma, then built in React 19, TypeScript and Tailwind CSS v4.
 tags:
   - Design
   - Development
@@ -23,11 +23,13 @@ import TextBlock from '../../../components/content/TextBlock.astro'
 import Video from '../../../components/content/Video.astro'
 import ImageBezel from '../../../components/content/ImageBezel.astro'
 
-<TextBlock title="What Sona is">
+<TextBlock title="A front end built to put Routini under load">
 
-Sona began as a Figma file, a personal exercise in UI and product design around one idea: discovering local music by listening first, seeing where an artist plays next and who shares that stage, and giving independent artists a way to reach nearby audiences. It is a hypothetical product. Whether it ever becomes a service is an open question.
+Sona is a front-end application for discovering local music: hearing an artist before reading about them, seeing where they play next and who shares that stage, and giving independent artists a route to nearby audiences. I designed it end to end in Figma, then built it in React 19, TypeScript and Tailwind CSS v4.
 
-Today it is a front-end and nothing more. I designed it end to end in Figma, then built it from that file in React 19, TypeScript and Tailwind CSS v4, which gave [Routini](/en/projects/routini) somewhere demanding to run. There is no backend: every artist, event, venue and distance is a seeded, hardcoded simulation, and "near you" is staged. A documentation site shows that a router works. An application of this shape shows how it behaves with a persistent player, code-split routes, URL state and shared-element animation in one stateful shell.
+It exists because a documentation site cannot put a router under real pressure. [Routini](/en/projects/routini)'s own site is a handful of mostly static pages: it never holds audio across a navigation, never keeps an expensive map instance alive through a query-string update, and never has to recover from a chunk that fails on a route someone is already looking at. Sona does all three in one stateful shell, which is how I found out where the router actually bends.
+
+The scope stops at the front end deliberately. Every artist, event, venue and distance comes from a seeded fixture that ships with the code, and "near you" is staged rather than measured. Putting a real backend behind it would have added a second system to debug without changing any of the routing, animation or state handling the front end had to get right.
 
 </TextBlock>
 
@@ -110,16 +112,16 @@ Most of the router's capabilities are used here under realistic conditions:
 - **`scrollRestoration`** — scoped through `scrollContainer` to `AppLayout`'s own scrolling `<main>` instead of the window, so switching lenses starts each lens at the top and navigating back into a list restores its previous position.
 - **The optional `<Outlet>`** is what allows the player to persist across every navigation.
 
-There is no server under the UI. Eighteen artists, fourteen events and twelve venues come from a seeded generator and are imported statically, so "performing soon with" and "other events at this venue" are derived from that data, distances are assigned, and the dataset stays stable across regenerations. The songs are real audio files. The theme is a `data-theme` toggle applied before first paint, so the page does not flash on load.
+The fixture is small and fixed: eighteen artists, fourteen events and twelve venues come from a seeded generator and are imported statically, so "performing soon with" and "other events at this venue" are derived from that data, distances are assigned, and the dataset stays stable across regenerations. The songs are real audio files. The theme is a `data-theme` toggle applied before first paint, so the page does not flash on load.
 
 </TextBlock>
 
 <TextBlock title="Where it stands">
 
-Sona is deployed and public. It shows that Routini is sufficient for a stateful, single-layout application, and that its View Transition and URL-state behavior hold up in something more demanding than a documentation site.
+Sona is deployed and public. It runs a persistent player, code-split routes, shared-element View Transitions and live URL state on a 3.2 KB router, all four at once, which is what it was built to establish.
 
 It also shows the limits. The persistent-player pattern depends on Routini having exactly one `<Outlet>` per application, and there is no way yet to nest a second layout with its own outlet inside the first, which a settings or admin section usually needs. That is the strongest in-application case for nested routes. A few exports stay unexercised here as well: `navigate()`, and the `render` and `viewport` preload modes.
 
-As a product, Sona is a front-end prototype with no backend behind it. Real geolocation in place of simulated distances, a data layer, a submission surface for independent artists, and RSVPs with ticket links are the next steps if it grows into a service.
+Sona runs on a seeded fixture, with no live data layer behind it. Real geolocation in place of assigned distances, persistence behind follows, a submission surface for independent artists, and RSVPs with ticket links are the next phase, and none of them change the front-end architecture the project was built to test.
 
 </TextBlock>
