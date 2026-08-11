@@ -120,6 +120,8 @@ shadow.append(style, ...overlays, tooltip)
 document.documentElement.append(host)
 ```
 
+I used Shadow DOM instead of relying only on unique class names because the extension runs on unknown pages, where global resets, broad selectors or `!important` rules could otherwise restyle the inspector UI.
+
 The overlay stylesheet begins with `all: initial !important`, positions are scheduled through `requestAnimationFrame`, and the tooltip clamps itself to the viewport. Layout classification lives in a DOM-independent module so it can be unit-tested. Grid-track counting needed a small parser, because `repeat()` and named lines nest their own syntax and splitting `grid-template-columns` on spaces produces wrong counts. The resolved track totals are what the tooltip reports above as `3 tracks` and `1 track`, alongside the element's gaps, alignment and depth.
 
 </TextBlock>
@@ -169,6 +171,8 @@ await removeInjections(tabId, removals)
 
 A per-tab promise lock prevents toolbar actions, settings updates, navigation events and preview requests from racing. A partial failure rolls back newly inserted CSS while preserving the previous working visualization. Manifest V3 service workers can restart between events, so the toolbar badge (`ON`, `OL`, `IN`, or an orange `!` when Chrome blocks injection) is reconstructed from session storage on each wake.
 
+This is not a snapshot-and-restore system for the website's CSS; the site's original styles remain active underneath, and removing Skeleton's injected stylesheet lets Chrome recompute the page normally.
+
 </TextBlock>
 
 <TextBlock title="Overflow diagnostics, honestly labeled experimental">
@@ -183,7 +187,7 @@ My first classifier produced false positives for inline text, intentional scroll
 
 The manifest requests five permissions — `activeTab`, `contextMenus`, `scripting`, `sidePanel`, and `storage` — with **zero** `host_permissions`. Nothing runs on a site until the extension is invoked there, and diagnostic scripts are injected only while their feature is active. Preferences sync through `chrome.storage.sync`; ephemeral tab state stays in `chrome.storage.session`. There is no telemetry or analytics, and page content never leaves the browser.
 
-The extension is plain JavaScript, HTML and CSS with **no build step and no runtime dependencies**: approximately 4,100 lines of production source and 52 automated tests using Node's native `node:test`. I wrote a release script that packages it into a **deterministic 15-file, ~36 KiB archive** with fixed timestamps, sorted paths and level-9 deflate. Packaging fails if the manifest and package versions disagree, if persistent host permissions appear, or if the source contains dynamic evaluation or remote scripts.
+The extension is plain JavaScript, HTML and CSS with **no build step and no runtime dependencies**: approximately 4,100 lines of production source and an automated test suite using Node's native `node:test`. I wrote a release script that packages it into a **deterministic 15-file, ~36 KiB archive** with fixed timestamps, sorted paths and level-9 deflate. Packaging fails if the manifest and package versions disagree, if persistent host permissions appear, or if the source contains dynamic evaluation or remote scripts.
 
 </TextBlock>
 

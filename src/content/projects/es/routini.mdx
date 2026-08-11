@@ -76,7 +76,7 @@ Routini no usa `React.lazy` internamente. `React.lazy` se suspende un frame en e
 
 Dos funcionalidades cubren el intervalo entre un clic y la página siguiente.
 
-**La precarga de enlaces** descarga el chunk de una ruta antes de que ocurra la navegación. `preload="hover"` se dispara al pasar el puntero o al enfocar. `preload="render"` se programa mediante `requestIdleCallback`, de modo que cede ante trabajo de mayor prioridad. `preload="viewport"` usa un único `IntersectionObserver` compartido para todos los enlaces de viewport de la página, en lugar de uno por enlace. Las tres pasan por un mismo precargador a nivel de módulo, deduplicado con un `WeakSet`, así que un chunk se descarga como mucho una vez sin importar cuántos enlaces apunten a él.
+**La precarga de enlaces** descarga el chunk de una ruta antes de que ocurra la navegación. `preload="hover"` se dispara al pasar el puntero o al enfocar. `preload="render"` se programa mediante `requestIdleCallback`, de modo que cede ante trabajo de mayor prioridad. `preload="viewport"` usa un único `IntersectionObserver` compartido para todos los enlaces de viewport de la página, en lugar de uno por enlace. Las tres pasan por un mismo precargador a nivel de módulo, deduplicado mediante un `WeakMap` indexado por la función de import, así que un chunk se descarga como mucho una vez sin importar cuántos enlaces apunten a él.
 
 **Las View Transitions** animan la navegación en sí. Optar por ellas en cada navegación (`viewTransition` en un `<Link>`, o `navigate(to, { viewTransition: true })`) envuelve la confirmación en `document.startViewTransition`. La nueva ruta tiene que confirmarse de forma síncrona dentro de la secuencia de snapshot, animación y snapshot del navegador, lo que requiere `flushSync` para sortear el batching de React. Sin eso la animación falla en silencio, así que una prueba de regresión cubre esa línea. Dos elementos que comparten un `view-transition-name` entre páginas son transformados el uno en el otro por el navegador:
 
@@ -116,7 +116,7 @@ El store de ubicación está construido sobre `useSyncExternalStore` de React 18
 
 El matcher de rutas no tiene dependencias. La última fue una librería de expresiones regulares, reemplazada por un matcher de segmentos de quince líneas. Eso eliminó la superficie de ReDoS, y un segmento estático con caracteres especiales (`/files/a.b`) ahora se compara de forma literal, donde una expresión regular leería el `.` como cualquier carácter. La coincidencia distingue mayúsculas de minúsculas, siguiendo la convención de las URLs.
 
-`useSearchParams` mantiene su propia suscripción y toma un snapshot de `window.location.search`. Ampliar el store de ubicación a la URL completa volvería a montar la ruta coincidente en cada cambio de query, así que el store se mantiene **enfocado solo en el pathname** y una actualización de query vuelve a renderizar únicamente los componentes que la leen. Sona, la aplicación de demostración, depende de esto: su mapa escribe las coordenadas del viewport en la URL en cada desplazamiento.
+`useSearchParams` mantiene su propia suscripción y toma un snapshot de `window.location.search`. Ampliar el store de ubicación a la URL completa volvería a renderizar la ruta coincidente y re-ejecutaría el matching en cada cambio de query, así que el store se mantiene **enfocado solo en el pathname** y una actualización de query vuelve a renderizar únicamente los componentes que la leen. Sona, la aplicación de demostración, depende de esto: su mapa escribe las coordenadas del viewport en la URL en cada desplazamiento.
 
 </TextBlock>
 
@@ -124,7 +124,7 @@ El matcher de rutas no tiene dependencias. La última fue una librería de expre
 
 Routini pesa **3.2 KB comprimido con gzip**. Un script en el repositorio produce ese número con el método de bundlephobia — bundle con esbuild, compresión y minificación con terser, luego gzip y brotli — de modo que coincide con la metodología detrás de las otras cifras junto a las que aparece en la landing page. CI falla el build cuando el bundle supera su presupuesto, lo que obliga a que una funcionalidad nueva justifique su tamaño antes de integrarse.
 
-El paquete tiene **cero dependencias en tiempo de ejecución**, con `react` y `react-dom` como peers. Alrededor de **100 pruebas** cubren el matcher, la navegación, popstate, la carga lazy, las advertencias de desarrollo y el boundary de errores, con Vitest, Testing Library y happy-dom. Changesets controla los releases, así que cada cambio visible para el usuario se publica con una entrada en el changelog. El build es ESM primero y también emite CJS, y verifico a mano las salidas `.d.ts` y `.d.cts` generadas.
+El paquete tiene **cero dependencias en tiempo de ejecución**, con `react` y `react-dom` como peers. Más de **110 pruebas** cubren el matcher, la navegación, popstate, la carga lazy, las advertencias de desarrollo y el boundary de errores, con Vitest, Testing Library y happy-dom. Changesets controla los releases, así que cada cambio visible para el usuario se publica con una entrada en el changelog. El build es ESM primero y también emite CJS, y verifico a mano las salidas `.d.ts` y `.d.cts` generadas.
 
 </TextBlock>
 

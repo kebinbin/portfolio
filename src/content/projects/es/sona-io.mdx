@@ -37,7 +37,7 @@ El alcance se detiene en el front end de forma deliberada. Cada artista, evento,
 
 Todo vive dentro de un único marco persistente: una barra superior con búsqueda y una campana de actividad, una barra lateral "Para ti" en escritorio, el contenido enrutado, y un pie de página que contiene el reproductor. En pantallas pequeñas una barra de pestañas reemplaza a la barra lateral. Un control segmentado cambia entre tres lentes enrutadas sobre el mismo conjunto de datos cercanos:
 
-- **Artistas** — ordenados por distancia simulada (*"0.9 km · 10 de mayo"*), cada tarjeta con un corazón para seguir, alternable entre vistas inmersiva, lista y grilla.
+- **Artistas** — ordenados por distancia simulada (*"0.9 km · 10 de mayo"*), cada tarjeta con un corazón para seguir, alternable entre vistas inmersiva, compacta y grilla.
 - **Eventos** — cada presentación próxima como su propia tarjeta, y la pestaña móvil "Eventos".
 - **Mapa** — esos mismos eventos ubicados geográficamente en un mapa interactivo.
 
@@ -45,7 +45,7 @@ Las tres lentes son rutas sobre un mismo modelo de datos, compartiendo un encabe
 
 </TextBlock>
 
-<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Recorriendo las tres vistas de la lente Artistas — inmersiva, lista y grilla — y luego cambiando a Eventos y Mapa. Cada pestaña es una ruta de Routini, así que la URL cambia junto con la vista." />
+<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Recorriendo las tres vistas de la lente Artistas — inmersiva, compacta y grilla — y luego cambiando a Eventos y Mapa. Cada pestaña es una ruta de Routini, así que la URL cambia junto con la vista." />
 
 <TextBlock title="El reproductor persistente y el Outlet opcional de Routini">
 
@@ -86,7 +86,7 @@ La página del evento extiende el mismo patrón. Su hero coloca una copia difumi
 
 La lente Mapa renderiza un pin por **recinto** para que los shows co-localizados no se apilen, y pasar el puntero sobre un pin abre un popup con tema construido a partir de la misma tarjeta usada en otros lados, lo que significa que su póster también se transforma en el hero del evento. Cuando un recinto tiene varios shows, un pequeño control `‹ 1/2 ›` los recorre en el sitio.
 
-El viewport se guarda en la URL. `?lat&lng&z` se escribe en el query string en cada desplazamiento y zoom mediante el `useSearchParams` de Routini. Como el store de ubicación está **enfocado solo en el pathname**, escribir ese query no vuelve a montar la instancia de Leaflet que está debajo. Un router cuyo store rastreara la URL completa destruiría y reconstruiría el mapa en cada arrastre. Este es el único lugar del proyecto donde ese diseño del store es visiblemente estructural.
+El viewport se guarda en la URL. `?lat&lng&z` se escribe en el query string en cada desplazamiento y zoom mediante el `useSearchParams` de Routini. Como el store de ubicación está **enfocado solo en el pathname**, escribir ese query ni siquiera vuelve a renderizar la ruta, así que la instancia de Leaflet que está debajo queda intacta. Un router cuyo store rastreara la URL completa volvería a renderizar el mapa y re-ejecutaría el matching en cada arrastre. Este es el único lugar del proyecto donde ese diseño del store es visiblemente estructural.
 
 </TextBlock>
 

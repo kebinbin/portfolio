@@ -37,7 +37,7 @@ The scope stops at the front end deliberately. Every artist, event, venue and di
 
 Everything sits inside a single persistent frame: a top bar with search and an activity bell, a "For you" sidebar on desktop, the routed content, and a footer that holds the player. On small screens a tab bar replaces the sidebar. A segmented control switches between three routed lenses over the same near-you dataset:
 
-- **Artists** — sorted by simulated distance (*"0.9 km · May 10"*), each card with a follow heart, switchable between immersive, list and grid layouts.
+- **Artists** — sorted by simulated distance (*"0.9 km · May 10"*), each card with a follow heart, switchable between immersive, compact and grid layouts.
 - **Events** — every upcoming show as its own card, and the mobile "Events" tab.
 - **Map** — those same events placed geographically on an interactive map.
 
@@ -45,7 +45,7 @@ The three lenses are routes over one data model, sharing a sticky header. Select
 
 </TextBlock>
 
-<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Cycling through the Artists lens's three layouts — immersive, list and grid — then switching to Events and Map. Each tab is a Routini route, so the URL changes with the view." />
+<Video src="/assets/projects/case-study-3/discover-lenses.mp4" title="Cycling through the Artists lens's three layouts — immersive, compact and grid — then switching to Events and Map. Each tab is a Routini route, so the URL changes with the view." />
 
 <TextBlock title="The persistent player and Routini's optional Outlet">
 
@@ -86,7 +86,7 @@ The event page extends the same pattern. Its hero places a blurred, full-bleed c
 
 The Map lens renders one pin per **venue** so co-located shows do not stack, and hovering a pin opens a themed popup built from the same card used elsewhere, which means its poster morphs into the event hero as well. When a venue hosts several shows, a small `‹ 1/2 ›` control cycles them in place.
 
-The viewport is held in the URL. `?lat&lng&z` is written to the query string on every pan and zoom through Routini's `useSearchParams`. Because the location store is **pathname-only**, writing that query does not remount the Leaflet instance underneath it. A router whose store tracked the whole URL would destroy and rebuild the map on every drag. This is the one place in the project where that store design is visibly load-bearing.
+The viewport is held in the URL. `?lat&lng&z` is written to the query string on every pan and zoom through Routini's `useSearchParams`. Because the location store is **pathname-only**, writing that query never even re-renders the route, so the Leaflet instance underneath is left untouched. A router whose store tracked the whole URL would re-render the map and re-run matching on every drag. This is the one place in the project where that store design is visibly load-bearing.
 
 </TextBlock>
 

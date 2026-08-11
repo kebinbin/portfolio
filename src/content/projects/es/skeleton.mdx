@@ -120,6 +120,8 @@ shadow.append(style, ...overlays, tooltip)
 document.documentElement.append(host)
 ```
 
+Usé Shadow DOM en lugar de depender solo de nombres de clase únicos porque la extensión se ejecuta sobre páginas desconocidas, donde resets globales, selectores amplios o reglas con `!important` podrían alterar la interfaz del inspector.
+
 La hoja de estilos del overlay comienza con `all: initial !important`, las posiciones se programan mediante `requestAnimationFrame` y el tooltip se ajusta a los límites del viewport. La clasificación del layout vive en un módulo independiente del DOM para poder probarla de forma aislada. Contar las pistas del grid necesitó un pequeño parser, porque `repeat()` y los nombres de línea anidan su propia sintaxis y dividir `grid-template-columns` por espacios da conteos incorrectos. Los totales de pistas resueltos son lo que el tooltip reporta arriba como `3 tracks` y `1 track`, junto con los gaps, la alineación y la profundidad del elemento.
 
 </TextBlock>
@@ -169,6 +171,8 @@ await removeInjections(tabId, removals)
 
 Un lock de promesa por pestaña evita que las acciones de la barra, las actualizaciones de ajustes, la navegación y las solicitudes de preview compitan entre sí. Un fallo parcial revierte el CSS recién insertado y conserva la visualización anterior. Los service workers de Manifest V3 pueden reiniciarse entre eventos, así que el badge de la barra (`ON`, `OL`, `IN`, o un `!` naranja cuando Chrome bloquea la inyección) se reconstruye desde el almacenamiento de sesión en cada arranque.
 
+No es un sistema de copia y restauración del CSS del sitio; los estilos originales de la página siguen activos debajo, y al eliminar la hoja inyectada por Skeleton, Chrome vuelve a calcular la página con normalidad.
+
 </TextBlock>
 
 <TextBlock title="Diagnóstico de overflow, honestamente etiquetado como experimental">
@@ -183,7 +187,7 @@ Mi primer clasificador producía falsos positivos con texto en línea, contenedo
 
 El manifest solicita cinco permisos — `activeTab`, `contextMenus`, `scripting`, `sidePanel` y `storage` — con **cero** `host_permissions`. Nada se ejecuta en un sitio hasta que la extensión se invoca ahí, y los scripts de diagnóstico se inyectan solo mientras su función está activa. Las preferencias se sincronizan mediante `chrome.storage.sync`; el estado efímero de cada pestaña permanece en `chrome.storage.session`. No hay telemetría ni analítica, y el contenido de la página nunca sale del navegador.
 
-La extensión utiliza JavaScript, HTML y CSS puros, **sin paso de build ni dependencias en tiempo de ejecución**: aproximadamente 4.100 líneas de código de producción y 52 pruebas automatizadas con el `node:test` nativo de Node. Escribí un script de release que la empaqueta en un **archivo determinista de 15 ficheros y ~36 KiB**, con timestamps fijos, rutas ordenadas y deflate nivel 9. El empaquetado falla si las versiones del manifest y el package no coinciden, si aparecen permisos persistentes de host, o si el código contiene evaluación dinámica o scripts remotos.
+La extensión utiliza JavaScript, HTML y CSS puros, **sin paso de build ni dependencias en tiempo de ejecución**: aproximadamente 4.100 líneas de código de producción y una suite automatizada de pruebas con el `node:test` nativo de Node. Escribí un script de release que la empaqueta en un **archivo determinista de 15 ficheros y ~36 KiB**, con timestamps fijos, rutas ordenadas y deflate nivel 9. El empaquetado falla si las versiones del manifest y el package no coinciden, si aparecen permisos persistentes de host, o si el código contiene evaluación dinámica o scripts remotos.
 
 </TextBlock>
 
