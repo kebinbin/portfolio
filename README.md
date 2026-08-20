@@ -26,7 +26,7 @@ Astro 5 · Tailwind CSS 4 · MDX · TypeScript · deployed on Cloudflare Pages.
 This project uses **bun** as its package manager — always use `bun install` /
 `bun add`, not `npm install`, to keep `bun.lockb` in sync (Cloudflare's build
 runs `bun install --frozen-lockfile` and hard-fails on drift). `npm run
-<script>` is fine for running scripts, since it just reads `package.json`.
+<name>` is fine for running scripts, since it just reads `package.json`.
 
 | Command              | Action                                               |
 | :------------------- | :---------------------------------------------------- |
