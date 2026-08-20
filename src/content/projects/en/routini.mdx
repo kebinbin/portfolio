@@ -76,7 +76,7 @@ Routini does not use `React.lazy` internally. `React.lazy` suspends for one fram
 
 Two features cover the gap between a click and the next page.
 
-**Link preload** fetches a route's chunk before the navigation happens. `preload="hover"` fires on pointer-enter or focus. `preload="render"` schedules through `requestIdleCallback`, so it yields to higher-priority work. `preload="viewport"` uses a single shared `IntersectionObserver` for every viewport link on the page instead of one observer per link. All three go through one module-level preloader, deduplicated with a `WeakSet`, so a chunk is fetched at most once however many links point at it.
+**Link preload** fetches a route's chunk before the navigation happens. `preload="hover"` fires on pointer-enter or focus. `preload="render"` schedules through `requestIdleCallback`, so it yields to higher-priority work. `preload="viewport"` uses a single shared `IntersectionObserver` for every viewport link on the page instead of one observer per link. All three go through one module-level preloader, deduplicated through a `WeakMap` keyed by the import function, so a chunk is fetched at most once however many links point at it.
 
 **View Transitions** animate the navigation itself. Opting in per navigation (`viewTransition` on a `<Link>`, or `navigate(to, { viewTransition: true })`) wraps the commit in `document.startViewTransition`. The new route has to commit synchronously inside the browser's snapshot-animate-snapshot callback, which requires `flushSync` to get past React's batching. Without it the animation fails silently, so a regression test covers that line. Two elements that share a `view-transition-name` across pages are morphed into each other by the browser:
 
@@ -116,7 +116,7 @@ The location store is built on React 18's `useSyncExternalStore`. The more commo
 
 Route matching has no dependency. A regex-matching library was the last one, and a fifteen-line segment matcher replaced it. That removed the ReDoS surface, and a static segment containing special characters (`/files/a.b`) now compares literally, where a regex would read the `.` as any character. Matching is case-sensitive, which follows URL convention.
 
-`useSearchParams` keeps its own subscription and snapshots `window.location.search`. Widening the location store to the full URL would remount the matched route on every query change, so the store stays **pathname-only** and a query update re-renders only the components that read it. Sona, the demo application, depends on this: its map writes viewport coordinates to the URL on every pan.
+`useSearchParams` keeps its own subscription and snapshots `window.location.search`. Widening the location store to the full URL would re-render the matched route and re-run matching on every query change, so the store stays **pathname-only** and a query update re-renders only the components that read it. Sona, the demo application, depends on this: its map writes viewport coordinates to the URL on every pan.
 
 </TextBlock>
 
@@ -124,7 +124,7 @@ Route matching has no dependency. A regex-matching library was the last one, and
 
 Routini ships at **3.2 KB gzipped**. A script in the repository produces that number with bundlephobia's method — esbuild bundle, terser compress and mangle, then gzip and brotli — so it matches the methodology behind the other figures it is shown next to on the landing page. CI fails the build when the bundle crosses its budget, which forces a new feature to account for its size before it merges.
 
-The package has **zero runtime dependencies**, with `react` and `react-dom` as peers. Roughly **100 tests** cover the matcher, navigation, popstate, lazy loading, development warnings and the error boundary, using Vitest, Testing Library and happy-dom. Changesets gates releases, so every user-visible change publishes with a changelog entry. The build is ESM-first and also emits CJS, and I check the generated `.d.ts` and `.d.cts` outputs by hand.
+The package has **zero runtime dependencies**, with `react` and `react-dom` as peers. Over **110 tests** cover the matcher, navigation, popstate, lazy loading, development warnings and the error boundary, using Vitest, Testing Library and happy-dom. Changesets gates releases, so every user-visible change publishes with a changelog entry. The build is ESM-first and also emits CJS, and I check the generated `.d.ts` and `.d.cts` outputs by hand.
 
 </TextBlock>
 
