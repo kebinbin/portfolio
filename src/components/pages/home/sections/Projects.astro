@@ -14,10 +14,6 @@ const projects = (await getCollection('projects'))
 
 // H2 baseline as a fraction of --text-headline, so the rule lands on the type's feet.
 const H2_BASELINE = 0.835
-
-const years = projects.map((p) => p.data.publishDate.getFullYear())
-const indexRange = `01 — ${String(projects.length).padStart(2, '0')}`
-const yearRange = `${Math.min(...years)} — ${Math.max(...years)}`
 ---
 
 <section class="pt-30 lg:pt-32">
@@ -25,25 +21,26 @@ const yearRange = `${Math.min(...years)} — ${Math.max(...years)}`
 		<div class="stage">
 			<div class="frame" data-frame>
 				<div class="reel" data-reel>
-					<header class="relative container">
-						<a id="projects"
-							><h2 class="text-headline text-ink pb-8 lg:pb-16">
-								{i18n.projects.h2}<span class="text-accent ml-4">.</span>
-							</h2></a
-						>
-						<span
-							aria-hidden="true"
-							class="grid-line absolute left-1/2 hidden h-0 w-screen -translate-x-1/2 border-t lg:block"
-							style={`top: calc(var(--text-headline) * ${H2_BASELINE})`}></span>
-						<p
-							aria-hidden="true"
-							class="text-ink/50 absolute right-6 hidden flex-col text-right text-[10px] tracking-[0.25em] uppercase lg:right-16 xl:flex 2xl:right-24"
-							style={`top: calc(var(--text-headline) * ${H2_BASELINE}); transform: translateY(-0.4em)`}
-						>
-							<span>{indexRange}</span>
-							<span class="text-ink/35">{yearRange}</span>
-						</p>
-					</header>
+					<div class="container">
+						<header class="relative">
+							<a id="projects"
+								><h2 class="text-headline text-ink pb-8 lg:pb-16">
+									{i18n.projects.h2}<span class="text-accent ml-4">.</span>
+								</h2></a
+							>
+							<span
+								aria-hidden="true"
+								class="grid-line absolute left-1/2 hidden h-0 w-screen -translate-x-1/2 border-t lg:block"
+								style={`top: calc(var(--text-headline) * ${H2_BASELINE})`}></span>
+							<p
+								aria-hidden="true"
+								class="text-ink/50 absolute right-0 hidden text-[10px] tracking-[0.25em] uppercase 2xl:block"
+								style={`top: calc(var(--text-headline) * ${H2_BASELINE}); transform: translateY(-0.4em)`}
+							>
+								{i18n.projects.eyebrow}
+							</p>
+						</header>
+					</div>
 
 					<div class="flex flex-[1_0_auto] flex-col">
 						<ul>
